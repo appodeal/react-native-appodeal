@@ -1,0 +1,30 @@
+
+{
+  "name": "react-native-appodeal",
+  "version": "2.1.3",
+  "description": "React Native Module created to support Appodeal SDK for iOS and Android platforms",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/appodeal/react-native-appodeal.git"
+  },
+  "homepage": "https://appodeal.com",
+  "keywords": [
+    "react",
+    "react-native",
+    "react-component",
+    "appodeal",
+    "monetisation",
+    "android",
+    "ios",
+    "ads"
+  ],
+  "author": "Appodeal, Inc",
+  "license": "Appodeal, Inc",
+  "peerDependencies": {
+    "react-native": ">=0.44.0"
+  }
+}
