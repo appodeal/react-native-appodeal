@@ -1,6 +1,8 @@
 
-import { NativeModules } from 'react-native';
+import {
+	NativeModules
+} from 'react-native';
 
-const { RNAppodeal } = NativeModules;
+import Appodeal from './appodeal';
 
-export default RNAppodeal;
+module.exports = { Appodeal };

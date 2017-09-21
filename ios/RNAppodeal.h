@@ -1,21 +1,31 @@
 #import <Foundation/Foundation.h>
 
-#if __has_include("RCTBridgeModule.h")
-#import "RCTBridgeModule.h"
+#if __has_include(<React/RCTEventDispatcher.h>)
+    #import <React/RCTComponent.h>
 #else
-#import <React/RCTBridgeModule.h>
+    #import "RCTComponent.h"
 #endif
 
-#if __has_include("RCTBridge")
-#import "RCTBridge"
+#if __has_include(<React/RCTEventDispatcher.h>)
+    #import <React/RCTEventDispatcher.h>
 #else
-#import <React/RCTBridge.h>
+    #import "RCTEventDispatcher.h"
 #endif
 
-#if __has_include("RCTEventDispatcher")
-#import "RCTEventDispatcher"
+#if __has_include(<React/RCTEventEmitter.h>)
+    #import <React/RCTEventEmitter.h>
 #else
-#import <React/RCTEventDispatcher.h>
+    #import "RCTEventEmitter"
+#endif
+
+#if __has_include(<React/RCTBridgeModule.h>)
+    #import <React/RCTBridgeModule.h>
+    #import <React/UIView+React.h>
+    #import <React/RCTLog.h>
+#else
+    #import "RCTBridgeModule.h"
+    #import "UIView+React.h"
+    #import "RCTLog.h"
 #endif
 
 #import <Appodeal/Appodeal.h>

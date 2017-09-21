@@ -20,10 +20,6 @@
 		661247051F6B312300171346 /* EventKitUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 661247041F6B312300171346 /* EventKitUI.framework */; };
 		661247071F6B312B00171346 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 661247061F6B312B00171346 /* GLKit.framework */; };
 		661247091F6B313400171346 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 661247081F6B313400171346 /* ImageIO.framework */; };
-		6612470B1F6B313E00171346 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 6612470A1F6B313E00171346 /* libc++.tbd */; };
-		6612470D1F6B314700171346 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 6612470C1F6B314700171346 /* libsqlite3.tbd */; };
-		6612470F1F6B314D00171346 /* libxml2.2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 6612470E1F6B314D00171346 /* libxml2.2.tbd */; };
-		661247111F6B315100171346 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 661247101F6B315100171346 /* libz.tbd */; };
 		661247131F6B315600171346 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 661247121F6B315600171346 /* MediaPlayer.framework */; };
 		661247151F6B315C00171346 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 661247141F6B315C00171346 /* MessageUI.framework */; };
 		6612471E1F6B317500171346 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 661247161F6B317500171346 /* MobileCoreServices.framework */; };
@@ -51,32 +47,6 @@
 
 /* Begin PBXFileReference section */
 		134814201AA4EA6300B7C361 /* libRNAppodeal.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libRNAppodeal.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		661246A11F6B29C300171346 /* Appodeal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Appodeal.framework; sourceTree = "<group>"; };
-		661246A31F6B29C300171346 /* Appodeal.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Appodeal.bundle; sourceTree = "<group>"; };
-		661246A41F6B29C300171346 /* button-close-default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button-close-default.png"; sourceTree = "<group>"; };
-		661246A51F6B29C300171346 /* button-close-highlighted.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button-close-highlighted.png"; sourceTree = "<group>"; };
-		661246A61F6B29C300171346 /* MPAdBrowserController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MPAdBrowserController.xib; sourceTree = "<group>"; };
-		661246A71F6B29C300171346 /* MPCloseBtn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MPCloseBtn.png; sourceTree = "<group>"; };
-		661246A81F6B29C300171346 /* MPCloseBtn@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "MPCloseBtn@2x.png"; sourceTree = "<group>"; };
-		661246A91F6B29C300171346 /* MPCloseBtn@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "MPCloseBtn@3x.png"; sourceTree = "<group>"; };
-		661246AA1F6B29C300171346 /* MPCloseButtonX.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MPCloseButtonX.png; sourceTree = "<group>"; };
-		661246AB1F6B29C300171346 /* MPCloseButtonX@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "MPCloseButtonX@2x.png"; sourceTree = "<group>"; };
-		661246AC1F6B29C300171346 /* MPCloseButtonX@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "MPCloseButtonX@3x.png"; sourceTree = "<group>"; };
-		661246AD1F6B29C300171346 /* MPDAAIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MPDAAIcon.png; sourceTree = "<group>"; };
-		661246AE1F6B29C300171346 /* MPDAAIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "MPDAAIcon@2x.png"; sourceTree = "<group>"; };
-		661246AF1F6B29C300171346 /* MPDAAIcon@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "MPDAAIcon@3x.png"; sourceTree = "<group>"; };
-		661246B01F6B29C300171346 /* MPMutedBtn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MPMutedBtn.png; sourceTree = "<group>"; };
-		661246B11F6B29C300171346 /* MPMutedBtn@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "MPMutedBtn@2x.png"; sourceTree = "<group>"; };
-		661246B21F6B29C300171346 /* MPMutedBtn@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "MPMutedBtn@3x.png"; sourceTree = "<group>"; };
-		661246B31F6B29C300171346 /* MPPlayBtn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MPPlayBtn.png; sourceTree = "<group>"; };
-		661246B41F6B29C300171346 /* MPPlayBtn@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "MPPlayBtn@2x.png"; sourceTree = "<group>"; };
-		661246B51F6B29C300171346 /* MPPlayBtn@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "MPPlayBtn@3x.png"; sourceTree = "<group>"; };
-		661246B61F6B29C300171346 /* MPUnmutedBtn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MPUnmutedBtn.png; sourceTree = "<group>"; };
-		661246B71F6B29C300171346 /* MPUnmutedBtn@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "MPUnmutedBtn@2x.png"; sourceTree = "<group>"; };
-		661246B81F6B29C300171346 /* MPUnmutedBtn@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "MPUnmutedBtn@3x.png"; sourceTree = "<group>"; };
-		661246B91F6B29C300171346 /* MRAID.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = MRAID.bundle; sourceTree = "<group>"; };
-		661246BA1F6B29C300171346 /* StartApp.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = StartApp.bundle; sourceTree = "<group>"; };
-		661246BB1F6B29C300171346 /* TapjoyResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = TapjoyResources.bundle; sourceTree = "<group>"; };
 		661246F01F6B310200171346 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		661246F21F6B310600171346 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		661246F41F6B310A00171346 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
@@ -104,6 +74,7 @@
 		6612471B1F6B317500171346 /* Twitter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Twitter.framework; path = System/Library/Frameworks/Twitter.framework; sourceTree = SDKROOT; };
 		6612471C1F6B317500171346 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		6612471D1F6B317500171346 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
+		669A1F631F70724900AE7D97 /* Appodeal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Appodeal.framework; path = sdk/Appodeal.framework; sourceTree = "<group>"; };
 		B3E7B5881CC2AC0600A0062D /* RNAppodeal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RNAppodeal.h; sourceTree = "<group>"; };
 		B3E7B5891CC2AC0600A0062D /* RNAppodeal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RNAppodeal.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -123,10 +94,6 @@
 				661247251F6B317500171346 /* WebKit.framework in Frameworks */,
 				661247151F6B315C00171346 /* MessageUI.framework in Frameworks */,
 				661247131F6B315600171346 /* MediaPlayer.framework in Frameworks */,
-				661247111F6B315100171346 /* libz.tbd in Frameworks */,
-				6612470F1F6B314D00171346 /* libxml2.2.tbd in Frameworks */,
-				6612470D1F6B314700171346 /* libsqlite3.tbd in Frameworks */,
-				6612470B1F6B313E00171346 /* libc++.tbd in Frameworks */,
 				661247091F6B313400171346 /* ImageIO.framework in Frameworks */,
 				661247071F6B312B00171346 /* GLKit.framework in Frameworks */,
 				661247051F6B312300171346 /* EventKitUI.framework in Frameworks */,
@@ -157,7 +124,6 @@
 		58B511D21A9E6C8500147676 = {
 			isa = PBXGroup;
 			children = (
-				661246A01F6B29C300171346 /* sdk */,
 				B3E7B5881CC2AC0600A0062D /* RNAppodeal.h */,
 				B3E7B5891CC2AC0600A0062D /* RNAppodeal.m */,
 				134814211AA4EA7D00B7C361 /* Products */,
@@ -165,50 +131,10 @@
 			);
 			sourceTree = "<group>";
 		};
-		661246A01F6B29C300171346 /* sdk */ = {
-			isa = PBXGroup;
-			children = (
-				661246A11F6B29C300171346 /* Appodeal.framework */,
-				661246A21F6B29C300171346 /* Resources */,
-			);
-			path = sdk;
-			sourceTree = "<group>";
-		};
-		661246A21F6B29C300171346 /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-				661246A31F6B29C300171346 /* Appodeal.bundle */,
-				661246A41F6B29C300171346 /* button-close-default.png */,
-				661246A51F6B29C300171346 /* button-close-highlighted.png */,
-				661246A61F6B29C300171346 /* MPAdBrowserController.xib */,
-				661246A71F6B29C300171346 /* MPCloseBtn.png */,
-				661246A81F6B29C300171346 /* MPCloseBtn@2x.png */,
-				661246A91F6B29C300171346 /* MPCloseBtn@3x.png */,
-				661246AA1F6B29C300171346 /* MPCloseButtonX.png */,
-				661246AB1F6B29C300171346 /* MPCloseButtonX@2x.png */,
-				661246AC1F6B29C300171346 /* MPCloseButtonX@3x.png */,
-				661246AD1F6B29C300171346 /* MPDAAIcon.png */,
-				661246AE1F6B29C300171346 /* MPDAAIcon@2x.png */,
-				661246AF1F6B29C300171346 /* MPDAAIcon@3x.png */,
-				661246B01F6B29C300171346 /* MPMutedBtn.png */,
-				661246B11F6B29C300171346 /* MPMutedBtn@2x.png */,
-				661246B21F6B29C300171346 /* MPMutedBtn@3x.png */,
-				661246B31F6B29C300171346 /* MPPlayBtn.png */,
-				661246B41F6B29C300171346 /* MPPlayBtn@2x.png */,
-				661246B51F6B29C300171346 /* MPPlayBtn@3x.png */,
-				661246B61F6B29C300171346 /* MPUnmutedBtn.png */,
-				661246B71F6B29C300171346 /* MPUnmutedBtn@2x.png */,
-				661246B81F6B29C300171346 /* MPUnmutedBtn@3x.png */,
-				661246B91F6B29C300171346 /* MRAID.bundle */,
-				661246BA1F6B29C300171346 /* StartApp.bundle */,
-				661246BB1F6B29C300171346 /* TapjoyResources.bundle */,
-			);
-			path = Resources;
-			sourceTree = "<group>";
-		};
 		661246EF1F6B310200171346 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				669A1F631F70724900AE7D97 /* Appodeal.framework */,
 				661247161F6B317500171346 /* MobileCoreServices.framework */,
 				661247171F6B317500171346 /* QuartzCore.framework */,
 				661247181F6B317500171346 /* Security.framework */,
@@ -387,13 +313,10 @@
 		58B511F01A9E6C8500147676 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/sdk";
+				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/../../../ios/**";
 				HEADER_SEARCH_PATHS = (
+					"$(SRCROOT)/../../../node_modules/react-native/React/**",
 					"$(inherited)",
-					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
-					"$(SRCROOT)/../../../React/**",
-					"$(SRCROOT)/../../react-native/React/**",
-					"$(SRCROOT)/React",
 				);
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_LDFLAGS = "-ObjC";
@@ -405,13 +328,10 @@
 		58B511F11A9E6C8500147676 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/sdk";
+				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/../../../ios/**";
 				HEADER_SEARCH_PATHS = (
+					"$(SRCROOT)/../../../node_modules/react-native/React/**",
 					"$(inherited)",
-					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
-					"$(SRCROOT)/../../../React/**",
-					"$(SRCROOT)/../../react-native/React/**",
-					"$(SRCROOT)/React",
 				);
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_LDFLAGS = "-ObjC";
