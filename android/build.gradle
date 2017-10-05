@@ -31,46 +31,4 @@ dependencies {
     compile fileTree(dir: "libs", include: ["*.jar"])
     compile 'com.facebook.react:react-native:+'
     compile 'com.adcolony:sdk:3.2.1'
-    compile 'com.google.android.gms:play-services-ads:11.0.2'
-    compile 'com.google.android.gms:play-services-location:11.0.2'
-}
-
-
-String getPlayServicesVersion() {
-    String version = ''
-    def localProperties = new File(rootDir, "local.properties")
-    if (localProperties.exists()) {
-        Properties properties = new Properties()
-        localProperties.withInputStream { instr ->
-            properties.load(instr)
-        }
-        def sdkDir = properties.getProperty('sdk.dir')
-        String pathToGPS = ("/extras/google/m2repository/com/google/android/gms/play-services").replace("//", File.separator)
-        File playServicesDirPath = new File(sdkDir + pathToGPS)
-        if(playServicesDirPath.exists()) {
-            int versionMajor, versionMinor, versionBuild = 0
-            playServicesDirPath.eachDir { dir ->
-                int firstValue = dir.name.tokenize('.')[0].toInteger()
-                int secondValue = dir.name.tokenize('.')[1].toInteger()
-                int thirdValue = dir.name.tokenize('.')[2].toInteger()
-                if(firstValue > versionMajor) {
-                    versionMajor = firstValue
-                    versionMinor = secondValue
-                    versionBuild = thirdValue
-                } else if (firstValue == versionMajor) {
-                    if(secondValue > versionMinor) {
-                        versionMinor = secondValue
-                    } else if (secondValue == versionMinor) {
-                        if(thirdValue > versionBuild) {
-                            versionBuild = thirdValue
-                        }
-                    }
-                }
-                version = versionMajor + '.' + versionMinor + '.' + versionBuild
-            }
-        } else {
-            print "Play Services not found in your Android SDK, please specify it manually or install Android SDK updates"
-        }
-    }
-    return version
 }

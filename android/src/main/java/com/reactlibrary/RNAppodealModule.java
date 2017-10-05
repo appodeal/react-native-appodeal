@@ -27,12 +27,6 @@ public class RNAppodealModule extends ReactContextBaseJavaModule implements Inte
 
 	private final ReactApplicationContext reactContext;
 
-	private static final String DURATION_SHORT_KEY = "SHORT";
-	private static final String DURATION_LONG_KEY = "LONG";
-
-	private Callback accessCoarseLocation;
-	private Callback writeExternalStorage;
-
 	private UserSettings settings;
 
 	public RNAppodealModule(ReactApplicationContext reactContext) {
@@ -49,34 +43,9 @@ public class RNAppodealModule extends ReactContextBaseJavaModule implements Inte
 		return "RNAppodeal";
 	}
 
-	@Override
-	public Map<String, Object> getConstants() {
-		final Map<String, Object> constants = new HashMap<>();
-
-		constants.put(DURATION_SHORT_KEY, Toast.LENGTH_SHORT);
-		constants.put(DURATION_LONG_KEY, Toast.LENGTH_LONG);
-
-		constants.put("NONE", Appodeal.NONE);
-		constants.put("INTERSTITIAL", Appodeal.INTERSTITIAL);
-		constants.put("BANNER", Appodeal.BANNER);
-		constants.put("BANNER_TOP", Appodeal.BANNER_TOP);
-		constants.put("BANNER_BOTTOM", Appodeal.BANNER_BOTTOM);
-		constants.put("NON_SKIPPABLE_VIDEO", Appodeal.NON_SKIPPABLE_VIDEO);
-		constants.put("REWARDED_VIDEO", Appodeal.REWARDED_VIDEO);
-
-		constants.put("GENDER_MALE", UserSettings.Gender.MALE.name());
-		constants.put("GENDER_FEMALE", UserSettings.Gender.FEMALE.name());
-		constants.put("GENDER_OTHER", UserSettings.Gender.OTHER.name());
-
-		constants.put("LOG_LEVEL_VERBOSE", Log.LogLevel.verbose.name());
-		constants.put("LOG_LEVEL_DEBUG", Log.LogLevel.debug.name());
-		constants.put("LOG_LEVEL_NONE", Log.LogLevel.none.name());
-		return constants;
-	}
-
 	@ReactMethod
-	public void showToast(String message, int duration) {
-		Toast.makeText(getReactApplicationContext(), message, duration).show();
+	public void showToast(String message) {
+		Toast.makeText(getReactApplicationContext(), message, 0).show();
 	}
 
 	@ReactMethod
@@ -86,23 +55,24 @@ public class RNAppodealModule extends ReactContextBaseJavaModule implements Inte
 	}
 
 	@ReactMethod
-	public void show(ReadableMap args, Callback callback){
-		int adType = args.getInt("adType");
-		String placement = args.hasKey("placement") ? args.getString("placement") : null;
+	public void show(int adTypes, String placement, Callback callback){
 		boolean result;
-		if (placement == null)
-			result = Appodeal.show(getCurrentActivity(), adType);
-		else
-			result = Appodeal.show(getCurrentActivity(), adType, placement);
-		if (callback != null)
+		if (placement == null) {
+			result = Appodeal.show(getCurrentActivity(), adTypes);
+		} else {
+			result = Appodeal.show(getCurrentActivity(), adTypes, placement);
+		}
+		if (callback != null) {
 			callback.invoke(result);
+		}
 	}
 
 	@ReactMethod
 	public void isLoaded(int adTypes, Callback callback){
 		boolean result =  Appodeal.isLoaded(adTypes);
-		if(callback != null)
+		if (callback != null) {
 			callback.invoke(result);
+		}
 	}
 
 	@ReactMethod
@@ -123,8 +93,9 @@ public class RNAppodealModule extends ReactContextBaseJavaModule implements Inte
 	@ReactMethod
 	public void isPrecache(int adType, Callback callback){
 		boolean result = Appodeal.isPrecache(adType);
-		if(callback != null)
+		if (callback != null) {
 			callback.invoke(result);
+		}
 	}
 
 	@ReactMethod
@@ -154,7 +125,12 @@ public class RNAppodealModule extends ReactContextBaseJavaModule implements Inte
 
 	@ReactMethod
 	public void setLogLevel(String level){
-		Appodeal.setLogLevel(Log.LogLevel.valueOf(level));
+		if (level.equals("none"))
+			Appodeal.setLogLevel(Log.LogLevel.none);
+		else if (level.equals("debug"))
+			Appodeal.setLogLevel(Log.LogLevel.debug);
+		else if (level.equals("verbose"))
+			Appodeal.setLogLevel(Log.LogLevel.verbose);
 	}
 
 	@ReactMethod
@@ -171,10 +147,11 @@ public class RNAppodealModule extends ReactContextBaseJavaModule implements Inte
 	public void disableNetwork(ReadableMap args){
 		String networkName = args.getString("network");
 		int adTypes = args.hasKey("adType") ? args.getInt("adType") : -1;
-		if(adTypes == -1)
+		if(adTypes == -1) {
 			Appodeal.disableNetwork(getCurrentActivity(), networkName);
-		else
+		} else {
 			Appodeal.disableNetwork(getCurrentActivity(), networkName, adTypes);
+		}
 	}
 
 	@ReactMethod
@@ -204,8 +181,9 @@ public class RNAppodealModule extends ReactContextBaseJavaModule implements Inte
 
 	@ReactMethod
 	public void getVersion(Callback callback){
-		if (callback != null)
+		if (callback != null) {
 			callback.invoke(Appodeal.getVersion());
+		}
 	}
 
 	@ReactMethod
@@ -213,12 +191,14 @@ public class RNAppodealModule extends ReactContextBaseJavaModule implements Inte
 		int adType = args.getInt("adType");
 		String placement = args.hasKey("placement") ? args.getString("placement") : null;
 		boolean result;
-		if (placement == null)
+		if (placement == null) {
 			result = Appodeal.canShow(adType);
-		else
+		} else {
 			result = Appodeal.canShow(adType, placement);
-		if (callback != null)
+		}
+		if (callback != null) {
 			callback.invoke(result);
+		}
 	}
 
 	@ReactMethod
@@ -258,13 +238,15 @@ public class RNAppodealModule extends ReactContextBaseJavaModule implements Inte
 			params.putString("currency", Appodeal.getRewardParameters(placement).second);
 		}
 
-		if (callback != null)
+		if (callback != null) {
 			callback.invoke(params);
+		}
 	}
 
 	private UserSettings getUserSettings(){
-		if(settings == null)
+		if(settings == null) {
 			settings = Appodeal.getUserSettings(getCurrentActivity());
+		}
 		return settings;
 	}
 
@@ -280,7 +262,12 @@ public class RNAppodealModule extends ReactContextBaseJavaModule implements Inte
 
 	@ReactMethod
 	public void setGender(String gender){
-		getUserSettings().setGender(UserSettings.Gender.valueOf(gender));
+		if (gender.equals("male"))
+			getUserSettings().setGender(com.appodeal.ads.UserSettings.Gender.MALE);
+		else if (gender.equals("female"))
+			getUserSettings().setGender(com.appodeal.ads.UserSettings.Gender.FEMALE);
+		else if (gender.equals("other"))
+			getUserSettings().setGender(com.appodeal.ads.UserSettings.Gender.OTHER);
 	}
 
 	private void sendEventToJS(String eventName, WritableMap params){

@@ -1,6 +1,10 @@
 #import "RNAppodeal.h"
 
-#pragma mark Appodeal constants
+#if __has_include(<React/RCTUtils.h>)
+#import <React/RCTUtils.h>
+#else
+#import "RCTUtils.h"
+#endif
 
 const int INTERSTITIAL        = 1;
 const int BANNER              = 4;
@@ -9,98 +13,107 @@ const int BANNER_TOP          = 16;
 const int REWARDED_VIDEO      = 128;
 const int NON_SKIPPABLE_VIDEO = 256;
 
-#pragma mark Custom properties
-
 NSMutableDictionary *customRules;
+BOOL isRewardedFinished;
+BOOL isNonSkippableFinished;
+BOOL isBannerPrecache;
+BOOL isInterstitialPrecache;
+
+static NSString *const kEventBannerLoaded = @"onBannerLoaded";
+static NSString *const kEventBannerFailedToLoad = @"onBannerFailedToLoad";
+static NSString *const kEventBannerShown = @"onBannerShown";
+static NSString *const kEventBannerClicked = @"onBannerClicked";
+
+static NSString *const kEventInterstitialLoaded = @"onInterstitialLoaded";
+static NSString *const kEventInterstitialFailedToLoad = @"onInterstitialFailedToLoad";
+static NSString *const kEventInterstitialShown = @"onInterstitialShown";
+static NSString *const kEventInterstitialClosed = @"onInterstitialClosed";
+static NSString *const kEventInterstitialClicked = @"onInterstitialClicked";
+
+static NSString *const kEventRewardedVideoLoaded = @"onRewardedVideoLoaded";
+static NSString *const kEventRewardedVideoFailedToLoad = @"onRewardedVideoFailedToLoad";
+static NSString *const kEventRewardedVideoShown = @"onRewardedVideoShown";
+static NSString *const kEventRewardedVideoClosed = @"onRewardedVideoClosed";
+static NSString *const kEventRewardedVideoFinished = @"onRewardedVideoFinished";
+
+static NSString *const kEventNonSkippableVideoLoaded = @"onNonSkippableVideoLoaded";
+static NSString *const kEventNonSkippableVideoFailedToLoad = @"onNonSkippableVideoFailedToLoad";
+static NSString *const kEventNonSkippableVideoShown = @"onNonSkippableVideoShown";
+static NSString *const kEventNonSkippableVideoClosed = @"onNonSkippableVideoClosed";
+static NSString *const kEventNonSkippableVideoFinished = @"onNonSkippableVideoFinished";
 
 #pragma mark Convert types, styles and logs
-
 int nativeAdTypesForType(int adTypes) {
     int nativeAdTypes = 0;
-    
     if ((adTypes & INTERSTITIAL) > 0) {
         nativeAdTypes |= AppodealAdTypeInterstitial;
     }
-    
     if ((adTypes & BANNER) > 0 ||
         (adTypes & BANNER_TOP) > 0 ||
         (adTypes & BANNER_BOTTOM) > 0) {
-        
         nativeAdTypes |= AppodealAdTypeBanner;
     }
-    
     if ((adTypes & REWARDED_VIDEO) > 0) {
         nativeAdTypes |= AppodealAdTypeRewardedVideo;
     }
-    
     if ((adTypes & NON_SKIPPABLE_VIDEO) >0) {
         nativeAdTypes |= AppodealAdTypeNonSkippableVideo;
     }
-    
     return nativeAdTypes;
 }
 
 int nativeShowStyleForType(int adTypes) {
-    
     if ((adTypes & INTERSTITIAL) > 0) {
         return AppodealShowStyleInterstitial;
     }
-    
     if ((adTypes & BANNER_TOP) > 0) {
         return AppodealShowStyleBannerTop;
     }
-    
     if ((adTypes & BANNER_BOTTOM) > 0) {
         return AppodealShowStyleBannerBottom;
     }
-    
     if ((adTypes & REWARDED_VIDEO) > 0) {
         return AppodealShowStyleRewardedVideo;
     }
-    
     if ((adTypes & NON_SKIPPABLE_VIDEO) > 0) {
         return AppodealShowStyleNonSkippableVideo;
     }
-    
     return 0;
 }
-
-
-
-APDLogLevel parseLogLevel (NSString * log) {
-    __block APDLogLevel tempLogLevel = APDLogLevelOff;
-    void (^selectedCase)() = @{
-       @"off" : ^{
-           tempLogLevel = APDLogLevelOff;
-       },
-       @"warning" : ^{
-           tempLogLevel = APDLogLevelWarning;
-       },
-       @"info" : ^{
-           tempLogLevel = APDLogLevelInfo;
-       },
-       @"error" : ^{
-           tempLogLevel = APDLogLevelError;
-       },
-       @"verbose" : ^{
-           tempLogLevel = APDLogLevelVerbose;
-       },
-       }[log];
-    if (selectedCase != nil)
-        selectedCase();
-    return tempLogLevel;
-}
-
 #pragma mark implementation of plugin
 
 @implementation RNAppodeal
 
+- (dispatch_queue_t)methodQueue {
+    return dispatch_get_main_queue();
+}
+
 RCT_EXPORT_MODULE();
 
-@synthesize bridge = _bridge;
+- (NSArray<NSString *> *)supportedEvents {
+    return @[
+             kEventBannerLoaded,
+             kEventBannerFailedToLoad,
+             kEventBannerShown,
+             kEventBannerClicked,
+             kEventInterstitialLoaded,
+             kEventInterstitialFailedToLoad,
+             kEventInterstitialShown,
+             kEventInterstitialClosed,
+             kEventInterstitialClicked,
+             kEventRewardedVideoLoaded,
+             kEventRewardedVideoFailedToLoad,
+             kEventRewardedVideoShown,
+             kEventRewardedVideoClosed,
+             kEventRewardedVideoFinished,
+             kEventNonSkippableVideoLoaded,
+             kEventNonSkippableVideoFailedToLoad,
+             kEventNonSkippableVideoShown,
+             kEventNonSkippableVideoClosed,
+             kEventNonSkippableVideoFinished ];
+}
 
-
-#pragma mark common methods
+#pragma mark exported methods
 
 RCT_EXPORT_METHOD(initialize:(NSString *)appKey types:(int)adType) {
     dispatch_async(dispatch_get_main_queue(), ^{
@@ -209,10 +222,15 @@ RCT_EXPORT_METHOD(setTesting:(BOOL)testingEnabled) {
     });
 }
 
-RCT_EXPORT_METHOD(setLogLevel:(NSString *)log) {
+RCT_EXPORT_METHOD(setLogLevel:(NSString *)logLevel) {
     dispatch_async(dispatch_get_main_queue(), ^{
-        APDLogLevel logLevel = parseLogLevel(log);
-        [Appodeal setLogLevel:logLevel];
+        if([logLevel isEqualToString:@"none"])
+            [Appodeal setLogLevel:APDLogLevelOff];
+        if([logLevel isEqualToString:@"debug"])
+            [Appodeal setLogLevel:APDLogLevelDebug];
+        if([logLevel isEqualToString:@"verbose"])
+            [Appodeal setLogLevel:APDLogLevelVerbose];
+
     });
 }
 
@@ -390,107 +408,85 @@ RCT_EXPORT_METHOD(setGender:(NSString *)AppodealUserGender) {
 #pragma mark Events
 #pragma mark - banner events
 - (void)bannerDidShow {
-    //[self sendEventWithName:@"onBannerShown" body:@{@"":@""}];
+    //[self sendEventWithName:@"onBannerShown" body:nil];
 }
 
 - (void)bannerDidLoadAdIsPrecache:(BOOL)precache {
-    [self.bridge.eventDispatcher sendDeviceEventWithName:@"onBannerLoaded" body:@{@"isPrecache":[NSNumber numberWithBool:precache]}];
+    [self sendEventWithName:kEventBannerLoaded body:@{@"isPrecache":[NSNumber numberWithBool:precache]}];
 }
 
 - (void)bannerDidClick {
-    [self.bridge.eventDispatcher sendDeviceEventWithName:@"onBannerClicked" body:@{@"":@""}];
+    [self sendEventWithName:kEventBannerClicked body:nil];
 }
 
 - (void)bannerDidFailToLoadAd; {
-    [self.bridge.eventDispatcher sendDeviceEventWithName:@"onBannerFailedToLoad" body:@{@"":@""}];
+    [self sendEventWithName:kEventBannerFailedToLoad body:nil];
 }
 
 #pragma mark - Interstitial events
 - (void)interstitialDidLoadAdisPrecache:(BOOL)precache {
-    [self.bridge.eventDispatcher sendDeviceEventWithName:@"onInterstitialLoaded" body:@{@"isPrecache":[NSNumber numberWithBool:precache]}];
+    [self sendEventWithName:kEventInterstitialLoaded body:@{@"isPrecache":[NSNumber numberWithBool:precache]}];
 }
 
 - (void)interstitialDidFailToLoadAd {
-    [self.bridge.eventDispatcher sendDeviceEventWithName:@"onInterstitialFailedToLoad" body:@{@"":@""}];
+    [self sendEventWithName:kEventInterstitialFailedToLoad body:nil];
 }
 
 - (void)interstitialWillPresent {
-    [self.bridge.eventDispatcher sendDeviceEventWithName:@"onInterstitialShown" body:@{@"":@""}];
+    [self sendEventWithName:kEventInterstitialShown body:nil];
 }
 
 - (void)interstitialDidDismiss {
-    [self.bridge.eventDispatcher sendDeviceEventWithName:@"onInterstitialClosed" body:@{@"":@""}];
+    [self sendEventWithName:kEventInterstitialClosed body:nil];
 }
 
 - (void)interstitialDidClick {
-    [self.bridge.eventDispatcher sendDeviceEventWithName:@"onInterstitialClicked" body:@{@"":@""}];
+    [self sendEventWithName:kEventInterstitialClicked body:nil];
 }
-
-- (void)interstitialDidFinish {
-    [self.bridge.eventDispatcher sendDeviceEventWithName:@"onInterstitialDidFinish" body:@{@"":@""}];
-}
-
-- (void)interstitialDidFailToPresent {
-    [self.bridge.eventDispatcher sendDeviceEventWithName:@"onInterstitialFailedToPresent" body:@{@"":@""}];
-}
-
 
 #pragma mark - NonSkippable video events
 - (void)nonSkippableVideoDidLoadAd {
-    [self.bridge.eventDispatcher sendDeviceEventWithName:@"onNonSkippableVideoLoaded" body:@{@"":@""}];
+    [self sendEventWithName:kEventNonSkippableVideoLoaded body:nil];
 }
 
 - (void)nonSkippableVideoDidFailToLoadAd {
-    [self.bridge.eventDispatcher sendDeviceEventWithName:@"onNonSkippableVideoFailedToLoad" body:@{@"":@""}];
+    [self sendEventWithName:kEventNonSkippableVideoFailedToLoad body:nil];
 }
 
 - (void)nonSkippableVideoDidPresent {
-    [self.bridge.eventDispatcher sendDeviceEventWithName:@"onNonSkippableVideoShown" body:@{@"":@""}];
+    [self sendEventWithName:kEventNonSkippableVideoShown body:nil];
 }
 
 - (void)nonSkippableVideoWillDismiss {
-    [self.bridge.eventDispatcher sendDeviceEventWithName:@"onNonSkippableVideoClosed" body:@{@"":@""}];
+    [self sendEventWithName:kEventNonSkippableVideoClosed body:nil];
 }
 
 - (void)nonSkippableVideoDidFinish {
-    [self.bridge.eventDispatcher sendDeviceEventWithName:@"onNonSkippableVideoFinished" body:@{@"":@""}];
-}
-
-- (void)nonSkippableVideoDidClick {
-    [self.bridge.eventDispatcher sendDeviceEventWithName:@"onNonSkippableVideoClicked" body:@{@"":@""}];
-}
-
-- (void)nonSkippableVideoDidFailToPresent {
-    [self.bridge.eventDispatcher sendDeviceEventWithName:@"onNonSkippableVideoFailedToPresent" body:@{@"":@""}];
+    [self sendEventWithName:kEventNonSkippableVideoFinished body:nil];
 }
 
 #pragma mark - Rewarded video events
 - (void)rewardedVideoDidLoadAd {
-    [self.bridge.eventDispatcher sendDeviceEventWithName:@"onRewardedVideoLoaded" body:@{@"":@""}];
+    [self sendEventWithName:kEventRewardedVideoLoaded body:nil];
 }
 
 - (void)rewardedVideoDidFailToLoadAd {
-    [self.bridge.eventDispatcher sendDeviceEventWithName:@"onRewardedVideoFailedToLoad" body:@{@"":@""}];
+    [self sendEventWithName:kEventRewardedVideoFailedToLoad body:nil];
 }
 
 - (void)rewardedVideoDidPresent {
-    [self.bridge.eventDispatcher sendDeviceEventWithName:@"onRewardedVideoShown" body:@{@"":@""}];
+    [self sendEventWithName:kEventRewardedVideoShown body:nil];
 }
 
 - (void)rewardedVideoWillDismiss {
-    [self.bridge.eventDispatcher sendDeviceEventWithName:@"onRewardedVideoClosed" body:@{@"":@""}];
+    [self sendEventWithName:kEventRewardedVideoClosed body:nil];
 }
 
 - (void)rewardedVideoDidFinish:(NSUInteger)rewardAmount name:(NSString *)rewardName {
     if (rewardName == nil) {
-        [self.bridge.eventDispatcher sendDeviceEventWithName:@"onRewardedVideoFinished" body:@{@"amount":[NSNumber numberWithInteger:0],@"name":@"nil"}];
+        [self sendEventWithName:kEventRewardedVideoFinished body:@{@"amount":[NSNumber numberWithInteger:0],@"name":@"nil"}];
     } else {
-        [self.bridge.eventDispatcher sendDeviceEventWithName:@"onRewardedVideoFinished" body:@{@"amount":[NSNumber numberWithInteger:rewardAmount],@"name":rewardName}];
+        [self sendEventWithName:kEventRewardedVideoFinished body:@{@"amount":[NSNumber numberWithInteger:rewardAmount],@"name":rewardName}];
     }
 }
-
-- (void)rewardedVideoDidFailToPresent {
-    [self.bridge.eventDispatcher sendDeviceEventWithName:@"onRewardedVideoFailedToPresent" body:@{@"":@""}];
-}
-
 @end
