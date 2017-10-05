@@ -2,43 +2,45 @@
 
 import {
   NativeModules,
-  DeviceEventEmitter,
+  NativeEventEmitter,
 } from 'react-native';
 
 const RNAppodeal = NativeModules.RNAppodeal;
 
-const eventHandlers = {
-  onInterstitialLoaded: new Map(),
-  onInterstitialClicked: new Map(),
-  onInterstitialClosed: new Map(),
-  onInterstitialFailedToLoad: new Map(),
-  onInterstitialShown: new Map(),
-
-  onBannerClicked: new Map(),
-  onBannerFailedToLoad: new Map(),
-  onBannerLoaded: new Map(),
-  onBannerShown: new Map(),
-
-  onRewardedVideoClosed: new Map(),
-  onRewardedVideoFailedToLoad: new Map(),
-  onRewardedVideoFinished: new Map(),
-  onRewardedVideoLoaded: new Map(),
-  onRewardedVideoShown: new Map(),
-
-  onNonSkippableVideoClosed: new Map(),
-  onNonSkippableVideoFailedToLoad: new Map(),
-  onNonSkippableVideoFinished: new Map(),
-  onNonSkippableVideoLoaded: new Map(),
-  onNonSkippableVideoShown: new Map(),  
-};
-
 const NONE = 0;
 const INTERSTITIAL = 3;
 const BANNER = 4;
-const BANNER_TOP = 8;
-const BANNER_BOTTOM = 16;
+const BANNER_BOTTOM = 8;
+const BANNER_TOP = 16;
 const REWARDED_VIDEO = 128;
 const NON_SKIPPABLE_VIDEO = 256;
+
+const eventEmitter = new NativeEventEmitter(RNAppodeal);
+
+const eventHandlers = {
+  onInterstitialLoaded: 'onInterstitialLoaded',
+  onInterstitialClicked: 'onInterstitialClicked',
+  onInterstitialClosed: 'onInterstitialClosed',
+  onInterstitialFailedToLoad: 'onInterstitialFailedToLoad',
+  onInterstitialShown: 'onInterstitialShown',
+
+  onBannerClicked: 'onBannerClicked',
+  onBannerFailedToLoad: 'onBannerFailedToLoad',
+  onBannerLoaded: 'onBannerLoaded',
+  onBannerShown: 'onBannerShown',
+
+  onRewardedVideoClosed: 'onRewardedVideoClosed',
+  onRewardedVideoFailedToLoad: 'onRewardedVideoFailedToLoad',
+  onRewardedVideoFinished: 'onRewardedVideoFinished',
+  onRewardedVideoLoaded: 'onRewardedVideoLoaded',
+  onRewardedVideoShown: 'onRewardedVideoShown',
+
+  onNonSkippableVideoClosed: 'onNonSkippableVideoClosed',
+  onNonSkippableVideoFailedToLoad: 'onNonSkippableVideoFailedToLoad',
+  onNonSkippableVideoFinished: 'onNonSkippableVideoFinished',
+  onNonSkippableVideoLoaded: 'onNonSkippableVideoLoaded',
+  onNonSkippableVideoShown: 'onNonSkippableVideoShown',
+};
 
 const LogLevel = {
   none: 'none',
@@ -46,105 +48,45 @@ const LogLevel = {
   verbose: 'verbose'
 }
 
-const addEventListener = (type, handler) => {
-  switch (type) {
-    case 'onInterstitialLoaded':
-      eventHandlers[type].set(handler, DeviceEventEmitter.addListener(type, (isPrecache) => { handler(isPrecache); }));
-      break;
-    case 'onInterstitialClicked':
-      eventHandlers[type].set(handler, DeviceEventEmitter.addListener(type, handler));
-      break;
-    case 'onInterstitialClosed':
-      eventHandlers[type].set(handler, DeviceEventEmitter.addListener(type, handler));
-      break;
-    case 'onInterstitialFailedToLoad':
-      eventHandlers[type].set(handler, DeviceEventEmitter.addListener(type, handler));
-      break;
-    case 'onInterstitialShown':
-      eventHandlers[type].set(handler, DeviceEventEmitter.addListener(type, handler));
-      break;
-
-    case 'onBannerLoaded':
-      eventHandlers[type].set(handler, DeviceEventEmitter.addListener(type, (height, isPrecache) => { handler(height, isPrecache); }));
-      break;
-    case 'onBannerFailedToLoad':
-      eventHandlers[type].set(handler, DeviceEventEmitter.addListener(type, handler));
-      break;
-    case 'onBannerClicked':
-      eventHandlers[type].set(handler, DeviceEventEmitter.addListener(type, handler));
-      break;
-    case 'onBannerShown':
-      eventHandlers[type].set(handler, DeviceEventEmitter.addListener(type, handler));
-      break;
-
-
-    case 'onRewardedVideoClosed':
-      eventHandlers[type].set(handler, DeviceEventEmitter.addListener(type, (isFinished) => { handler(isFinished); }));
-      break;
-    case 'onRewardedVideoFailedToLoad':
-      eventHandlers[type].set(handler, DeviceEventEmitter.addListener(type, handler));
-      break;
-    case 'onRewardedVideoFinished':
-      eventHandlers[type].set(handler, DeviceEventEmitter.addListener(type, (amount, currency) => { handler(amount, currency); }));
-      break;
-    case 'onRewardedVideoLoaded':
-      eventHandlers[type].set(handler, DeviceEventEmitter.addListener(type, handler));
-      break;
-    case 'onRewardedVideoShown':
-      eventHandlers[type].set(handler, DeviceEventEmitter.addListener(type, handler));
-      break;
-
-    case 'onNonSkippableVideoClosed':
-      eventHandlers[type].set(handler, DeviceEventEmitter.addListener(type, (isFinished) => { handler(isFinished); }));
-      break;
-    case 'onNonSkippableVideoFailedToLoad':
-      eventHandlers[type].set(handler, DeviceEventEmitter.addListener(type, handler));
-      break;
-    case 'onNonSkippableVideoFinished':
-      eventHandlers[type].set(handler, DeviceEventEmitter.addListener(type, handler));
-      break;
-    case 'onNonSkippableVideoLoaded':
-      eventHandlers[type].set(handler, DeviceEventEmitter.addListener(type, handler));
-      break;
-    case 'onNonSkippableVideoShown':
-      eventHandlers[type].set(handler, DeviceEventEmitter.addListener(type, handler));
-      break;
-    default:
-      console.log(`Event with type ${type} does not exist.`);
-  }
+const Gender = {
+  male: 'male',
+  female: 'female',
+  other: 'other'
 }
+
+const _subscriptions = new Map();
+
+const addEventListener = (event, handler) => {
+  const mappedEvent = eventHandlers[event];
+  if (mappedEvent) {
+    let listener;
+    listener = eventEmitter.addListener(mappedEvent, handler);
+    _subscriptions.set(handler, listener);
+    return {
+      remove: () => removeEventListener(event, handler)
+    };
+  } else {
+    console.warn(`Trying to subscribe to unknown event: "${event}"`);
+    return {
+      remove: () => {},
+    };
+  }
+};
 
 const removeEventListener = (type, handler) => {
-  if (!eventHandlers[type].has(handler)) {
+  const listener = _subscriptions.get(handler);
+  if (!listener) {
     return;
   }
-  eventHandlers[type].get(handler).remove();
-  eventHandlers[type].delete(handler);
-}
+  listener.remove();
+  _subscriptions.delete(handler);
+};
 
 const removeAllListeners = () => {
-  DeviceEventEmitter.removeAllListeners('onInterstitialLoaded');
-  DeviceEventEmitter.removeAllListeners('onInterstitialClicked');
-  DeviceEventEmitter.removeAllListeners('onInterstitialClosed');
-  DeviceEventEmitter.removeAllListeners('onInterstitialFailedToLoad');
-  DeviceEventEmitter.removeAllListeners('onInterstitialShown');
-
-  DeviceEventEmitter.removeAllListeners('onBannerLoaded');
-  DeviceEventEmitter.removeAllListeners('onBannerFailedToLoad');
-  DeviceEventEmitter.removeAllListeners('onBannerClicked');
-  DeviceEventEmitter.removeAllListeners('onBannerShown');
-
-  DeviceEventEmitter.removeAllListeners('onRewardedVideoFailedToLoad');
-  DeviceEventEmitter.removeAllListeners('onRewardedVideoClosed');
-  DeviceEventEmitter.removeAllListeners('onRewardedVideoFinished');
-  DeviceEventEmitter.removeAllListeners('onRewardedVideoLoaded');
-  DeviceEventEmitter.removeAllListeners('onRewardedVideoShown');
-
-  DeviceEventEmitter.removeAllListeners('onNonSkippableVideoClosed');
-  DeviceEventEmitter.removeAllListeners('onNonSkippableVideoFailedToLoad');
-  DeviceEventEmitter.removeAllListeners('onNonSkippableVideoFinished');
-  DeviceEventEmitter.removeAllListeners('onNonSkippableVideoLoaded');
-  DeviceEventEmitter.removeAllListeners('onNonSkippableVideoShown');
+  _subscriptions.forEach((listener, key, map) => {
+    listener.remove();
+    map.delete(key);
+  });
 };
 
 module.exports = {
@@ -156,6 +98,7 @@ module.exports = {
   REWARDED_VIDEO,
   NON_SKIPPABLE_VIDEO,
   LogLevel,
+  Gender,
   addEventListener,
   removeEventListener,
   removeAllListeners,
