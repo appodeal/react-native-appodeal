@@ -475,14 +475,16 @@ RCT_EXPORT_METHOD(setGender:(NSString *)AppodealUserGender) {
 }
 
 - (void)rewardedVideoDidPresent {
+    isRewardedFinished = NO;
     [self sendEventWithName:kEventRewardedVideoShown body:nil];
 }
 
 - (void)rewardedVideoWillDismiss {
-    [self sendEventWithName:kEventRewardedVideoClosed body:nil];
+    [self sendEventWithName:kEventRewardedVideoClosed body:@{@"isFinished":[NSNumber numberWithBool:isRewardedFinished]}];
 }
 
 - (void)rewardedVideoDidFinish:(NSUInteger)rewardAmount name:(NSString *)rewardName {
+    isRewardedFinished = YES;
     if (rewardName == nil) {
         [self sendEventWithName:kEventRewardedVideoFinished body:@{@"amount":[NSNumber numberWithInteger:0],@"name":@"nil"}];
     } else {
