@@ -61,11 +61,6 @@ maven {
    url  "https://adcolony.bintray.com/AdColony"      
 }
 ```
-+ Add Google Play Services Ads and Location into your gradle dependencies of `android/app/build.gradle`:
-```gradle
-compile "com.google.android.gms:play-services-ads:9.8.0"
-compile "com.google.android.gms:play-services-location:9.8.0"
-```
 
 + Enable multiDex in your application. Follow [this](https://developer.android.com/studio/build/multidex.html) documentation to enable it.
 
