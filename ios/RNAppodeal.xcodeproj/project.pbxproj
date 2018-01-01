@@ -75,8 +75,8 @@
 		6612471C1F6B317500171346 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		6612471D1F6B317500171346 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		669A1F631F70724900AE7D97 /* Appodeal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Appodeal.framework; path = sdk/Appodeal.framework; sourceTree = "<group>"; };
-		B3E7B5881CC2AC0600A0062D /* RNAppodeal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RNAppodeal.h; sourceTree = "<group>"; };
-		B3E7B5891CC2AC0600A0062D /* RNAppodeal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RNAppodeal.m; sourceTree = "<group>"; };
+		B3E7B5881CC2AC0600A0062D /* RNAppodeal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RNAppodeal/RNAppodeal.h; sourceTree = "<group>"; };
+		B3E7B5891CC2AC0600A0062D /* RNAppodeal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RNAppodeal/RNAppodeal.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
