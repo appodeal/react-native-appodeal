@@ -1,7 +1,7 @@
 
 {
   "name": "react-native-appodeal",
-  "version": "2.1.4",
+  "version": "2.4.10",
   "description": "React Native Module created to support Appodeal SDK for iOS and Android platforms",
   "main": "index.js",
   "repository": {
@@ -22,6 +22,6 @@
   "author": "Appodeal, Inc",
   "license": "Appodeal, Inc",
   "peerDependencies": {
-    "react-native": ">=0.44.0"
+    "react-native": "0.59.5"
   }
 }

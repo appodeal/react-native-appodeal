@@ -1,12 +1,12 @@
 
 Pod::Spec.new do |s|
-  s.name         = "RNAppodeal"
-  s.version      = "1.0.0"
-  s.summary      = "RNAppodeal"
+  s.name         = "Appodeal"
+  s.version      = "2.4.10"
+  s.summary      = "Appodeal"
   s.description  = <<-DESC
                   RNAppodeal
                    DESC
-  s.homepage     = ""
+  s.homepage     = "appodal.com"
   s.license      = "MIT"
   # s.license      = { :type => "MIT", :file => "FILE_LICENSE" }
   s.author             = { "author" => "author@domain.cn" }
