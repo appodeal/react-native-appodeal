@@ -6,7 +6,7 @@
   "main": "index.js",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/appodeal/react-native-appodeal.git"
+    "url": "git+https://github.com/trickyc0d3r/react-native-appodeal.git"
   },
   "homepage": "https://appodeal.com",
   "keywords": [
