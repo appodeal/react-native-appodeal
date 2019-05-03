@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3F10ABA9227C74F700CE6C82 /* Appodeal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F10ABA7227C74F500CE6C82 /* Appodeal.framework */; };
 		661246F11F6B310200171346 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 661246F01F6B310200171346 /* AdSupport.framework */; };
 		661246F31F6B310600171346 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 661246F21F6B310600171346 /* AudioToolbox.framework */; };
 		661246F51F6B310A00171346 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 661246F41F6B310A00171346 /* AVFoundation.framework */; };
@@ -47,6 +48,25 @@
 
 /* Begin PBXFileReference section */
 		134814201AA4EA6300B7C361 /* libRNAppodeal.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libRNAppodeal.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		3F10AB96227C74E600CE6C82 /* APDFacebookAudienceAdapter.embeddedframework */ = {isa = PBXFileReference; lastKnownFileType = folder; path = APDFacebookAudienceAdapter.embeddedframework; sourceTree = "<group>"; };
+		3F10AB97227C74E700CE6C82 /* APDGoogleAdMobAdapter.embeddedframework */ = {isa = PBXFileReference; lastKnownFileType = folder; path = APDGoogleAdMobAdapter.embeddedframework; sourceTree = "<group>"; };
+		3F10AB98227C74E700CE6C82 /* APDUnityAdapter.embeddedframework */ = {isa = PBXFileReference; lastKnownFileType = folder; path = APDUnityAdapter.embeddedframework; sourceTree = "<group>"; };
+		3F10AB99227C74E800CE6C82 /* APDTapjoyAdapter.embeddedframework */ = {isa = PBXFileReference; lastKnownFileType = folder; path = APDTapjoyAdapter.embeddedframework; sourceTree = "<group>"; };
+		3F10AB9A227C74E900CE6C82 /* APDFlurryAdapter.embeddedframework */ = {isa = PBXFileReference; lastKnownFileType = folder; path = APDFlurryAdapter.embeddedframework; sourceTree = "<group>"; };
+		3F10AB9B227C74EA00CE6C82 /* APDStartAppAdapter.embeddedframework */ = {isa = PBXFileReference; lastKnownFileType = folder; path = APDStartAppAdapter.embeddedframework; sourceTree = "<group>"; };
+		3F10AB9C227C74EB00CE6C82 /* APDAmazonAdsAdapter.embeddedframework */ = {isa = PBXFileReference; lastKnownFileType = folder; path = APDAmazonAdsAdapter.embeddedframework; sourceTree = "<group>"; };
+		3F10AB9D227C74EC00CE6C82 /* APDTwitterMoPubAdapter.embeddedframework */ = {isa = PBXFileReference; lastKnownFileType = folder; path = APDTwitterMoPubAdapter.embeddedframework; sourceTree = "<group>"; };
+		3F10AB9E227C74ED00CE6C82 /* APDAdColonyAdapter.embeddedframework */ = {isa = PBXFileReference; lastKnownFileType = folder; path = APDAdColonyAdapter.embeddedframework; sourceTree = "<group>"; };
+		3F10AB9F227C74EE00CE6C82 /* APDVungleAdapter.embeddedframework */ = {isa = PBXFileReference; lastKnownFileType = folder; path = APDVungleAdapter.embeddedframework; sourceTree = "<group>"; };
+		3F10ABA0227C74EE00CE6C82 /* APDPubnativeAdapter.embeddedframework */ = {isa = PBXFileReference; lastKnownFileType = folder; path = APDPubnativeAdapter.embeddedframework; sourceTree = "<group>"; };
+		3F10ABA1227C74F000CE6C82 /* APDYandexAdapter.embeddedframework */ = {isa = PBXFileReference; lastKnownFileType = folder; path = APDYandexAdapter.embeddedframework; sourceTree = "<group>"; };
+		3F10ABA2227C74F000CE6C82 /* APDZplayAdapter.embeddedframework */ = {isa = PBXFileReference; lastKnownFileType = folder; path = APDZplayAdapter.embeddedframework; sourceTree = "<group>"; };
+		3F10ABA3227C74F000CE6C82 /* APDIronSourceAdapter.embeddedframework */ = {isa = PBXFileReference; lastKnownFileType = folder; path = APDIronSourceAdapter.embeddedframework; sourceTree = "<group>"; };
+		3F10ABA4227C74F200CE6C82 /* APDInMobiAdapter.embeddedframework */ = {isa = PBXFileReference; lastKnownFileType = folder; path = APDInMobiAdapter.embeddedframework; sourceTree = "<group>"; };
+		3F10ABA5227C74F300CE6C82 /* APDChartboostAdapter.embeddedframework */ = {isa = PBXFileReference; lastKnownFileType = folder; path = APDChartboostAdapter.embeddedframework; sourceTree = "<group>"; };
+		3F10ABA6227C74F400CE6C82 /* APDAppLovinAdapter.embeddedframework */ = {isa = PBXFileReference; lastKnownFileType = folder; path = APDAppLovinAdapter.embeddedframework; sourceTree = "<group>"; };
+		3F10ABA7227C74F500CE6C82 /* Appodeal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Appodeal.framework; sourceTree = "<group>"; };
+		3F10ABA8227C74F700CE6C82 /* APDMyTargetAdapter.embeddedframework */ = {isa = PBXFileReference; lastKnownFileType = folder; path = APDMyTargetAdapter.embeddedframework; sourceTree = "<group>"; };
 		661246F01F6B310200171346 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		661246F21F6B310600171346 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		661246F41F6B310A00171346 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
@@ -74,7 +94,6 @@
 		6612471B1F6B317500171346 /* Twitter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Twitter.framework; path = System/Library/Frameworks/Twitter.framework; sourceTree = SDKROOT; };
 		6612471C1F6B317500171346 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		6612471D1F6B317500171346 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
-		669A1F631F70724900AE7D97 /* Appodeal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Appodeal.framework; path = sdk/Appodeal.framework; sourceTree = "<group>"; };
 		B3E7B5881CC2AC0600A0062D /* RNAppodeal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RNAppodeal.h; sourceTree = "<group>"; };
 		B3E7B5891CC2AC0600A0062D /* RNAppodeal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RNAppodeal.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -88,6 +107,7 @@
 				6612471F1F6B317500171346 /* QuartzCore.framework in Frameworks */,
 				661247201F6B317500171346 /* Security.framework in Frameworks */,
 				661247211F6B317500171346 /* StoreKit.framework in Frameworks */,
+				3F10ABA9227C74F700CE6C82 /* Appodeal.framework in Frameworks */,
 				661247221F6B317500171346 /* SystemConfiguration.framework in Frameworks */,
 				661247231F6B317500171346 /* Twitter.framework in Frameworks */,
 				661247241F6B317500171346 /* UIKit.framework in Frameworks */,
@@ -134,7 +154,25 @@
 		661246EF1F6B310200171346 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				669A1F631F70724900AE7D97 /* Appodeal.framework */,
+				3F10AB9E227C74ED00CE6C82 /* APDAdColonyAdapter.embeddedframework */,
+				3F10AB9C227C74EB00CE6C82 /* APDAmazonAdsAdapter.embeddedframework */,
+				3F10ABA6227C74F400CE6C82 /* APDAppLovinAdapter.embeddedframework */,
+				3F10ABA5227C74F300CE6C82 /* APDChartboostAdapter.embeddedframework */,
+				3F10AB96227C74E600CE6C82 /* APDFacebookAudienceAdapter.embeddedframework */,
+				3F10AB9A227C74E900CE6C82 /* APDFlurryAdapter.embeddedframework */,
+				3F10AB97227C74E700CE6C82 /* APDGoogleAdMobAdapter.embeddedframework */,
+				3F10ABA4227C74F200CE6C82 /* APDInMobiAdapter.embeddedframework */,
+				3F10ABA3227C74F000CE6C82 /* APDIronSourceAdapter.embeddedframework */,
+				3F10ABA8227C74F700CE6C82 /* APDMyTargetAdapter.embeddedframework */,
+				3F10ABA0227C74EE00CE6C82 /* APDPubnativeAdapter.embeddedframework */,
+				3F10AB9B227C74EA00CE6C82 /* APDStartAppAdapter.embeddedframework */,
+				3F10AB99227C74E800CE6C82 /* APDTapjoyAdapter.embeddedframework */,
+				3F10AB9D227C74EC00CE6C82 /* APDTwitterMoPubAdapter.embeddedframework */,
+				3F10AB98227C74E700CE6C82 /* APDUnityAdapter.embeddedframework */,
+				3F10AB9F227C74EE00CE6C82 /* APDVungleAdapter.embeddedframework */,
+				3F10ABA1227C74F000CE6C82 /* APDYandexAdapter.embeddedframework */,
+				3F10ABA2227C74F000CE6C82 /* APDZplayAdapter.embeddedframework */,
+				3F10ABA7227C74F500CE6C82 /* Appodeal.framework */,
 				661247161F6B317500171346 /* MobileCoreServices.framework */,
 				661247171F6B317500171346 /* QuartzCore.framework */,
 				661247181F6B317500171346 /* Security.framework */,
@@ -205,6 +243,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 			);
 			mainGroup = 58B511D21A9E6C8500147676;
@@ -313,7 +352,10 @@
 		58B511F01A9E6C8500147676 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/../../../ios/**";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(PROJECT_DIR)/../../../ios/**",
+					"$(PROJECT_DIR)",
+				);
 				HEADER_SEARCH_PATHS = (
 					"$(SRCROOT)/../../../node_modules/react-native/React/**",
 					"$(inherited)",
@@ -328,7 +370,10 @@
 		58B511F11A9E6C8500147676 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/../../../ios/**";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(PROJECT_DIR)/../../../ios/**",
+					"$(PROJECT_DIR)",
+				);
 				HEADER_SEARCH_PATHS = (
 					"$(SRCROOT)/../../../node_modules/react-native/React/**",
 					"$(inherited)",

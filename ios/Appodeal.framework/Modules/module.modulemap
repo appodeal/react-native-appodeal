@@ -1,0 +1,23 @@
+
+framework module Appodeal { 
+  umbrella header "Appodeal.h"
+  export * 
+    module * { export * }
+  header "APDSdk.h"
+  header "APDDefines.h"
+  header "APDUserInfo.h"
+  header "APDUserInfoProtocol.h"
+  header "AppodealBannerView.h"
+  header "APDBannerView.h"
+  header "APDMRECView.h"
+  header "APDSkippableVideo.h"
+  header "APDInterstitialAd.h"
+  header "APDRewardedVideo.h"
+  header "APDRewardProtocol.h"
+  header "APDNativeAdLoader.h"
+  header "APDNativeAdQueue.h"
+  header "APDNativeAd.h"
+  header "APDMediaView.h"
+  header "APDImage.h"
+  header "AppodealRequestDelegateProtocol.h"
+}

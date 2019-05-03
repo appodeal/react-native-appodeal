@@ -1,0 +1,9 @@
+
+framework module Flurry { 
+  umbrella header "Flurry.h"
+  export * 
+    module * { export * }
+  header "Flurry.h"
+  header "FlurrySessionBuilder.h"
+  header "FlurryWatch.h"
+}
