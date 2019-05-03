@@ -14,9 +14,6 @@ Pod::Spec.new do |s|
   s.source       = { :git => "https://github.com/appodeal/CocoaPods.git", :tag => "master" }
   s.source_files  = "RNAppodeal/**/*.{h,m}"
   s.requires_arc = true
-
-
-  s.dependency "React"
   s.dependency "Appodeal","2.4.10"
 
 end
