@@ -1,6 +1,0 @@
-framework module InMobiSDK {
-  umbrella header "InMobiSDK.h"
-
-  export *
-  module * { export * }
-}

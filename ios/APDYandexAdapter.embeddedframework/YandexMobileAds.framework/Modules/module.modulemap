@@ -1,6 +1,0 @@
-framework module YandexMobileAds {
-  umbrella header "YandexMobileAds-umbrella.h"
-
-  export *
-  module * { export * }
-}
