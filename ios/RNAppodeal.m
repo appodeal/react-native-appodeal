@@ -1,171 +1,93 @@
 #import "RNAppodeal.h"
-
-#if __has_include(<React/RCTUtils.h>)
+#import "RNADefines.h"
 #import <React/RCTUtils.h>
-#else
-#import "RCTUtils.h"
-#endif
 
-const int INTERSTITIAL        = 1;
-const int BANNER              = 4;
-const int BANNER_BOTTOM       = 8;
-const int BANNER_TOP          = 16;
-const int REWARDED_VIDEO      = 128;
-const int NON_SKIPPABLE_VIDEO = 256;
 
-NSMutableDictionary *customRules;
-BOOL isRewardedFinished;
-BOOL isNonSkippableFinished;
-BOOL isBannerPrecache;
-BOOL isInterstitialPrecache;
+@interface RNAppodeal () <AppodealBannerDelegate, AppodealInterstitialDelegate, AppodealRewardedVideoDelegate, AppodealNonSkippableVideoDelegate>
 
-static NSString *const kEventBannerLoaded = @"onBannerLoaded";
-static NSString *const kEventBannerFailedToLoad = @"onBannerFailedToLoad";
-static NSString *const kEventBannerShown = @"onBannerShown";
-static NSString *const kEventBannerClicked = @"onBannerClicked";
+@property (nonatomic, strong) NSMutableDictionary <NSString *, id> *segmentRestrictions;
 
-static NSString *const kEventInterstitialLoaded = @"onInterstitialLoaded";
-static NSString *const kEventInterstitialFailedToLoad = @"onInterstitialFailedToLoad";
-static NSString *const kEventInterstitialShown = @"onInterstitialShown";
-static NSString *const kEventInterstitialClosed = @"onInterstitialClosed";
-static NSString *const kEventInterstitialClicked = @"onInterstitialClicked";
+@end
 
-static NSString *const kEventRewardedVideoLoaded = @"onRewardedVideoLoaded";
-static NSString *const kEventRewardedVideoFailedToLoad = @"onRewardedVideoFailedToLoad";
-static NSString *const kEventRewardedVideoShown = @"onRewardedVideoShown";
-static NSString *const kEventRewardedVideoClosed = @"onRewardedVideoClosed";
-static NSString *const kEventRewardedVideoFinished = @"onRewardedVideoFinished";
-
-static NSString *const kEventNonSkippableVideoLoaded = @"onNonSkippableVideoLoaded";
-static NSString *const kEventNonSkippableVideoFailedToLoad = @"onNonSkippableVideoFailedToLoad";
-static NSString *const kEventNonSkippableVideoShown = @"onNonSkippableVideoShown";
-static NSString *const kEventNonSkippableVideoClosed = @"onNonSkippableVideoClosed";
-static NSString *const kEventNonSkippableVideoFinished = @"onNonSkippableVideoFinished";
-
-#pragma mark Convert types, styles and logs
-int nativeAdTypesForType(int adTypes) {
-    int nativeAdTypes = 0;
-    if ((adTypes & INTERSTITIAL) > 0) {
-        nativeAdTypes |= AppodealAdTypeInterstitial;
-    }
-    if ((adTypes & BANNER) > 0 ||
-        (adTypes & BANNER_TOP) > 0 ||
-        (adTypes & BANNER_BOTTOM) > 0) {
-        nativeAdTypes |= AppodealAdTypeBanner;
-    }
-    if ((adTypes & REWARDED_VIDEO) > 0) {
-        nativeAdTypes |= AppodealAdTypeRewardedVideo;
-    }
-    if ((adTypes & NON_SKIPPABLE_VIDEO) >0) {
-        nativeAdTypes |= AppodealAdTypeNonSkippableVideo;
-    }
-    return nativeAdTypes;
-}
-
-int nativeShowStyleForType(int adTypes) {
-    if ((adTypes & INTERSTITIAL) > 0) {
-        return AppodealShowStyleInterstitial;
-    }
-    if ((adTypes & BANNER_TOP) > 0) {
-        return AppodealShowStyleBannerTop;
-    }
-    if ((adTypes & BANNER_BOTTOM) > 0) {
-        return AppodealShowStyleBannerBottom;
-    }
-    if ((adTypes & REWARDED_VIDEO) > 0) {
-        return AppodealShowStyleRewardedVideo;
-    }
-    if ((adTypes & NON_SKIPPABLE_VIDEO) > 0) {
-        return AppodealShowStyleNonSkippableVideo;
-    }
-    return 0;
-}
-#pragma mark implementation of plugin
 
 @implementation RNAppodeal
+
+@synthesize bridge = _bridge;
 
 - (dispatch_queue_t)methodQueue {
     return dispatch_get_main_queue();
 }
 
-RCT_EXPORT_MODULE();
-
-- (NSArray<NSString *> *)supportedEvents {
-    return @[
-             kEventBannerLoaded,
-             kEventBannerFailedToLoad,
-             kEventBannerShown,
-             kEventBannerClicked,
-             kEventInterstitialLoaded,
-             kEventInterstitialFailedToLoad,
-             kEventInterstitialShown,
-             kEventInterstitialClosed,
-             kEventInterstitialClicked,
-             kEventRewardedVideoLoaded,
-             kEventRewardedVideoFailedToLoad,
-             kEventRewardedVideoShown,
-             kEventRewardedVideoClosed,
-             kEventRewardedVideoFinished,
-             kEventNonSkippableVideoLoaded,
-             kEventNonSkippableVideoFailedToLoad,
-             kEventNonSkippableVideoShown,
-             kEventNonSkippableVideoClosed,
-             kEventNonSkippableVideoFinished ];
+- (NSMutableDictionary <NSString *, id> *)segmentRestrictions {
+    if (!_segmentRestrictions) {
+        _segmentRestrictions = [NSMutableDictionary new];
+    }
+    return _segmentRestrictions;
 }
 
-#pragma mark exported methods
+- (UIViewController *)rootViewController {
+    return UIApplication.sharedApplication.keyWindow.rootViewController;
+}
 
-RCT_EXPORT_METHOD(initialize:(NSString *)appKey types:(int)adType) {
+RCT_EXPORT_MODULE();
+
+#pragma mark Method export
+
+RCT_EXPORT_METHOD(initialize:(NSString *)appKey types:(NSInteger)adType consent:(BOOL)consent) {
     dispatch_async(dispatch_get_main_queue(), ^{
-        customRules = [[NSMutableDictionary alloc] init];
-        [Appodeal setFramework:APDFrameworkReactNative];
-        [Appodeal initializeWithApiKey:appKey types:nativeAdTypesForType(adType)];
+        [Appodeal setSegmentFilter:self.segmentRestrictions];
+        [Appodeal setFramework:APDFrameworkReactNative version:RNAVersion()];
         
         [Appodeal setRewardedVideoDelegate:self];
         [Appodeal setNonSkippableVideoDelegate:self];
         [Appodeal setBannerDelegate:self];
         [Appodeal setInterstitialDelegate:self];
+        
+        [Appodeal initializeWithApiKey:appKey
+                                 types:AppodealAdTypeFromRNAAdType(adType)
+                            hasConsent:consent];
     });
 }
 
-RCT_EXPORT_METHOD(showToast:(NSString *)message) {
-    UIAlertView *toast = [[UIAlertView alloc] initWithTitle:nil message:message delegate:nil cancelButtonTitle:nil otherButtonTitles:nil, nil];
-    [toast show];
-    int duration = 1;
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, duration * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
-        [toast dismissWithClickedButtonIndex:0 animated:YES];
-    });
-}
-
-RCT_EXPORT_METHOD(show:(int)showType placement:(NSString*)placement result:(RCTResponseSenderBlock)callback) {
+RCT_EXPORT_METHOD(show:(int)showType placement:(NSString *)placement result:(RCTResponseSenderBlock)callback) {
     dispatch_async(dispatch_get_main_queue(), ^{
-        if ([placement  isEqual: @""]) {
-            if([Appodeal showAd:nativeShowStyleForType(showType) rootViewController:[[UIApplication sharedApplication] keyWindow].rootViewController])
-                callback(@[@YES]);
-            else
-                callback(@[@NO]);
-        } else {
-            if([Appodeal showAd:nativeShowStyleForType(showType) forPlacement:placement rootViewController:[[UIApplication sharedApplication] keyWindow].rootViewController])
-                callback(@[@YES]);
-            else
-                callback(@[@NO]);
-        }
+        BOOL result = [Appodeal showAd:AppodealShowStyleFromRNAAdType(showType)
+                          forPlacement:placement
+                    rootViewController:self.rootViewController];
+        callback(@[@(result)]);
     });
 }
 
 RCT_EXPORT_METHOD(isLoaded:(int)showType result:(RCTResponseSenderBlock)callback) {
     dispatch_async(dispatch_get_main_queue(), ^{
-        NSLog(@"Appodeal REACT: isLoaded");
-        if([Appodeal isReadyForShowWithStyle:nativeShowStyleForType(showType)])
-            callback(@[@YES]);
-        else
-            callback(@[@NO]);
+        BOOL result = [Appodeal isReadyForShowWithStyle:AppodealShowStyleFromRNAAdType(showType)];
+        callback(@[@(result)]);
     });
 }
 
-RCT_EXPORT_METHOD(cache:(int)adType) {
+RCT_EXPORT_METHOD(canShow:(NSInteger)showType placement:(NSString *)placement result:(RCTResponseSenderBlock)callback) {
     dispatch_async(dispatch_get_main_queue(), ^{
-        [Appodeal cacheAd:nativeAdTypesForType(adType)];
+        BOOL result = [Appodeal canShow:AppodealAdTypeFromRNAAdType(showType) forPlacement:placement];
+        callback(@[@(result)]);
+    });
+}
+
+RCT_EXPORT_METHOD(updateConsent:(BOOL)consent) {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [Appodeal updateConsent:consent];
+    });
+}
+
+RCT_EXPORT_METHOD(predictedEcpm:(NSInteger)adType result:(RCTResponseSenderBlock)callback) {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        double eCPM = [Appodeal predictedEcpmForAdType:AppodealAdTypeFromRNAAdType(adType)];
+        callback(@[@(eCPM)]);
+    });
+}
+
+RCT_EXPORT_METHOD(cache:(NSInteger)adType) {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [Appodeal cacheAd:AppodealAdTypeFromRNAAdType(adType)];
     });
 }
 
@@ -175,46 +97,50 @@ RCT_EXPORT_METHOD(hide:(int)adType) {
     });
 }
 
-RCT_EXPORT_METHOD(setAutoCache:(int)adType autoc:(BOOL)autocache) {
+RCT_EXPORT_METHOD(setAutoCache:(NSInteger)adType autocache:(BOOL)autocache) {
     dispatch_async(dispatch_get_main_queue(), ^{
-        [Appodeal setAutocache:autocache types:nativeAdTypesForType(adType)];
+        [Appodeal setAutocache:autocache types:AppodealAdTypeFromRNAAdType(adType)];
     });
 }
 
-RCT_EXPORT_METHOD(isPrecache:(int)adType calls:(RCTResponseSenderBlock)callback) {
+RCT_EXPORT_METHOD(isPrecache:(NSInteger)adType calls:(RCTResponseSenderBlock)callback) {
     dispatch_async(dispatch_get_main_queue(), ^{
-        if([Appodeal isAutocacheEnabled:nativeAdTypesForType(adType)])
-            callback(@[@YES]);
-        else
-            callback(@[@NO]);
+        BOOL result = [Appodeal isAutocacheEnabled:AppodealAdTypeFromRNAAdType(adType)];
+        callback(@[@(result)]);
     });
 }
 
-
-#pragma mark Banner settings
-
-RCT_EXPORT_METHOD(setSmartBanners:(BOOL)val) {
+RCT_EXPORT_METHOD(predictedEcpm:(NSInteger)adType calls:(RCTResponseSenderBlock)callback) {
     dispatch_async(dispatch_get_main_queue(), ^{
-        [Appodeal setSmartBannersEnabled:val];
+        double eCPM = [Appodeal predictedEcpmForAdType:AppodealAdTypeFromRNAAdType(adType)];
+        callback(@[@(eCPM)]);
     });
 }
 
-RCT_EXPORT_METHOD(setBannerBackground:(BOOL)val) {
+#pragma mark - Banner
+
+RCT_EXPORT_METHOD(setSmartBanners:(BOOL)smartBanners) {
     dispatch_async(dispatch_get_main_queue(), ^{
-        [Appodeal setBannerBackgroundVisible:val];
+        [Appodeal setSmartBannersEnabled:smartBanners];
     });
 }
 
-RCT_EXPORT_METHOD(setBannerAnimation:(BOOL)val) {
+RCT_EXPORT_METHOD(setBannerBackground:(BOOL)bannerBackground) {
     dispatch_async(dispatch_get_main_queue(), ^{
-        [Appodeal setBannerAnimationEnabled:val];
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated"
+        [Appodeal setBannerBackgroundVisible:bannerBackground];
+#pragma clang diagnostic pop
     });
 }
 
-RCT_EXPORT_METHOD(setTabletBanners:(BOOL)val) { }
+RCT_EXPORT_METHOD(setBannerAnimation:(BOOL)bannerAnimations) {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [Appodeal setBannerAnimationEnabled:bannerAnimations];
+    });
+}
 
 #pragma mark Advanced features
-
 
 RCT_EXPORT_METHOD(setTesting:(BOOL)testingEnabled) {
     dispatch_async(dispatch_get_main_queue(), ^{
@@ -222,15 +148,9 @@ RCT_EXPORT_METHOD(setTesting:(BOOL)testingEnabled) {
     });
 }
 
-RCT_EXPORT_METHOD(setLogLevel:(NSString *)logLevel) {
+RCT_EXPORT_METHOD(setLogLevel:(APDLogLevel)logLevel) {
     dispatch_async(dispatch_get_main_queue(), ^{
-        if([logLevel isEqualToString:@"none"])
-            [Appodeal setLogLevel:APDLogLevelOff];
-        if([logLevel isEqualToString:@"debug"])
-            [Appodeal setLogLevel:APDLogLevelDebug];
-        if([logLevel isEqualToString:@"verbose"])
-            [Appodeal setLogLevel:APDLogLevelVerbose];
-
+        [Appodeal setLogLevel:logLevel];
     });
 }
 
@@ -240,27 +160,17 @@ RCT_EXPORT_METHOD(setChildDirectedTreatment:(BOOL)enabled) {
     });
 }
 
-RCT_EXPORT_METHOD(setOnLoadedTriggerBoth:(int)adType enabled:(BOOL)val) { }
-
 RCT_EXPORT_METHOD(disableNetwork:(NSString *)name) {
     dispatch_async(dispatch_get_main_queue(), ^{
-        [Appodeal disableNetworkForAdType:AppodealAdTypeMREC name:name];
-        [Appodeal disableNetworkForAdType:AppodealAdTypeBanner name:name];
-        [Appodeal disableNetworkForAdType:AppodealAdTypeNativeAd name:name];
-        [Appodeal disableNetworkForAdType:AppodealAdTypeNonSkippableVideo name:name];
-        [Appodeal disableNetworkForAdType:AppodealAdTypeRewardedVideo name:name];
-        [Appodeal disableNetworkForAdType:AppodealAdTypeInterstitial name:name];
+        AppodealAdType adType = 1 << 5 | AppodealAdTypeBanner | AppodealAdTypeNativeAd | AppodealAdTypeNonSkippableVideo | AppodealAdTypeRewardedVideo | AppodealAdTypeInterstitial;
+        [Appodeal disableNetworkForAdType:adType
+                                     name:name];
     });
 }
 
-RCT_EXPORT_METHOD(disableNetworkType:(NSString *)name types:(int)adType) {
+RCT_EXPORT_METHOD(disableNetworkType:(NSString *)name types:(NSInteger)adType) {
     dispatch_async(dispatch_get_main_queue(), ^{
-        if ((adType & BANNER) > 0 ||
-            (adType & BANNER_TOP) > 0 ||
-            (adType & BANNER_BOTTOM) > 0) {
-            [Appodeal disableNetworkForAdType:AppodealAdTypeBanner name:name];
-        }
-        [Appodeal disableNetworkForAdType:nativeAdTypesForType(adType) name:name];
+        [Appodeal disableNetworkForAdType:AppodealAdTypeFromRNAAdType(adType) name:name];
     });
 }
 
@@ -270,166 +180,118 @@ RCT_EXPORT_METHOD(disableLocationPermissionCheck) {
     });
 }
 
-RCT_EXPORT_METHOD(disableWriteExternalStoragePermissionCheck) { }
-
-RCT_EXPORT_METHOD(requestAndroidMPermissions) { }
-
-RCT_EXPORT_METHOD(muteVideosIfCallsMuted) { }
-
-RCT_EXPORT_METHOD(showTestScreen) { }
-
 RCT_EXPORT_METHOD(getVersion:(RCTResponseSenderBlock)callback) {
     dispatch_async(dispatch_get_main_queue(), ^{
         callback(@[[Appodeal getVersion]]);
     });
 }
 
-RCT_EXPORT_METHOD(isAutocacheEnabled:(int)types callback:(RCTResponseSenderBlock)callback) {
+RCT_EXPORT_METHOD(isAutocacheEnabled:(NSInteger)types callback:(RCTResponseSenderBlock)callback) {
     dispatch_async(dispatch_get_main_queue(), ^{
-        if ([Appodeal isAutocacheEnabled:nativeAdTypesForType(types)]) {
-            callback(@[@YES]);
-        }
-        else
-            callback(@[@NO]);
+        BOOL result = [Appodeal isAutocacheEnabled:AppodealAdTypeFromRNAAdType(types)];
+        callback(@[@(result)]);
     });
 }
 
-RCT_EXPORT_METHOD(isInitialized:(RCTResponseSenderBlock)callback) {
+RCT_EXPORT_METHOD(isInitialized:(int)types callback:(RCTResponseSenderBlock)callback) {
     dispatch_async(dispatch_get_main_queue(), ^{
-        if([Appodeal isInitalized])
-            callback(@[@YES]);
-        else
-            callback(@[@NO]);
+        BOOL result = [Appodeal isInitalizedForAdType:types];
+        callback(@[@(result)]);
     });
 }
 
-RCT_EXPORT_METHOD(disableUserData:(NSString *)network) {
+#pragma mark Placement
+
+RCT_EXPORT_METHOD(getRewardParameters:(NSString *)placementName callback:(RCTResponseSenderBlock)callback) {
     dispatch_async(dispatch_get_main_queue(), ^{
-        [Appodeal disableUserData:network];
+        NSObject <APDReward> *reward = [Appodeal rewardForPlacement:placementName];
+        callback(@[ @(reward.amount), reward.currencyName ?: @"" ]);
     });
 }
 
-#pragma mark Placement features
-
-RCT_EXPORT_METHOD(getRewardParameters:(NSString *) placementName result:(RCTResponseSenderBlock)callback) {
-    dispatch_async(dispatch_get_main_queue(), ^{
-        NSObject <APDReward> * reward = [Appodeal rewardForPlacement: placementName];
-        if (reward) {
-            NSString *rewardCurrency = reward.currencyName;
-            NSUInteger rewardAmount = reward.amount;
-            callback(@[ @(rewardAmount), rewardCurrency ]);
-        }
-        else
-            callback(@[@0,@""]);
-    });
+RCT_EXPORT_METHOD(setCustomDoubleRule:(NSString *)ruleName value:(double)value) {
+    NSLock *lock = [NSLock new];
+    [lock lock];
+    self.segmentRestrictions[ruleName ?: @""] = @(value);
+    [lock unlock];
 }
 
-RCT_EXPORT_METHOD(canShow:(int)showType placement:(NSString *) placementName result:(RCTResponseSenderBlock)callback) {
-    dispatch_async(dispatch_get_main_queue(), ^{
-        if([Appodeal canShowAd: nativeShowStyleForType(showType) forPlacement: placementName])
-            callback(@[@YES]);
-        else
-            callback(@[@NO]);
-    });
+RCT_EXPORT_METHOD(setCustomIntegerRule:(NSString *)ruleName value:(int)value) {
+    NSLock *lock = [NSLock new];
+    [lock lock];
+    self.segmentRestrictions[ruleName ?: @""] = @(value);
+    [lock unlock];
 }
 
-RCT_EXPORT_METHOD(setCustomDoubleRule:(NSString *)ruleName value:(double)ruleValue) {
-    dispatch_async(dispatch_get_main_queue(), ^{
-        if (customRules) {
-            NSDictionary *tempDictionary = @{ruleName : [NSNumber numberWithDouble:ruleValue]};
-            [customRules addEntriesFromDictionary:tempDictionary];
-            [Appodeal setCustomRule:customRules];
-        }
-    });
+RCT_EXPORT_METHOD(setCustomStringRule:(NSString *)ruleName value:(NSString *)value) {
+    NSLock *lock = [NSLock new];
+    [lock lock];
+    self.segmentRestrictions[ruleName ?: @""] = value;
+    [lock unlock];
 }
 
-RCT_EXPORT_METHOD(setCustomIntegerRule:(NSString *)ruleName value:(int)ruleValue) {
-    dispatch_async(dispatch_get_main_queue(), ^{
-        if (customRules) {
-            NSDictionary *tempDictionary = @{ruleName : [NSNumber numberWithInteger:ruleValue]};
-            [customRules addEntriesFromDictionary:tempDictionary];
-            [Appodeal setCustomRule:customRules];
-        }
-    });
+RCT_EXPORT_METHOD(setCustomBooleanRule:(NSString *)ruleName value:(BOOL)value) {
+    NSLock *lock = [NSLock new];
+    [lock lock];
+    self.segmentRestrictions[ruleName ?: @""] = @(value);
+    [lock unlock];
 }
 
-RCT_EXPORT_METHOD(setCustomStringRule:(NSString *)ruleName value:(NSString *)ruleValue) {
-    dispatch_async(dispatch_get_main_queue(), ^{
-        if (customRules) {
-            NSDictionary *tempDictionary = @{ruleName : ruleValue};
-            [customRules addEntriesFromDictionary:tempDictionary];
-            [Appodeal setCustomRule:customRules];
-        }
-    });
-}
-
-RCT_EXPORT_METHOD(setCustomBooleanRule:(NSString *)ruleName value:(BOOL)ruleValue) {
-    dispatch_async(dispatch_get_main_queue(), ^{
-        if (customRules) {
-            NSDictionary *tempDictionary = @{ruleName : [NSNumber numberWithBool:ruleValue]};
-            [customRules addEntriesFromDictionary:tempDictionary];
-            [Appodeal setCustomRule:customRules];
-        }
-    });
-}
-
-
-#pragma mark User Data
+#pragma mark - User Data
 
 RCT_EXPORT_METHOD(setUserId:(NSString *)userId) {
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [Appodeal setUserId:userId];
-    });
+    [Appodeal setUserId:userId];
 }
 
 RCT_EXPORT_METHOD(setAge:(int)age) {
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [Appodeal setUserAge:age];
-    });
+    [Appodeal setUserAge:age];
+}
+
+RCT_EXPORT_METHOD(setGender:(AppodealUserGender)gender) {
+    [Appodeal setUserGender:gender];
 }
 
 RCT_EXPORT_METHOD(trackInAppPurchase:(double)amount currencyCode:(NSString *)currency) {
     dispatch_async(dispatch_get_main_queue(), ^{
-        [[APDSdk sharedSdk] trackInAppPurchase:[NSNumber numberWithDouble:amount] currency: currency];
+        [APDSdk.sharedSdk trackInAppPurchase:@(amount)
+                                    currency:currency];
     });
 }
 
-RCT_EXPORT_METHOD(setGender:(NSString *)AppodealUserGender) {
-    dispatch_async(dispatch_get_main_queue(), ^{
-        if([AppodealUserGender isEqualToString:@"other"])
-            [Appodeal setUserGender:AppodealUserGenderOther];
-        if([AppodealUserGender isEqualToString:@"male"])
-            [Appodeal setUserGender:AppodealUserGenderMale];
-        if([AppodealUserGender isEqualToString:@"female"])
-            [Appodeal setUserGender:AppodealUserGenderFemale];
-    });
+- (NSArray<NSString *> *)supportedEvents {
+    return RNASupportedMehtods();
 }
 
-#pragma mark Events
-#pragma mark - banner events
+#pragma mark - AppodealBannerDelegate
+
 - (void)bannerDidShow {
-    //[self sendEventWithName:@"onBannerShown" body:nil];
+    [self sendEventWithName:kEventBannerShown body:nil];
 }
 
 - (void)bannerDidLoadAdIsPrecache:(BOOL)precache {
-    [self sendEventWithName:kEventBannerLoaded body:@{@"isPrecache":[NSNumber numberWithBool:precache]}];
-}
-
-- (void)bannerDidClick {
-    [self sendEventWithName:kEventBannerClicked body:nil];
+    [self sendEventWithName:kEventBannerLoaded body:@{@"isPrecache": @(precache)}];
 }
 
 - (void)bannerDidFailToLoadAd; {
     [self sendEventWithName:kEventBannerFailedToLoad body:nil];
 }
 
-#pragma mark - Interstitial events
-- (void)interstitialDidLoadAdisPrecache:(BOOL)precache {
-    [self sendEventWithName:kEventInterstitialLoaded body:@{@"isPrecache":[NSNumber numberWithBool:precache]}];
+- (void)bannerDidClick {
+    [self sendEventWithName:kEventBannerClicked body:nil];
+}
+
+#pragma mark - AppodealInterstitialDelegate
+
+- (void)interstitialDidLoadAdIsPrecache:(BOOL)precache {
+    [self sendEventWithName:kEventInterstitialLoaded body:@{@"isPrecache": @(precache)}];
 }
 
 - (void)interstitialDidFailToLoadAd {
     [self sendEventWithName:kEventInterstitialFailedToLoad body:nil];
+}
+
+- (void)interstitialDidFailToPresent {
+    [self sendEventWithName:kEventInterstitialFailedToPresent body:nil];
 }
 
 - (void)interstitialWillPresent {
@@ -444,9 +306,10 @@ RCT_EXPORT_METHOD(setGender:(NSString *)AppodealUserGender) {
     [self sendEventWithName:kEventInterstitialClicked body:nil];
 }
 
-#pragma mark - NonSkippable video events
-- (void)nonSkippableVideoDidLoadAd {
-    [self sendEventWithName:kEventNonSkippableVideoLoaded body:nil];
+#pragma mark - AppodealNonSkippableVideoDelegate
+
+- (void)nonSkippableVideoDidLoadAdIsPrecache:(BOOL)precache {
+    [self sendEventWithName:kEventNonSkippableVideoLoaded body:@{@"isPrecache": @(precache)}];
 }
 
 - (void)nonSkippableVideoDidFailToLoadAd {
@@ -457,36 +320,51 @@ RCT_EXPORT_METHOD(setGender:(NSString *)AppodealUserGender) {
     [self sendEventWithName:kEventNonSkippableVideoShown body:nil];
 }
 
-- (void)nonSkippableVideoWillDismiss {
-    [self sendEventWithName:kEventNonSkippableVideoClosed body:nil];
+- (void)nonSkippableVideoDidFailToPresentWithError:(NSError *)error {
+    [self sendEventWithName:kEventNonSkippableVideoFailedToPresent body:nil];
+}
+
+- (void)nonSkippableVideoWillDismissAndWasFullyWatched:(BOOL)wasFullyWatched {
+    [self sendEventWithName:kEventNonSkippableVideoClosed body:@{@"fullyWatched": @(wasFullyWatched)}];
 }
 
 - (void)nonSkippableVideoDidFinish {
     [self sendEventWithName:kEventNonSkippableVideoFinished body:nil];
 }
 
-#pragma mark - Rewarded video events
-- (void)rewardedVideoDidLoadAd {
-    [self sendEventWithName:kEventRewardedVideoLoaded body:nil];
+#pragma mark - AppodealRewardedVideoDelegate
+
+- (void)rewardedVideoDidLoadAdIsPrecache:(BOOL)precache {
+    [self sendEventWithName:kEventRewardedVideoLoaded body:@{@"isPrecache": @(precache)}];
 }
 
 - (void)rewardedVideoDidFailToLoadAd {
     [self sendEventWithName:kEventRewardedVideoFailedToLoad body:nil];
 }
 
+- (void)rewardedVideoDidFailToPresentWithError:(NSError *)error {
+    [self sendEventWithName:kEventRewardedVideoFailedToPresent body:nil];
+}
+
 - (void)rewardedVideoDidPresent {
     [self sendEventWithName:kEventRewardedVideoShown body:nil];
 }
 
-- (void)rewardedVideoWillDismiss {
-    [self sendEventWithName:kEventRewardedVideoClosed body:nil];
+- (void)rewardedVideoWillDismissAndWasFullyWatched:(BOOL)wasFullyWatched {
+    [self sendEventWithName:kEventRewardedVideoClosed body:@{@"fullyWatched": @(wasFullyWatched)}];
 }
 
-- (void)rewardedVideoDidFinish:(NSUInteger)rewardAmount name:(NSString *)rewardName {
-    if (rewardName == nil) {
-        [self sendEventWithName:kEventRewardedVideoFinished body:@{@"amount":[NSNumber numberWithInteger:0],@"name":@"nil"}];
-    } else {
-        [self sendEventWithName:kEventRewardedVideoFinished body:@{@"amount":[NSNumber numberWithInteger:rewardAmount],@"name":rewardName}];
-    }
+- (void)rewardedVideoDidFinish:(float)rewardAmount name:(NSString *)rewardName {
+    [self sendEventWithName:kEventRewardedVideoFinished body:@{@"amount":@(rewardAmount), @"name": rewardName ?: @""}];
 }
+
+#pragma mark - Noop
+
+RCT_EXPORT_METHOD(setTabletBanners:(BOOL)val) {}
+RCT_EXPORT_METHOD(disableWriteExternalStoragePermissionCheck) {}
+RCT_EXPORT_METHOD(requestAndroidMPermissions) {}
+RCT_EXPORT_METHOD(muteVideosIfCallsMuted) {}
+RCT_EXPORT_METHOD(showTestScreen) {}
+RCT_EXPORT_METHOD(setOnLoadedTriggerBoth:(int)adType enabled:(BOOL)val) {}
+
 @end
