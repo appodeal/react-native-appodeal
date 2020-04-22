@@ -4,30 +4,39 @@ import { requireNativeComponent, StyleProp, ViewStyle } from 'react-native';
 
 interface AppodealBannerProps {
 	adSize: AdSize,
-	placement: string,
-	onAdLoaded: Function,
-	onAdFailedToLoad: Function,
-	onAdClicked: Function,
-	onAdExpired: Function,
-	style: StyleProp<ViewStyle>
+	placement?: string,
+	onAdLoaded?: Function,
+	onAdFailedToLoad?: Function,
+	onAdClicked?: Function,
+	onAdExpired?: Function,
+	style?: StyleProp<ViewStyle>
 }
 
 type AdSize = 'phone' | 'tablet' | 'mrec';
 
 interface NativeAppodealBannerProps {
 	adSize: AdSize,
-	placement: string,
-	onAdLoaded: Function,
-	onAdFailedToLoad: Function,
-	onAdClicked: Function,
-	onAdExpired: Function,
-	style: StyleProp<ViewStyle>,
+	placement?: string,
+	onAdLoaded?: Function,
+	onAdFailedToLoad?: Function,
+	onAdClicked?: Function,
+	onAdExpired?: Function,
+	style?: StyleProp<ViewStyle>,
 }
 
-const RNAppodealBannerView = requireNativeComponent('RNAppodealBannerView');
+const RNAppodealBannerView = requireNativeComponent<NativeAppodealBannerProps>('RNAppodealBannerView');
 
 const AppodealBanner = (props: AppodealBannerProps) => {
-	const { adSize, placement, onAdLoaded, onAdFailedToLoad, onAdClicked, onAdExpired, style, ...restProps } = props
+	const { 
+		adSize, 
+		placement, 
+		onAdLoaded, 
+		onAdFailedToLoad, 
+		onAdClicked, 
+		onAdExpired, 
+		style, 
+		...restProps 
+	} = props
 
 	const height: Record<AdSize, number> = {
 		phone: 50,

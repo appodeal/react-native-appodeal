@@ -5,9 +5,6 @@
  * @format
  */
 
-const path = require('path');
-const escape = require('escape-string-regexp');
-
 module.exports = {
   transformer: {
     getTransformOptions: async () => ({
@@ -16,12 +13,5 @@ module.exports = {
         inlineRequires: false,
       },
     }),
-  },
-  resolver: {
-    blacklistRE: new RegExp(
-      `^${escape(
-        path.resolve(__dirname, 'node_modules', 'react-native-appodeal'),
-      ) + '\\/(node_modules|example)'}\\/.*$`,
-    ),
   },
 };

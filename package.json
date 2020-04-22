@@ -4,7 +4,7 @@
   "description": "React Native Module created to support Appodeal SDK for iOS and Android platforms",
   "repository": {
     "type": "git",
-    "url": "https://github.com/staskochkin/react-native-appodeal.git"
+    "url": "/Users/staskochkin/Projects/Plugins/react-native-appodeal/.git"
   },
   "homepage": "https://github.com/staskochkin/react-native-appodeal",
   "main": "dist/lib/index.js",
@@ -19,15 +19,16 @@
   "author": "Appodeal <https://appodeal.com>",
   "license": "MIT",
   "peerDependencies": {
+    "react": "*",
     "react-native": "*"
   },
   "devDependencies": {
-    "@types/fbemitter": "^2.0.32",
-    "@types/react-native": "^0.57.4",
-    "tslint": "^5.11.0",
-    "tslint-config-airbnb": "^5.11.0",
-    "tslint-config-prettier": "^1.15.0",
-    "typescript": "^3.1.2"
+    "@types/react": "^16.4.6",
+    "@types/react-native": "^0.56.0",
+    "react-native-scripts-ts": "^1.15.0",
+    "react-native-typescript-transformer": "^1.2.10",
+    "tslib": "^1.9.3",
+    "typescript": "^2.9.2"
   },
   "keywords": [
     "react",

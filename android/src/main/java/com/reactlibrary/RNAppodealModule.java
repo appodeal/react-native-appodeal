@@ -394,5 +394,4 @@ public class RNAppodealModule extends ReactContextBaseJavaModule implements Inte
 		params.putBoolean("isGranted", response == PackageManager.PERMISSION_GRANTED);
 		sendEventToJS("writeExternalStorageResponse", params);
 	}
-
 }

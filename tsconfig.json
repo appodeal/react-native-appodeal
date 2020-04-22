@@ -1,13 +1,15 @@
 {
   "compilerOptions": {
-    "moduleResolution": "node",
-    "target": "es6",
+    "jsx": "react",
+    "target": "es2015",
+    "lib": [ "es2017" ],
+    "skipLibCheck": true,
+    "importHelpers": true,
     "module": "es2015",
-    "strict": true,
-    "jsx": "react-native",
-    "sourceMap": false,
-    "declaration": true,
+    "moduleResolution": "node",
+    "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
+    "declaration": true,
     "declarationDir": "dist/types",
     "outDir": "dist/lib",
     "typeRoots": ["node_modules/@types"]
