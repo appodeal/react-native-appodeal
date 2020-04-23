@@ -10,11 +10,13 @@ import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.uimanager.ViewManager;
 import com.facebook.react.bridge.JavaScriptModule;
 
-public class RNAppodealPackage implements ReactPackage {
 
+public class RNAppodealPackage implements ReactPackage {
     @Override
     public List<NativeModule> createNativeModules(ReactApplicationContext reactContext) {
-      return Arrays.<NativeModule>asList(new RNAppodealModule(reactContext));
+      return Arrays.<NativeModule>asList(
+              new RNAppodealModule(reactContext)
+      );
     }
 
     // Deprecated from RN 0.47
@@ -24,6 +26,8 @@ public class RNAppodealPackage implements ReactPackage {
 
     @Override
     public List<ViewManager> createViewManagers(ReactApplicationContext reactContext) {
-      return Collections.emptyList();
+      return Arrays.<ViewManager>asList(
+              new RNAppodealBannerManager()
+      );
     }
 }

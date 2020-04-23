@@ -5,6 +5,7 @@ import {
     AppodealRewardedEvent,
     AppodealBannerEvent,
 } from 'react-native-appodeal';
+import { Platform } from 'react-native';
 
 
 export const initialize = (consent: boolean, testing: boolean) => {
@@ -26,9 +27,27 @@ export const initialize = (consent: boolean, testing: boolean) => {
     )
 }
 
+export enum BannerShowStyle {
+    BOTTOM = "Bottom",
+    TOP = "Top",
+    VIEW = "View"
+}
+
+
+export const isViewBannerStyle = (style: BannerShowStyle) => style === BannerShowStyle.VIEW;
+
+export const bannerAdType = (style: BannerShowStyle) => {
+    switch (style) {
+        case BannerShowStyle.BOTTOM: return AppodealAdType.BANNER_BOTTOM;
+        case BannerShowStyle.TOP: return AppodealAdType.BANNER_TOP;
+        default: return AppodealAdType.BANNER;
+    }
+}
 
 const constants = {
-    appKey: 'dee74c5129f53fc629a44a690a02296694e3eef99f2d3a5f',
+    appKey: Platform.OS === "ios" ? 
+        "dee74c5129f53fc629a44a690a02296694e3eef99f2d3a5f" : 
+        "fee50c333ff3825fd6ad6d38cff78154de3025546d47a84f",
     adTypes: AppodealAdType.INTERSTITIAL | AppodealAdType.REWARDED_VIDEO | AppodealAdType.BANNER,
     logLevel: 'debug',
     user: {

@@ -10,6 +10,7 @@
     "lint": "eslint ."
   },
   "dependencies": {
+    "@react-native-community/segmented-control": "^1.4.0",
     "react": "16.11.0",
     "react-native": "0.62.2",
     "react-native-appodeal": "file:.."
@@ -21,7 +22,6 @@
     "@types/jest": "^25.2.1",
     "@types/react": "^16.9.34",
     "@types/react-native": "^0.62.2",
-    "@types/react-native-appodeal": "file:..",
     "@types/react-test-renderer": "^16.9.2",
     "babel-jest": "^24.9.0",
     "eslint": "^6.5.1",

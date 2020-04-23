@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { styles } from '../styles';
+import { BannerShowStyle } from '../advertising';
 import {
     AppodealAdType,
     Appodeal,
@@ -11,6 +12,7 @@ import {
     ScrollView,
     TouchableOpacity,
 } from 'react-native';
+import SegmentedControl from '@react-native-community/segmented-control';
 
 
 export const SectionHeader = (props: { value: string }) => {
@@ -130,24 +132,51 @@ export const AdStatusFooter = (props: {
     })
 
     const updateState = () => {
-        Appodeal.canShow(
-            props.adType,
-            'default',
-            (result: boolean) => setState({ ...state, canShow: result })
+        Appodeal.canShow(props.adType, null, (result: boolean) =>
+            setState(prev => ({ ...prev, canShow: result }))
         )
-        Appodeal.predictedEcpm(
-            props.adType,
-            (result: number) => setState({ ...state, ecpm: result })
+        Appodeal.predictedEcpm(props.adType, (result: number) =>
+            setState(prev => ({ ...prev, ecpm: result }))
         )
     }
 
     return (
         <TouchableOpacity onPress={updateState}>
             <View>
-                <Text style={styles.sectionFooter}>
-                    {state.canShow ? 'Can' : 'Can not'} show. Predicted eCPM {state.ecpm}
+                <Text style={styles.sectionFooter} numberOfLines={2}>
+                    {state.canShow ? "Can" : "Can't"} show. {'\n'} Predicted eCPM is {state.ecpm}.
                 </Text>
             </View>
         </TouchableOpacity>
     )
+}
+
+
+export const BannerSegmentedControl = (props: {
+    showStyle: BannerShowStyle,
+    onChange(showStyle: BannerShowStyle): void
+}) => {
+    const showStyles = [
+        BannerShowStyle.BOTTOM,
+        BannerShowStyle.TOP,
+        BannerShowStyle.VIEW
+    ]
+
+    const index = () => {
+        return showStyles.indexOf(props.showStyle)
+    }
+
+    return (
+        <View>
+            <Text style={styles.sectionHeader}>Banner style</Text>
+            <View style={styles.rowContainer}>
+                <SegmentedControl
+                    style={{margin: 8}}
+                    values={showStyles}
+                    selectedIndex={index()}
+                    onChange={(event) => props.onChange(showStyles[event.nativeEvent.selectedSegmentIndex])}
+                />
+            </View>
+        </View>
+    );
 }

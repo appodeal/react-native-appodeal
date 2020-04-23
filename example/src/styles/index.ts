@@ -81,7 +81,9 @@ export const styles = StyleSheet.create({
     },
     banner: {
         height: 50,
-        width: '100%'
+        width: '100%',
+        backgroundColor: 'hsl(0, 0%, 97%)',
+        alignContent: 'stretch',
     },
     buttonSelected: {
         flex: 1,
@@ -90,6 +92,7 @@ export const styles = StyleSheet.create({
         margin: 8,
         height: 26,
         borderRadius: 8,
+        fontSize: 14,
         backgroundColor: '#53d769',
     },
     buttonPlain: {
@@ -98,7 +101,7 @@ export const styles = StyleSheet.create({
         alignSelf: 'stretch',
         margin: 8,
         borderRadius: 8,
-        fontSize: 12,
+        fontSize: 14,
         backgroundColor: '#ddd'
     },
     buttonText: {

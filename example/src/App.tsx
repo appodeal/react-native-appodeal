@@ -6,6 +6,7 @@ import {
     ScrollView,
     SafeAreaView,
     View,
+    StatusBar,
 } from 'react-native';
 import {
     SectionHeader,
@@ -13,12 +14,18 @@ import {
     NavigationBar,
     AutocacheControl,
     AdStatusFooter,
+    BannerSegmentedControl,
 } from './components';
 import {
     AppodealBanner,
     AppodealAdType,
     Appodeal
 } from 'react-native-appodeal';
+import {
+    BannerShowStyle,
+    isViewBannerStyle,
+    bannerAdType,
+} from './advertising';
 
 
 interface AppState {
@@ -26,8 +33,10 @@ interface AppState {
     bannerOnScreen: boolean,
     consent: boolean,
     test: boolean,
-    autocache: number
+    autocache: number,
+    bannerShowStyle: BannerShowStyle
 }
+
 
 export const App = () => {
     const [state, setState] = React.useState<AppState>({
@@ -35,7 +44,8 @@ export const App = () => {
         bannerOnScreen: false,
         consent: true,
         test: true,
-        autocache: AppodealAdType.INTERSTITIAL
+        autocache: AppodealAdType.INTERSTITIAL | AppodealAdType.BANNER,
+        bannerShowStyle: BannerShowStyle.VIEW
     })
 
     useEffect(() => {
@@ -44,19 +54,31 @@ export const App = () => {
                 return
             }
             initialize(state.consent, state.test)
-            setState({ ...state, bannerOnScreen: true })
         }
         initIfNeeded()
     }, [state.initialised]);
 
     useEffect(() => Appodeal.updateConsent(state.consent), [state.consent]);
     useEffect(() => {
-        Appodeal.setAutoCache(AppodealAdType.INTERSTITIAL, state.autocache & AppodealAdType.INTERSTITIAL)
-        Appodeal.setAutoCache(AppodealAdType.BANNER, state.autocache & AppodealAdType.BANNER)
-        Appodeal.setAutoCache(AppodealAdType.REWARDED_VIDEO, state.autocache & AppodealAdType.REWARDED_VIDEO)
+        const types = [AppodealAdType.INTERSTITIAL, AppodealAdType.REWARDED_VIDEO, AppodealAdType.BANNER]
+        types.forEach(adType => Appodeal.setAutoCache(adType, (state.autocache & adType) > 0))
     }, [state.autocache]);
 
     const toggle = (name: keyof AppState) => () => setState({ ...state, [name]: !state[name] })
+
+    const updateBanner = () => {
+        if (!isViewBannerStyle(state.bannerShowStyle)) {
+            if (state.bannerOnScreen) {
+                Appodeal.hide(bannerAdType(state.bannerShowStyle))
+            } else {
+                Appodeal.show(bannerAdType(state.bannerShowStyle))
+            }
+        }
+        setState({
+            ...state,
+            bannerOnScreen: !state.bannerOnScreen
+        })
+    }
 
     const ShowGroup = () => {
         return (
@@ -87,30 +109,20 @@ export const App = () => {
                     onClick={() => Appodeal.show(AppodealAdType.REWARDED_VIDEO)}
                 />
                 <AdStatusFooter adType={AppodealAdType.REWARDED_VIDEO} />
-                <SectionHeader value="Banner ads" />
-                {state.bannerOnScreen ? <AppodealBanner style={styles.banner} adSize='phone' /> : null}
+                <SectionHeader value={"Banner " + state.bannerShowStyle} />
                 {
                     state.autocache & AppodealAdType.BANNER ? null :
                         <Row
-                            title='Cache static banner'
-                            onClick={() => Appodeal.cache(AppodealAdType.REWARDED_VIDEO)}
+                            title='Cache banner'
+                            onClick={() => Appodeal.cache(AppodealAdType.BANNER)}
                         />
                 }
                 <Row
-                    title={state.bannerOnScreen ? 'Hide custom banner' : 'Show custom banner'}
-                    onClick={() => setState({ ...state, bannerOnScreen: !state.bannerOnScreen })}
-                />
-                <Row
-                    title='Show static banner top'
-                    onClick={() => Appodeal.show(AppodealAdType.BANNER_TOP)}
-                />
-                <Row
-                    title='Show static banner bottom'
-                    onClick={() => Appodeal.show(AppodealAdType.BANNER_BOTTOM)}
-                />
-                <Row
-                    title='Hide static banner'
-                    onClick={() => Appodeal.hide(AppodealAdType.BANNER)}
+                    title={state.bannerOnScreen ?
+                        'Hide banner' :
+                        'Show banner'
+                    }
+                    onClick={updateBanner}
                 />
                 <AdStatusFooter adType={AppodealAdType.BANNER} />
             </View>
@@ -147,16 +159,28 @@ export const App = () => {
 
 
     return (
-        <SafeAreaView style={styles.container}>
+        <>
+            <StatusBar />
             <NavigationBar />
-            <ScrollView style={styles.scrollView}>
-                <InitialisationGroup/>
-                <AutocacheControl
-                    mask={state.autocache}
-                    onUpdate={autocache => setState({ ...state, autocache: autocache })}
-                />
-                {state.initialised ? <ShowGroup /> : null}
-            </ScrollView>
-        </SafeAreaView>
+            {isViewBannerStyle(state.bannerShowStyle) && state.bannerOnScreen ?
+                    <AppodealBanner style={styles.banner} adSize='phone' /> :
+                    null}
+            <SafeAreaView style={styles.container}>
+                <ScrollView style={styles.scrollView}>
+                    <InitialisationGroup />
+                    <AutocacheControl
+                        mask={state.autocache}
+                        onUpdate={autocache => setState({ ...state, autocache: autocache })}
+                    />
+                    {state.initialised ? null :
+                        <BannerSegmentedControl
+                            showStyle={state.bannerShowStyle}
+                            onChange={(style) => setState({ ...state, bannerShowStyle: style })}
+                        />
+                    }
+                    {state.initialised ? <ShowGroup /> : null}
+                </ScrollView>
+            </SafeAreaView>
+        </>
     );
 }

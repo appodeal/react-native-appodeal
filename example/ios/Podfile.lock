@@ -258,6 +258,8 @@ PODS:
     - React-cxxreact (= 0.62.2)
     - React-jsi (= 0.62.2)
   - React-jsinspector (0.62.2)
+  - react-native-segmented-control (1.4.0):
+    - React
   - React-RCTActionSheet (0.62.2):
     - React-Core/RCTActionSheetHeaders (= 0.62.2)
   - React-RCTAnimation (0.62.2):
@@ -368,6 +370,7 @@ DEPENDENCIES:
   - React-jsi (from `../node_modules/react-native/ReactCommon/jsi`)
   - React-jsiexecutor (from `../node_modules/react-native/ReactCommon/jsiexecutor`)
   - React-jsinspector (from `../node_modules/react-native/ReactCommon/jsinspector`)
+  - "react-native-segmented-control (from `../node_modules/@react-native-community/segmented-control`)"
   - React-RCTActionSheet (from `../node_modules/react-native/Libraries/ActionSheetIOS`)
   - React-RCTAnimation (from `../node_modules/react-native/Libraries/NativeAnimation`)
   - React-RCTBlob (from `../node_modules/react-native/Libraries/Blob`)
@@ -379,7 +382,7 @@ DEPENDENCIES:
   - React-RCTVibration (from `../node_modules/react-native/Libraries/Vibration`)
   - ReactCommon/callinvoker (from `../node_modules/react-native/ReactCommon`)
   - ReactCommon/turbomodule/core (from `../node_modules/react-native/ReactCommon`)
-  - RNAppodeal (from `../node_modules/react-native-appodeal/RNAppodeal.podspec`)
+  - RNAppodeal (from `../../RNAppodeal.podspec`)
   - Yoga (from `../node_modules/react-native/ReactCommon/yoga`)
 
 SPEC REPOS:
@@ -443,6 +446,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon/jsiexecutor"
   React-jsinspector:
     :path: "../node_modules/react-native/ReactCommon/jsinspector"
+  react-native-segmented-control:
+    :path: "../node_modules/@react-native-community/segmented-control"
   React-RCTActionSheet:
     :path: "../node_modules/react-native/Libraries/ActionSheetIOS"
   React-RCTAnimation:
@@ -464,7 +469,7 @@ EXTERNAL SOURCES:
   ReactCommon:
     :path: "../node_modules/react-native/ReactCommon"
   RNAppodeal:
-    :path: "../node_modules/react-native-appodeal/RNAppodeal.podspec"
+    :path: "../../RNAppodeal.podspec"
   Yoga:
     :path: "../node_modules/react-native/ReactCommon/yoga"
 
@@ -511,6 +516,7 @@ SPEC CHECKSUMS:
   React-jsi: b6dc94a6a12ff98e8877287a0b7620d365201161
   React-jsiexecutor: 1540d1c01bb493ae3124ed83351b1b6a155db7da
   React-jsinspector: 512e560d0e985d0e8c479a54a4e5c147a9c83493
+  react-native-segmented-control: 6ad7533758f4567e1e97136a67986f4167fd106a
   React-RCTActionSheet: f41ea8a811aac770e0cc6e0ad6b270c644ea8b7c
   React-RCTAnimation: 49ab98b1c1ff4445148b72a3d61554138565bad0
   React-RCTBlob: a332773f0ebc413a0ce85942a55b064471587a71
@@ -525,6 +531,6 @@ SPEC CHECKSUMS:
   YandexMobileMetrica: 1030df2959c886a7be3bc3d274eb54c8e86afd6f
   Yoga: 3ebccbdd559724312790e7742142d062476b698e
 
-PODFILE CHECKSUM: e1cca593d96d59d8435bcb60e9fbbc5901dbe37f
+PODFILE CHECKSUM: 41e4c569b115acae69abf4a761a2c131823b93c7
 
 COCOAPODS: 1.9.1

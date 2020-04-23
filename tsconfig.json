@@ -14,5 +14,12 @@
     "outDir": "dist/lib",
     "typeRoots": ["node_modules/@types"]
   },
-  "include": ["src"]
+  "include": ["src"],
+  "exclude": [
+    "node_modules",
+    "dist",
+    "ios",
+    "android",
+    "example"
+  ]
 }

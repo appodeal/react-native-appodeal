@@ -10,8 +10,10 @@ import com.facebook.react.bridge.ReadableMap;
 import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.modules.core.DeviceEventManagerModule.RCTDeviceEventEmitter;
 import com.facebook.react.bridge.Arguments;
+
 import java.util.Map;
 import java.util.HashMap;
+
 import android.content.pm.PackageManager;
 
 import com.appodeal.ads.Appodeal;
@@ -23,375 +25,384 @@ import com.appodeal.ads.RewardedVideoCallbacks;
 import com.appodeal.ads.utils.PermissionsHelper.AppodealPermissionCallbacks;
 import com.appodeal.ads.utils.Log;
 
+
 public class RNAppodealModule extends ReactContextBaseJavaModule implements InterstitialCallbacks, BannerCallbacks, NonSkippableVideoCallbacks, RewardedVideoCallbacks, AppodealPermissionCallbacks {
 
-	private final ReactApplicationContext reactContext;
+    private final ReactApplicationContext reactContext;
 
-	private UserSettings settings;
+    public RNAppodealModule(ReactApplicationContext reactContext) {
+        super(reactContext);
+        this.reactContext = reactContext;
+        Appodeal.setFramework("react-native", getPluginVersion());
+        Appodeal.setInterstitialCallbacks(this);
+        Appodeal.setBannerCallbacks(this);
+        Appodeal.setNonSkippableVideoCallbacks(this);
+        Appodeal.setRewardedVideoCallbacks(this);
+    }
 
-	public RNAppodealModule(ReactApplicationContext reactContext) {
-		super(reactContext);
-		this.reactContext = reactContext;
-		Appodeal.setInterstitialCallbacks(this);
-		Appodeal.setBannerCallbacks(this);
-		Appodeal.setNonSkippableVideoCallbacks(this);
-		Appodeal.setRewardedVideoCallbacks(this);
-	}
+    private String getPluginVersion() { return Appodeal.getVersion() + ".1"; }
 
-	@Override
-	public String getName() {
-		return "RNAppodeal";
-	}
+    private void sendEventToJS(String eventName, WritableMap params) {
+        reactContext.getJSModule(RCTDeviceEventEmitter.class).emit(eventName, params);
+    }
 
-	@ReactMethod
-	public void showToast(String message) {
-		Toast.makeText(getReactApplicationContext(), message, 0).show();
-	}
+    @Override
+    public String getName() {
+        return "RNAppodeal";
+    }
 
-	@ReactMethod
-	public void initialize(String appKey, int adTypes) {
-		Appodeal.setFramework("react-native", "2.1.4");
-		Appodeal.initialize(getCurrentActivity(), appKey, adTypes);
-	}
+    @ReactMethod
+    public void showToast(String message) {
+        Toast.makeText(getReactApplicationContext(), message, 0).show();
+    }
 
-	@ReactMethod
-	public void show(int adTypes, String placement, Callback callback){
-		boolean result;
-		if (placement == null) {
-			result = Appodeal.show(getCurrentActivity(), adTypes);
-		} else {
-			result = Appodeal.show(getCurrentActivity(), adTypes, placement);
-		}
-		if (callback != null) {
-			callback.invoke(result);
-		}
-	}
+    @ReactMethod
+    public void initialize(String appKey, int adTypes, boolean consent) {
+        Appodeal.initialize(getCurrentActivity(), appKey, adTypes, consent);
+    }
 
-	@ReactMethod
-	public void isLoaded(int adTypes, Callback callback){
-		boolean result =  Appodeal.isLoaded(adTypes);
-		if (callback != null) {
-			callback.invoke(result);
-		}
-	}
+    @ReactMethod
+    public void show(int adTypes, String placement, Callback callback) {
+        boolean result;
+        if (placement == null) {
+            result = Appodeal.show(getCurrentActivity(), adTypes);
+        } else {
+            result = Appodeal.show(getCurrentActivity(), adTypes, placement);
+        }
+        if (callback != null) {
+            callback.invoke(result);
+        }
+    }
 
-	@ReactMethod
-	public void cache(int adTypes){
-		Appodeal.cache(getCurrentActivity(), adTypes);
-	}
+    @ReactMethod
+    public void isLoaded(int adTypes, Callback callback) {
+        boolean result = Appodeal.isLoaded(adTypes);
+        if (callback != null) {
+            callback.invoke(result);
+        }
+    }
 
-	@ReactMethod
-	public void hide(int adTypes){
-		Appodeal.hide(getCurrentActivity(), adTypes);
-	}
+    @ReactMethod
+    public void canShow(int adTypes, String placement, Callback callback) {
+        boolean result = placement == null ?
+                Appodeal.canShow(adTypes) :
+                Appodeal.canShow(adTypes, placement);
+        if (callback != null) {
+            callback.invoke(result);
+        }
+    }
 
-	@ReactMethod
-	public void setAutoCache(int adTypes, boolean isEnabled){
-		Appodeal.setAutoCache(adTypes, isEnabled);
-	}
+    @ReactMethod
+    public void updateConsent(boolean consent) {
+        Appodeal.updateConsent(consent);
+    }
 
-	@ReactMethod
-	public void isPrecache(int adType, Callback callback){
-		boolean result = Appodeal.isPrecache(adType);
-		if (callback != null) {
-			callback.invoke(result);
-		}
-	}
+    @ReactMethod
+    public void predictedEcpm(int adType, Callback callback) {
+        double ecpm = Appodeal.getPredictedEcpm(adType);
+        if (callback != null) {
+            callback.invoke(ecpm);
+        }
+    }
 
-	@ReactMethod
-	public void setTabletBanners(boolean flag){
-		Appodeal.set728x90Banners(flag);
-	}
+    @ReactMethod
+    public void cache(int adTypes) {
+        Appodeal.cache(getCurrentActivity(), adTypes);
+    }
 
-	@ReactMethod
-	public void setSmartBanners(boolean flag){
-		Appodeal.setSmartBanners(flag);
-	}
+    @ReactMethod
+    public void hide(int adTypes) {
+        Appodeal.hide(getCurrentActivity(), adTypes);
+    }
 
-	@ReactMethod
-	public void setBannerAnimation(boolean flag){
-		Appodeal.setBannerAnimation(flag);
-	}
+    @ReactMethod
+    public void setAutoCache(int adTypes, boolean isEnabled) {
+        Appodeal.setAutoCache(adTypes, isEnabled);
+    }
 
-	@ReactMethod
-	public void setBannerBackground(boolean flag){
-		// not supported yet
-	}
+    @ReactMethod
+    public void isPrecache(int adType, Callback callback) {
+        boolean result = Appodeal.isPrecache(adType);
+        if (callback != null) {
+            callback.invoke(result);
+        }
+    }
 
-	@ReactMethod
-	public void setTesting(boolean flag){
-		Appodeal.setTesting(flag);
-	}
+    @ReactMethod
+    public void setTabletBanners(boolean flag) {
+        Appodeal.set728x90Banners(flag);
+    }
 
-	@ReactMethod
-	public void setLogLevel(String level){
-		if (level.equals("none"))
-			Appodeal.setLogLevel(Log.LogLevel.none);
-		else if (level.equals("debug"))
-			Appodeal.setLogLevel(Log.LogLevel.debug);
-		else if (level.equals("verbose"))
-			Appodeal.setLogLevel(Log.LogLevel.verbose);
-	}
+    @ReactMethod
+    public void setSmartBanners(boolean flag) {
+        Appodeal.setSmartBanners(flag);
+    }
 
-	@ReactMethod
-	public void setChildDirectedTreatment(boolean flag){
-		Appodeal.setChildDirectedTreatment(flag);
-	}
+    @ReactMethod
+    public void setBannerAnimation(boolean flag) {
+        Appodeal.setBannerAnimation(flag);
+    }
 
-	@ReactMethod
-	public void setOnLoadedTriggerBoth(int adTypes, boolean flag){
-		Appodeal.setTriggerOnLoadedOnPrecache(adTypes, flag);
-	}
+    @ReactMethod
+    public void setBannerBackground(boolean flag) {
+        // not supported yet
+    }
 
-	@ReactMethod
-	public void disableNetwork(ReadableMap args){
-		String networkName = args.getString("network");
-		int adTypes = args.hasKey("adType") ? args.getInt("adType") : -1;
-		if(adTypes == -1) {
-			Appodeal.disableNetwork(getCurrentActivity(), networkName);
-		} else {
-			Appodeal.disableNetwork(getCurrentActivity(), networkName, adTypes);
-		}
-	}
+    @ReactMethod
+    public void setTesting(boolean flag) {
+        Appodeal.setTesting(flag);
+    }
 
-	@ReactMethod
-	public void disableLocationPermissionCheck(){
-		Appodeal.disableLocationPermissionCheck();
-	}
+    @ReactMethod
+    public void setLogLevel(String level) {
+        Appodeal.setLogLevel(RNAppodealUtils.getLogLevelFromString(level));
+    }
 
-	@ReactMethod
-	public void disableWriteExternalStoragePermissionCheck(){
-		Appodeal.disableWriteExternalStoragePermissionCheck();
-	}
+    @ReactMethod
+    public void setChildDirectedTreatment(boolean flag) {
+        Appodeal.setChildDirectedTreatment(flag);
+    }
 
-	@ReactMethod
-	public void requestAndroidMPermissions(){
-		Appodeal.requestAndroidMPermissions(getCurrentActivity(), this);
-	}
+    @ReactMethod
+    public void setOnLoadedTriggerBoth(int adTypes, boolean flag) {
+        Appodeal.setTriggerOnLoadedOnPrecache(adTypes, flag);
+    }
 
-	@ReactMethod
-	public void muteVideosIfCallsMuted(boolean flag){
-		Appodeal.muteVideosIfCallsMuted(flag);
-	}
+    @ReactMethod
+    public void disableNetwork(String networkName, int adTypes) {
+        Appodeal.disableNetwork(getCurrentActivity(), networkName, adTypes);
+    }
 
-	@ReactMethod
-	public void showTestScreen(){
-		Appodeal.startTestActivity(getCurrentActivity());
-	}
+    @ReactMethod
+    public void disableLocationPermissionCheck() {
+        Appodeal.disableLocationPermissionCheck();
+    }
 
-	@ReactMethod
-	public void getVersion(Callback callback){
-		if (callback != null) {
-			callback.invoke(Appodeal.getVersion());
-		}
-	}
+    @ReactMethod
+    public void disableWriteExternalStoragePermissionCheck() {
+        Appodeal.disableWriteExternalStoragePermissionCheck();
+    }
 
-	@ReactMethod
-	public void canShow(ReadableMap args, Callback callback){
-		int adType = args.getInt("adType");
-		String placement = args.hasKey("placement") ? args.getString("placement") : null;
-		boolean result;
-		if (placement == null) {
-			result = Appodeal.canShow(adType);
-		} else {
-			result = Appodeal.canShow(adType, placement);
-		}
-		if (callback != null) {
-			callback.invoke(result);
-		}
-	}
+    @ReactMethod
+    public void requestAndroidMPermissions() {
+        Appodeal.requestAndroidMPermissions(getCurrentActivity(), this);
+    }
 
-	@ReactMethod
-	public void setCustomStringRule(String name, String value){
-		Appodeal.setCustomRule(name, value);
-	}
+    @ReactMethod
+    public void muteVideosIfCallsMuted(boolean flag) {
+        Appodeal.muteVideosIfCallsMuted(flag);
+    }
 
-	@ReactMethod
-	public void setCustomBooleanRule(String name, boolean value){
-		Appodeal.setCustomRule(name, value);
-	}
+    @ReactMethod
+    public void showTestScreen() {
+        Appodeal.startTestActivity(getCurrentActivity());
+    }
 
-	@ReactMethod
-	public void setCustomIntegerRule(String name, int value){
-		Appodeal.setCustomRule(name, value);
-	}
+    @ReactMethod
+    public void getVersion(Callback callback) {
+        if (callback != null) {
+            callback.invoke(Appodeal.getVersion());
+        }
+    }
 
-	@ReactMethod
-	public void setCustomDoubleRule(String name, double value){
-		Appodeal.setCustomRule(name, value);
-	}
+    @ReactMethod
+    public void setCustomStringRule(String name, String value) {
+        Appodeal.setSegmentFilter(name, value);
+    }
 
-	@ReactMethod
-	public void trackInAppPurchase(double amount, String currency){
-		Appodeal.trackInAppPurchase(getCurrentActivity(), amount, currency);
-	}
+    @ReactMethod
+    public void setCustomBooleanRule(String name, boolean value) {
+        Appodeal.setSegmentFilter(name, value);
+    }
 
-	@ReactMethod
-	public void getRewardParameters(ReadableMap args, Callback callback){
-		String placement = args.hasKey("placement") ? args.getString("placement") : null;
-		WritableMap params = Arguments.createMap();
-		if (placement == null) {
-			params.putInt("amount", Appodeal.getRewardParameters().first);
-			params.putString("currency", Appodeal.getRewardParameters().second);
-		} else {
-			params.putInt("amount", Appodeal.getRewardParameters(placement).first);
-			params.putString("currency", Appodeal.getRewardParameters(placement).second);
-		}
+    @ReactMethod
+    public void setCustomIntegerRule(String name, int value) {
+        Appodeal.setSegmentFilter(name, value);
+    }
 
-		if (callback != null) {
-			callback.invoke(params);
-		}
-	}
+    @ReactMethod
+    public void setCustomDoubleRule(String name, double value) {
+        Appodeal.setSegmentFilter(name, value);
+    }
 
-	private UserSettings getUserSettings(){
-		if(settings == null) {
-			settings = Appodeal.getUserSettings(getCurrentActivity());
-		}
-		return settings;
-	}
+    @ReactMethod
+    public void trackInAppPurchase(double amount, String currency) {
+        Appodeal.trackInAppPurchase(getCurrentActivity(), amount, currency);
+    }
 
-	@ReactMethod
-	public void setAge(int age){
-		getUserSettings().setAge(age);
-	}
+    @ReactMethod
+    public void getRewardParameters(ReadableMap args, Callback callback) {
+        String placement = args.hasKey("placement") ? args.getString("placement") : null;
+        WritableMap params = Arguments.createMap();
+        if (placement == null) {
+            params.putDouble("amount", Appodeal.getRewardParameters().first);
+            params.putString("currency", Appodeal.getRewardParameters().second);
+        } else {
+            params.putDouble("amount", Appodeal.getRewardParameters(placement).first);
+            params.putString("currency", Appodeal.getRewardParameters(placement).second);
+        }
 
-	@ReactMethod
-	public void setUserId(String id){
-		getUserSettings().setUserId(id);
-	}
+        if (callback != null) {
+            callback.invoke(params);
+        }
+    }
 
-	@ReactMethod
-	public void setGender(String gender){
-		if (gender.equals("male"))
-			getUserSettings().setGender(com.appodeal.ads.UserSettings.Gender.MALE);
-		else if (gender.equals("female"))
-			getUserSettings().setGender(com.appodeal.ads.UserSettings.Gender.FEMALE);
-		else if (gender.equals("other"))
-			getUserSettings().setGender(com.appodeal.ads.UserSettings.Gender.OTHER);
-	}
+    @ReactMethod
+    public void setAge(int age) {
+        Appodeal.setUserAge(age);
+    }
 
-	private void sendEventToJS(String eventName, WritableMap params){
-		reactContext.getJSModule(RCTDeviceEventEmitter.class).emit(eventName, params);
-	}
+    @ReactMethod
+    public void setUserId(String id) { Appodeal.setUserId(id); }
 
-	@Override
-	public void onInterstitialClicked() {
-		sendEventToJS("onInterstitialClicked", null);
-	}
+    @ReactMethod
+    public void setGender(String gender) { Appodeal.setUserGender(RNAppodealUtils.getGenderFromString(gender)); }
 
-	@Override
-	public void onInterstitialClosed() {
-		sendEventToJS("onInterstitialClosed", null);
-	}
+    @Override
+    public void onBannerLoaded(int height, boolean isPrecache) {
+        WritableMap params = Arguments.createMap();
+        params.putInt("height", height);
+        params.putBoolean("isPrecache", isPrecache);
+        sendEventToJS("onBannerLoaded", params);
+    }
 
-	@Override
-	public void onInterstitialFailedToLoad() {
-		sendEventToJS("onInterstitialFailedToLoad", null);
-	}
+    @Override
+    public void onBannerFailedToLoad() {
+        sendEventToJS("onBannerFailedToLoad", null);
+    }
 
-	@Override
-	public void onInterstitialLoaded(boolean isPrecache) {
-		WritableMap params = Arguments.createMap();
-		params.putBoolean("isPrecache", isPrecache);
-		sendEventToJS("onInterstitialLoaded", params);
-	}
+    @Override
+    public void onBannerShown() {
+        sendEventToJS("onBannerShown", null);
+    }
 
-	@Override
-	public void onInterstitialShown() {
-		sendEventToJS("onInterstitialShown", null);
-	}
+    @Override
+    public void onBannerClicked() {
+        sendEventToJS("onBannerClicked", null);
+    }
 
-	@Override
-	public void onBannerClicked() {
-		sendEventToJS("onBannerClicked", null);
-	}
+    @Override
+    public void onBannerShowFailed() { }
 
-	@Override
-	public void onBannerFailedToLoad() {
-		sendEventToJS("onBannerFailedToLoad", null);
-	}
+    @Override
+    public void onBannerExpired() { }
 
-	@Override
-	public void onBannerLoaded(int height, boolean isPrecache) {
-		WritableMap params = Arguments.createMap();
-		params.putInt("height", height);
-		params.putBoolean("isPrecache", isPrecache);
-		sendEventToJS("onBannerLoaded", params);
-	}
+    @Override
+    public void onInterstitialLoaded(boolean isPrecache) {
+        WritableMap params = Arguments.createMap();
+        params.putBoolean("isPrecache", isPrecache);
+        sendEventToJS("onInterstitialLoaded", params);
+    }
 
-	@Override
-	public void onBannerShown() {
-		sendEventToJS("onBannerShown", null);
-	}
+    @Override
+    public void onInterstitialFailedToLoad() {
+        sendEventToJS("onInterstitialFailedToLoad", null);
+    }
 
-	@Override
-	public void onNonSkippableVideoClosed(boolean isFinished) {
-		WritableMap params = Arguments.createMap();
-		params.putBoolean("isFinished", isFinished);
-		sendEventToJS("onNonSkippableVideoClosed", params);
-	}
+    @Override
+    public void onInterstitialShowFailed() { sendEventToJS("onInterstitialFaliedToShow", null); }
 
-	@Override
-	public void onNonSkippableVideoFailedToLoad() {
-		sendEventToJS("onNonSkippableVideoFailedToLoad", null);
-	}
+    @Override
+    public void onInterstitialShown() {
+        sendEventToJS("onInterstitialShown", null);
+    }
 
-	@Override
-	public void onNonSkippableVideoFinished() {
-		sendEventToJS("onNonSkippableVideoFinished", null);
-	}
+    @Override
+    public void onInterstitialClosed() {
+        sendEventToJS("onInterstitialClosed", null);
+    }
 
-	@Override
-	public void onNonSkippableVideoLoaded() {
-		sendEventToJS("onNonSkippableVideoLoaded", null);
-	}
+    @Override
+    public void onInterstitialClicked() {
+        sendEventToJS("onInterstitialClicked", null);
+    }
 
-	@Override
-	public void onNonSkippableVideoShown() {
-		sendEventToJS("onNonSkippableVideoShown", null);
-	}
+    @Override
+    public void onInterstitialExpired() { }
 
-	@Override
-	public void onRewardedVideoClosed(boolean isFinished) {
-		WritableMap params = Arguments.createMap();
-		params.putBoolean("isFinished", isFinished);
-		sendEventToJS("onRewardedVideoClosed", params);
-	}
+    @Override
+    public void onRewardedVideoLoaded(boolean isPrecache) {
+        WritableMap params = Arguments.createMap();
+        params.putBoolean("isPrecache", isPrecache);
+        sendEventToJS("onRewardedVideoLoaded", params);
+    }
 
-	@Override
-	public void onRewardedVideoFailedToLoad() {
-		sendEventToJS("onRewardedVideoFailedToLoad", null);
-	}
+    @Override
+    public void onRewardedVideoFailedToLoad() { sendEventToJS("onRewardedVideoFailedToLoad", null); }
 
-	@Override
-	public void onRewardedVideoFinished(int amount, String currency) {
-		WritableMap params = Arguments.createMap();
-		params.putInt("amount", amount);
-		params.putString("currency", currency);
-		sendEventToJS("onRewardedVideoFinished", params);
-	}
+    @Override
+    public void onRewardedVideoShowFailed() { sendEventToJS("onRewardedVideoFailedToShow", null); }
 
-	@Override
-	public void onRewardedVideoLoaded() {
-		sendEventToJS("onRewardedVideoLoaded", null);
-	}
+    @Override
+    public void onRewardedVideoShown() {
+        sendEventToJS("onRewardedVideoShown", null);
+    }
 
-	@Override
-	public void onRewardedVideoShown() {
-		sendEventToJS("onRewardedVideoShown", null);
-	}
+    @Override
+    public void onRewardedVideoClosed(boolean isFinished) {
+        WritableMap params = Arguments.createMap();
+        params.putBoolean("isFinished", isFinished);
+        sendEventToJS("onRewardedVideoClosed", params);
+    }
 
-	@Override
-	public void accessCoarseLocationResponse(int response) {
-		WritableMap params = Arguments.createMap();
-		params.putBoolean("isGranted", response == PackageManager.PERMISSION_GRANTED);
-		sendEventToJS("accessCoarseLocationResponse", params);
-	}
+    @Override
+    public void onRewardedVideoFinished(double amount, String currency) {
+        WritableMap params = Arguments.createMap();
+        params.putDouble("amount", amount);
+        params.putString("currency", currency);
+        sendEventToJS("onRewardedVideoFinished", params);
+    }
 
-	@Override
-	public void writeExternalStorageResponse(int response) {
-		WritableMap params = Arguments.createMap();
-		params.putBoolean("isGranted", response == PackageManager.PERMISSION_GRANTED);
-		sendEventToJS("writeExternalStorageResponse", params);
-	}
+    @Override
+    public void onRewardedVideoExpired() { }
+
+    @Override
+    public void onRewardedVideoClicked() { }
+
+    @Override
+    public void onNonSkippableVideoLoaded(boolean isPrecache) {
+        WritableMap params = Arguments.createMap();
+        params.putBoolean("isPrecache", isPrecache);
+        sendEventToJS("onNonSkippableVideoLoaded", params);
+    }
+
+    @Override
+    public void onNonSkippableVideoFailedToLoad() { sendEventToJS("onNonSkippableVideoFailedToLoad", null); }
+
+    @Override
+    public void onNonSkippableVideoShowFailed() { sendEventToJS("onNonSkippableVideoFailedToShow", null); }
+
+    @Override
+    public void onNonSkippableVideoShown() {
+        sendEventToJS("onNonSkippableVideoShown", null);
+    }
+
+    @Override
+    public void onNonSkippableVideoClosed(boolean isFinished) {
+        WritableMap params = Arguments.createMap();
+        params.putBoolean("isFinished", isFinished);
+        sendEventToJS("onNonSkippableVideoClosed", params);
+    }
+
+    @Override
+    public void onNonSkippableVideoFinished() {
+        sendEventToJS("onNonSkippableVideoFinished", null);
+    }
+
+    @Override
+    public void onNonSkippableVideoExpired() { }
+
+    @Override
+    public void accessCoarseLocationResponse(int response) {
+        WritableMap params = Arguments.createMap();
+        params.putBoolean("isGranted", response == PackageManager.PERMISSION_GRANTED);
+        sendEventToJS("accessCoarseLocationResponse", params);
+    }
+
+    @Override
+    public void writeExternalStorageResponse(int response) {
+        WritableMap params = Arguments.createMap();
+        params.putBoolean("isGranted", response == PackageManager.PERMISSION_GRANTED);
+        sendEventToJS("writeExternalStorageResponse", params);
+    }
 }
