@@ -24,20 +24,22 @@ public class RNAppodealBannerManager extends SimpleViewManager<RCTAppodealBanner
     @Override
     public @Nullable Map getExportedCustomDirectEventTypeConstants() {
         return MapBuilder.of(
-                "onAdPress",
-                MapBuilder.of("registrationName", "onAdPress"),
-                "onAdError",
-                MapBuilder.of("registrationName", "onAdError"),
-                "onLoggingImpression",
-                MapBuilder.of("registrationName", "onLoggingImpression"),
-                "onAdLoad",
-                MapBuilder.of("registrationName", "onAdLoad")
+                "onBannerLoaded",
+                MapBuilder.of("registrationName", "onBannerLoaded"),
+                "onBannerFailedToLoad",
+                MapBuilder.of("registrationName", "onBannerFailedToLoad"),
+                "onBannerShowFailed",
+                MapBuilder.of("registrationName", "onBannerShowFailed"),
+                "onBannerShown",
+                MapBuilder.of("registrationName", "onBannerShown"),
+                "onBannerClicked",
+                MapBuilder.of("registrationName", "onBannerClicked")
         );
     }
 
     @Override
     public String getName() {
-        return "CTKBannerView";
+        return "RNAppodealBannerView";
     }
 }
 
