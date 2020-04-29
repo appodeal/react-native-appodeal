@@ -1,6 +1,5 @@
 package com.reactlibrary;
 
-import com.appodeal.ads.Appodeal;
 import com.facebook.react.common.MapBuilder;
 import com.facebook.react.uimanager.SimpleViewManager;
 import com.facebook.react.uimanager.ThemedReactContext;
@@ -10,15 +9,14 @@ import java.util.Map;
 
 import javax.annotation.Nullable;
 
+
 public class RNAppodealBannerManager extends SimpleViewManager<RCTAppodealBannerView> {
-    @ReactProp(name = "size")
-    public void setSize(RCTAppodealBannerView view, String size) {
-        view.setAdSize(size);
-    }
+    @ReactProp(name = "adSize")
+    public void setSize(RCTAppodealBannerView view, String size) { view.setAdSize(size); }
 
     @Override
-    protected RCTAppodealBannerView createViewInstance(ThemedReactContext reactContext) {
-        return new RCTAppodealBannerView(reactContext);
+    public RCTAppodealBannerView createViewInstance(ThemedReactContext context) {
+        return new RCTAppodealBannerView(context);
     }
 
     @Override

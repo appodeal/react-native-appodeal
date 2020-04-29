@@ -163,8 +163,12 @@ export const App = () => {
             <StatusBar />
             <NavigationBar />
             {isViewBannerStyle(state.bannerShowStyle) && state.bannerOnScreen ?
-                    <AppodealBanner style={styles.banner} adSize='phone' /> :
-                    null}
+                <AppodealBanner
+                    style={styles.banner}
+                    adSize='phone'
+                    onAdLoaded={() => console.log("Banner view did load")}
+                /> :
+                null}
             <SafeAreaView style={styles.container}>
                 <ScrollView style={styles.scrollView}>
                     <InitialisationGroup />
