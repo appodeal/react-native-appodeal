@@ -45,7 +45,7 @@ export const App = () => {
         consent: true,
         test: true,
         autocache: AppodealAdType.INTERSTITIAL | AppodealAdType.BANNER,
-        bannerShowStyle: BannerShowStyle.VIEW
+        bannerShowStyle: BannerShowStyle.BOTTOM
     })
 
     useEffect(() => {

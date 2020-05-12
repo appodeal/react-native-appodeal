@@ -11,6 +11,7 @@ import {
     TouchableHighlight,
     ScrollView,
     TouchableOpacity,
+    Platform,
 } from 'react-native';
 import SegmentedControl from '@react-native-community/segmented-control';
 
@@ -156,11 +157,14 @@ export const BannerSegmentedControl = (props: {
     showStyle: BannerShowStyle,
     onChange(showStyle: BannerShowStyle): void
 }) => {
-    const showStyles = [
+    let showStyles = [
         BannerShowStyle.BOTTOM,
         BannerShowStyle.TOP,
-        BannerShowStyle.VIEW
     ]
+
+    if (Platform.OS === "ios") {
+        showStyles.push(BannerShowStyle.VIEW)
+    }
 
     const index = () => {
         return showStyles.indexOf(props.showStyle)
