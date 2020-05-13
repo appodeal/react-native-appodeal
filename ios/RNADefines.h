@@ -11,12 +11,14 @@
 
 FOUNDATION_EXPORT NSString *const kEventBannerLoaded;
 FOUNDATION_EXPORT NSString *const kEventBannerFailedToLoad;
+FOUNDATION_EXPORT NSString *const kEventBannerExpired;
 FOUNDATION_EXPORT NSString *const kEventBannerShown;
 FOUNDATION_EXPORT NSString *const kEventBannerClicked;
 
 FOUNDATION_EXPORT NSString *const kEventInterstitialLoaded;
 FOUNDATION_EXPORT NSString *const kEventInterstitialFailedToLoad;
 FOUNDATION_EXPORT NSString *const kEventInterstitialFailedToPresent;
+FOUNDATION_EXPORT NSString *const kEventInterstitialExpired;
 FOUNDATION_EXPORT NSString *const kEventInterstitialShown;
 FOUNDATION_EXPORT NSString *const kEventInterstitialClosed;
 FOUNDATION_EXPORT NSString *const kEventInterstitialClicked;
@@ -24,6 +26,7 @@ FOUNDATION_EXPORT NSString *const kEventInterstitialClicked;
 FOUNDATION_EXPORT NSString *const kEventRewardedVideoLoaded;
 FOUNDATION_EXPORT NSString *const kEventRewardedVideoFailedToLoad;
 FOUNDATION_EXPORT NSString *const kEventRewardedVideoFailedToPresent;
+FOUNDATION_EXPORT NSString *const kEventRewardedVideoExpired;
 FOUNDATION_EXPORT NSString *const kEventRewardedVideoShown;
 FOUNDATION_EXPORT NSString *const kEventRewardedVideoClosed;
 FOUNDATION_EXPORT NSString *const kEventRewardedVideoFinished;
@@ -31,6 +34,7 @@ FOUNDATION_EXPORT NSString *const kEventRewardedVideoFinished;
 FOUNDATION_EXPORT NSString *const kEventNonSkippableVideoLoaded;
 FOUNDATION_EXPORT NSString *const kEventNonSkippableVideoFailedToLoad;
 FOUNDATION_EXPORT NSString *const kEventNonSkippableVideoFailedToPresent;
+FOUNDATION_EXPORT NSString *const kEventNonSkippableVideoExpired;
 FOUNDATION_EXPORT NSString *const kEventNonSkippableVideoShown;
 FOUNDATION_EXPORT NSString *const kEventNonSkippableVideoClosed;
 FOUNDATION_EXPORT NSString *const kEventNonSkippableVideoFinished;

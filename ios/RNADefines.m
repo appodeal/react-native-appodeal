@@ -14,12 +14,14 @@
 
 NSString *const kEventBannerLoaded          = @"onBannerLoaded";
 NSString *const kEventBannerFailedToLoad    = @"onBannerFailedToLoad";
+NSString *const kEventBannerExpired         = @"onBannerExpired";
 NSString *const kEventBannerShown           = @"onBannerShown";
 NSString *const kEventBannerClicked         = @"onBannerClicked";
 
 NSString *const kEventInterstitialLoaded            = @"onInterstitialLoaded";
 NSString *const kEventInterstitialFailedToLoad      = @"onInterstitialFailedToLoad";
 NSString *const kEventInterstitialFailedToPresent   = @"onInterstitialFaliedToShow";
+NSString *const kEventInterstitialExpired           = @"onInterstitialExpired";
 NSString *const kEventInterstitialShown             = @"onInterstitialShown";
 NSString *const kEventInterstitialClosed            = @"onInterstitialClosed";
 NSString *const kEventInterstitialClicked           = @"onInterstitialClicked";
@@ -27,6 +29,7 @@ NSString *const kEventInterstitialClicked           = @"onInterstitialClicked";
 NSString *const kEventRewardedVideoLoaded           = @"onRewardedVideoLoaded";
 NSString *const kEventRewardedVideoFailedToLoad     = @"onRewardedVideoFailedToLoad";
 NSString *const kEventRewardedVideoFailedToPresent  = @"onRewardedVideoFailedToShow";
+NSString *const kEventRewardedVideoExpired          = @"onRewardedVideoExpired";
 NSString *const kEventRewardedVideoShown            = @"onRewardedVideoShown";
 NSString *const kEventRewardedVideoClosed           = @"onRewardedVideoClosed";
 NSString *const kEventRewardedVideoFinished         = @"onRewardedVideoFinished";
@@ -34,6 +37,7 @@ NSString *const kEventRewardedVideoFinished         = @"onRewardedVideoFinished"
 NSString *const kEventNonSkippableVideoLoaded          = @"onNonSkippableVideoLoaded";
 NSString *const kEventNonSkippableVideoFailedToLoad    = @"onNonSkippableVideoFailedToLoad";
 NSString *const kEventNonSkippableVideoFailedToPresent = @"onNonSkippableVideoFailedToShow";
+NSString *const kEventNonSkippableVideoExpired         = @"onNonSkippableVideoExpired";
 NSString *const kEventNonSkippableVideoShown           = @"onNonSkippableVideoShown";
 NSString *const kEventNonSkippableVideoClosed          = @"onNonSkippableVideoClosed";
 NSString *const kEventNonSkippableVideoFinished        = @"onNonSkippableVideoFinished";
@@ -63,30 +67,34 @@ RCT_ENUM_CONVERTER(AppodealUserGender, (@{
 #pragma mark - Utils
 
 NSString *RNAVersion() {
-    return [NSString stringWithFormat:@"%@.%@", APDSdkVersionString(), @"1"];
+    return @"2.6.3";
 }
 
 NSArray<NSString *> *RNASupportedMehtods() {
     return @[
              kEventBannerLoaded,
              kEventBannerFailedToLoad,
+             kEventBannerExpired,
              kEventBannerShown,
              kEventBannerClicked,
              kEventInterstitialLoaded,
              kEventInterstitialFailedToLoad,
              kEventInterstitialShown,
              kEventInterstitialFailedToPresent,
+             kEventInterstitialExpired,
              kEventInterstitialClosed,
              kEventInterstitialClicked,
              kEventRewardedVideoLoaded,
              kEventRewardedVideoFailedToLoad,
              kEventRewardedVideoFailedToPresent,
+             kEventRewardedVideoExpired,
              kEventRewardedVideoShown,
              kEventRewardedVideoClosed,
              kEventRewardedVideoFinished,
              kEventNonSkippableVideoLoaded,
              kEventNonSkippableVideoFailedToLoad,
              kEventNonSkippableVideoFailedToPresent,
+             kEventNonSkippableVideoExpired,
              kEventNonSkippableVideoShown,
              kEventNonSkippableVideoClosed,
              kEventNonSkippableVideoFinished

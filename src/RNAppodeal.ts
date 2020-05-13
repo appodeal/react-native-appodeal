@@ -105,22 +105,12 @@ export default {
   getVersion: (
     cb = () => { }
   ) => RNAppodeal.getVersion(cb),
-  setCustomStringRule: (
-    name: string,
-    value: string
-  ) => RNAppodeal.setCustomStringRule(name, value),
-  setCustomBooleanRule: (
-    name: string,
-    value: boolean
-  ) => RNAppodeal.setCustomBooleanRule(name, value),
-  setCustomIntegerRule: (
-    name: string,
-    value: number
-  ) => RNAppodeal.setCustomIntegerRule(name, value),
-  setCustomDoubleRule: (
-    name: string,
-    value: number
-  ) => RNAppodeal.setCustomDoubleRule(name, value),
+  setSegmentFilter: (
+    filter: { [key: string]: any }
+  ) => RNAppodeal.setSegmentFilter(filter),
+  setExtras: (
+    extras: { [key: string]: any }
+  ) => RNAppodeal.setExtras(extras),
   trackInAppPurchase: (
     amount: number,
     currency: string

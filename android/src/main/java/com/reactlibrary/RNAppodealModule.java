@@ -7,6 +7,8 @@ import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.bridge.Callback;
 import com.facebook.react.bridge.ReadableMap;
+import com.facebook.react.bridge.ReadableMapKeySetIterator;
+import com.facebook.react.bridge.ReadableType;
 import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.modules.core.DeviceEventManagerModule.RCTDeviceEventEmitter;
 import com.facebook.react.bridge.Arguments;
@@ -206,23 +208,43 @@ public class RNAppodealModule extends ReactContextBaseJavaModule implements Inte
     }
 
     @ReactMethod
-    public void setCustomStringRule(String name, String value) {
-        Appodeal.setSegmentFilter(name, value);
+    public void setExtras(ReadableMap extras) {
+        ReadableMapKeySetIterator iterator = extras.keySetIterator();
+        while (iterator.hasNextKey()) {
+            String key = iterator.nextKey();
+            ReadableType type = extras.getType(key);
+            switch (type) {
+                case Boolean:
+                    Appodeal.setExtraData(key, extras.getBoolean(key));
+                    break;
+                case Number:
+                    Appodeal.setExtraData(key, extras.getDouble(key));
+                    break;
+                case String:
+                    Appodeal.setExtraData(key, extras.getString(key));
+                    break;
+            }
+        }
     }
 
     @ReactMethod
-    public void setCustomBooleanRule(String name, boolean value) {
-        Appodeal.setSegmentFilter(name, value);
-    }
-
-    @ReactMethod
-    public void setCustomIntegerRule(String name, int value) {
-        Appodeal.setSegmentFilter(name, value);
-    }
-
-    @ReactMethod
-    public void setCustomDoubleRule(String name, double value) {
-        Appodeal.setSegmentFilter(name, value);
+    public void setSegmentFilter(ReadableMap segmentFilter) {
+        ReadableMapKeySetIterator iterator = segmentFilter.keySetIterator();
+        while (iterator.hasNextKey()) {
+            String key = iterator.nextKey();
+            ReadableType type = segmentFilter.getType(key);
+            switch (type) {
+                case Boolean:
+                    Appodeal.setSegmentFilter(key, segmentFilter.getBoolean(key));
+                    break;
+                case Number:
+                    Appodeal.setSegmentFilter(key, segmentFilter.getDouble(key));
+                    break;
+                case String:
+                    Appodeal.setSegmentFilter(key, segmentFilter.getString(key));
+                    break;
+            }
+        }
     }
 
     @ReactMethod
@@ -253,10 +275,14 @@ public class RNAppodealModule extends ReactContextBaseJavaModule implements Inte
     }
 
     @ReactMethod
-    public void setUserId(String id) { Appodeal.setUserId(id); }
+    public void setUserId(String id) { 
+        Appodeal.setUserId(id); 
+    }
 
     @ReactMethod
-    public void setGender(String gender) { Appodeal.setUserGender(RNAppodealUtils.getGenderFromString(gender)); }
+    public void setGender(String gender) { 
+        Appodeal.setUserGender(RNAppodealUtils.getGenderFromString(gender)); 
+    }
 
     @Override
     public void onBannerLoaded(int height, boolean isPrecache) {
@@ -285,7 +311,9 @@ public class RNAppodealModule extends ReactContextBaseJavaModule implements Inte
     public void onBannerShowFailed() { }
 
     @Override
-    public void onBannerExpired() { }
+    public void onBannerExpired() { 
+        sendEventToJS("onBannerExpired", null); 
+    }
 
     @Override
     public void onInterstitialLoaded(boolean isPrecache) {
@@ -300,7 +328,9 @@ public class RNAppodealModule extends ReactContextBaseJavaModule implements Inte
     }
 
     @Override
-    public void onInterstitialShowFailed() { sendEventToJS("onInterstitialFaliedToShow", null); }
+    public void onInterstitialShowFailed() { 
+        sendEventToJS("onInterstitialFaliedToShow", null); 
+    }
 
     @Override
     public void onInterstitialShown() {
@@ -318,7 +348,9 @@ public class RNAppodealModule extends ReactContextBaseJavaModule implements Inte
     }
 
     @Override
-    public void onInterstitialExpired() { }
+    public void onInterstitialExpired() { 
+        sendEventToJS("onInterstitialExpired", null);
+    }
 
     @Override
     public void onRewardedVideoLoaded(boolean isPrecache) {
@@ -328,10 +360,14 @@ public class RNAppodealModule extends ReactContextBaseJavaModule implements Inte
     }
 
     @Override
-    public void onRewardedVideoFailedToLoad() { sendEventToJS("onRewardedVideoFailedToLoad", null); }
+    public void onRewardedVideoFailedToLoad() { 
+        sendEventToJS("onRewardedVideoFailedToLoad", null); 
+    }
 
     @Override
-    public void onRewardedVideoShowFailed() { sendEventToJS("onRewardedVideoFailedToShow", null); }
+    public void onRewardedVideoShowFailed() { 
+        sendEventToJS("onRewardedVideoFailedToShow", null); 
+    }
 
     @Override
     public void onRewardedVideoShown() {
@@ -354,7 +390,9 @@ public class RNAppodealModule extends ReactContextBaseJavaModule implements Inte
     }
 
     @Override
-    public void onRewardedVideoExpired() { }
+    public void onRewardedVideoExpired() { 
+        sendEventToJS("onRewardedVideoExpired", null); 
+    }
 
     @Override
     public void onRewardedVideoClicked() { }
@@ -367,10 +405,14 @@ public class RNAppodealModule extends ReactContextBaseJavaModule implements Inte
     }
 
     @Override
-    public void onNonSkippableVideoFailedToLoad() { sendEventToJS("onNonSkippableVideoFailedToLoad", null); }
+    public void onNonSkippableVideoFailedToLoad() {
+        sendEventToJS("onNonSkippableVideoFailedToLoad", null); 
+    }
 
     @Override
-    public void onNonSkippableVideoShowFailed() { sendEventToJS("onNonSkippableVideoFailedToShow", null); }
+    public void onNonSkippableVideoShowFailed() { 
+        sendEventToJS("onNonSkippableVideoFailedToShow", null); 
+    }
 
     @Override
     public void onNonSkippableVideoShown() {
@@ -390,7 +432,9 @@ public class RNAppodealModule extends ReactContextBaseJavaModule implements Inte
     }
 
     @Override
-    public void onNonSkippableVideoExpired() { }
+    public void onNonSkippableVideoExpired() { 
+        sendEventToJS("onNonSkippableVideoExpired", null); 
+    }
 
     @Override
     public void accessCoarseLocationResponse(int response) {
