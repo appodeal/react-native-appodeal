@@ -258,7 +258,7 @@ PODS:
     - React-cxxreact (= 0.62.2)
     - React-jsi (= 0.62.2)
   - React-jsinspector (0.62.2)
-  - react-native-segmented-control (1.4.0):
+  - react-native-segmented-control (1.6.1):
     - React
   - React-RCTActionSheet (0.62.2):
     - React-Core/RCTActionSheetHeaders (= 0.62.2)
@@ -319,7 +319,7 @@ PODS:
     - React-cxxreact (= 0.62.2)
     - React-jsi (= 0.62.2)
     - ReactCommon/callinvoker (= 0.62.2)
-  - RNAppodeal (2.1.11):
+  - RNAppodeal (2.6.3):
     - Appodeal (= 2.6.3)
     - React
   - YandexMobileMetrica (3.9.4):
@@ -516,7 +516,7 @@ SPEC CHECKSUMS:
   React-jsi: b6dc94a6a12ff98e8877287a0b7620d365201161
   React-jsiexecutor: 1540d1c01bb493ae3124ed83351b1b6a155db7da
   React-jsinspector: 512e560d0e985d0e8c479a54a4e5c147a9c83493
-  react-native-segmented-control: 6ad7533758f4567e1e97136a67986f4167fd106a
+  react-native-segmented-control: d7c444e5cc5f526da766f8ff24346898b7ac7be5
   React-RCTActionSheet: f41ea8a811aac770e0cc6e0ad6b270c644ea8b7c
   React-RCTAnimation: 49ab98b1c1ff4445148b72a3d61554138565bad0
   React-RCTBlob: a332773f0ebc413a0ce85942a55b064471587a71
@@ -527,7 +527,7 @@ SPEC CHECKSUMS:
   React-RCTText: fae545b10cfdb3d247c36c56f61a94cfd6dba41d
   React-RCTVibration: 4356114dbcba4ce66991096e51a66e61eda51256
   ReactCommon: ed4e11d27609d571e7eee8b65548efc191116eb3
-  RNAppodeal: cdbc659dd4e1843bc41e3e3f30abbf978af75940
+  RNAppodeal: f4c53272900995de93eb8e05169a8aa122f24867
   YandexMobileMetrica: 1030df2959c886a7be3bc3d274eb54c8e86afd6f
   Yoga: 3ebccbdd559724312790e7742142d062476b698e
 
