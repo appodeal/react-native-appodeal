@@ -4,9 +4,9 @@
   "description": "React Native Module created to support Appodeal SDK for iOS and Android platforms",
   "repository": {
     "type": "git",
-    "url": "/Users/staskochkin/Projects/Plugins/react-native-appodeal/.git"
+    "url": "git+https://github.com/appodeal/react-native-appodeal.git"
   },
-  "homepage": "https://github.com/staskochkin/react-native-appodeal",
+  "homepage": "https://appodeal.com",
   "main": "dist/lib/index.js",
   "typings": "dist/types/index.d.ts",
   "directories": {
