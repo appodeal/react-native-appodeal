@@ -1,12 +1,12 @@
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion 23
-    buildToolsVersion "23.0.3"
+    compileSdkVersion 28
+    buildToolsVersion "28.0.3"
 
     defaultConfig {
-        minSdkVersion 16
-        targetSdkVersion 22
+        minSdkVersion 14
+        targetSdkVersion 28
         versionCode 1
         versionName "1.0"
     }
@@ -15,7 +15,11 @@ android {
         warning 'InvalidPackage'
     }
     dexOptions {
-        javaMaxHeapSize "2g"
+        javaMaxHeapSize "4g"
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
 }
 
@@ -23,14 +27,15 @@ repositories {
     jcenter() 
     mavenCentral()
     maven {
-      url  "https://adcolony.bintray.com/AdColony"      
+        url "https://artifactory.appodeal.com/appodeal"
     }
 }
 
 dependencies {
-    compile fileTree(dir: "libs", include: ["*.jar"])
-    compile 'com.facebook.react:react-native:+'
-    compile 'com.adcolony:sdk:3.2.1'
-    compile "com.google.android.gms:play-services-ads:9.8.0"
-    compile "com.google.android.gms:play-services-location:9.8.0"
+    implementation 'com.facebook.react:react-native:+'
+    implementation 'com.appodeal.ads.sdk:core:2.6.3'
+    implementation 'com.appodeal.ads.sdk.networks:appodealx:2.6.0.1'
+    implementation 'com.appodeal.ads.sdk.networks:mraid:2.6.0.1'
+    implementation 'com.appodeal.ads.sdk.networks:nast:2.6.0.1'
+    implementation 'com.appodeal.ads.sdk.networks:vast:2.6.0.1'
 }

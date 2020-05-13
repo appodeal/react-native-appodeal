@@ -7,29 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		661246F11F6B310200171346 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 661246F01F6B310200171346 /* AdSupport.framework */; };
-		661246F31F6B310600171346 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 661246F21F6B310600171346 /* AudioToolbox.framework */; };
-		661246F51F6B310A00171346 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 661246F41F6B310A00171346 /* AVFoundation.framework */; };
-		661246F71F6B310E00171346 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 661246F61F6B310E00171346 /* CFNetwork.framework */; };
-		661246FE1F6B311D00171346 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 661246F81F6B311D00171346 /* CoreGraphics.framework */; };
-		661246FF1F6B311D00171346 /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 661246F91F6B311D00171346 /* CoreImage.framework */; };
-		661247001F6B311D00171346 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 661246FA1F6B311D00171346 /* CoreLocation.framework */; };
-		661247011F6B311D00171346 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 661246FB1F6B311D00171346 /* CoreMedia.framework */; };
-		661247021F6B311D00171346 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 661246FC1F6B311D00171346 /* CoreMotion.framework */; };
-		661247031F6B311D00171346 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 661246FD1F6B311D00171346 /* CoreTelephony.framework */; };
-		661247051F6B312300171346 /* EventKitUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 661247041F6B312300171346 /* EventKitUI.framework */; };
-		661247071F6B312B00171346 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 661247061F6B312B00171346 /* GLKit.framework */; };
-		661247091F6B313400171346 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 661247081F6B313400171346 /* ImageIO.framework */; };
-		661247131F6B315600171346 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 661247121F6B315600171346 /* MediaPlayer.framework */; };
-		661247151F6B315C00171346 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 661247141F6B315C00171346 /* MessageUI.framework */; };
-		6612471E1F6B317500171346 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 661247161F6B317500171346 /* MobileCoreServices.framework */; };
-		6612471F1F6B317500171346 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 661247171F6B317500171346 /* QuartzCore.framework */; };
-		661247201F6B317500171346 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 661247181F6B317500171346 /* Security.framework */; };
-		661247211F6B317500171346 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 661247191F6B317500171346 /* StoreKit.framework */; };
-		661247221F6B317500171346 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6612471A1F6B317500171346 /* SystemConfiguration.framework */; };
-		661247231F6B317500171346 /* Twitter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6612471B1F6B317500171346 /* Twitter.framework */; };
-		661247241F6B317500171346 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6612471C1F6B317500171346 /* UIKit.framework */; };
-		661247251F6B317500171346 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6612471D1F6B317500171346 /* WebKit.framework */; };
+		423911F7233CBDEA00C47FA0 /* RNADefines.m in Sources */ = {isa = PBXBuildFile; fileRef = 423911F6233CBDEA00C47FA0 /* RNADefines.m */; };
+		42E9D361233D3A74003F3784 /* RNAppodealBannerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 42E9D360233D3A74003F3784 /* RNAppodealBannerView.m */; };
+		42E9D365233D3F7B003F3784 /* RNAppodealBannerViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 42E9D364233D3F7B003F3784 /* RNAppodealBannerViewManager.m */; };
 		B3E7B58A1CC2AC0600A0062D /* RNAppodeal.m in Sources */ = {isa = PBXBuildFile; fileRef = B3E7B5891CC2AC0600A0062D /* RNAppodeal.m */; };
 /* End PBXBuildFile section */
 
@@ -47,34 +27,12 @@
 
 /* Begin PBXFileReference section */
 		134814201AA4EA6300B7C361 /* libRNAppodeal.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libRNAppodeal.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		661246F01F6B310200171346 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
-		661246F21F6B310600171346 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
-		661246F41F6B310A00171346 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
-		661246F61F6B310E00171346 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
-		661246F81F6B311D00171346 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		661246F91F6B311D00171346 /* CoreImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreImage.framework; path = System/Library/Frameworks/CoreImage.framework; sourceTree = SDKROOT; };
-		661246FA1F6B311D00171346 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
-		661246FB1F6B311D00171346 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
-		661246FC1F6B311D00171346 /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
-		661246FD1F6B311D00171346 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
-		661247041F6B312300171346 /* EventKitUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = EventKitUI.framework; path = System/Library/Frameworks/EventKitUI.framework; sourceTree = SDKROOT; };
-		661247061F6B312B00171346 /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
-		661247081F6B313400171346 /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
-		6612470A1F6B313E00171346 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
-		6612470C1F6B314700171346 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
-		6612470E1F6B314D00171346 /* libxml2.2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libxml2.2.tbd; path = usr/lib/libxml2.2.tbd; sourceTree = SDKROOT; };
-		661247101F6B315100171346 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
-		661247121F6B315600171346 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
-		661247141F6B315C00171346 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
-		661247161F6B317500171346 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
-		661247171F6B317500171346 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
-		661247181F6B317500171346 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
-		661247191F6B317500171346 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
-		6612471A1F6B317500171346 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
-		6612471B1F6B317500171346 /* Twitter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Twitter.framework; path = System/Library/Frameworks/Twitter.framework; sourceTree = SDKROOT; };
-		6612471C1F6B317500171346 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
-		6612471D1F6B317500171346 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
-		669A1F631F70724900AE7D97 /* Appodeal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Appodeal.framework; path = sdk/Appodeal.framework; sourceTree = "<group>"; };
+		423911F5233CBDEA00C47FA0 /* RNADefines.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RNADefines.h; sourceTree = "<group>"; };
+		423911F6233CBDEA00C47FA0 /* RNADefines.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RNADefines.m; sourceTree = "<group>"; };
+		42E9D35F233D3A74003F3784 /* RNAppodealBannerView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RNAppodealBannerView.h; sourceTree = "<group>"; };
+		42E9D360233D3A74003F3784 /* RNAppodealBannerView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RNAppodealBannerView.m; sourceTree = "<group>"; };
+		42E9D363233D3F7B003F3784 /* RNAppodealBannerViewManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RNAppodealBannerViewManager.h; sourceTree = "<group>"; };
+		42E9D364233D3F7B003F3784 /* RNAppodealBannerViewManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RNAppodealBannerViewManager.m; sourceTree = "<group>"; };
 		B3E7B5881CC2AC0600A0062D /* RNAppodeal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RNAppodeal.h; sourceTree = "<group>"; };
 		B3E7B5891CC2AC0600A0062D /* RNAppodeal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RNAppodeal.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -84,29 +42,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6612471E1F6B317500171346 /* MobileCoreServices.framework in Frameworks */,
-				6612471F1F6B317500171346 /* QuartzCore.framework in Frameworks */,
-				661247201F6B317500171346 /* Security.framework in Frameworks */,
-				661247211F6B317500171346 /* StoreKit.framework in Frameworks */,
-				661247221F6B317500171346 /* SystemConfiguration.framework in Frameworks */,
-				661247231F6B317500171346 /* Twitter.framework in Frameworks */,
-				661247241F6B317500171346 /* UIKit.framework in Frameworks */,
-				661247251F6B317500171346 /* WebKit.framework in Frameworks */,
-				661247151F6B315C00171346 /* MessageUI.framework in Frameworks */,
-				661247131F6B315600171346 /* MediaPlayer.framework in Frameworks */,
-				661247091F6B313400171346 /* ImageIO.framework in Frameworks */,
-				661247071F6B312B00171346 /* GLKit.framework in Frameworks */,
-				661247051F6B312300171346 /* EventKitUI.framework in Frameworks */,
-				661246FE1F6B311D00171346 /* CoreGraphics.framework in Frameworks */,
-				661246FF1F6B311D00171346 /* CoreImage.framework in Frameworks */,
-				661247001F6B311D00171346 /* CoreLocation.framework in Frameworks */,
-				661247011F6B311D00171346 /* CoreMedia.framework in Frameworks */,
-				661247021F6B311D00171346 /* CoreMotion.framework in Frameworks */,
-				661247031F6B311D00171346 /* CoreTelephony.framework in Frameworks */,
-				661246F71F6B310E00171346 /* CFNetwork.framework in Frameworks */,
-				661246F51F6B310A00171346 /* AVFoundation.framework in Frameworks */,
-				661246F31F6B310600171346 /* AudioToolbox.framework in Frameworks */,
-				661246F11F6B310200171346 /* AdSupport.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -121,49 +56,27 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		42E9D362233D3F62003F3784 /* Banner */ = {
+			isa = PBXGroup;
+			children = (
+				42E9D35F233D3A74003F3784 /* RNAppodealBannerView.h */,
+				42E9D360233D3A74003F3784 /* RNAppodealBannerView.m */,
+				42E9D363233D3F7B003F3784 /* RNAppodealBannerViewManager.h */,
+				42E9D364233D3F7B003F3784 /* RNAppodealBannerViewManager.m */,
+			);
+			name = Banner;
+			sourceTree = "<group>";
+		};
 		58B511D21A9E6C8500147676 = {
 			isa = PBXGroup;
 			children = (
+				42E9D362233D3F62003F3784 /* Banner */,
 				B3E7B5881CC2AC0600A0062D /* RNAppodeal.h */,
 				B3E7B5891CC2AC0600A0062D /* RNAppodeal.m */,
+				423911F5233CBDEA00C47FA0 /* RNADefines.h */,
+				423911F6233CBDEA00C47FA0 /* RNADefines.m */,
 				134814211AA4EA7D00B7C361 /* Products */,
-				661246EF1F6B310200171346 /* Frameworks */,
 			);
-			sourceTree = "<group>";
-		};
-		661246EF1F6B310200171346 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				669A1F631F70724900AE7D97 /* Appodeal.framework */,
-				661247161F6B317500171346 /* MobileCoreServices.framework */,
-				661247171F6B317500171346 /* QuartzCore.framework */,
-				661247181F6B317500171346 /* Security.framework */,
-				661247191F6B317500171346 /* StoreKit.framework */,
-				6612471A1F6B317500171346 /* SystemConfiguration.framework */,
-				6612471B1F6B317500171346 /* Twitter.framework */,
-				6612471C1F6B317500171346 /* UIKit.framework */,
-				6612471D1F6B317500171346 /* WebKit.framework */,
-				661247141F6B315C00171346 /* MessageUI.framework */,
-				661247121F6B315600171346 /* MediaPlayer.framework */,
-				661247101F6B315100171346 /* libz.tbd */,
-				6612470E1F6B314D00171346 /* libxml2.2.tbd */,
-				6612470C1F6B314700171346 /* libsqlite3.tbd */,
-				6612470A1F6B313E00171346 /* libc++.tbd */,
-				661247081F6B313400171346 /* ImageIO.framework */,
-				661247061F6B312B00171346 /* GLKit.framework */,
-				661247041F6B312300171346 /* EventKitUI.framework */,
-				661246F81F6B311D00171346 /* CoreGraphics.framework */,
-				661246F91F6B311D00171346 /* CoreImage.framework */,
-				661246FA1F6B311D00171346 /* CoreLocation.framework */,
-				661246FB1F6B311D00171346 /* CoreMedia.framework */,
-				661246FC1F6B311D00171346 /* CoreMotion.framework */,
-				661246FD1F6B311D00171346 /* CoreTelephony.framework */,
-				661246F61F6B310E00171346 /* CFNetwork.framework */,
-				661246F41F6B310A00171346 /* AVFoundation.framework */,
-				661246F21F6B310600171346 /* AudioToolbox.framework */,
-				661246F01F6B310200171346 /* AdSupport.framework */,
-			);
-			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -205,6 +118,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 			);
 			mainGroup = 58B511D21A9E6C8500147676;
@@ -222,6 +136,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				423911F7233CBDEA00C47FA0 /* RNADefines.m in Sources */,
+				42E9D361233D3A74003F3784 /* RNAppodealBannerView.m in Sources */,
+				42E9D365233D3F7B003F3784 /* RNAppodealBannerViewManager.m in Sources */,
 				B3E7B58A1CC2AC0600A0062D /* RNAppodeal.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -313,13 +230,16 @@
 		58B511F01A9E6C8500147676 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/../../../ios/**";
-				HEADER_SEARCH_PATHS = (
-					"$(SRCROOT)/../../../node_modules/react-native/React/**",
+				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
+					"$(SRCROOT)/../example/ios/Pods/Appodeal/**",
+				);
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/../example/ios/Pods/Headers/Public/**",
 				);
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
-				OTHER_LDFLAGS = "-ObjC";
+				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_NAME = RNAppodeal;
 				SKIP_INSTALL = YES;
 			};
@@ -328,13 +248,16 @@
 		58B511F11A9E6C8500147676 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/../../../ios/**";
-				HEADER_SEARCH_PATHS = (
-					"$(SRCROOT)/../../../node_modules/react-native/React/**",
+				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
+					"$(SRCROOT)/../example/ios/Pods/Appodeal/**",
+				);
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/../example/ios/Pods/Headers/Public/**",
 				);
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
-				OTHER_LDFLAGS = "-ObjC";
+				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_NAME = RNAppodeal;
 				SKIP_INSTALL = YES;
 			};

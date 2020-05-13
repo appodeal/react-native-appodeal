@@ -1,14 +1,35 @@
-
 {
   "name": "react-native-appodeal",
-  "version": "2.1.4",
+  "version": "2.6.3",
   "description": "React Native Module created to support Appodeal SDK for iOS and Android platforms",
-  "main": "index.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/appodeal/react-native-appodeal.git"
   },
   "homepage": "https://appodeal.com",
+  "main": "dist/lib/index.js",
+  "typings": "dist/types/index.d.ts",
+  "directories": {
+    "example": "example"
+  },
+  "scripts": {
+    "tsc": "tsc --project .",
+    "lint": "tslint --project ."
+  },
+  "author": "Appodeal <https://appodeal.com>",
+  "license": "MIT",
+  "peerDependencies": {
+    "react": "*",
+    "react-native": "*"
+  },
+  "devDependencies": {
+    "@types/react": "^16.4.6",
+    "@types/react-native": "^0.56.0",
+    "react-native-scripts-ts": "^1.15.0",
+    "react-native-typescript-transformer": "^1.2.10",
+    "tslib": "^1.9.3",
+    "typescript": "^2.9.2"
+  },
   "keywords": [
     "react",
     "react-native",
@@ -19,9 +40,12 @@
     "ios",
     "ads"
   ],
-  "author": "Appodeal, Inc",
-  "license": "Appodeal, Inc",
-  "peerDependencies": {
-    "react-native": ">=0.44.0"
-  }
+  "files": [
+    "android",
+    "ios",
+    "src",
+    "package.json",
+    "dist",
+    "RNAppodeal.podspec"
+  ]
 }
