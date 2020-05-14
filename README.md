@@ -2,8 +2,6 @@
 
 React Native package that adds Appodeal SDK support to your react-native application.
 
-**Facebook Audience SDK** integration for React Native, available on iOS and Android. Features native, interstitial and banner ads.
-
 ## Table of Contents
 
 * [Installation](#installation)
@@ -51,7 +49,99 @@ Add *GADApplicationIdentifier* key (if you use APDGoogleAdMobAdapter).
 
 #### Android
 
-In development
+1. Add Appodeal adapters. 
+
+Add dependencies into `build.gradle` (module: app)
+
+``` groovy
+dependencies {
+    ...
+    implementation 'com.appodeal.ads:sdk:2.6.3.+'
+    ...
+}
+```
+
+Add repository into `build.gradle` (module: project)
+
+``` groovy
+allprojects {
+    repositories {
+        ...
+        maven { url "https://artifactory.appodeal.com/appodeal" }
+        ...
+    }
+}
+```
+
+> Note. You can change following implementation to use custom mediation setup. See [Docs](https://wiki.appodeal.com/display/DE/Android+SDK.+Integration+Guide)
+
+2. Enable `multidex`
+
+In `build.gradle` (module: app)
+
+``` groovy
+defaultConfig {
+    ...
+    multiDexEnabled true
+    ...
+}
+...
+dependencies {
+    ...
+    implementation 'com.android.support:multidex:1.0.3'
+    ...
+}
+```
+
+3. Set all required permissions in *AndroidManifest.xml*. See [Docs](https://wiki.appodeal.com/display/DE/Android+SDK.+Integration+Guide)
+
+``` xml
+<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+<uses-permission android:name="android.permission.INTERNET" />
+```
+
+4. Network security configuration
+
+Add the Network Security Configuration file to your AndroidManifest.xml:
+
+``` xml
+<?xml version="1.0" encoding="utf-8"?>
+<manifest>
+    <application 
+		...
+        android:networkSecurityConfig="@xml/network_security_config">
+    </application>
+</manifest>
+```
+
+In your *network_security_config.xml* file, add base-config that sets `cleartextTrafficPermitted` to `true`:
+
+``` xml
+<?xml version="1.0" encoding="utf-8"?>
+<network-security-config>
+    <base-config cleartextTrafficPermitted="true">
+        <trust-anchors>
+            <certificates src="system" />
+            <certificates src="user" />
+        </trust-anchors>
+    </base-config>
+    <domain-config cleartextTrafficPermitted="true">
+        <domain includeSubdomains="true">127.0.0.1</domain>
+    </domain-config>
+</network-security-config>
+```
+
+5. Admob Configuration (if you use Admob adapter)
+
+``` xml
+<manifest>
+    <application>
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="[ADMOB_APP_ID]"/>
+    </application>
+</manifest>
+```
 
 ## Usage
 
