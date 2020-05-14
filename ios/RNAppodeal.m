@@ -92,6 +92,7 @@ RCT_EXPORT_METHOD(synchroniseConsent:(NSString *)appKey types:(NSInteger)adType)
         }];
     });
 }
+
 RCT_EXPORT_METHOD(show:(int)showType placement:(NSString *)placement result:(RCTResponseSenderBlock)callback) {
     dispatch_async(dispatch_get_main_queue(), ^{
         BOOL result = [Appodeal showAd:AppodealShowStyleFromRNAAdType(showType)
