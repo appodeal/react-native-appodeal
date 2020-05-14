@@ -15,7 +15,7 @@
   "scripts": {
     "tsc": "tsc --project .",
     "lint": "tslint --project .",
-    "prepublish": "npm run tsc"
+    "prepare": "npm run tsc"
   },
   "author": "Appodeal <https://appodeal.com>",
   "license": "MIT",
