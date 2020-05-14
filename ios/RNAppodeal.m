@@ -17,7 +17,7 @@ STKConsentManagerDisplayDelegate
 @implementation RNAppodeal
 {
     NSString *_appKey;
-    NSInteger *_adType;
+    NSInteger _adType;
 }
 
 @synthesize bridge = _bridge;
@@ -27,6 +27,22 @@ STKConsentManagerDisplayDelegate
 }
 
 RCT_EXPORT_MODULE();
+
+- (void)initialize {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [Appodeal setFramework:APDFrameworkReactNative version:RNAVersion()];
+        
+        [Appodeal setRewardedVideoDelegate:self];
+        [Appodeal setNonSkippableVideoDelegate:self];
+        [Appodeal setBannerDelegate:self];
+        [Appodeal setInterstitialDelegate:self];
+        
+        BOOL consent = STKConsentManager.sharedManager.consentStatus != STKConsentStatusNonPersonalized;
+        [Appodeal initializeWithApiKey:_appKey
+                                 types:AppodealAdTypeFromRNAAdType(_adType)
+                            hasConsent:consent];
+    });
+}
 
 #pragma mark Method export
 
@@ -56,7 +72,7 @@ RCT_EXPORT_METHOD(synchroniseConsent:(NSString *)appKey types:(NSInteger)adType)
         }
         
         if (STKConsentManager.sharedManager.shouldShowConsentDialog != STKConsentBoolTrue) {
-            [strongSelf initialize:_appKey types:_adType];
+            [strongSelf initialize];
             return ;
         }
         
@@ -66,7 +82,7 @@ RCT_EXPORT_METHOD(synchroniseConsent:(NSString *)appKey types:(NSInteger)adType)
             }
             
             if (!STKConsentManager.sharedManager.isConsentDialogReady) {
-                [strongSelf initialize:_appKey types:_adType];
+                [strongSelf initialize];
                 return ;
             }
             UIViewController *rootViewController = [UIApplication sharedApplication].delegate.window.rootViewController;
@@ -451,11 +467,11 @@ RCT_EXPORT_METHOD(trackInAppPurchase:(double)amount currencyCode:(NSString *)cur
 - (void)consentManagerWillShowDialog:(STKConsentManager *)consentManager {}
 
 - (void)consentManagerDidDismissDialog:(STKConsentManager *)consentManager {
-    [self initialize:_appKey types:_adType];
+    [self initialize];
 }
 
 - (void)consentManager:(STKConsentManager *)consentManager didFailToPresent:(NSError *)error {
-    [self initialize:_appKey types:_adType];
+    [self initialize];
 }
 
 #pragma mark - Noop
