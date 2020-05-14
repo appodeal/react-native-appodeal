@@ -62,35 +62,36 @@ RCT_EXPORT_METHOD(initialize:(NSString *)appKey types:(NSInteger)adType consent:
 }
 
 RCT_EXPORT_METHOD(synchroniseConsent:(NSString *)appKey types:(NSInteger)adType) {
-    __weak typeof(self) weakSelf = self;
-    _appKey = appKey;
-    _adType = adType;
-    [STKConsentManager.sharedManager synchronizeWithAppKey:appKey completion:^(NSError *error) {
-        __strong typeof(self) strongSelf = weakSelf;
-        if (error) {
-            NSLog(@"Error while synchronising consent manager: %@", error);
-        }
-        
-        if (STKConsentManager.sharedManager.shouldShowConsentDialog != STKConsentBoolTrue) {
-            [strongSelf initialize];
-            return ;
-        }
-        
-        [STKConsentManager.sharedManager loadConsentDialog:^(NSError *error) {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        __weak typeof(self) weakSelf = self;
+        _appKey = appKey;
+        _adType = adType;
+        [STKConsentManager.sharedManager synchronizeWithAppKey:appKey completion:^(NSError *error) {
+            __strong typeof(self) strongSelf = weakSelf;
             if (error) {
-                NSLog(@"Error while loading consent dialog: %@", error);
+                NSLog(@"Error while synchronising consent manager: %@", error);
             }
             
-            if (!STKConsentManager.sharedManager.isConsentDialogReady) {
+            if (STKConsentManager.sharedManager.shouldShowConsentDialog != STKConsentBoolTrue) {
                 [strongSelf initialize];
                 return ;
             }
-            UIViewController *rootViewController = [UIApplication sharedApplication].delegate.window.rootViewController;
-            [STKConsentManager.sharedManager showConsentDialogFromRootViewController:rootViewController delegate:self];
+            
+            [STKConsentManager.sharedManager loadConsentDialog:^(NSError *error) {
+                if (error) {
+                    NSLog(@"Error while loading consent dialog: %@", error);
+                }
+                
+                if (!STKConsentManager.sharedManager.isConsentDialogReady) {
+                    [strongSelf initialize];
+                    return ;
+                }
+                UIViewController *rootViewController = [UIApplication sharedApplication].delegate.window.rootViewController;
+                [STKConsentManager.sharedManager showConsentDialogFromRootViewController:rootViewController delegate:self];
+            }];
         }];
-    }];
+    });
 }
-
 RCT_EXPORT_METHOD(show:(int)showType placement:(NSString *)placement result:(RCTResponseSenderBlock)callback) {
     dispatch_async(dispatch_get_main_queue(), ^{
         BOOL result = [Appodeal showAd:AppodealShowStyleFromRNAAdType(showType)
