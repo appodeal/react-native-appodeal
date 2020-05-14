@@ -42,6 +42,10 @@ export default {
     adTypes: AdTypeType,
     consent: boolean
   ) => RNAppodeal.initialize(appKey, adTypes, consent),
+  synchroniseConsent: (
+    appKey: String,
+    adTypes: AdTypeType
+  ) => RNAppodeal.synchroniseConsent(appKey, adTypes),
   show: (
     adTypes: AdTypeType,
     placement: string,

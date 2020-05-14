@@ -69,6 +69,11 @@ import {
 } from 'react-native-appodeal';
 
 const adTypes = AppodealAdType.INTERSTITIAL | AppodealAdType.REWARDED_VIDEO | AppodealAdType.BANNER;
+
+// Initialize using Stack Consent Manager. (Requests consent when needed and starts initialisation after)
+Appodeal.synchroniseConsent('Your app key', adTypes)
+
+// OR: Initialize using your own consent implementation
 const consent = true;
 Appodeal.initialize('Your app key', adTypes, consent)
 ```
