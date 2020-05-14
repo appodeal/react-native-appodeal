@@ -60,16 +60,16 @@ public class RNAppodealModule extends ReactContextBaseJavaModule implements Inte
 
     @ReactMethod
     public void initialize(String appKey, int adTypes, boolean consent) {
-        Appodeal.initialize(getCurrentActivity(), appKey, adTypes, consent);
+        Appodeal.initialize(getCurrentActivity(), appKey, RNAppodealUtils.getAdTypesFormRNTypes(adTypes), consent);
     }
 
     @ReactMethod
     public void show(int adTypes, String placement, Callback callback) {
         boolean result;
         if (placement == null) {
-            result = Appodeal.show(getCurrentActivity(), adTypes);
+            result = Appodeal.show(getCurrentActivity(), RNAppodealUtils.getAdTypesFormRNTypes(adTypes));
         } else {
-            result = Appodeal.show(getCurrentActivity(), adTypes, placement);
+            result = Appodeal.show(getCurrentActivity(), RNAppodealUtils.getAdTypesFormRNTypes(adTypes), placement);
         }
         if (callback != null) {
             callback.invoke(result);
@@ -78,7 +78,7 @@ public class RNAppodealModule extends ReactContextBaseJavaModule implements Inte
 
     @ReactMethod
     public void isLoaded(int adTypes, Callback callback) {
-        boolean result = Appodeal.isLoaded(adTypes);
+        boolean result = Appodeal.isLoaded(RNAppodealUtils.getAdTypesFormRNTypes(adTypes));
         if (callback != null) {
             callback.invoke(result);
         }
@@ -87,8 +87,8 @@ public class RNAppodealModule extends ReactContextBaseJavaModule implements Inte
     @ReactMethod
     public void canShow(int adTypes, String placement, Callback callback) {
         boolean result = placement == null ?
-                Appodeal.canShow(adTypes) :
-                Appodeal.canShow(adTypes, placement);
+                Appodeal.canShow(RNAppodealUtils.getAdTypesFormRNTypes(adTypes)) :
+                Appodeal.canShow(RNAppodealUtils.getAdTypesFormRNTypes(adTypes), placement);
         if (callback != null) {
             callback.invoke(result);
         }
@@ -101,7 +101,7 @@ public class RNAppodealModule extends ReactContextBaseJavaModule implements Inte
 
     @ReactMethod
     public void predictedEcpm(int adType, Callback callback) {
-        double ecpm = Appodeal.getPredictedEcpm(adType);
+        double ecpm = Appodeal.getPredictedEcpm(RNAppodealUtils.getAdTypesFormRNTypes(adType));
         if (callback != null) {
             callback.invoke(ecpm);
         }
@@ -109,22 +109,22 @@ public class RNAppodealModule extends ReactContextBaseJavaModule implements Inte
 
     @ReactMethod
     public void cache(int adTypes) {
-        Appodeal.cache(getCurrentActivity(), adTypes);
+        Appodeal.cache(getCurrentActivity(), RNAppodealUtils.getAdTypesFormRNTypes(adTypes));
     }
 
     @ReactMethod
     public void hide(int adTypes) {
-        Appodeal.hide(getCurrentActivity(), adTypes);
+        Appodeal.hide(getCurrentActivity(), RNAppodealUtils.getAdTypesFormRNTypes(adTypes));
     }
 
     @ReactMethod
     public void setAutoCache(int adTypes, boolean isEnabled) {
-        Appodeal.setAutoCache(adTypes, isEnabled);
+        Appodeal.setAutoCache(RNAppodealUtils.getAdTypesFormRNTypes(adTypes), isEnabled);
     }
 
     @ReactMethod
     public void isPrecache(int adType, Callback callback) {
-        boolean result = Appodeal.isPrecache(adType);
+        boolean result = Appodeal.isPrecache(RNAppodealUtils.getAdTypesFormRNTypes(adType));
         if (callback != null) {
             callback.invoke(result);
         }
@@ -167,12 +167,12 @@ public class RNAppodealModule extends ReactContextBaseJavaModule implements Inte
 
     @ReactMethod
     public void setOnLoadedTriggerBoth(int adTypes, boolean flag) {
-        Appodeal.setTriggerOnLoadedOnPrecache(adTypes, flag);
+        Appodeal.setTriggerOnLoadedOnPrecache(RNAppodealUtils.getAdTypesFormRNTypes(adTypes), flag);
     }
 
     @ReactMethod
     public void disableNetwork(String networkName, int adTypes) {
-        Appodeal.disableNetwork(getCurrentActivity(), networkName, adTypes);
+        Appodeal.disableNetwork(getCurrentActivity(), networkName, RNAppodealUtils.getAdTypesFormRNTypes(adTypes));
     }
 
     @ReactMethod
