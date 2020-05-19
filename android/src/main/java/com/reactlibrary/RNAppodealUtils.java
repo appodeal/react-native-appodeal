@@ -46,6 +46,9 @@ public class RNAppodealUtils {
         if ((types & (1 << 6)) > 0) {
             result |= Appodeal.NON_SKIPPABLE_VIDEO;
         }
+        if ((types & (1 << 8)) > 0) {
+            result |= Appodeal.MREC;
+        }
         return result;
     }
 }

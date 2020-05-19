@@ -50,7 +50,8 @@ typedef NS_OPTIONS(NSInteger, RNAAdType) {
     RNAAdTypeBannerTop = 1 << 4,
     RNAAdTypeRewardedVideo = 1 << 5,
     RNAAdTypeNonSkippableVideo = 1 << 6,
-    RNAAdTypeNative = 1 << 7
+    RNAAdTypeNative = 1 << 7,
+    RNAAdTypeMREC = 1 << 8
 };
 
 AppodealAdType AppodealAdTypeFromRNAAdType(RNAAdType adType);

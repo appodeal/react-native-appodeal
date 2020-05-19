@@ -167,6 +167,9 @@ export const App = () => {
                     style={styles.banner}
                     adSize='phone'
                     onAdLoaded={() => console.log("Banner view did load")}
+                    onAdExpired={() => console.log("Banner view expired")}
+                    onAdClicked={() => console.log("Banner view is clicked")}
+                    onAdFailedToLoad={() => console.log("Banner view is failed to load")}
                 /> :
                 null}
             <SafeAreaView style={styles.container}>
