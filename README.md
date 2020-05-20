@@ -9,6 +9,7 @@ React Native package that adds Appodeal SDK support to your react-native applica
   + [Initialisation](#initialisation)
   + [Callbacks](#callbacks)
   + [Presentation](#presentation)
+* [Banner View](#bannerview)
 * [Changelog](#changelog)
 
 ## Installation
@@ -75,7 +76,7 @@ allprojects {
 
 > Note. You can change following implementation to use custom mediation setup. See [Docs](https://wiki.appodeal.com/display/DE/Android+SDK.+Integration+Guide)
 
-2. Enable `multidex`
+2. Enable `multidex` 
 
 In `build.gradle` (module: app)
 
@@ -114,7 +115,7 @@ Add the Network Security Configuration file to your AndroidManifest.xml:
 </manifest>
 ```
 
-In your *network_security_config.xml* file, add base-config that sets `cleartextTrafficPermitted` to `true`:
+In your *network_security_config.xml* file, add base-config that sets `cleartextTrafficPermitted` to `true` :
 
 ``` xml
 <?xml version="1.0" encoding="utf-8"?>
@@ -400,6 +401,63 @@ You can hide banner ad after it was shown. Call `hide` method with another ad ty
 
 ``` javascript
 Appodeal.hide(AppodealAdType.BANNER_TOP)
+```
+
+## Banner View
+
+AppodealBanner is a component that allows you to display ads in a banner format (know as _AppodealBannerView_).
+
+Banners are available in 3 sizes:
+
+* `phone` (320x50)
+* `tablet` (728x90)
+* `mrec` (MREC)
+
+> Note if you want to show MREC banners in your app, you need to initialise Appodeal SDK with *AppodealAdType. MREC*
+
+Appodeal Banner View can be used only *after* Appodeal SDK was initialised. You can use show only *one* banner on screen.
+Static banners (top or bottom) can't be used in one session with _AppodealBanner_. 
+
+``` javascript
+import {
+    AppodealBanner
+} from 'react-native-appodeal';
+
+<AppodealBanner
+    style = {{
+        height: 50,
+        width: '100%',
+        backgroundColor: 'hsl(0, 0%, 97%)',
+        alignContent: 'stretch',
+    }}
+    adSize = 'phone' />
+```
+
+When banner is added on screen it starts to load ad automatically event if autocache is disabled.
+
+### Styling
+
+Height property of banner styles should corresponds to *adSize* attribute. We recommend to use 
+
+| adSize | height |
+|---|---|
+| 'phone' | 50 |
+| 'tablet' | 90 |
+| 'mrec' | 250 |
+
+### Callbacks
+
+Banner view has explicit callbacks. 
+
+``` javascript
+<AppodealBanner
+    style = {styles.banner}
+    adSize = 'phone'
+    onAdLoaded = {() => console.log("Banner view did load")}
+    onAdExpired = {() => console.log("Banner view expired")}
+    onAdClicked = {() => console.log("Banner view is clicked")}
+    onAdFailedToLoad = {() => console.log("Banner view is failed to load")}
+/>
 ```
 
 ## Changelog
