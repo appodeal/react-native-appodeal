@@ -2,15 +2,21 @@ package com.reactlibrary;
 
 ;
 import android.content.res.Resources;
+import android.opengl.Visibility;
 import android.os.Build;
 import android.util.DisplayMetrics;
 import android.util.TypedValue;
+import android.view.Choreographer;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 
 import com.appodeal.ads.Appodeal;
 import com.appodeal.ads.BannerCallbacks;
+import com.appodeal.ads.BannerView;
 import com.appodeal.ads.MrecCallbacks;
 import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.LifecycleEventListener;
@@ -18,11 +24,14 @@ import com.facebook.react.bridge.ReactContext;
 import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.uimanager.ThemedReactContext;
 import com.facebook.react.uimanager.events.RCTEventEmitter;
+import com.facebook.react.views.image.ReactImageView;
 import com.facebook.react.views.view.ReactViewGroup;
 
 import java.lang.reflect.Method;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
+import androidx.viewpager.widget.ViewPager;
 
 
 public class RCTAppodealBannerView extends ReactViewGroup implements LifecycleEventListener, BannerCallbacks, MrecCallbacks {
@@ -32,12 +41,31 @@ public class RCTAppodealBannerView extends ReactViewGroup implements LifecycleEv
         MREC
     }
 
-    private PopupWindow popupWindow;
+    private View adView;
     private BannerSize size;
+    private final Runnable measureAndLayout = new Runnable() {
+        @Override
+        public void run() {
+            for (int i = 0; i < getChildCount(); i++) {
+                View child = getChildAt(i);
+                child.measure(
+                        MeasureSpec.makeMeasureSpec(getMeasuredWidth(), MeasureSpec.EXACTLY),
+                        MeasureSpec.makeMeasureSpec(getMeasuredHeight(), MeasureSpec.EXACTLY)
+                );
+                child.layout(0, 0, child.getMeasuredWidth(), child.getMeasuredHeight());
+            }
+        }
+    };
 
     public RCTAppodealBannerView(ThemedReactContext context) {
         super(context);
         context.addLifecycleEventListener(this);
+    }
+
+    @Override
+    public void requestLayout() {
+        super.requestLayout();
+        post(measureAndLayout);
     }
 
     public void setAdSize(String adSize) {
@@ -59,13 +87,13 @@ public class RCTAppodealBannerView extends ReactViewGroup implements LifecycleEv
     }
 
     public void hide() {
-        if (popupWindow != null) {
-            popupWindow.dismiss();
-            popupWindow = null;
+        if (adView != null) {
+            removeView(adView);
+            adView = null;
         }
     }
 
-    private void showPopupWindow() {
+    private void showBannerView() {
         Resources r = getReactContext().getResources();
         DisplayMetrics dm = r.getDisplayMetrics();
 
@@ -96,10 +124,9 @@ public class RCTAppodealBannerView extends ReactViewGroup implements LifecycleEv
         int pxW = r.getDisplayMetrics().widthPixels;
         int pxH = dp2px(height, dm);
 
-        popupWindow = new PopupWindow(adView, pxW, pxH);
-        setPopUpWindowLayoutType(popupWindow, WindowManager.LayoutParams.TYPE_APPLICATION_SUB_PANEL);
-        popupWindow.getContentView().setSystemUiVisibility(getReactContext().getCurrentActivity().getWindow().getAttributes().flags);
-        popupWindow.showAsDropDown(this, 0, -pxH);
+        adView.setVisibility(VISIBLE);
+        adView.setLayoutParams(new BannerView.LayoutParams(pxW, pxH));
+        addView(adView);
 
         Appodeal.show(getReactContext().getCurrentActivity(), adType);
     }
@@ -112,19 +139,6 @@ public class RCTAppodealBannerView extends ReactViewGroup implements LifecycleEv
         return  getReactContext().getJSModule(RCTEventEmitter.class);
     }
 
-    private void setPopUpWindowLayoutType(@NonNull PopupWindow popupWindow, int layoutType) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            popupWindow.setWindowLayoutType(WindowManager.LayoutParams.TYPE_APPLICATION_SUB_PANEL);
-        } else {
-            try {
-                Method method = PopupWindow.class.getDeclaredMethod("setWindowLayoutType", int.class);
-                method.setAccessible(true);
-                method.invoke(popupWindow, layoutType);
-            } catch (Exception exception) {
-            }
-        }
-    }
-
     private int dp2px(int dp, DisplayMetrics dm) {
         return Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, dm));
     }
@@ -132,8 +146,8 @@ public class RCTAppodealBannerView extends ReactViewGroup implements LifecycleEv
     @Override
     protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
         super.onLayout(changed, left, top, right, bottom);
-        if (popupWindow != null) { return; }
-        showPopupWindow();
+        if (adView != null) { return; }
+        showBannerView();
     }
 
     @Override
@@ -146,8 +160,6 @@ public class RCTAppodealBannerView extends ReactViewGroup implements LifecycleEv
     public void onHostDestroy() {
         hide();
         Appodeal.destroy(Appodeal.BANNER_VIEW);
-        popupWindow.dismiss();
-        popupWindow = null;
     }
 
     @Override
