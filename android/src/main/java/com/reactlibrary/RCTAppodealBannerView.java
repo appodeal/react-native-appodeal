@@ -18,6 +18,7 @@ import com.appodeal.ads.Appodeal;
 import com.appodeal.ads.BannerCallbacks;
 import com.appodeal.ads.BannerView;
 import com.appodeal.ads.MrecCallbacks;
+import com.appodeal.ads.MrecView;
 import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.LifecycleEventListener;
 import com.facebook.react.bridge.ReactContext;
@@ -34,7 +35,7 @@ import androidx.annotation.RequiresApi;
 import androidx.viewpager.widget.ViewPager;
 
 
-public class RCTAppodealBannerView extends ReactViewGroup implements LifecycleEventListener, BannerCallbacks, MrecCallbacks {
+public class RCTAppodealBannerView extends ReactViewGroup implements BannerCallbacks, MrecCallbacks {
     private enum BannerSize {
         PHONE,
         TABLET,
@@ -59,7 +60,6 @@ public class RCTAppodealBannerView extends ReactViewGroup implements LifecycleEv
 
     public RCTAppodealBannerView(ThemedReactContext context) {
         super(context);
-        context.addLifecycleEventListener(this);
     }
 
     @Override
@@ -148,18 +148,6 @@ public class RCTAppodealBannerView extends ReactViewGroup implements LifecycleEv
         super.onLayout(changed, left, top, right, bottom);
         if (adView != null) { return; }
         showBannerView();
-    }
-
-    @Override
-    public void onHostResume() { }
-
-    @Override
-    public void onHostPause() { }
-
-    @Override
-    public void onHostDestroy() {
-        hide();
-        Appodeal.destroy(Appodeal.BANNER_VIEW);
     }
 
     @Override

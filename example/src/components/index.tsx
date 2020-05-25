@@ -159,7 +159,8 @@ export const BannerSegmentedControl = (props: {
     let showStyles = [
         BannerShowStyle.BOTTOM,
         BannerShowStyle.TOP,
-        BannerShowStyle.VIEW
+        BannerShowStyle.VIEW,
+        BannerShowStyle.MREC
     ]
 
     const index = () => {

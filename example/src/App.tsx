@@ -164,8 +164,8 @@ export const App = () => {
             <NavigationBar />
             {isViewBannerStyle(state.bannerShowStyle) && state.bannerOnScreen ?
                 <AppodealBanner
-                    style={styles.banner}
-                    adSize='phone'
+                    style={state.bannerShowStyle === BannerShowStyle.MREC ? styles.mrec : styles.banner}
+                    adSize={state.bannerShowStyle === BannerShowStyle.MREC ? 'mrec' : 'phone'}
                     onAdLoaded={() => console.log("Banner view did load")}
                     onAdExpired={() => console.log("Banner view expired")}
                     onAdClicked={() => console.log("Banner view is clicked")}
