@@ -7,6 +7,7 @@ import {
     SafeAreaView,
     View,
     StatusBar,
+    ActivityIndicator,
 } from 'react-native';
 import {
     SectionHeader,
@@ -19,6 +20,8 @@ import {
 import {
     AppodealBanner,
     AppodealAdType,
+    AppodealConsentStatus,
+    AppodealConsentRegulation,
     Appodeal
 } from 'react-native-appodeal';
 import {
@@ -30,8 +33,10 @@ import {
 
 interface AppState {
     initialised: boolean,
+    initialising: false,
     bannerOnScreen: boolean,
-    consent: boolean,
+    regulation: AppodealConsentRegulation,
+    consent: AppodealConsentStatus,
     test: boolean,
     autocache: number,
     bannerShowStyle: BannerShowStyle
@@ -41,8 +46,10 @@ interface AppState {
 export const App = () => {
     const [state, setState] = React.useState<AppState>({
         initialised: false,
+        initialising: false,
         bannerOnScreen: false,
-        consent: true,
+        regulation: AppodealConsentRegulation.UNKNOWN,
+        consent: AppodealConsentStatus.UNKNOWN,
         test: true,
         autocache: AppodealAdType.INTERSTITIAL | AppodealAdType.BANNER,
         bannerShowStyle: BannerShowStyle.BOTTOM
@@ -50,13 +57,19 @@ export const App = () => {
 
     useEffect(() => {
         function initIfNeeded() {
-            if (!state.initialised) {
-                return
-            }
-            initialize(state.consent, state.test)
+            if (!state.initialising) { return }
+            initialize(state.test, (status: AppodealConsentStatus, regulation: AppodealConsentRegulation) => {
+                setState({
+                    ...state, 
+                    initialising: false, 
+                    initialised: true,
+                    regulation: regulation,
+                    consent: status
+                })
+            })
         }
         initIfNeeded()
-    }, [state.initialised]);
+    }, [state.initialising]);
 
     useEffect(() => Appodeal.updateConsent(state.consent), [state.consent]);
     useEffect(() => {
@@ -129,14 +142,20 @@ export const App = () => {
         )
     }
 
+    const RegulationGroup = () => {
+        return (
+            <View>
+                <SectionHeader value="Regulation" />
+                <Row title={"Regulation: " + ["unknown 🏴", "none 🏳", "GDPR 🇪🇺", "CCPA 🇺🇸"][state.regulation]} />
+                <Row title={"Consent status: " + ["unknown", "non personalised", "partly personalised", "personalised"][state.consent]} />
+            </View>
+        )
+    }
+
     const InitialisationGroup = () => {
         return (
             <View>
                 <SectionHeader value="Initialisation" />
-                <Row
-                    title='User consent'
-                    accessory={() => <Switch value={state.consent} onValueChange={toggle('consent')} />}
-                />
                 <Row
                     title='Test mode'
                     accessory={() => <Switch
@@ -147,11 +166,13 @@ export const App = () => {
                 />
                 <Row
                     title='Initialise'
-                    accessory={() => <Switch
-                        value={state.initialised}
-                        disabled={state.initialised}
-                        onValueChange={toggle('initialised')}
-                    />}
+                    accessory={() => state.initialising ?
+                        <ActivityIndicator /> :
+                        <Switch
+                            value={state.initialised}
+                            disabled={state.initialised}
+                            onValueChange={toggle('initialising')}
+                        />}
                 />
             </View>
         )
@@ -175,6 +196,7 @@ export const App = () => {
             <SafeAreaView style={styles.container}>
                 <ScrollView style={styles.scrollView}>
                     <InitialisationGroup />
+                    <RegulationGroup />
                     <AutocacheControl
                         mask={state.autocache}
                         onUpdate={autocache => setState({ ...state, autocache: autocache })}
