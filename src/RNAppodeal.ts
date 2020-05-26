@@ -89,6 +89,9 @@ export default {
   updateConsent: (value: boolean) => {
     RNAppodeal.updateConsent(value)
   },
+  forceShowConsentDialog: (callback = handler) => {
+    RNAppodeal.forceShowConsentDialog(callback);
+  },
   setTesting: (value: boolean) => {
     RNAppodeal.setTesting(value)
   },

@@ -44,7 +44,7 @@ RCT_EXPORT_MODULE();
         [Appodeal setNonSkippableVideoDelegate:self];
         [Appodeal setBannerDelegate:self];
         [Appodeal setInterstitialDelegate:self];
-
+        
         [Appodeal initializeWithApiKey:appKey
                                  types:adTypes
                             hasConsent:consent];
@@ -88,6 +88,27 @@ RCT_EXPORT_METHOD(synchroniseConsent:(NSString *)appKey callback:(RCTResponseSen
                 [STKConsentManager.sharedManager showConsentDialogFromRootViewController:RNAppodealRootViewController()
                                                                                 delegate:self];
             }];
+        }];
+    });
+}
+
+RCT_EXPORT_METHOD(forceShowConsentDialog:(RCTResponseSenderBlock)callback) {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        __weak typeof(self) weakSelf = self;
+        [STKConsentManager.sharedManager loadConsentDialog:^(NSError *error) {
+            __strong typeof(self) strongSelf = weakSelf;
+            if (error) {
+                NSLog(@"Error while loading consent dialog: %@", error);
+            }
+            
+            if (!STKConsentManager.sharedManager.isConsentDialogReady) {
+                callback ? callback(RNAppodealConsentParameters()) : nil;
+                return ;
+            }
+            
+            strongSelf.consentCallback = callback;
+            [STKConsentManager.sharedManager showConsentDialogFromRootViewController:RNAppodealRootViewController()
+                                                                            delegate:self];
         }];
     });
 }

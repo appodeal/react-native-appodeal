@@ -1,7 +1,15 @@
 package com.reactlibrary;
 
+import android.telecom.Call;
 import android.widget.Toast;
 
+import com.explorestack.consent.Consent;
+import com.explorestack.consent.ConsentForm;
+import com.explorestack.consent.ConsentFormListener;
+import com.explorestack.consent.ConsentInfoUpdateListener;
+import com.explorestack.consent.ConsentManager;
+import com.explorestack.consent.exception.ConsentManagerException;
+import com.explorestack.iab.utils.Utils;
 import com.facebook.react.bridge.ActivityEventListener;
 import com.facebook.react.bridge.LifecycleEventListener;
 import com.facebook.react.bridge.ReactApplicationContext;
@@ -33,6 +41,7 @@ import com.appodeal.ads.utils.Log;
 public class RNAppodealModule extends ReactContextBaseJavaModule implements InterstitialCallbacks, BannerCallbacks, NonSkippableVideoCallbacks, RewardedVideoCallbacks, AppodealPermissionCallbacks, LifecycleEventListener {
 
     private final ReactApplicationContext reactContext;
+    private ConsentForm consentForm;
 
     public RNAppodealModule(ReactApplicationContext reactContext) {
         super(reactContext);
@@ -53,6 +62,16 @@ public class RNAppodealModule extends ReactContextBaseJavaModule implements Inte
         reactContext.getJSModule(RCTDeviceEventEmitter.class).emit(eventName, params);
     }
 
+    private ReadableMap getConsentParams() {
+        WritableMap params = Arguments.createMap();
+        ConsentManager manager = ConsentManager.getInstance(reactContext);
+        Consent.Status status = manager.getConsentStatus();
+        Consent.Zone zone = manager.getConsentZone();
+        params.putInt("status", RNAppodealUtils.getConsentStatusIntFromStatus(status));
+        params.putInt("regulation", RNAppodealUtils.getConsentRegualationIntFromZone(zone));
+        return params;
+    }
+
     @Override
     public String getName() {
         return "RNAppodeal";
@@ -66,6 +85,71 @@ public class RNAppodealModule extends ReactContextBaseJavaModule implements Inte
     @ReactMethod
     public void initialize(String appKey, int adTypes, boolean consent) {
         Appodeal.initialize(getCurrentActivity(), appKey, RNAppodealUtils.getAdTypesFormRNTypes(adTypes), consent);
+    }
+
+    @ReactMethod
+    public void synchroniseConsent(String appKey, Callback callback) {
+        ConsentManager.getInstance(reactContext).requestConsentInfoUpdate(appKey, new ConsentInfoUpdateListener() {
+            @Override
+            public void onConsentInfoUpdated(Consent consent) {
+                Consent.ShouldShow consentShouldShow = ConsentManager.getInstance(reactContext).shouldShowConsentDialog();
+                if (consentShouldShow == Consent.ShouldShow.TRUE) {
+                    forceShowConsentDialog(callback);
+                } else if (callback != null) {
+                    callback.invoke(getConsentParams());
+                }
+            }
+
+            @Override
+            public void onFailedToUpdateConsentInfo(ConsentManagerException e) {
+                if (callback != null) {
+                    callback.invoke(getConsentParams());
+                }
+            }
+        });
+    }
+
+    @ReactMethod
+    public void forceShowConsentDialog(Callback callback) {
+        // Create new Consent form listener
+        ConsentFormListener consentFormListener = new ConsentFormListener() {
+            @Override
+            public void onConsentFormLoaded() {
+                consentForm.showAsActivity();
+            }
+
+            @Override
+            public void onConsentFormError(ConsentManagerException error) {
+                consentForm = null;
+                if (callback != null) {
+                    callback.invoke(getConsentParams());
+                }
+            }
+
+            @Override
+            public void onConsentFormOpened() { }
+
+            @Override
+            public void onConsentFormClosed(Consent consent) {
+                consentForm = null;
+                if (callback != null) {
+                    callback.invoke(getConsentParams());
+                }
+            }
+        };
+
+        consentForm = new ConsentForm.Builder(reactContext)
+                .withListener(consentFormListener)
+                .build();
+        consentForm.load();
+    }
+
+    @ReactMethod
+    public void hasConsent(String vendor, Callback callback) {
+        Consent.HasConsent result = ConsentManager.getInstance(reactContext).hasConsentForVendor(vendor);
+        if (callback != null) {
+            callback.invoke(result == Consent.HasConsent.TRUE);
+        }
     }
 
     @ReactMethod
