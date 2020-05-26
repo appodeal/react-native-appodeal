@@ -85,6 +85,12 @@ export const styles = StyleSheet.create({
         backgroundColor: 'hsl(0, 0%, 97%)',
         alignContent: 'stretch',
     },
+    mrec: {
+        height: 250,
+        width: '100%',
+        backgroundColor: 'hsl(0, 0%, 97%)',
+        alignContent: 'stretch',
+    },
     buttonSelected: {
         flex: 1,
         justifyContent: 'space-around',

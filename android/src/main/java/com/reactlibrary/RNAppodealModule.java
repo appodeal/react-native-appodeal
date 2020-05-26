@@ -2,6 +2,8 @@ package com.reactlibrary;
 
 import android.widget.Toast;
 
+import com.facebook.react.bridge.ActivityEventListener;
+import com.facebook.react.bridge.LifecycleEventListener;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
@@ -28,18 +30,21 @@ import com.appodeal.ads.utils.PermissionsHelper.AppodealPermissionCallbacks;
 import com.appodeal.ads.utils.Log;
 
 
-public class RNAppodealModule extends ReactContextBaseJavaModule implements InterstitialCallbacks, BannerCallbacks, NonSkippableVideoCallbacks, RewardedVideoCallbacks, AppodealPermissionCallbacks {
+public class RNAppodealModule extends ReactContextBaseJavaModule implements InterstitialCallbacks, BannerCallbacks, NonSkippableVideoCallbacks, RewardedVideoCallbacks, AppodealPermissionCallbacks, LifecycleEventListener {
 
     private final ReactApplicationContext reactContext;
 
     public RNAppodealModule(ReactApplicationContext reactContext) {
         super(reactContext);
-        this.reactContext = reactContext;
+
         Appodeal.setFramework("react-native", getPluginVersion());
         Appodeal.setInterstitialCallbacks(this);
         Appodeal.setBannerCallbacks(this);
         Appodeal.setNonSkippableVideoCallbacks(this);
         Appodeal.setRewardedVideoCallbacks(this);
+
+        this.reactContext = reactContext;
+        this.reactContext.addLifecycleEventListener(this);
     }
 
     private String getPluginVersion() { return Appodeal.getVersion() + ".1"; }
@@ -448,5 +453,20 @@ public class RNAppodealModule extends ReactContextBaseJavaModule implements Inte
         WritableMap params = Arguments.createMap();
         params.putBoolean("isGranted", response == PackageManager.PERMISSION_GRANTED);
         sendEventToJS("writeExternalStorageResponse", params);
+    }
+
+    @Override
+    public void onHostDestroy() {
+        Appodeal.destroy(Appodeal.BANNER);
+        Appodeal.destroy(Appodeal.MREC);
+    }
+
+    @Override
+    public void onHostPause() { }
+
+    @Override
+    public void onHostResume() {
+        Appodeal.onResume(this.getCurrentActivity(), Appodeal.BANNER);
+        Appodeal.onResume(this.getCurrentActivity(), Appodeal.MREC);
     }
 }
