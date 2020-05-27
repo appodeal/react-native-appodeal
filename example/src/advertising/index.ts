@@ -1,6 +1,8 @@
 import {
     Appodeal,
     AppodealAdType,
+    AppodealConsentStatus,
+    AppodealConsentRegulation,
     AppodealInterstitialEvent,
     AppodealRewardedEvent,
     AppodealBannerEvent,
@@ -9,7 +11,10 @@ import {
 import { Platform } from 'react-native';
 
 
-export const initialize = (consent: boolean, testing: boolean) => {
+export const initialize = (
+    testing: boolean,
+    callback: (consent: AppodealConsentStatus, regulation: AppodealConsentRegulation) => void
+) => {
     // Setup callbacks
     registerListeners()
     // Set extras
@@ -25,12 +30,17 @@ export const initialize = (consent: boolean, testing: boolean) => {
     Appodeal.disableLocationPermissionCheck()
     Appodeal.setLogLevel(constants.logLevel)
     Appodeal.setTesting(testing)
+
     // Initialize Appodeal
-    Appodeal.initialize(
-        constants.appKey,
-        constants.adTypes,
-        consent
-    )
+    Appodeal.synchroniseConsent(constants.appKey, (consent: AppodealConsentStatus, regulation: AppodealConsentRegulation) => {
+        Appodeal.initialize(
+            constants.appKey,
+            constants.adTypes,
+            consent !== AppodealConsentStatus.NON_PERSONALIZED
+        )
+        callback(consent, regulation)
+    })
+
 }
 
 export enum BannerShowStyle {
@@ -52,8 +62,8 @@ export const bannerAdType = (style: BannerShowStyle) => {
 }
 
 const constants = {
-    appKey: Platform.OS === "ios" ? 
-        "dee74c5129f53fc629a44a690a02296694e3eef99f2d3a5f" : 
+    appKey: Platform.OS === "ios" ?
+        "dee74c5129f53fc629a44a690a02296694e3eef99f2d3a5f" :
         "fee50c333ff3825fd6ad6d38cff78154de3025546d47a84f",
     adTypes: AppodealAdType.INTERSTITIAL | AppodealAdType.REWARDED_VIDEO | AppodealAdType.BANNER | AppodealAdType.MREC,
     logLevel: AppodealLogLevel.DEBUG,
@@ -80,13 +90,13 @@ const registerListeners = () => {
             "paid": false
         })
     })
-    Appodeal.addEventListener(AppodealInterstitialEvent.EXPIRED, () => 
+    Appodeal.addEventListener(AppodealInterstitialEvent.EXPIRED, () =>
         console.log("Interstitial expired")
     )
     Appodeal.addEventListener(AppodealInterstitialEvent.CLICKED, () =>
         console.log("Interstitial clicked")
     )
-    Appodeal.addEventListener(AppodealInterstitialEvent.CLOSED, () => 
+    Appodeal.addEventListener(AppodealInterstitialEvent.CLOSED, () =>
         console.log("Interstitial closed")
     )
     Appodeal.addEventListener(AppodealInterstitialEvent.FAILED_TO_LOAD, () =>

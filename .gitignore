@@ -38,6 +38,7 @@ project.xcworkspace
 #
 build/
 captures/
+.settings
 .idea
 .gradle
 local.properties

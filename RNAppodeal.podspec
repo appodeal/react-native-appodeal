@@ -19,6 +19,7 @@ Pod::Spec.new do |s|
 
   s.dependency "React"
   s.dependency "Appodeal", "2.6.3"
+  s.dependency "StackConsentManager", "~> 1.0.1"
 end
 
   

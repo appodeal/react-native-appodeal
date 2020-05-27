@@ -322,6 +322,8 @@ PODS:
   - RNAppodeal (2.6.3):
     - Appodeal (= 2.6.3)
     - React
+    - StackConsentManager (~> 1.0.1)
+  - StackConsentManager (1.0.1)
   - YandexMobileMetrica (3.9.4):
     - YandexMobileMetrica/Static (= 3.9.4)
   - YandexMobileMetrica/Static (3.9.4):
@@ -415,6 +417,7 @@ SPEC REPOS:
     - GoogleAppMeasurement
     - GoogleUtilities
     - nanopb
+    - StackConsentManager
     - YandexMobileMetrica
 
 EXTERNAL SOURCES:
@@ -527,7 +530,8 @@ SPEC CHECKSUMS:
   React-RCTText: fae545b10cfdb3d247c36c56f61a94cfd6dba41d
   React-RCTVibration: 4356114dbcba4ce66991096e51a66e61eda51256
   ReactCommon: ed4e11d27609d571e7eee8b65548efc191116eb3
-  RNAppodeal: f4c53272900995de93eb8e05169a8aa122f24867
+  RNAppodeal: 19d26452976a38f75a42e3e7e2358fab1cfb2dff
+  StackConsentManager: 2e7c7512d4c1b5dddf248e7e9f78931d8d0142e8
   YandexMobileMetrica: 1030df2959c886a7be3bc3d274eb54c8e86afd6f
   Yoga: 3ebccbdd559724312790e7742142d062476b698e
 

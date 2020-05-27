@@ -33,3 +33,17 @@ export enum AppodealGender {
   FEMALE = 'female',
   OTHER = 'other'
 }
+
+export enum AppodealConsentStatus {
+  UNKNOWN = 0,
+  NON_PERSONALIZED = 1,
+  PARTLY_PERSONALIZED = 2,
+  PERSONALIZED = 3
+}
+
+export enum AppodealConsentRegulation {
+  UNKNOWN = 0,
+  NONE = 1,
+  GDPR = 2,
+  CCPA = 3
+}

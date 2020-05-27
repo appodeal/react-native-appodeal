@@ -1,4 +1,5 @@
 #import "RNAppodeal.h"
+#import <StackConsentManager/StackConsentManager.h>
 #import "RNADefines.h"
 #import <React/RCTUtils.h>
 
@@ -7,24 +8,35 @@
 AppodealBannerDelegate,
 AppodealInterstitialDelegate,
 AppodealRewardedVideoDelegate,
-AppodealNonSkippableVideoDelegate
+AppodealNonSkippableVideoDelegate,
+STKConsentManagerDisplayDelegate
 >
-@end
 
+@property (nonatomic, copy) RCTResponseSenderBlock consentCallback;
+
+@end
 
 @implementation RNAppodeal
 
 @synthesize bridge = _bridge;
 
-- (UIViewController *)rootViewController {
+UIViewController *RNAppodealRootViewController(void) {
     return UIApplication.sharedApplication.keyWindow.rootViewController;
+}
+
+
+NSArray *RNAppodealConsentParameters(void) {
+    return @[
+        @(STKConsentManager.sharedManager.consentStatus),
+        @(STKConsentManager.sharedManager.regulation)
+    ];
 }
 
 RCT_EXPORT_MODULE();
 
-#pragma mark Method export
-
-RCT_EXPORT_METHOD(initialize:(NSString *)appKey types:(NSInteger)adType consent:(BOOL)consent) {
+- (void)initializeSdkWithAppKey:(NSString *)appKey
+                        adTypes:(AppodealAdType)adTypes
+                        consent:(BOOL)consent {
     dispatch_async(dispatch_get_main_queue(), ^{
         [Appodeal setFramework:APDFrameworkReactNative version:RNAVersion()];
         
@@ -34,8 +46,80 @@ RCT_EXPORT_METHOD(initialize:(NSString *)appKey types:(NSInteger)adType consent:
         [Appodeal setInterstitialDelegate:self];
         
         [Appodeal initializeWithApiKey:appKey
-                                 types:AppodealAdTypeFromRNAAdType(adType)
+                                 types:adTypes
                             hasConsent:consent];
+    });
+}
+
+#pragma mark - Method export
+
+RCT_EXPORT_METHOD(initialize:(NSString *)appKey types:(NSInteger)adType consent:(BOOL)consent) {
+    [self initializeSdkWithAppKey:appKey
+                          adTypes:AppodealAdTypeFromRNAAdType(adType)
+                          consent:consent];
+}
+
+RCT_EXPORT_METHOD(synchroniseConsent:(NSString *)appKey callback:(RCTResponseSenderBlock)callback) {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        __weak typeof(self) weakSelf = self;
+        [STKConsentManager.sharedManager synchronizeWithAppKey:appKey
+                                                    completion:^(NSError *error) {
+            __strong typeof(self) strongSelf = weakSelf;
+            if (error) {
+                NSLog(@"Error while synchronising consent manager: %@", error);
+            }
+            
+            if (STKConsentManager.sharedManager.shouldShowConsentDialog != STKConsentBoolTrue) {
+                callback ? callback(RNAppodealConsentParameters()) : nil;
+                return ;
+            }
+            
+            [STKConsentManager.sharedManager loadConsentDialog:^(NSError *error) {
+                if (error) {
+                    NSLog(@"Error while loading consent dialog: %@", error);
+                }
+                
+                if (!STKConsentManager.sharedManager.isConsentDialogReady) {
+                    callback ? callback(RNAppodealConsentParameters()) : nil;
+                    return ;
+                }
+                
+                strongSelf.consentCallback = callback;
+                [STKConsentManager.sharedManager showConsentDialogFromRootViewController:RNAppodealRootViewController()
+                                                                                delegate:self];
+            }];
+        }];
+    });
+}
+
+RCT_EXPORT_METHOD(forceShowConsentDialog:(RCTResponseSenderBlock)callback) {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        __weak typeof(self) weakSelf = self;
+        [STKConsentManager.sharedManager loadConsentDialog:^(NSError *error) {
+            __strong typeof(self) strongSelf = weakSelf;
+            if (error) {
+                NSLog(@"Error while loading consent dialog: %@", error);
+            }
+            
+            if (!STKConsentManager.sharedManager.isConsentDialogReady) {
+                callback ? callback(RNAppodealConsentParameters()) : nil;
+                return ;
+            }
+            
+            strongSelf.consentCallback = callback;
+            [STKConsentManager.sharedManager showConsentDialogFromRootViewController:RNAppodealRootViewController()
+                                                                            delegate:self];
+        }];
+    });
+}
+
+RCT_EXPORT_METHOD(hasConsent:(NSString *)vendorBundle callback:(RCTResponseSenderBlock)callback) {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        BOOL result = [STKConsentManager.sharedManager hasConsentForVendorBundle:vendorBundle];
+        NSArray *params = @[
+            @(result)
+        ];
+        callback(params);
     });
 }
 
@@ -43,7 +127,7 @@ RCT_EXPORT_METHOD(show:(int)showType placement:(NSString *)placement result:(RCT
     dispatch_async(dispatch_get_main_queue(), ^{
         BOOL result = [Appodeal showAd:AppodealShowStyleFromRNAAdType(showType)
                           forPlacement:placement
-                    rootViewController:self.rootViewController];
+                    rootViewController:RNAppodealRootViewController()];
         NSArray *params = @[
             @(result)
         ];
@@ -408,6 +492,20 @@ RCT_EXPORT_METHOD(trackInAppPurchase:(double)amount currencyCode:(NSString *)cur
         @"name": rewardName ?: @""
     };
     [self sendEventWithName:kEventRewardedVideoFinished body:params];
+}
+
+#pragma mark - STKConsentManagerDisplayDelegate
+
+- (void)consentManagerWillShowDialog:(STKConsentManager *)consentManager {}
+
+- (void)consentManagerDidDismissDialog:(STKConsentManager *)consentManager {
+    self.consentCallback ? self.consentCallback(RNAppodealConsentParameters()) : nil;
+    self.consentCallback = nil;
+}
+
+- (void)consentManager:(STKConsentManager *)consentManager didFailToPresent:(NSError *)error {
+    self.consentCallback ? self.consentCallback(RNAppodealConsentParameters()) : nil;
+    self.consentCallback = nil;
 }
 
 #pragma mark - Noop

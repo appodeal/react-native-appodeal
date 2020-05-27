@@ -1,8 +1,9 @@
 package com.reactlibrary;
 
-import com.appodeal.ads.Appodeal;
-import com.appodeal.ads.UserSettings;
-import com.appodeal.ads.utils.Log;
+        import com.appodeal.ads.Appodeal;
+        import com.appodeal.ads.UserSettings;
+        import com.appodeal.ads.utils.Log;
+        import com.explorestack.consent.Consent;
 
 
 public class RNAppodealUtils {
@@ -48,6 +49,44 @@ public class RNAppodealUtils {
         }
         if ((types & (1 << 8)) > 0) {
             result |= Appodeal.MREC;
+        }
+        return result;
+    }
+
+    public static int getConsentStatusIntFromStatus(Consent.Status status) {
+        int result = 0;
+        switch (status) {
+            case UNKNOWN:
+                result = 0;
+                break;
+            case NON_PERSONALIZED:
+                result = 1;
+                break;
+            case PARTLY_PERSONALIZED:
+                result = 2;
+                break;
+            case PERSONALIZED:
+                result = 3;
+                break;
+        }
+        return result;
+    }
+
+    public static int getConsentRegualationIntFromZone(Consent.Zone zone) {
+        int result = 0;
+        switch (zone) {
+            case UNKNOWN:
+                result = 0;
+                break;
+            case NONE:
+                result = 1;
+                break;
+            case GDPR:
+                result = 2;
+                break;
+            case CCPA:
+                result = 3;
+                break;
         }
         return result;
     }
