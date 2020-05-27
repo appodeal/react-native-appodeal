@@ -9,6 +9,7 @@ React Native package that adds Appodeal SDK support to your react-native applica
   + [Initialisation](#initialisation)
   + [Callbacks](#callbacks)
   + [Presentation](#presentation)
+* [Consent Manager](#consentmanager)
 * [Banner View](#bannerview)
 * [Changelog](#changelog)
 
@@ -407,6 +408,53 @@ You can hide banner ad after it was shown. Call `hide` method with another ad ty
 ``` javascript
 Appodeal.hide(AppodealAdType.BANNER_TOP)
 ```
+
+## Consent Manager
+
+Consent manager is used to provide GDPR and CCPA compliance. Consent manager SDK can be synchronized at any moment of application lifecycle. We recommend to synchronize it at application launch. Multiple synchronization calls are allowed.
+
+Required parameter is `appKey` - Appodeal API Key.
+
+To synchronise user consent you can use following methods. If user consent is required it will shows fullscreen Consent Dialog.
+Callback will return information about latest user consent and current regulation zone.
+
+``` javascript
+import {
+    Appodeal,
+    AppodealConsentStatus,
+    AppodealConsentRegulation,
+} from 'react-native-appodeal';
+
+Appodeal.synchroniseConsent('Your appKey', (consent: AppodealConsentStatus, regulation: AppodealConsentRegulation) => {
+    // Initialise Appodeal SDK here
+})
+```
+
+You can force consent manager to show consent dialog at any moment of application lifecycle after consent manager was synchronised.
+
+``` javascript
+import {
+    Appodeal,
+    AppodealConsentStatus,
+    AppodealConsentRegulation,
+} from 'react-native-appodeal';
+
+Appodeal.forceShowConsentDialog((consent: AppodealConsentStatus, regulation: AppodealConsentRegulation) => {
+    // Handle updated data
+})
+```
+
+You can get consent result for specific vendor bundle, that registered in Appodeal system. Eg you can use your application id.
+
+``` javascript
+import { Appodeal } from 'react-native-appodeal';
+
+Appodeal.hasConsent('com.organisation.app', (consentResult: boolean) => {
+    // Handle updated data
+})
+```
+
+> Note. Usage of Consent Manager is not required. 
 
 ## Banner View
 
