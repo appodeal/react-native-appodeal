@@ -515,6 +515,12 @@ Banner view has explicit callbacks.
 
 ## Changelog
 
+2.6.4
+
+* Update Appodeal to 2.6.4
+* Add banner view and MREC support
+* Add Consent Manager support
+
 2.6.3
 
 * Update Appodeal to 2.6.3

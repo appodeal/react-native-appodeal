@@ -56,7 +56,7 @@ public class RNAppodealModule extends ReactContextBaseJavaModule implements Inte
         this.reactContext.addLifecycleEventListener(this);
     }
 
-    private String getPluginVersion() { return Appodeal.getVersion() + ".1"; }
+    private String getPluginVersion() { return Appodeal.getVersion(); }
 
     private void sendEventToJS(String eventName, WritableMap params) {
         reactContext.getJSModule(RCTDeviceEventEmitter.class).emit(eventName, params);
