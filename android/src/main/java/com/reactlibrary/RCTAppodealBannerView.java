@@ -2,37 +2,20 @@ package com.reactlibrary;
 
 ;
 import android.content.res.Resources;
-import android.opengl.Visibility;
-import android.os.Build;
 import android.util.DisplayMetrics;
 import android.util.TypedValue;
-import android.view.Choreographer;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.WindowManager;
-import android.widget.FrameLayout;
-import android.widget.LinearLayout;
-import android.widget.PopupWindow;
 
 import com.appodeal.ads.Appodeal;
 import com.appodeal.ads.BannerCallbacks;
 import com.appodeal.ads.BannerView;
 import com.appodeal.ads.MrecCallbacks;
-import com.appodeal.ads.MrecView;
 import com.facebook.react.bridge.Arguments;
-import com.facebook.react.bridge.LifecycleEventListener;
 import com.facebook.react.bridge.ReactContext;
 import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.uimanager.ThemedReactContext;
 import com.facebook.react.uimanager.events.RCTEventEmitter;
-import com.facebook.react.views.image.ReactImageView;
 import com.facebook.react.views.view.ReactViewGroup;
-
-import java.lang.reflect.Method;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.RequiresApi;
-import androidx.viewpager.widget.ViewPager;
 
 
 public class RCTAppodealBannerView extends ReactViewGroup implements BannerCallbacks, MrecCallbacks {
