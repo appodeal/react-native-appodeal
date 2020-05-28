@@ -124,6 +124,13 @@ AppodealAdType AppodealAdTypeFromRNAAdType(RNAAdType adType) {
         result |= AppodealAdTypeNativeAd;
     }
     
+    if ((adType & RNAAdTypeMREC) > 0) {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated"
+        result |= AppodealAdTypeMREC;
+#pragma clang diagnostic pop
+    }
+    
     return result;
 }
 

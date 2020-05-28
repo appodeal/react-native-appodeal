@@ -53,7 +53,7 @@
 }
 
 - (void)insertReactSubview:(UIView *)subview atIndex:(NSInteger)atIndex {
-    RCTLogError(@"RNDFPBannerView cannot have subviews");
+    RCTLogError(@"RNAppodealBannerView cannot have subviews");
 }
 
 - (void)layoutSubviews {

@@ -1,5 +1,6 @@
 package com.reactlibrary;
 
+import com.appodeal.ads.Appodeal;
 import com.facebook.react.common.MapBuilder;
 import com.facebook.react.uimanager.SimpleViewManager;
 import com.facebook.react.uimanager.ThemedReactContext;
@@ -7,7 +8,8 @@ import com.facebook.react.uimanager.annotations.ReactProp;
 
 import java.util.Map;
 
-import javax.annotation.Nullable;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 
 public class RNAppodealBannerManager extends SimpleViewManager<RCTAppodealBannerView> {
@@ -16,22 +18,30 @@ public class RNAppodealBannerManager extends SimpleViewManager<RCTAppodealBanner
 
     @Override
     public RCTAppodealBannerView createViewInstance(ThemedReactContext context) {
-        return new RCTAppodealBannerView(context);
+        RCTAppodealBannerView banner = new RCTAppodealBannerView(context);
+        Appodeal.setBannerCallbacks(banner);
+        Appodeal.setMrecCallbacks(banner);
+        return banner;
     }
 
     @Override
-    public @Nullable Map getExportedCustomDirectEventTypeConstants() {
+    public void onDropViewInstance(@NonNull RCTAppodealBannerView view) {
+        super.onDropViewInstance(view);
+        view.hide();
+    }
+
+    @Nullable
+    @Override
+    public Map<String, Object> getExportedCustomDirectEventTypeConstants() {
         return MapBuilder.of(
                 "onBannerLoaded",
-                MapBuilder.of("registrationName", "onBannerLoaded"),
+                MapBuilder.of("registrationName", "onAdLoaded"),
                 "onBannerFailedToLoad",
-                MapBuilder.of("registrationName", "onBannerFailedToLoad"),
-                "onBannerShowFailed",
-                MapBuilder.of("registrationName", "onBannerShowFailed"),
-                "onBannerShown",
-                MapBuilder.of("registrationName", "onBannerShown"),
+                MapBuilder.of("registrationName", "onAdFailedToLoad"),
                 "onBannerClicked",
-                MapBuilder.of("registrationName", "onBannerClicked")
+                MapBuilder.of("registrationName", "onAdClicked"),
+                "onBannerExpired",
+                MapBuilder.of("registrationName", "onAdExpired")
         );
     }
 

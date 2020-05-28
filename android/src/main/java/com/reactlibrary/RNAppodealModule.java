@@ -1,7 +1,17 @@
 package com.reactlibrary;
 
+import android.telecom.Call;
 import android.widget.Toast;
 
+import com.explorestack.consent.Consent;
+import com.explorestack.consent.ConsentForm;
+import com.explorestack.consent.ConsentFormListener;
+import com.explorestack.consent.ConsentInfoUpdateListener;
+import com.explorestack.consent.ConsentManager;
+import com.explorestack.consent.exception.ConsentManagerException;
+import com.explorestack.iab.utils.Utils;
+import com.facebook.react.bridge.ActivityEventListener;
+import com.facebook.react.bridge.LifecycleEventListener;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
@@ -28,24 +38,38 @@ import com.appodeal.ads.utils.PermissionsHelper.AppodealPermissionCallbacks;
 import com.appodeal.ads.utils.Log;
 
 
-public class RNAppodealModule extends ReactContextBaseJavaModule implements InterstitialCallbacks, BannerCallbacks, NonSkippableVideoCallbacks, RewardedVideoCallbacks, AppodealPermissionCallbacks {
+public class RNAppodealModule extends ReactContextBaseJavaModule implements InterstitialCallbacks, BannerCallbacks, NonSkippableVideoCallbacks, RewardedVideoCallbacks, AppodealPermissionCallbacks, LifecycleEventListener {
 
     private final ReactApplicationContext reactContext;
+    private ConsentForm consentForm;
 
     public RNAppodealModule(ReactApplicationContext reactContext) {
         super(reactContext);
-        this.reactContext = reactContext;
+
         Appodeal.setFramework("react-native", getPluginVersion());
         Appodeal.setInterstitialCallbacks(this);
         Appodeal.setBannerCallbacks(this);
         Appodeal.setNonSkippableVideoCallbacks(this);
         Appodeal.setRewardedVideoCallbacks(this);
+
+        this.reactContext = reactContext;
+        this.reactContext.addLifecycleEventListener(this);
     }
 
     private String getPluginVersion() { return Appodeal.getVersion() + ".1"; }
 
     private void sendEventToJS(String eventName, WritableMap params) {
         reactContext.getJSModule(RCTDeviceEventEmitter.class).emit(eventName, params);
+    }
+
+    private ReadableMap getConsentParams() {
+        WritableMap params = Arguments.createMap();
+        ConsentManager manager = ConsentManager.getInstance(reactContext);
+        Consent.Status status = manager.getConsentStatus();
+        Consent.Zone zone = manager.getConsentZone();
+        params.putInt("status", RNAppodealUtils.getConsentStatusIntFromStatus(status));
+        params.putInt("regulation", RNAppodealUtils.getConsentRegualationIntFromZone(zone));
+        return params;
     }
 
     @Override
@@ -60,16 +84,81 @@ public class RNAppodealModule extends ReactContextBaseJavaModule implements Inte
 
     @ReactMethod
     public void initialize(String appKey, int adTypes, boolean consent) {
-        Appodeal.initialize(getCurrentActivity(), appKey, adTypes, consent);
+        Appodeal.initialize(getCurrentActivity(), appKey, RNAppodealUtils.getAdTypesFormRNTypes(adTypes), consent);
+    }
+
+    @ReactMethod
+    public void synchroniseConsent(String appKey, Callback callback) {
+        ConsentManager.getInstance(reactContext).requestConsentInfoUpdate(appKey, new ConsentInfoUpdateListener() {
+            @Override
+            public void onConsentInfoUpdated(Consent consent) {
+                Consent.ShouldShow consentShouldShow = ConsentManager.getInstance(reactContext).shouldShowConsentDialog();
+                if (consentShouldShow == Consent.ShouldShow.TRUE) {
+                    forceShowConsentDialog(callback);
+                } else if (callback != null) {
+                    callback.invoke(getConsentParams());
+                }
+            }
+
+            @Override
+            public void onFailedToUpdateConsentInfo(ConsentManagerException e) {
+                if (callback != null) {
+                    callback.invoke(getConsentParams());
+                }
+            }
+        });
+    }
+
+    @ReactMethod
+    public void forceShowConsentDialog(Callback callback) {
+        // Create new Consent form listener
+        ConsentFormListener consentFormListener = new ConsentFormListener() {
+            @Override
+            public void onConsentFormLoaded() {
+                consentForm.showAsActivity();
+            }
+
+            @Override
+            public void onConsentFormError(ConsentManagerException error) {
+                consentForm = null;
+                if (callback != null) {
+                    callback.invoke(getConsentParams());
+                }
+            }
+
+            @Override
+            public void onConsentFormOpened() { }
+
+            @Override
+            public void onConsentFormClosed(Consent consent) {
+                consentForm = null;
+                if (callback != null) {
+                    callback.invoke(getConsentParams());
+                }
+            }
+        };
+
+        consentForm = new ConsentForm.Builder(reactContext)
+                .withListener(consentFormListener)
+                .build();
+        consentForm.load();
+    }
+
+    @ReactMethod
+    public void hasConsent(String vendor, Callback callback) {
+        Consent.HasConsent result = ConsentManager.getInstance(reactContext).hasConsentForVendor(vendor);
+        if (callback != null) {
+            callback.invoke(result == Consent.HasConsent.TRUE);
+        }
     }
 
     @ReactMethod
     public void show(int adTypes, String placement, Callback callback) {
         boolean result;
         if (placement == null) {
-            result = Appodeal.show(getCurrentActivity(), adTypes);
+            result = Appodeal.show(getCurrentActivity(), RNAppodealUtils.getAdTypesFormRNTypes(adTypes));
         } else {
-            result = Appodeal.show(getCurrentActivity(), adTypes, placement);
+            result = Appodeal.show(getCurrentActivity(), RNAppodealUtils.getAdTypesFormRNTypes(adTypes), placement);
         }
         if (callback != null) {
             callback.invoke(result);
@@ -78,7 +167,7 @@ public class RNAppodealModule extends ReactContextBaseJavaModule implements Inte
 
     @ReactMethod
     public void isLoaded(int adTypes, Callback callback) {
-        boolean result = Appodeal.isLoaded(adTypes);
+        boolean result = Appodeal.isLoaded(RNAppodealUtils.getAdTypesFormRNTypes(adTypes));
         if (callback != null) {
             callback.invoke(result);
         }
@@ -87,8 +176,8 @@ public class RNAppodealModule extends ReactContextBaseJavaModule implements Inte
     @ReactMethod
     public void canShow(int adTypes, String placement, Callback callback) {
         boolean result = placement == null ?
-                Appodeal.canShow(adTypes) :
-                Appodeal.canShow(adTypes, placement);
+                Appodeal.canShow(RNAppodealUtils.getAdTypesFormRNTypes(adTypes)) :
+                Appodeal.canShow(RNAppodealUtils.getAdTypesFormRNTypes(adTypes), placement);
         if (callback != null) {
             callback.invoke(result);
         }
@@ -101,7 +190,7 @@ public class RNAppodealModule extends ReactContextBaseJavaModule implements Inte
 
     @ReactMethod
     public void predictedEcpm(int adType, Callback callback) {
-        double ecpm = Appodeal.getPredictedEcpm(adType);
+        double ecpm = Appodeal.getPredictedEcpm(RNAppodealUtils.getAdTypesFormRNTypes(adType));
         if (callback != null) {
             callback.invoke(ecpm);
         }
@@ -109,22 +198,22 @@ public class RNAppodealModule extends ReactContextBaseJavaModule implements Inte
 
     @ReactMethod
     public void cache(int adTypes) {
-        Appodeal.cache(getCurrentActivity(), adTypes);
+        Appodeal.cache(getCurrentActivity(), RNAppodealUtils.getAdTypesFormRNTypes(adTypes));
     }
 
     @ReactMethod
     public void hide(int adTypes) {
-        Appodeal.hide(getCurrentActivity(), adTypes);
+        Appodeal.hide(getCurrentActivity(), RNAppodealUtils.getAdTypesFormRNTypes(adTypes));
     }
 
     @ReactMethod
     public void setAutoCache(int adTypes, boolean isEnabled) {
-        Appodeal.setAutoCache(adTypes, isEnabled);
+        Appodeal.setAutoCache(RNAppodealUtils.getAdTypesFormRNTypes(adTypes), isEnabled);
     }
 
     @ReactMethod
     public void isPrecache(int adType, Callback callback) {
-        boolean result = Appodeal.isPrecache(adType);
+        boolean result = Appodeal.isPrecache(RNAppodealUtils.getAdTypesFormRNTypes(adType));
         if (callback != null) {
             callback.invoke(result);
         }
@@ -167,12 +256,12 @@ public class RNAppodealModule extends ReactContextBaseJavaModule implements Inte
 
     @ReactMethod
     public void setOnLoadedTriggerBoth(int adTypes, boolean flag) {
-        Appodeal.setTriggerOnLoadedOnPrecache(adTypes, flag);
+        Appodeal.setTriggerOnLoadedOnPrecache(RNAppodealUtils.getAdTypesFormRNTypes(adTypes), flag);
     }
 
     @ReactMethod
     public void disableNetwork(String networkName, int adTypes) {
-        Appodeal.disableNetwork(getCurrentActivity(), networkName, adTypes);
+        Appodeal.disableNetwork(getCurrentActivity(), networkName, RNAppodealUtils.getAdTypesFormRNTypes(adTypes));
     }
 
     @ReactMethod
@@ -448,5 +537,20 @@ public class RNAppodealModule extends ReactContextBaseJavaModule implements Inte
         WritableMap params = Arguments.createMap();
         params.putBoolean("isGranted", response == PackageManager.PERMISSION_GRANTED);
         sendEventToJS("writeExternalStorageResponse", params);
+    }
+
+    @Override
+    public void onHostDestroy() {
+        Appodeal.destroy(Appodeal.BANNER);
+        Appodeal.destroy(Appodeal.MREC);
+    }
+
+    @Override
+    public void onHostPause() { }
+
+    @Override
+    public void onHostResume() {
+        Appodeal.onResume(this.getCurrentActivity(), Appodeal.BANNER);
+        Appodeal.onResume(this.getCurrentActivity(), Appodeal.MREC);
     }
 }

@@ -8,6 +8,7 @@ export interface AdTypeType {
   readonly BANNER_TOP: number,
   readonly REWARDED_VIDEO: number,
   readonly NON_SKIPPABLE_VIDEO: number
+  readonly MREC: number
 }
 
 export const AppodealAdType: AdTypeType = {
@@ -17,7 +18,8 @@ export const AppodealAdType: AdTypeType = {
   BANNER_BOTTOM: 1 << 3,
   BANNER_TOP: 1 << 4,
   REWARDED_VIDEO: 1 << 5,
-  NON_SKIPPABLE_VIDEO: 1 << 6
+  NON_SKIPPABLE_VIDEO: 1 << 6,
+  MREC: 1 << 8.
 }
 
 export enum AppodealLogLevel {
@@ -30,4 +32,18 @@ export enum AppodealGender {
   MALE = 'male',
   FEMALE = 'female',
   OTHER = 'other'
+}
+
+export enum AppodealConsentStatus {
+  UNKNOWN = 0,
+  NON_PERSONALIZED = 1,
+  PARTLY_PERSONALIZED = 2,
+  PERSONALIZED = 3
+}
+
+export enum AppodealConsentRegulation {
+  UNKNOWN = 0,
+  NONE = 1,
+  GDPR = 2,
+  CCPA = 3
 }

@@ -2,8 +2,6 @@
 
 React Native package that adds Appodeal SDK support to your react-native application.
 
-**Facebook Audience SDK** integration for React Native, available on iOS and Android. Features native, interstitial and banner ads.
-
 ## Table of Contents
 
 * [Installation](#installation)
@@ -11,6 +9,8 @@ React Native package that adds Appodeal SDK support to your react-native applica
   + [Initialisation](#initialisation)
   + [Callbacks](#callbacks)
   + [Presentation](#presentation)
+* [Consent Manager](#consentmanager)
+* [Banner View](#bannerview)
 * [Changelog](#changelog)
 
 ## Installation
@@ -51,7 +51,99 @@ Add *GADApplicationIdentifier* key (if you use APDGoogleAdMobAdapter).
 
 #### Android
 
-In development
+1. Add Appodeal adapters. 
+
+Add dependencies into `build.gradle` (module: app)
+
+``` groovy
+dependencies {
+    ...
+    implementation 'com.appodeal.ads:sdk:2.6.3.+'
+    ...
+}
+```
+
+Add repository into `build.gradle` (module: project)
+
+``` groovy
+allprojects {
+    repositories {
+        ...
+        maven { url "https://artifactory.appodeal.com/appodeal" }
+        ...
+    }
+}
+```
+
+> Note. You can change following implementation to use custom mediation setup. See [Docs](https://wiki.appodeal.com/display/DE/Android+SDK.+Integration+Guide)
+
+2. Enable `multidex` 
+
+In `build.gradle` (module: app)
+
+``` groovy
+defaultConfig {
+    ...
+    multiDexEnabled true
+    ...
+}
+...
+dependencies {
+    ...
+    implementation 'com.android.support:multidex:1.0.3'
+    ...
+}
+```
+
+3. Set all required permissions in *AndroidManifest.xml*. See [Docs](https://wiki.appodeal.com/display/DE/Android+SDK.+Integration+Guide)
+
+``` xml
+<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+<uses-permission android:name="android.permission.INTERNET" />
+```
+
+4. Network security configuration
+
+Add the Network Security Configuration file to your AndroidManifest.xml:
+
+``` xml
+<?xml version="1.0" encoding="utf-8"?>
+<manifest>
+    <application 
+		...
+        android:networkSecurityConfig="@xml/network_security_config">
+    </application>
+</manifest>
+```
+
+In your *network_security_config.xml* file, add base-config that sets `cleartextTrafficPermitted` to `true` :
+
+``` xml
+<?xml version="1.0" encoding="utf-8"?>
+<network-security-config>
+    <base-config cleartextTrafficPermitted="true">
+        <trust-anchors>
+            <certificates src="system" />
+            <certificates src="user" />
+        </trust-anchors>
+    </base-config>
+    <domain-config cleartextTrafficPermitted="true">
+        <domain includeSubdomains="true">127.0.0.1</domain>
+    </domain-config>
+</network-security-config>
+```
+
+5. Admob Configuration (if you use Admob adapter)
+
+``` xml
+<manifest>
+    <application>
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="[ADMOB_APP_ID]"/>
+    </application>
+</manifest>
+```
 
 ## Usage
 
@@ -69,6 +161,11 @@ import {
 } from 'react-native-appodeal';
 
 const adTypes = AppodealAdType.INTERSTITIAL | AppodealAdType.REWARDED_VIDEO | AppodealAdType.BANNER;
+
+// Initialize using Stack Consent Manager. (Requests consent when needed and starts initialisation after)
+Appodeal.synchroniseConsent('Your app key', adTypes)
+
+// OR: Initialize using your own consent implementation
 const consent = true;
 Appodeal.initialize('Your app key', adTypes, consent)
 ```
@@ -310,6 +407,110 @@ You can hide banner ad after it was shown. Call `hide` method with another ad ty
 
 ``` javascript
 Appodeal.hide(AppodealAdType.BANNER_TOP)
+```
+
+## Consent Manager
+
+Consent manager is used to provide GDPR and CCPA compliance. Consent manager SDK can be synchronized at any moment of application lifecycle. We recommend to synchronize it at application launch. Multiple synchronization calls are allowed.
+
+Required parameter is `appKey` - Appodeal API Key.
+
+To synchronise user consent you can use following methods. If user consent is required it will shows fullscreen Consent Dialog.
+Callback will return information about latest user consent and current regulation zone.
+
+``` javascript
+import {
+    Appodeal,
+    AppodealConsentStatus,
+    AppodealConsentRegulation,
+} from 'react-native-appodeal';
+
+Appodeal.synchroniseConsent('Your appKey', (consent: AppodealConsentStatus, regulation: AppodealConsentRegulation) => {
+    // Initialise Appodeal SDK here
+})
+```
+
+You can force consent manager to show consent dialog at any moment of application lifecycle after consent manager was synchronised.
+
+``` javascript
+import {
+    Appodeal,
+    AppodealConsentStatus,
+    AppodealConsentRegulation,
+} from 'react-native-appodeal';
+
+Appodeal.forceShowConsentDialog((consent: AppodealConsentStatus, regulation: AppodealConsentRegulation) => {
+    // Handle updated data
+})
+```
+
+You can get consent result for specific vendor bundle, that registered in Appodeal system. Eg you can use your application id.
+
+``` javascript
+import { Appodeal } from 'react-native-appodeal';
+
+Appodeal.hasConsent('com.organisation.app', (consentResult: boolean) => {
+    // Handle updated data
+})
+```
+
+> Note. Usage of Consent Manager is not required. 
+
+## Banner View
+
+AppodealBanner is a component that allows you to display ads in a banner format (know as _AppodealBannerView_).
+
+Banners are available in 3 sizes:
+
+* `phone` (320x50)
+* `tablet` (728x90)
+* `mrec` (MREC)
+
+> Note if you want to show MREC banners in your app, you need to initialise Appodeal SDK with *AppodealAdType. MREC*
+
+Appodeal Banner View can be used only *after* Appodeal SDK was initialised. You can use show only *one* banner on screen.
+Static banners (top or bottom) can't be used in one session with _AppodealBanner_. 
+
+``` javascript
+import {
+    AppodealBanner
+} from 'react-native-appodeal';
+
+<AppodealBanner
+    style = {{
+        height: 50,
+        width: '100%',
+        backgroundColor: 'hsl(0, 0%, 97%)',
+        alignContent: 'stretch',
+    }}
+    adSize = 'phone' />
+```
+
+When banner is added on screen it starts to load ad automatically event if autocache is disabled.
+
+### Styling
+
+Height property of banner styles should corresponds to *adSize* attribute. We recommend to use 
+
+| adSize | height |
+|---|---|
+| 'phone' | 50 |
+| 'tablet' | 90 |
+| 'mrec' | 250 |
+
+### Callbacks
+
+Banner view has explicit callbacks. 
+
+``` javascript
+<AppodealBanner
+    style = {styles.banner}
+    adSize = 'phone'
+    onAdLoaded = {() => console.log("Banner view did load")}
+    onAdExpired = {() => console.log("Banner view expired")}
+    onAdClicked = {() => console.log("Banner view is clicked")}
+    onAdFailedToLoad = {() => console.log("Banner view is failed to load")}
+/>
 ```
 
 ## Changelog
