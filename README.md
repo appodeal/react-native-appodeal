@@ -26,7 +26,7 @@ Run following commands in project root directory
 1. Go to `ios/` folder and open *Podfile*
 2. Add Appodeal adapters. See [Docs](https://wiki.appodeal.com/display/DE/iOS+SDK.+Integration+Guide)
 
-> Note. Appodeal requires to use `use_frameworks!` . You need to remove Folly dependency from Podfile and AppDelegate
+> Note. Appodeal requires to use `use_frameworks!` . You need to remove Flipper dependency from Podfile and AppDelegate
 
 3. Run `pod install` 
 4. Open `.xcworkspace` 
