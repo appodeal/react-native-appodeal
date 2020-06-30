@@ -510,6 +510,11 @@ Banner view has explicit callbacks.
 
 ## Changelog
 
+2.6.5
+
+* Update Appodeal to 2.6.5
+* Fix iOS banner view
+
 2.6.4
 
 * Update Appodeal to 2.6.4
