@@ -67,7 +67,7 @@ RCT_ENUM_CONVERTER(AppodealUserGender, (@{
 #pragma mark - Utils
 
 NSString *RNAVersion() {
-    return @"2.6.4";
+    return @"2.6.5";
 }
 
 NSArray<NSString *> *RNASupportedMehtods() {
