@@ -1,6 +1,5 @@
-package com.reactlibrary;
+package com.appodeal;
 
-;
 import android.content.res.Resources;
 import android.util.DisplayMetrics;
 import android.util.TypedValue;

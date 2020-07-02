@@ -1,4 +1,4 @@
-package com.reactlibrary;
+package com.appodeal;
 
 import android.widget.Toast;
 

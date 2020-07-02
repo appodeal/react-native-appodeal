@@ -1,4 +1,4 @@
-package com.reactlibrary;
+package com.appodeal;
 
 import com.appodeal.ads.Appodeal;
 import com.appodeal.ads.UserSettings;
