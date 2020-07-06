@@ -1,4 +1,4 @@
-package com.appodeal;
+package com.appodeal.rnappodeal;
 
 import android.content.res.Resources;
 import android.util.DisplayMetrics;

@@ -1,4 +1,4 @@
-package com.appodeal;
+package com.appodeal.rnappodeal;
 
 import com.appodeal.ads.Appodeal;
 import com.appodeal.ads.UserSettings;
