@@ -34,7 +34,7 @@
 }
 
 - (void)setAdSize:(NSString *)adSize {
-    UIViewController *rootViewController = UIApplication.sharedApplication.keyWindow.rootViewController;
+    UIViewController *rootViewController = RCTPresentedViewController();
     [self.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
     
     CGSize size = RNAppodealBannerViewSizeFromString(adSize);

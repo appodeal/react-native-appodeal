@@ -20,11 +20,6 @@ STKConsentManagerDisplayDelegate
 
 @synthesize bridge = _bridge;
 
-UIViewController *RNAppodealRootViewController(void) {
-    return UIApplication.sharedApplication.keyWindow.rootViewController;
-}
-
-
 NSArray *RNAppodealConsentParameters(void) {
     return @[
         @(STKConsentManager.sharedManager.consentStatus),
@@ -85,7 +80,7 @@ RCT_EXPORT_METHOD(synchroniseConsent:(NSString *)appKey callback:(RCTResponseSen
                 }
                 
                 strongSelf.consentCallback = callback;
-                [STKConsentManager.sharedManager showConsentDialogFromRootViewController:RNAppodealRootViewController()
+                [STKConsentManager.sharedManager showConsentDialogFromRootViewController:RCTPresentedViewController()
                                                                                 delegate:self];
             }];
         }];
@@ -107,7 +102,7 @@ RCT_EXPORT_METHOD(forceShowConsentDialog:(RCTResponseSenderBlock)callback) {
             }
             
             strongSelf.consentCallback = callback;
-            [STKConsentManager.sharedManager showConsentDialogFromRootViewController:RNAppodealRootViewController()
+            [STKConsentManager.sharedManager showConsentDialogFromRootViewController:RCTPresentedViewController()
                                                                             delegate:self];
         }];
     });
@@ -127,7 +122,7 @@ RCT_EXPORT_METHOD(show:(int)showType placement:(NSString *)placement result:(RCT
     dispatch_async(dispatch_get_main_queue(), ^{
         BOOL result = [Appodeal showAd:AppodealShowStyleFromRNAAdType(showType)
                           forPlacement:placement
-                    rootViewController:RNAppodealRootViewController()];
+                    rootViewController:RCTPresentedViewController()];
         NSArray *params = @[
             @(result)
         ];
