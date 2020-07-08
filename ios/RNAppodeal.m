@@ -227,6 +227,13 @@ RCT_EXPORT_METHOD(setBannerAnimation:(BOOL)bannerAnimations) {
     });
 }
 
+RCT_EXPORT_METHOD(setTabletBanners:(BOOL)val) {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        APDUnitSize size = val ? kAppodealUnitSize_728x90 : kAppodealUnitSize_320x50;
+        [Appodeal setPreferredBannerAdSize:size];
+    });
+}
+
 #pragma mark Advanced features
 
 RCT_EXPORT_METHOD(setTesting:(BOOL)testingEnabled) {
@@ -505,7 +512,6 @@ RCT_EXPORT_METHOD(trackInAppPurchase:(double)amount currencyCode:(NSString *)cur
 
 #pragma mark - Noop
 
-RCT_EXPORT_METHOD(setTabletBanners:(BOOL)val) {}
 RCT_EXPORT_METHOD(disableWriteExternalStoragePermissionCheck) {}
 RCT_EXPORT_METHOD(requestAndroidMPermissions) {}
 RCT_EXPORT_METHOD(muteVideosIfCallsMuted) {}
