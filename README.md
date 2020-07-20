@@ -515,6 +515,11 @@ Banner view has explicit callbacks.
 
 ## Changelog
 
+2.7.2-Beta
+
+* Update Appodeal to 2.7.2-Beta
+* Add deeper Consent Manager integration
+
 2.6.5
 
 * Update Appodeal to 2.6.5
