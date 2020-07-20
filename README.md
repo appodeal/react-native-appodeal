@@ -413,7 +413,9 @@ Required parameter is `appKey` - Appodeal API Key.
 To synchronise user consent you can use following methods. If user consent is required it will shows fullscreen Consent Dialog.
 Callback will return information about latest user consent and current regulation zone.
 
-Since 2.7.0 version, Appdoeal SDK can be initialised directly with Consent Report object of Consent Manager. Since the 2.7.0 version, Appdoeal SDK can be initialized directly with the Consent Report object of Consent Manager. If your application uses Consent Manager and you call the synchronize method before Appodeal initialization you don't need to pass boolean consent as an argument. SDK will check that the consent report exists and will use it. 
+Since the 2.7.0 version, Appdoeal SDK can be initialized directly with the Consent Report object of Consent Manager. If your application uses Consent Manager and you call the synchronize method before Appodeal initialization you don't need to pass boolean consent as an argument. SDK will check that the consent report exists and will use it. 
+
+> In case Appodeal will try to initialize without boolean consent or before the Consent Manager is synchronized it will use `false` boolean consent.
 
 ``` javascript
 import {
