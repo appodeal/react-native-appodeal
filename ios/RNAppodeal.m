@@ -31,7 +31,7 @@ RCT_EXPORT_MODULE();
 
 - (void)initializeSdkWithAppKey:(NSString *)appKey
                         adTypes:(AppodealAdType)adTypes
-                        consent:(BOOL)consent {
+                        consent:(NSNumber *)consent {
     dispatch_async(dispatch_get_main_queue(), ^{
         [Appodeal setFramework:APDFrameworkReactNative version:RNAVersion()];
         
@@ -40,9 +40,17 @@ RCT_EXPORT_MODULE();
         [Appodeal setBannerDelegate:self];
         [Appodeal setInterstitialDelegate:self];
         
-        [Appodeal initializeWithApiKey:appKey
-                                 types:adTypes
-                            hasConsent:consent];
+        if (consent != nil) {
+            [Appodeal initializeWithApiKey:appKey
+                                     types:adTypes
+                                hasConsent:consent.boolValue];
+        } else if (STKConsentManager.sharedManager.consent != nil) {
+            [Appodeal initializeWithApiKey:appKey
+                                     types:adTypes
+                             consentReport:STKConsentManager.sharedManager.consent];
+        } else {
+            RCTAssert(NO, @"One of boolean consent or Consent Manager report must be provided");
+        }
     });
 }
 
@@ -51,7 +59,13 @@ RCT_EXPORT_MODULE();
 RCT_EXPORT_METHOD(initialize:(NSString *)appKey types:(NSInteger)adType consent:(BOOL)consent) {
     [self initializeSdkWithAppKey:appKey
                           adTypes:AppodealAdTypeFromRNAAdType(adType)
-                          consent:consent];
+                          consent:@(consent)];
+}
+
+RCT_EXPORT_METHOD(initializeWithConsentReport:(NSString *)appKey types:(NSInteger)adType) {
+    [self initializeSdkWithAppKey:appKey
+                          adTypes:adType
+                          consent:nil];
 }
 
 RCT_EXPORT_METHOD(synchroniseConsent:(NSString *)appKey callback:(RCTResponseSenderBlock)callback) {

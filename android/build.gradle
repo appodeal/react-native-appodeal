@@ -34,11 +34,11 @@ repositories {
 dependencies {
     implementation 'com.facebook.react:react-native:+'
     // Appodeal
-    implementation 'com.appodeal.ads.sdk:core:2.6.5'
-    implementation 'com.appodeal.ads.sdk.networks:appodealx:2.6.5.1'
-    implementation 'com.appodeal.ads.sdk.networks:mraid:2.6.5.1'
-    implementation 'com.appodeal.ads.sdk.networks:nast:2.6.5.1'
-    implementation 'com.appodeal.ads.sdk.networks:vast:2.6.5.1'
+    implementation 'com.appodeal.ads.sdk:core:2.7.2'
+    implementation 'com.appodeal.ads.sdk.networks:appodealx:2.7.2.1'
+    implementation 'com.appodeal.ads.sdk.networks:mraid:2.7.2.1'
+    implementation 'com.appodeal.ads.sdk.networks:nast:2.7.2.1'
+    implementation 'com.appodeal.ads.sdk.networks:vast:2.7.2.1'
     // Consent manager
     implementation 'com.explorestack:consent:1.0.1'
 }
