@@ -49,7 +49,9 @@ RCT_EXPORT_MODULE();
                                      types:adTypes
                              consentReport:STKConsentManager.sharedManager.consent];
         } else {
-            RCTAssert(NO, @"One of boolean consent or Consent Manager report must be provided");
+            [Appodeal initializeWithApiKey:appKey
+                                     types:adTypes
+                                hasConsent:NO];
         }
     });
 }
@@ -64,7 +66,7 @@ RCT_EXPORT_METHOD(initialize:(NSString *)appKey types:(NSInteger)adType consent:
 
 RCT_EXPORT_METHOD(initializeWithConsentReport:(NSString *)appKey types:(NSInteger)adType) {
     [self initializeSdkWithAppKey:appKey
-                          adTypes:adType
+                          adTypes:AppodealAdTypeFromRNAAdType(adType)
                           consent:nil];
 }
 
