@@ -84,6 +84,18 @@ public class RNAppodealModule extends ReactContextBaseJavaModule implements Inte
     }
 
     @ReactMethod
+    public void initializeWithConsentReport(String appKey, int adTypes) {
+        Consent consent = ConsentManager.getInstance(reactContext).getConsent();
+        int types = RNAppodealUtils.getAdTypesFormRNTypes(adTypes);
+        if (consent != null) {
+            Appodeal.initialize(getCurrentActivity(), appKey, types, consent);
+        } else {
+            Appodeal.initialize(getCurrentActivity(), appKey, types, false);
+        }
+
+    }
+
+    @ReactMethod
     public void synchroniseConsent(String appKey, Callback callback) {
         ConsentManager.getInstance(reactContext).requestConsentInfoUpdate(appKey, new ConsentInfoUpdateListener() {
             @Override

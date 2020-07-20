@@ -47,8 +47,10 @@ export default {
   addEventListener,
   removeEventListener,
   removeAllListeners,
-  initialize: (appKey: String, adTypes: AdTypeType, consent: boolean) => {
-    RNAppodeal.initialize(appKey, adTypes, consent)
+  initialize: (appKey: String, adTypes: AdTypeType, consent?: boolean) => {
+    consent !== undefined ?
+      RNAppodeal.initialize(appKey, adTypes, consent) :
+      RNAppodeal.initializeWithConsentReport(appKey, adTypes)
   },
   synchroniseConsent: (appKey: String, handler: ConsentHandler) => {
     RNAppodeal.synchroniseConsent(appKey, handler)
