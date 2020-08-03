@@ -468,7 +468,7 @@ Banners are available in 3 sizes:
 
 > Note if you want to show MREC banners in your app, you need to initialise Appodeal SDK with *AppodealAdType. MREC*
 
-Appodeal Banner View can be used only *after* Appodeal SDK was initialised. You can use show only *one* banner on screen.
+Appodeal Banner View can be used only *after* Appodeal SDK was initialized. You can show only *one* banner on the screen.
 Static banners (top or bottom) can't be used in one session with _AppodealBanner_. 
 
 ``` javascript
