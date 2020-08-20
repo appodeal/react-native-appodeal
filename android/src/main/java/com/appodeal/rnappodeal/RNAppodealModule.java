@@ -333,13 +333,13 @@ public class RNAppodealModule extends ReactContextBaseJavaModule implements Inte
             ReadableType type = segmentFilter.getType(key);
             switch (type) {
                 case Boolean:
-                    Appodeal.setSegmentFilter(key, segmentFilter.getBoolean(key));
+                    Appodeal.setCustomFilter(key, segmentFilter.getBoolean(key));
                     break;
                 case Number:
-                    Appodeal.setSegmentFilter(key, segmentFilter.getDouble(key));
+                    Appodeal.setCustomFilter(key, segmentFilter.getDouble(key));
                     break;
                 case String:
-                    Appodeal.setSegmentFilter(key, segmentFilter.getString(key));
+                    Appodeal.setCustomFilter(key, segmentFilter.getString(key));
                     break;
             }
         }

@@ -334,7 +334,7 @@ RCT_EXPORT_METHOD(getRewardParameters:(NSString *)placementName callback:(RCTRes
 
 RCT_EXPORT_METHOD(setSegmentFilter:(NSDictionary *)filter) {
     dispatch_async(dispatch_get_main_queue(), ^{
-        [Appodeal setSegmentFilter:filter];
+        [Appodeal setCustomState:filter];
     });
 }
 

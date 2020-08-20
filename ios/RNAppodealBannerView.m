@@ -39,12 +39,9 @@
     
     CGSize size = RNAppodealBannerViewSizeFromString(adSize);
     if (size.height == 250) {
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated"
         NSAssert([Appodeal isInitalizedForAdType:AppodealAdTypeMREC],
                  @"Appodeal should be initialised with AppodealAdTypeMREC before trying to add AppodealBanner in hierachy");
         self.bannerView = [[APDMRECView alloc] init];
-#pragma clang diagnostic pop
     } else {
         NSAssert([Appodeal isInitalizedForAdType:AppodealAdTypeBanner],
                  @"Appodeal should be initialised with AppodealAdTypeBanner before trying to add AppodealBanner in hierachy");
