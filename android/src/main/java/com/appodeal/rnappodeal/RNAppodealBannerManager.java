@@ -16,6 +16,9 @@ public class RNAppodealBannerManager extends SimpleViewManager<RCTAppodealBanner
     @ReactProp(name = "adSize")
     public void setSize(RCTAppodealBannerView view, String size) { view.setAdSize(size); }
 
+    @ReactProp(name = "placement")
+    public void setPlacement(RCTAppodealBannerView view, String placement) { view.setPlacement(placement); }
+
     @Override
     public RCTAppodealBannerView createViewInstance(ThemedReactContext context) {
         RCTAppodealBannerView banner = new RCTAppodealBannerView(context);
