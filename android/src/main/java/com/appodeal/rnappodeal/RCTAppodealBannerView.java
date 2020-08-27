@@ -1,5 +1,6 @@
 package com.appodeal.rnappodeal;
 
+import android.app.Activity;
 import android.content.res.Resources;
 import android.util.DisplayMetrics;
 import android.util.TypedValue;
@@ -26,6 +27,8 @@ public class RCTAppodealBannerView extends ReactViewGroup implements BannerCallb
 
     private View adView;
     private BannerSize size;
+    private String placement;
+
     private final Runnable measureAndLayout = new Runnable() {
         @Override
         public void run() {
@@ -64,8 +67,15 @@ public class RCTAppodealBannerView extends ReactViewGroup implements BannerCallb
         }
 
         if (!Appodeal.isAutoCacheEnabled(adType)) {
-            Appodeal.cache(getReactContext().getCurrentActivity(), adType);
+            Activity activity = getReactContext().getCurrentActivity();
+            if (activity != null) {
+                Appodeal.cache(activity, adType);
+            }
         }
+    }
+
+    public void setPlacement(String placement) {
+        this.placement = placement;
     }
 
     public void hide() {
@@ -83,24 +93,33 @@ public class RCTAppodealBannerView extends ReactViewGroup implements BannerCallb
         View adView;
         int adType;
 
+        Activity activity = getReactContext().getCurrentActivity();
+        if (activity == null) {
+            return;
+        }
+
         switch (size) {
             case MREC:
                 adType = Appodeal.MREC;
                 height = 250;
-                adView = Appodeal.getMrecView(getReactContext().getCurrentActivity());
+                adView = Appodeal.getMrecView(activity);
                 break;
             case TABLET:
                 adType = Appodeal.BANNER_VIEW;
                 height = 90;
                 Appodeal.set728x90Banners(true);
-                adView = Appodeal.getBannerView(getReactContext().getCurrentActivity());
+                adView = Appodeal.getBannerView(activity);
                 break;
             default:
                 adType = Appodeal.BANNER_VIEW;
                 height = 50;
                 Appodeal.set728x90Banners(false);
-                adView = Appodeal.getBannerView(getReactContext().getCurrentActivity());
+                adView = Appodeal.getBannerView(activity);
                 break;
+        }
+
+        if (adView == null) {
+            return;
         }
 
         int pxW = r.getDisplayMetrics().widthPixels;
@@ -110,7 +129,11 @@ public class RCTAppodealBannerView extends ReactViewGroup implements BannerCallb
         adView.setLayoutParams(new BannerView.LayoutParams(pxW, pxH));
         addView(adView);
 
-        Appodeal.show(getReactContext().getCurrentActivity(), adType);
+        if (this.placement != null) {
+            Appodeal.show(activity, adType, placement);
+        } else {
+            Appodeal.show(activity, adType);
+        }
     }
 
     private ReactContext getReactContext() {
