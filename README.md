@@ -26,7 +26,7 @@ Run following commands in project root directory
 1. Go to `ios/` folder and open *Podfile*
 2. Add Appodeal adapters. See [Docs](https://wiki.appodeal.com/display/DE/iOS+SDK.+Integration+Guide)
 
-> Note. Appodeal requires to use `use_frameworks!` . You need to remove Folly dependency from Podfile and AppDelegate
+> Note. Appodeal requires to use `use_frameworks!` . You need to remove Flipper dependency from Podfile and AppDelegate
 
 3. Run `pod install` 
 4. Open `.xcworkspace` 
@@ -161,11 +161,6 @@ import {
 } from 'react-native-appodeal';
 
 const adTypes = AppodealAdType.INTERSTITIAL | AppodealAdType.REWARDED_VIDEO | AppodealAdType.BANNER;
-
-// Initialize using Stack Consent Manager. (Requests consent when needed and starts initialisation after)
-Appodeal.synchroniseConsent('Your app key', adTypes)
-
-// OR: Initialize using your own consent implementation
 const consent = true;
 Appodeal.initialize('Your app key', adTypes, consent)
 ```
@@ -418,6 +413,10 @@ Required parameter is `appKey` - Appodeal API Key.
 To synchronise user consent you can use following methods. If user consent is required it will shows fullscreen Consent Dialog.
 Callback will return information about latest user consent and current regulation zone.
 
+Since the 2.7.0 version, Appdoeal SDK can be initialized directly with the Consent Report object of Consent Manager. If your application uses Consent Manager and you call the synchronize method before Appodeal initialization you don't need to pass boolean consent as an argument. SDK will check that the consent report exists and will use it. 
+
+> In case Appodeal will try to initialize without boolean consent or before the Consent Manager is synchronized it will use `false` boolean consent.
+
 ``` javascript
 import {
     Appodeal,
@@ -427,6 +426,7 @@ import {
 
 Appodeal.synchroniseConsent('Your appKey', (consent: AppodealConsentStatus, regulation: AppodealConsentRegulation) => {
     // Initialise Appodeal SDK here
+    Appodeal.initialize('Your appKey', adTypes);
 })
 ```
 
@@ -468,7 +468,7 @@ Banners are available in 3 sizes:
 
 > Note if you want to show MREC banners in your app, you need to initialise Appodeal SDK with *AppodealAdType. MREC*
 
-Appodeal Banner View can be used only *after* Appodeal SDK was initialised. You can use show only *one* banner on screen.
+Appodeal Banner View can be used only *after* Appodeal SDK was initialized. You can show only *one* banner on the screen.
 Static banners (top or bottom) can't be used in one session with _AppodealBanner_. 
 
 ``` javascript
@@ -514,6 +514,32 @@ Banner view has explicit callbacks.
 ```
 
 ## Changelog
+
+2.7.4
+
+* [iOS] Update Appodeal to 2.7.4
+* [Android] Fixes in banner view
+
+2.7.3-Beta
+
+* Update Appodeal to 2.7.3-Beta
+
+
+2.7.2-Beta
+
+* Update Appodeal to 2.7.2-Beta
+* Add deeper Consent Manager integration
+
+2.6.5
+
+* Update Appodeal to 2.6.5
+* Fix iOS banner view
+
+2.6.4
+
+* Update Appodeal to 2.6.4
+* Add banner view and MREC support
+* Add Consent Manager support
 
 2.6.3
 

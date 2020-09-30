@@ -1,4 +1,4 @@
-package com.reactlibrary;
+package com.appodeal.rnappodeal;
 
 import java.util.Arrays;
 import java.util.Collections;

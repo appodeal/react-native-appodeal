@@ -18,7 +18,7 @@ Pod::Spec.new do |s|
   s.static_framework = true
 
   s.dependency "React"
-  s.dependency "Appodeal", "2.6.3"
+  s.dependency "Appodeal", "2.7.4-Beta"
   s.dependency "StackConsentManager", "~> 1.0.1"
 end
 

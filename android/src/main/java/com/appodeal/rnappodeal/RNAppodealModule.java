@@ -1,6 +1,5 @@
-package com.reactlibrary;
+package com.appodeal.rnappodeal;
 
-import android.telecom.Call;
 import android.widget.Toast;
 
 import com.explorestack.consent.Consent;
@@ -9,8 +8,6 @@ import com.explorestack.consent.ConsentFormListener;
 import com.explorestack.consent.ConsentInfoUpdateListener;
 import com.explorestack.consent.ConsentManager;
 import com.explorestack.consent.exception.ConsentManagerException;
-import com.explorestack.iab.utils.Utils;
-import com.facebook.react.bridge.ActivityEventListener;
 import com.facebook.react.bridge.LifecycleEventListener;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
@@ -23,19 +20,14 @@ import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.modules.core.DeviceEventManagerModule.RCTDeviceEventEmitter;
 import com.facebook.react.bridge.Arguments;
 
-import java.util.Map;
-import java.util.HashMap;
-
 import android.content.pm.PackageManager;
 
 import com.appodeal.ads.Appodeal;
-import com.appodeal.ads.UserSettings;
 import com.appodeal.ads.BannerCallbacks;
 import com.appodeal.ads.InterstitialCallbacks;
 import com.appodeal.ads.NonSkippableVideoCallbacks;
 import com.appodeal.ads.RewardedVideoCallbacks;
 import com.appodeal.ads.utils.PermissionsHelper.AppodealPermissionCallbacks;
-import com.appodeal.ads.utils.Log;
 
 
 public class RNAppodealModule extends ReactContextBaseJavaModule implements InterstitialCallbacks, BannerCallbacks, NonSkippableVideoCallbacks, RewardedVideoCallbacks, AppodealPermissionCallbacks, LifecycleEventListener {
@@ -56,20 +48,24 @@ public class RNAppodealModule extends ReactContextBaseJavaModule implements Inte
         this.reactContext.addLifecycleEventListener(this);
     }
 
-    private String getPluginVersion() { return Appodeal.getVersion() + ".1"; }
+    private String getPluginVersion() {
+        return Appodeal.getVersion();
+    }
 
     private void sendEventToJS(String eventName, WritableMap params) {
         reactContext.getJSModule(RCTDeviceEventEmitter.class).emit(eventName, params);
     }
 
-    private ReadableMap getConsentParams() {
-        WritableMap params = Arguments.createMap();
+    private int getConsentStatus() {
         ConsentManager manager = ConsentManager.getInstance(reactContext);
         Consent.Status status = manager.getConsentStatus();
+        return  RNAppodealUtils.getConsentStatusIntFromStatus(status);
+    }
+
+    private int getConsentRegulation() {
+        ConsentManager manager = ConsentManager.getInstance(reactContext);
         Consent.Zone zone = manager.getConsentZone();
-        params.putInt("status", RNAppodealUtils.getConsentStatusIntFromStatus(status));
-        params.putInt("regulation", RNAppodealUtils.getConsentRegualationIntFromZone(zone));
-        return params;
+        return  RNAppodealUtils.getConsentRegualationIntFromZone(zone);
     }
 
     @Override
@@ -88,6 +84,18 @@ public class RNAppodealModule extends ReactContextBaseJavaModule implements Inte
     }
 
     @ReactMethod
+    public void initializeWithConsentReport(String appKey, int adTypes) {
+        Consent consent = ConsentManager.getInstance(reactContext).getConsent();
+        int types = RNAppodealUtils.getAdTypesFormRNTypes(adTypes);
+        if (consent != null) {
+            Appodeal.initialize(getCurrentActivity(), appKey, types, consent);
+        } else {
+            Appodeal.initialize(getCurrentActivity(), appKey, types, false);
+        }
+
+    }
+
+    @ReactMethod
     public void synchroniseConsent(String appKey, Callback callback) {
         ConsentManager.getInstance(reactContext).requestConsentInfoUpdate(appKey, new ConsentInfoUpdateListener() {
             @Override
@@ -96,14 +104,14 @@ public class RNAppodealModule extends ReactContextBaseJavaModule implements Inte
                 if (consentShouldShow == Consent.ShouldShow.TRUE) {
                     forceShowConsentDialog(callback);
                 } else if (callback != null) {
-                    callback.invoke(getConsentParams());
+                    callback.invoke(getConsentStatus(), getConsentRegulation());
                 }
             }
 
             @Override
             public void onFailedToUpdateConsentInfo(ConsentManagerException e) {
                 if (callback != null) {
-                    callback.invoke(getConsentParams());
+                    callback.invoke(getConsentStatus(), getConsentRegulation());
                 }
             }
         });
@@ -122,18 +130,19 @@ public class RNAppodealModule extends ReactContextBaseJavaModule implements Inte
             public void onConsentFormError(ConsentManagerException error) {
                 consentForm = null;
                 if (callback != null) {
-                    callback.invoke(getConsentParams());
+                    callback.invoke(getConsentStatus(), getConsentRegulation());
                 }
             }
 
             @Override
-            public void onConsentFormOpened() { }
+            public void onConsentFormOpened() {
+            }
 
             @Override
             public void onConsentFormClosed(Consent consent) {
                 consentForm = null;
                 if (callback != null) {
-                    callback.invoke(getConsentParams());
+                    callback.invoke(getConsentStatus(), getConsentRegulation());
                 }
             }
         };
@@ -324,13 +333,13 @@ public class RNAppodealModule extends ReactContextBaseJavaModule implements Inte
             ReadableType type = segmentFilter.getType(key);
             switch (type) {
                 case Boolean:
-                    Appodeal.setSegmentFilter(key, segmentFilter.getBoolean(key));
+                    Appodeal.setCustomFilter(key, segmentFilter.getBoolean(key));
                     break;
                 case Number:
-                    Appodeal.setSegmentFilter(key, segmentFilter.getDouble(key));
+                    Appodeal.setCustomFilter(key, segmentFilter.getDouble(key));
                     break;
                 case String:
-                    Appodeal.setSegmentFilter(key, segmentFilter.getString(key));
+                    Appodeal.setCustomFilter(key, segmentFilter.getString(key));
                     break;
             }
         }
@@ -364,13 +373,13 @@ public class RNAppodealModule extends ReactContextBaseJavaModule implements Inte
     }
 
     @ReactMethod
-    public void setUserId(String id) { 
-        Appodeal.setUserId(id); 
+    public void setUserId(String id) {
+        Appodeal.setUserId(id);
     }
 
     @ReactMethod
-    public void setGender(String gender) { 
-        Appodeal.setUserGender(RNAppodealUtils.getGenderFromString(gender)); 
+    public void setGender(String gender) {
+        Appodeal.setUserGender(RNAppodealUtils.getGenderFromString(gender));
     }
 
     @Override
@@ -397,11 +406,12 @@ public class RNAppodealModule extends ReactContextBaseJavaModule implements Inte
     }
 
     @Override
-    public void onBannerShowFailed() { }
+    public void onBannerShowFailed() {
+    }
 
     @Override
-    public void onBannerExpired() { 
-        sendEventToJS("onBannerExpired", null); 
+    public void onBannerExpired() {
+        sendEventToJS("onBannerExpired", null);
     }
 
     @Override
@@ -417,8 +427,8 @@ public class RNAppodealModule extends ReactContextBaseJavaModule implements Inte
     }
 
     @Override
-    public void onInterstitialShowFailed() { 
-        sendEventToJS("onInterstitialFaliedToShow", null); 
+    public void onInterstitialShowFailed() {
+        sendEventToJS("onInterstitialFaliedToShow", null);
     }
 
     @Override
@@ -437,7 +447,7 @@ public class RNAppodealModule extends ReactContextBaseJavaModule implements Inte
     }
 
     @Override
-    public void onInterstitialExpired() { 
+    public void onInterstitialExpired() {
         sendEventToJS("onInterstitialExpired", null);
     }
 
@@ -449,13 +459,13 @@ public class RNAppodealModule extends ReactContextBaseJavaModule implements Inte
     }
 
     @Override
-    public void onRewardedVideoFailedToLoad() { 
-        sendEventToJS("onRewardedVideoFailedToLoad", null); 
+    public void onRewardedVideoFailedToLoad() {
+        sendEventToJS("onRewardedVideoFailedToLoad", null);
     }
 
     @Override
-    public void onRewardedVideoShowFailed() { 
-        sendEventToJS("onRewardedVideoFailedToShow", null); 
+    public void onRewardedVideoShowFailed() {
+        sendEventToJS("onRewardedVideoFailedToShow", null);
     }
 
     @Override
@@ -479,12 +489,13 @@ public class RNAppodealModule extends ReactContextBaseJavaModule implements Inte
     }
 
     @Override
-    public void onRewardedVideoExpired() { 
-        sendEventToJS("onRewardedVideoExpired", null); 
+    public void onRewardedVideoExpired() {
+        sendEventToJS("onRewardedVideoExpired", null);
     }
 
     @Override
-    public void onRewardedVideoClicked() { }
+    public void onRewardedVideoClicked() {
+    }
 
     @Override
     public void onNonSkippableVideoLoaded(boolean isPrecache) {
@@ -495,12 +506,12 @@ public class RNAppodealModule extends ReactContextBaseJavaModule implements Inte
 
     @Override
     public void onNonSkippableVideoFailedToLoad() {
-        sendEventToJS("onNonSkippableVideoFailedToLoad", null); 
+        sendEventToJS("onNonSkippableVideoFailedToLoad", null);
     }
 
     @Override
-    public void onNonSkippableVideoShowFailed() { 
-        sendEventToJS("onNonSkippableVideoFailedToShow", null); 
+    public void onNonSkippableVideoShowFailed() {
+        sendEventToJS("onNonSkippableVideoFailedToShow", null);
     }
 
     @Override
@@ -521,8 +532,8 @@ public class RNAppodealModule extends ReactContextBaseJavaModule implements Inte
     }
 
     @Override
-    public void onNonSkippableVideoExpired() { 
-        sendEventToJS("onNonSkippableVideoExpired", null); 
+    public void onNonSkippableVideoExpired() {
+        sendEventToJS("onNonSkippableVideoExpired", null);
     }
 
     @Override
@@ -546,7 +557,8 @@ public class RNAppodealModule extends ReactContextBaseJavaModule implements Inte
     }
 
     @Override
-    public void onHostPause() { }
+    public void onHostPause() {
+    }
 
     @Override
     public void onHostResume() {

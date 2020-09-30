@@ -1,4 +1,4 @@
-package com.reactlibrary;
+package com.appodeal.rnappodeal;
 
 import com.appodeal.ads.Appodeal;
 import com.facebook.react.common.MapBuilder;
@@ -15,6 +15,9 @@ import androidx.annotation.Nullable;
 public class RNAppodealBannerManager extends SimpleViewManager<RCTAppodealBannerView> {
     @ReactProp(name = "adSize")
     public void setSize(RCTAppodealBannerView view, String size) { view.setAdSize(size); }
+
+    @ReactProp(name = "placement")
+    public void setPlacement(RCTAppodealBannerView view, String placement) { view.setPlacement(placement); }
 
     @Override
     public RCTAppodealBannerView createViewInstance(ThemedReactContext context) {

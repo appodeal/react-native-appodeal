@@ -1,12 +1,12 @@
-package com.reactlibrary;
+package com.appodeal.rnappodeal;
 
-        import com.appodeal.ads.Appodeal;
-        import com.appodeal.ads.UserSettings;
-        import com.appodeal.ads.utils.Log;
-        import com.explorestack.consent.Consent;
+import com.appodeal.ads.Appodeal;
+import com.appodeal.ads.UserSettings;
+import com.appodeal.ads.utils.Log;
+import com.explorestack.consent.Consent;
 
 
-public class RNAppodealUtils {
+class RNAppodealUtils {
     public static UserSettings.Gender getGenderFromString(String gender) {
         UserSettings.Gender result = UserSettings.Gender.OTHER;
         if (gender.equals("male")) {
@@ -17,7 +17,7 @@ public class RNAppodealUtils {
         return result;
     }
 
-    public static Log.LogLevel getLogLevelFromString(String logLevel) {
+    static Log.LogLevel getLogLevelFromString(String logLevel) {
         Log.LogLevel result = Log.LogLevel.none;
         if (logLevel.equals("debug")) {
             result = Log.LogLevel.debug;
@@ -27,7 +27,7 @@ public class RNAppodealUtils {
         return result;
     }
 
-    public static int getAdTypesFormRNTypes(int types) {
+    static int getAdTypesFormRNTypes(int types) {
         int result = 0;
         if ((types & (1 << 0)) > 0) {
             result |= Appodeal.INTERSTITIAL;
@@ -53,7 +53,7 @@ public class RNAppodealUtils {
         return result;
     }
 
-    public static int getConsentStatusIntFromStatus(Consent.Status status) {
+    static int getConsentStatusIntFromStatus(Consent.Status status) {
         int result = 0;
         switch (status) {
             case UNKNOWN:
@@ -72,7 +72,7 @@ public class RNAppodealUtils {
         return result;
     }
 
-    public static int getConsentRegualationIntFromZone(Consent.Zone zone) {
+    static int getConsentRegualationIntFromZone(Consent.Zone zone) {
         int result = 0;
         switch (zone) {
             case UNKNOWN:

@@ -20,11 +20,6 @@ STKConsentManagerDisplayDelegate
 
 @synthesize bridge = _bridge;
 
-UIViewController *RNAppodealRootViewController(void) {
-    return UIApplication.sharedApplication.keyWindow.rootViewController;
-}
-
-
 NSArray *RNAppodealConsentParameters(void) {
     return @[
         @(STKConsentManager.sharedManager.consentStatus),
@@ -36,7 +31,7 @@ RCT_EXPORT_MODULE();
 
 - (void)initializeSdkWithAppKey:(NSString *)appKey
                         adTypes:(AppodealAdType)adTypes
-                        consent:(BOOL)consent {
+                        consent:(NSNumber *)consent {
     dispatch_async(dispatch_get_main_queue(), ^{
         [Appodeal setFramework:APDFrameworkReactNative version:RNAVersion()];
         
@@ -45,9 +40,19 @@ RCT_EXPORT_MODULE();
         [Appodeal setBannerDelegate:self];
         [Appodeal setInterstitialDelegate:self];
         
-        [Appodeal initializeWithApiKey:appKey
-                                 types:adTypes
-                            hasConsent:consent];
+        if (consent != nil) {
+            [Appodeal initializeWithApiKey:appKey
+                                     types:adTypes
+                                hasConsent:consent.boolValue];
+        } else if (STKConsentManager.sharedManager.consent != nil) {
+            [Appodeal initializeWithApiKey:appKey
+                                     types:adTypes
+                             consentReport:STKConsentManager.sharedManager.consent];
+        } else {
+            [Appodeal initializeWithApiKey:appKey
+                                     types:adTypes
+                                hasConsent:NO];
+        }
     });
 }
 
@@ -56,7 +61,13 @@ RCT_EXPORT_MODULE();
 RCT_EXPORT_METHOD(initialize:(NSString *)appKey types:(NSInteger)adType consent:(BOOL)consent) {
     [self initializeSdkWithAppKey:appKey
                           adTypes:AppodealAdTypeFromRNAAdType(adType)
-                          consent:consent];
+                          consent:@(consent)];
+}
+
+RCT_EXPORT_METHOD(initializeWithConsentReport:(NSString *)appKey types:(NSInteger)adType) {
+    [self initializeSdkWithAppKey:appKey
+                          adTypes:AppodealAdTypeFromRNAAdType(adType)
+                          consent:nil];
 }
 
 RCT_EXPORT_METHOD(synchroniseConsent:(NSString *)appKey callback:(RCTResponseSenderBlock)callback) {
@@ -85,7 +96,7 @@ RCT_EXPORT_METHOD(synchroniseConsent:(NSString *)appKey callback:(RCTResponseSen
                 }
                 
                 strongSelf.consentCallback = callback;
-                [STKConsentManager.sharedManager showConsentDialogFromRootViewController:RNAppodealRootViewController()
+                [STKConsentManager.sharedManager showConsentDialogFromRootViewController:RCTPresentedViewController()
                                                                                 delegate:self];
             }];
         }];
@@ -107,7 +118,7 @@ RCT_EXPORT_METHOD(forceShowConsentDialog:(RCTResponseSenderBlock)callback) {
             }
             
             strongSelf.consentCallback = callback;
-            [STKConsentManager.sharedManager showConsentDialogFromRootViewController:RNAppodealRootViewController()
+            [STKConsentManager.sharedManager showConsentDialogFromRootViewController:RCTPresentedViewController()
                                                                             delegate:self];
         }];
     });
@@ -127,7 +138,7 @@ RCT_EXPORT_METHOD(show:(int)showType placement:(NSString *)placement result:(RCT
     dispatch_async(dispatch_get_main_queue(), ^{
         BOOL result = [Appodeal showAd:AppodealShowStyleFromRNAAdType(showType)
                           forPlacement:placement
-                    rootViewController:RNAppodealRootViewController()];
+                    rootViewController:RCTPresentedViewController()];
         NSArray *params = @[
             @(result)
         ];
@@ -232,6 +243,13 @@ RCT_EXPORT_METHOD(setBannerAnimation:(BOOL)bannerAnimations) {
     });
 }
 
+RCT_EXPORT_METHOD(setTabletBanners:(BOOL)val) {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        APDUnitSize size = val ? kAppodealUnitSize_728x90 : kAppodealUnitSize_320x50;
+        [Appodeal setPreferredBannerAdSize:size];
+    });
+}
+
 #pragma mark Advanced features
 
 RCT_EXPORT_METHOD(setTesting:(BOOL)testingEnabled) {
@@ -316,7 +334,7 @@ RCT_EXPORT_METHOD(getRewardParameters:(NSString *)placementName callback:(RCTRes
 
 RCT_EXPORT_METHOD(setSegmentFilter:(NSDictionary *)filter) {
     dispatch_async(dispatch_get_main_queue(), ^{
-        [Appodeal setSegmentFilter:filter];
+        [Appodeal setCustomState:filter];
     });
 }
 
@@ -510,7 +528,6 @@ RCT_EXPORT_METHOD(trackInAppPurchase:(double)amount currencyCode:(NSString *)cur
 
 #pragma mark - Noop
 
-RCT_EXPORT_METHOD(setTabletBanners:(BOOL)val) {}
 RCT_EXPORT_METHOD(disableWriteExternalStoragePermissionCheck) {}
 RCT_EXPORT_METHOD(requestAndroidMPermissions) {}
 RCT_EXPORT_METHOD(muteVideosIfCallsMuted) {}

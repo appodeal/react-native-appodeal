@@ -30,17 +30,15 @@ export const initialize = (
     Appodeal.disableLocationPermissionCheck()
     Appodeal.setLogLevel(constants.logLevel)
     Appodeal.setTesting(testing)
-
+    Appodeal.setTabletBanners(false)
     // Initialize Appodeal
     Appodeal.synchroniseConsent(constants.appKey, (consent: AppodealConsentStatus, regulation: AppodealConsentRegulation) => {
         Appodeal.initialize(
             constants.appKey,
-            constants.adTypes,
-            consent !== AppodealConsentStatus.NON_PERSONALIZED
+            constants.adTypes
         )
         callback(consent, regulation)
     })
-
 }
 
 export enum BannerShowStyle {

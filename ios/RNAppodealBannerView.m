@@ -34,21 +34,22 @@
 }
 
 - (void)setAdSize:(NSString *)adSize {
-    UIViewController *rootViewController = UIApplication.sharedApplication.keyWindow.rootViewController;
+    UIViewController *rootViewController = RCTPresentedViewController();
     [self.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
+    
     CGSize size = RNAppodealBannerViewSizeFromString(adSize);
     if (size.height == 250) {
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated"
+        NSAssert([Appodeal isInitalizedForAdType:AppodealAdTypeMREC],
+                 @"Appodeal should be initialised with AppodealAdTypeMREC before trying to add AppodealBanner in hierachy");
         self.bannerView = [[APDMRECView alloc] init];
-#pragma clang diagnostic pop
     } else {
+        NSAssert([Appodeal isInitalizedForAdType:AppodealAdTypeBanner],
+                 @"Appodeal should be initialised with AppodealAdTypeBanner before trying to add AppodealBanner in hierachy");
         self.bannerView = [[APDBannerView alloc] initWithSize:size
                                            rootViewController:rootViewController];
     }
     self.bannerView.delegate = self;
     self.bannerView.frame = self.bounds;
-    [self addSubview:self.bannerView];
     [self.bannerView loadAd];
 }
 
@@ -61,10 +62,13 @@
     self.bannerView.frame = self.bounds;
 }
 
-#pragma mark APDBannerViewDelegate
+#pragma mark - APDBannerViewDelegate
 
 - (void)bannerViewDidLoadAd:(APDBannerView *)bannerView isPrecache:(BOOL)precache {
     self.onAdLoaded ? self.onAdLoaded(@{@"isPreache": @(precache)}) : nil;
+    if (self.bannerView.superview != self) {
+        [self addSubview:self.bannerView];
+    }
 }
 
 - (void)bannerView:(APDBannerView *)bannerView didFailToLoadAdWithError:(NSError *)error {

@@ -25,7 +25,7 @@ export const RegulationSection = (props: RegulationSectionProps) => {
         "partly personalised", 
         "personalised"
     ]
-
+        
     return (
         <View>
             <SectionHeader value="Regulation" />
