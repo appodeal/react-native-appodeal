@@ -483,7 +483,9 @@ import {
         backgroundColor: 'hsl(0, 0%, 97%)',
         alignContent: 'stretch',
     }}
-    adSize = 'phone' />
+    adSize = 'phone'
+    usesSmartSizing // (iOS specific) on Android smart banners are enabled by default.
+/>
 ```
 
 When banner is added on screen it starts to load ad automatically event if autocache is disabled.
@@ -506,6 +508,7 @@ Banner view has explicit callbacks.
 <AppodealBanner
     style = {styles.banner}
     adSize = 'phone'
+    usesSmartSizing // (iOS specific) on Android smart banners are enabled by default.
     onAdLoaded = {() => console.log("Banner view did load")}
     onAdExpired = {() => console.log("Banner view expired")}
     onAdClicked = {() => console.log("Banner view is clicked")}
