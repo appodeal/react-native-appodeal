@@ -18,6 +18,7 @@ type AdSize = 'phone' | 'tablet' | 'mrec';
 interface NativeAppodealBannerProps {
 	adSize: AdSize,
 	placement?: string,
+	usesSmartSizing?: boolean,
 	onAdLoaded?: Function,
 	onAdFailedToLoad?: Function,
 	onAdClicked?: Function,
