@@ -5,6 +5,7 @@ import { requireNativeComponent, StyleProp, ViewStyle } from 'react-native';
 interface AppodealBannerProps {
 	adSize: AdSize,
 	placement?: string,
+	usesSmartSizing?: boolean
 	onAdLoaded?: Function,
 	onAdFailedToLoad?: Function,
 	onAdClicked?: Function,
@@ -17,6 +18,7 @@ type AdSize = 'phone' | 'tablet' | 'mrec';
 interface NativeAppodealBannerProps {
 	adSize: AdSize,
 	placement?: string,
+	usesSmartSizing?: boolean,
 	onAdLoaded?: Function,
 	onAdFailedToLoad?: Function,
 	onAdClicked?: Function,
@@ -30,6 +32,7 @@ const AppodealBanner = (props: AppodealBannerProps) => {
 	const { 
 		adSize, 
 		placement, 
+		usesSmartSizing,
 		onAdLoaded, 
 		onAdFailedToLoad, 
 		onAdClicked, 
@@ -52,6 +55,7 @@ const AppodealBanner = (props: AppodealBannerProps) => {
 			onAdClicked={onAdClicked}
 			onAdExpired={onAdExpired}
 			placement={placement}
+			usesSmartSizing={usesSmartSizing}
 			style={[style, {height: height[adSize]}]}
 			{...restProps}
 			/>

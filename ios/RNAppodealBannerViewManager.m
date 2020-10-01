@@ -25,6 +25,7 @@ RCT_EXPORT_MODULE();
 }
 
 RCT_REMAP_VIEW_PROPERTY(placement, _bannerView.placement, NSString)
+RCT_REMAP_VIEW_PROPERTY(usesSmartSizing, _bannerView.usesSmartSizing, BOOL)
 RCT_REMAP_VIEW_PROPERTY(adSize, adSize, NSString)
 
 RCT_EXPORT_VIEW_PROPERTY(onAdLoaded, RCTBubblingEventBlock)
