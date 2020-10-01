@@ -20,6 +20,7 @@ export const BannerView = (props: BannerViewProps) => {
             onAdExpired={() => console.log("Banner view expired")}
             onAdClicked={() => console.log("Banner view is clicked")}
             onAdFailedToLoad={() => console.log("Banner view is failed to load")}
+            usesSmartSizing
         /> :
         null
 }

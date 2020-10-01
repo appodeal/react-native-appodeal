@@ -518,6 +518,10 @@ Banner view has explicit callbacks.
 
 ## Changelog
 
+2.7.5
+
+* [iOS] Add smart banners to banner view. Change pod dependency to Appodeal to 2.7.4
+
 2.7.4
 
 * [iOS] Update Appodeal to 2.7.4
