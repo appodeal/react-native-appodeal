@@ -58,7 +58,7 @@ Add dependencies into `build.gradle` (module: app)
 ``` groovy
 dependencies {
     ...
-    implementation 'com.appodeal.ads:sdk:2.6.3.+'
+    implementation 'com.appodeal.ads:sdk:2.7.3.+'
     ...
 }
 ```
