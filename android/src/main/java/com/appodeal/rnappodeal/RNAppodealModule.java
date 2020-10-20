@@ -49,7 +49,7 @@ public class RNAppodealModule extends ReactContextBaseJavaModule implements Inte
     }
 
     private String getPluginVersion() {
-        return "2.7.5";
+        return "2.7.6";
     }
 
     private void sendEventToJS(String eventName, WritableMap params) {
