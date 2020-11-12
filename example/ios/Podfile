@@ -4,24 +4,25 @@ require_relative '../node_modules/@react-native-community/cli-platform-ios/nativ
 install! 'cocoapods', :warn_for_multiple_pod_sources => false
 
 source 'https://github.com/appodeal/CocoaPods.git'
-source 'https://github.com/CocoaPods/Specs.git'
+source 'https://cdn.cocoapods.org/'
+
 
 def appodeal
   pod 'RNAppodeal', :path => '../../RNAppodeal.podspec' 
-  pod 'APDAdColonyAdapter', '2.8.0.1-Beta' 
-  pod 'APDAmazonAdsAdapter', '2.8.0.1-Beta' 
-  pod 'APDAppLovinAdapter', '2.8.0.2-Beta' 
-  pod 'APDBidMachineAdapter', '2.8.0.1-Beta' 
-  pod 'APDFacebookAudienceAdapter', '2.8.0.1-Beta' 
-  pod 'APDGoogleAdMobAdapter', '2.8.0.2-Beta' 
-  pod 'APDIronSourceAdapter', '2.8.0.1-Beta' 
-  pod 'APDMyTargetAdapter', '2.8.0.1-Beta' 
-  pod 'APDOguryAdapter', '2.8.0.1-Beta' 
-  pod 'APDSmaatoAdapter', '2.8.0.1-Beta' 
-  pod 'APDStartAppAdapter', '2.8.0.1-Beta' 
-  pod 'APDUnityAdapter', '2.8.0.1-Beta' 
-  pod 'APDVungleAdapter', '2.8.0.1-Beta' 
-  pod 'APDYandexAdapter', '2.8.0.1-Beta' 
+  pod 'APDAdColonyAdapter', '2.8.1.1-Beta' 
+  pod 'APDAmazonAdsAdapter', '2.8.1.1-Beta' 
+  pod 'APDAppLovinAdapter', '2.8.1.1-Beta' 
+  pod 'APDBidMachineAdapter', '2.8.1.1-Beta' 
+  pod 'APDFacebookAudienceAdapter', '2.8.1.1-Beta' 
+  pod 'APDGoogleAdMobAdapter', '2.8.1.1-Beta' 
+  pod 'APDIronSourceAdapter', '2.8.1.1-Beta' 
+  pod 'APDMyTargetAdapter', '2.8.1.1-Beta' 
+  pod 'APDOguryAdapter', '2.8.1.1-Beta' 
+  pod 'APDSmaatoAdapter', '2.8.1.1-Beta' 
+  pod 'APDStartAppAdapter', '2.8.1.1-Beta' 
+  pod 'APDUnityAdapter', '2.8.1.1-Beta' 
+  pod 'APDVungleAdapter', '2.8.1.1-Beta' 
+  pod 'APDYandexAdapter', '2.8.1.1-Beta' 
 end
 
 target 'Example' do
@@ -67,4 +68,3 @@ target 'Example' do
   use_native_modules!
   use_frameworks!
 end
-
