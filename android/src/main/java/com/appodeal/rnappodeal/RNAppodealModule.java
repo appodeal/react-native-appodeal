@@ -49,7 +49,7 @@ public class RNAppodealModule extends ReactContextBaseJavaModule implements Inte
     }
 
     private String getPluginVersion() {
-        return "2.8.0";
+        return "2.8.1";
     }
 
     private void sendEventToJS(String eventName, WritableMap params) {
@@ -306,6 +306,11 @@ public class RNAppodealModule extends ReactContextBaseJavaModule implements Inte
     }
 
     @ReactMethod
+    public void setSharedAdsInstanceAcrossActivities(boolean flag) {
+        Appodeal.setSharedAdsInstanceAcrossActivities(flag);
+    }
+
+    @ReactMethod
     public void setExtras(ReadableMap extras) {
         ReadableMapKeySetIterator iterator = extras.keySetIterator();
         while (iterator.hasNextKey()) {
@@ -557,12 +562,8 @@ public class RNAppodealModule extends ReactContextBaseJavaModule implements Inte
     }
 
     @Override
-    public void onHostPause() {
-    }
+    public void onHostPause() { }
 
     @Override
-    public void onHostResume() {
-        Appodeal.onResume(this.getCurrentActivity(), Appodeal.BANNER);
-        Appodeal.onResume(this.getCurrentActivity(), Appodeal.MREC);
-    }
+    public void onHostResume() { }
 }

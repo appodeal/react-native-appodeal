@@ -58,7 +58,7 @@ Add dependencies into `build.gradle` (module: app)
 ``` groovy
 dependencies {
     ...
-    implementation 'com.appodeal.ads:sdk:2.7.4.+'
+    implementation 'com.appodeal.ads:sdk:2.8.1.+'
     ...
 }
 ```
@@ -517,6 +517,11 @@ Banner view has explicit callbacks.
 ```
 
 ## Changelog
+
+2.8.1-Beta
+
+* Update Appodeal to 2.8.1 
+* [Android] Add method `setSharedAdsInstanceAcrossActivities`
 
 2.7.6
 

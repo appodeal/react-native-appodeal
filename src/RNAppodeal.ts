@@ -153,5 +153,8 @@ export default {
   },
   disableWriteExternalStoragePermissionCheck: () => {
     RNAppodeal.disableWriteExternalStoragePermissionCheck()
+  },
+  setSharedAdsInstanceAcrossActivities: (value: boolean) => {
+    RNAppodeal.setSharedAdsInstanceAcrossActivities(value)
   }
 };

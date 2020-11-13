@@ -27,6 +27,7 @@ export const initialize = (
     Appodeal.setGender(constants.user.gender)
     Appodeal.setUserId(constants.user.id)
     // Global settings
+    Appodeal.setSharedAdsInstanceAcrossActivities(true)
     Appodeal.disableLocationPermissionCheck()
     Appodeal.setLogLevel(constants.logLevel)
     Appodeal.setTesting(testing)

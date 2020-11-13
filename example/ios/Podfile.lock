@@ -550,7 +550,6 @@ SPEC REPOS:
     - CriteoPublisherSdk
     - StackConsentManager
     - StackIAB
-    - StackModules
   trunk:
     - AdColony
     - AmazonAd
@@ -698,7 +697,7 @@ SPEC CHECKSUMS:
   smaato-ios-sdk: 975ac58f5cb870653bb5544962bdbe4c28f140b1
   StackConsentManager: 01f09961a8bc8c590ca54edd8d4631a456cae0b3
   StackIAB: 4f6bea0403d6415200179171ea80f5b6a704db9f
-  StackModules: 89704d5145477c7c37513d9dfbdf1bfe4722c59e
+  StackModules: bdce04cf8a281cfbd982e43f90d90df23166f0fa
   StartAppSDK: d4680feb85ffb81d42b247f1a68affb56625ba7e
   TapjoySDK: e863ea0d0f5d3ab3f8f12d9a9af737789d9dab6d
   UnityAds: 84b080493348d6995771f171e6bdc3c84b198686

@@ -532,5 +532,6 @@ RCT_EXPORT_METHOD(disableWriteExternalStoragePermissionCheck) {}
 RCT_EXPORT_METHOD(requestAndroidMPermissions) {}
 RCT_EXPORT_METHOD(muteVideosIfCallsMuted) {}
 RCT_EXPORT_METHOD(showTestScreen) {}
+RCT_EXPORT_METHOD(setSharedAdsInstanceAcrossActivities:(BOOL)flag) {}
 
 @end

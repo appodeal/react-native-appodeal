@@ -34,9 +34,9 @@ repositories {
 dependencies {
     implementation 'com.facebook.react:react-native:+'
     // Appodeal
-    implementation 'com.appodeal.ads.sdk:core:2.8.0'
-    implementation 'com.appodeal.ads.sdk.networks:mraid:2.8.0.2'
-    implementation 'com.appodeal.ads.sdk.networks:vast:2.8.0.2'
+    implementation 'com.appodeal.ads.sdk:core:2.8.1'
+    implementation 'com.appodeal.ads.sdk.networks:mraid:2.8.1.2'
+    implementation 'com.appodeal.ads.sdk.networks:vast:2.8.1.2'
     // Consent manager
     implementation 'com.explorestack:consent:1.0.1'
 }
