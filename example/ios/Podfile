@@ -25,7 +25,7 @@ def appodeal
 end
 
 target 'Example' do
-  # Pods for Example
+  # Pods for example
   pod 'FBLazyVector', :path => "../node_modules/react-native/Libraries/FBLazyVector"
   pod 'FBReactNativeSpec', :path => "../node_modules/react-native/Libraries/FBReactNativeSpec"
   pod 'RCTRequired', :path => "../node_modules/react-native/Libraries/RCTRequired"

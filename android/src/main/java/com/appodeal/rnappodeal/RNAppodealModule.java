@@ -264,8 +264,8 @@ public class RNAppodealModule extends ReactContextBaseJavaModule implements Inte
     }
 
     @ReactMethod
-    public void setOnLoadedTriggerBoth(int adTypes, boolean flag) {
-        Appodeal.setTriggerOnLoadedOnPrecache(RNAppodealUtils.getAdTypesFormRNTypes(adTypes), flag);
+    public void setOnLoadedTriggerBoth(boolean flag) {
+        Appodeal.setTriggerOnLoadedOnPrecache(RNAppodealUtils.getAllTypes(), flag);
     }
 
     @ReactMethod

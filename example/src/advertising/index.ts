@@ -15,6 +15,7 @@ export const initialize = (
     testing: boolean,
     callback: (consent: AppodealConsentStatus, regulation: AppodealConsentRegulation) => void
 ) => {
+    Appodeal.setLogLevel(constants.logLevel)
     // Setup callbacks
     registerListeners()
     // Set extras
@@ -26,9 +27,9 @@ export const initialize = (
     Appodeal.setAge(constants.user.age)
     Appodeal.setGender(constants.user.gender)
     Appodeal.setUserId(constants.user.id)
+    Appodeal.setOnLoadedTriggerBoth(false);
     // Global settings
     Appodeal.disableLocationPermissionCheck()
-    Appodeal.setLogLevel(constants.logLevel)
     Appodeal.setTesting(testing)
     Appodeal.setTabletBanners(false)
     // Initialize Appodeal

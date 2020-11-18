@@ -264,6 +264,12 @@ RCT_EXPORT_METHOD(setLogLevel:(APDLogLevel)logLevel) {
     });
 }
 
+RCT_EXPORT_METHOD(setOnLoadedTriggerBoth:(BOOL)flag) {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [Appodeal setTriggerPrecacheCallbacks:!flag];
+    });
+}
+
 RCT_EXPORT_METHOD(setChildDirectedTreatment:(BOOL)enabled) {
     dispatch_async(dispatch_get_main_queue(), ^{
         [Appodeal setChildDirectedTreatment:enabled];

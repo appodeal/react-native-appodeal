@@ -27,6 +27,10 @@ class RNAppodealUtils {
         return result;
     }
 
+    static int getAllTypes() {
+        return Appodeal.INTERSTITIAL | Appodeal.BANNER | Appodeal.REWARDED_VIDEO | Appodeal.NON_SKIPPABLE_VIDEO | Appodeal.MREC;
+    }
+    
     static int getAdTypesFormRNTypes(int types) {
         int result = 0;
         if ((types & (1 << 0)) > 0) {
