@@ -268,7 +268,9 @@ Appodeal.muteVideosIfCallsMuted(bool);
 Appodeal.disableWriteExternalStoragePermissionCheck();
 // Request Android M permissions on app start
 // Call this method before initilisation
-Appodeal.requestAndroidMPermissions();
+Appodeal.requestAndroidMPermissions(params => 
+    console.log(`Requested AndroidM writeExternalStorage: ${params.writeExternalStorage} accessCoarseLocation: ${params.accessCoarseLocation}`)
+);
 ```
 
 ### Callbacks

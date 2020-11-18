@@ -28,6 +28,10 @@ export const initialize = (
     Appodeal.setGender(constants.user.gender)
     Appodeal.setUserId(constants.user.id)
     Appodeal.setOnLoadedTriggerBoth(false);
+    Appodeal.muteVideosIfCallsMuted(true);
+    Appodeal.requestAndroidMPermissions((params: any) => 
+        console.log(`Requested AndroidM writeExternalStorage: ${params.writeExternalStorage} accessCoarseLocation: ${params.accessCoarseLocation}`)
+    );
     // Global settings
     Appodeal.disableLocationPermissionCheck()
     Appodeal.setTesting(testing)

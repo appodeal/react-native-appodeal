@@ -534,9 +534,9 @@ RCT_EXPORT_METHOD(trackInAppPurchase:(double)amount currencyCode:(NSString *)cur
 
 #pragma mark - Noop
 
-RCT_EXPORT_METHOD(disableWriteExternalStoragePermissionCheck) {}
-RCT_EXPORT_METHOD(requestAndroidMPermissions) {}
-RCT_EXPORT_METHOD(muteVideosIfCallsMuted) {}
+RCT_EXPORT_METHOD(requestAndroidMPermissions:(RCTResponseSenderBlock)callback) {}
+RCT_EXPORT_METHOD(muteVideosIfCallsMuted:(BOOL)flag) {}
 RCT_EXPORT_METHOD(showTestScreen) {}
+RCT_EXPORT_METHOD(disableWriteExternalStoragePermissionCheck) {}
 
 @end
