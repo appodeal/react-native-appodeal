@@ -463,7 +463,7 @@ RCT_EXPORT_METHOD(trackInAppPurchase:(double)amount currencyCode:(NSString *)cur
 
 - (void)nonSkippableVideoWillDismissAndWasFullyWatched:(BOOL)wasFullyWatched {
     NSDictionary *params = @{
-        @"fullyWatched": @(wasFullyWatched)
+        @"isFinished": @(wasFullyWatched)
     };
     [self sendEventWithName:kEventNonSkippableVideoClosed body:params];
 }
@@ -499,7 +499,7 @@ RCT_EXPORT_METHOD(trackInAppPurchase:(double)amount currencyCode:(NSString *)cur
 
 - (void)rewardedVideoWillDismissAndWasFullyWatched:(BOOL)wasFullyWatched {
     NSDictionary *params = @{
-        @"fullyWatched": @(wasFullyWatched)
+        @"isFinished": @(wasFullyWatched)
     };
     [self sendEventWithName:kEventRewardedVideoClosed body:params];
 }

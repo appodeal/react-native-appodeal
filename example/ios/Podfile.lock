@@ -248,8 +248,8 @@ PODS:
     - React-cxxreact (= 0.62.2)
     - React-jsi (= 0.62.2)
   - React-jsinspector (0.62.2)
-  - react-native-segmented-control (1.6.1):
-    - React
+  - react-native-segmented-control (2.2.1):
+    - React-Core
   - React-RCTActionSheet (0.62.2):
     - React-Core/RCTActionSheetHeaders (= 0.62.2)
   - React-RCTAnimation (0.62.2):
@@ -493,7 +493,7 @@ SPEC CHECKSUMS:
   React-jsi: b6dc94a6a12ff98e8877287a0b7620d365201161
   React-jsiexecutor: 1540d1c01bb493ae3124ed83351b1b6a155db7da
   React-jsinspector: 512e560d0e985d0e8c479a54a4e5c147a9c83493
-  react-native-segmented-control: d7c444e5cc5f526da766f8ff24346898b7ac7be5
+  react-native-segmented-control: eb9e25fbfbce226ecf66d643428fbe97601e691a
   React-RCTActionSheet: f41ea8a811aac770e0cc6e0ad6b270c644ea8b7c
   React-RCTAnimation: 49ab98b1c1ff4445148b72a3d61554138565bad0
   React-RCTBlob: a332773f0ebc413a0ce85942a55b064471587a71
@@ -511,4 +511,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: c0b18a9a24c6a3b39486e3d527d064225983ca23
 
-COCOAPODS: 1.9.3
+COCOAPODS: 1.10.0

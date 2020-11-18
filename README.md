@@ -352,7 +352,7 @@ Appodeal.addEventListener(AppodealRewardedEvent.REWARD, (event: any) =>
     console.log("Rewarded video finished. Amount: ", event.amount + ", currency: " + event.currency)
 )
 Appodeal.addEventListener(AppodealRewardedEvent.CLOSED, (event: any) =>
-    console.log("Rewarded video closed: ", event.isFinished)
+    console.log("Rewarded video closed, is finished: ", event.isFinished)
 )
 Appodeal.addEventListener(AppodealRewardedEvent.FAILED_TO_LOAD, () =>
     console.log("Rewarded video failed to load")
