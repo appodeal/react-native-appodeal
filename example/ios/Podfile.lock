@@ -309,7 +309,7 @@ PODS:
     - React-cxxreact (= 0.62.2)
     - React-jsi (= 0.62.2)
     - ReactCommon/callinvoker (= 0.62.2)
-  - RNAppodeal (2.7.6):
+  - RNAppodeal (2.7.7):
     - Appodeal (= 2.7.5)
     - React-Core
     - StackConsentManager (~> 1.0.1)
@@ -504,7 +504,7 @@ SPEC CHECKSUMS:
   React-RCTText: fae545b10cfdb3d247c36c56f61a94cfd6dba41d
   React-RCTVibration: 4356114dbcba4ce66991096e51a66e61eda51256
   ReactCommon: ed4e11d27609d571e7eee8b65548efc191116eb3
-  RNAppodeal: a594a4c18dbdfbf18f982b99cb9807253468fc67
+  RNAppodeal: 2099935786bfcc6150d0a40066ea07b4e8f8ff61
   StackConsentManager: 01f09961a8bc8c590ca54edd8d4631a456cae0b3
   YandexMobileMetrica: 7ba67267e1ef841f77d5db17a5091b8e9eba911f
   Yoga: 3ebccbdd559724312790e7742142d062476b698e

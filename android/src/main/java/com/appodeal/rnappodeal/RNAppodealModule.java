@@ -31,8 +31,6 @@ import com.appodeal.ads.NonSkippableVideoCallbacks;
 import com.appodeal.ads.RewardedVideoCallbacks;
 import com.appodeal.ads.utils.PermissionsHelper.AppodealPermissionCallbacks;
 
-import java.util.concurrent.CountDownLatch;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
@@ -56,7 +54,7 @@ public class RNAppodealModule extends ReactContextBaseJavaModule implements Inte
     }
 
     private String getPluginVersion() {
-        return "2.7.6";
+        return "2.7.7";
     }
 
     private void sendEventToJS(String eventName, WritableMap params) {

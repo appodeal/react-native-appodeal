@@ -520,6 +520,12 @@ Banner view has explicit callbacks.
 
 ## Changelog
 
+2.7.7
+
+* [iOS] Fix `setOnLoadedTriggerBoth` method
+* [Android] Fix `requestAndroidMPermissions` method
+* Fix paramaters in `AppodealRewardedEvent.CLOSED` callback
+
 2.7.6
 
 * [iOS] Update Appodeal to 2.7.5
