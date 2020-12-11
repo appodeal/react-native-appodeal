@@ -1,27 +1,28 @@
-platform :ios, '9.0'
+platform :ios, '10.0'
 require_relative '../node_modules/@react-native-community/cli-platform-ios/native_modules'
 
 install! 'cocoapods', :warn_for_multiple_pod_sources => false
 
 source 'https://github.com/appodeal/CocoaPods.git'
-source 'https://github.com/CocoaPods/Specs.git'
+source 'https://cdn.cocoapods.org/'
+
 
 def appodeal
   pod 'RNAppodeal', :path => '../../RNAppodeal.podspec' 
-  pod 'APDAdColonyAdapter', '2.7.5.1' 
-  pod 'APDAmazonAdsAdapter', '2.7.5.1' 
-  pod 'APDAppLovinAdapter', '2.7.5.1' 
-  pod 'APDAppodealAdExchangeAdapter', '2.7.5.1' 
-  pod 'APDFacebookAudienceAdapter', '2.7.5.1' 
-  pod 'APDGoogleAdMobAdapter', '2.7.5.1' 
-  pod 'APDIronSourceAdapter', '2.7.5.1' 
-  pod 'APDMyTargetAdapter', '2.7.5.1' 
-  pod 'APDOguryAdapter', '2.7.5.1' 
-  pod 'APDSmaatoAdapter', '2.7.5.1' 
-  pod 'APDStartAppAdapter', '2.7.5.1' 
-  pod 'APDUnityAdapter', '2.7.5.1' 
-  pod 'APDVungleAdapter', '2.7.5.1' 
-  pod 'APDYandexAdapter', '2.7.5.1' 
+  pod 'APDAdColonyAdapter', '~> 2.8.1.1' 
+  pod 'APDAmazonAdsAdapter', '~> 2.8.1.1' 
+  pod 'APDAppLovinAdapter', '~> 2.8.1.1' 
+  pod 'APDBidMachineAdapter', '~> 2.8.1.1' 
+  pod 'APDFacebookAudienceAdapter', '~> 2.8.1.1' 
+  pod 'APDGoogleAdMobAdapter', '~> 2.8.1.1' 
+  pod 'APDIronSourceAdapter', '~> 2.8.1.1' 
+  pod 'APDMyTargetAdapter', '~> 2.8.1.1' 
+  pod 'APDOguryAdapter', '~> 2.8.1.1' 
+  pod 'APDSmaatoAdapter', '~> 2.8.1.1' 
+  pod 'APDStartAppAdapter', '~> 2.8.1.1' 
+  pod 'APDUnityAdapter', '~> 2.8.1.1' 
+  pod 'APDVungleAdapter', '~> 2.8.1.1' 
+  pod 'APDYandexAdapter', '~> 2.8.1.1' 
 end
 
 target 'Example' do
@@ -67,4 +68,3 @@ target 'Example' do
   use_native_modules!
   use_frameworks!
 end
-

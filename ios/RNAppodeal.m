@@ -537,6 +537,7 @@ RCT_EXPORT_METHOD(trackInAppPurchase:(double)amount currencyCode:(NSString *)cur
 RCT_EXPORT_METHOD(requestAndroidMPermissions:(RCTResponseSenderBlock)callback) {}
 RCT_EXPORT_METHOD(muteVideosIfCallsMuted:(BOOL)flag) {}
 RCT_EXPORT_METHOD(showTestScreen) {}
+RCT_EXPORT_METHOD(setSharedAdsInstanceAcrossActivities:(BOOL)flag) {}
 RCT_EXPORT_METHOD(disableWriteExternalStoragePermissionCheck) {}
 
 @end

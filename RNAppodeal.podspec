@@ -17,8 +17,8 @@ Pod::Spec.new do |s|
   s.requires_arc = true
   s.static_framework = true
 
-  s.dependency "React-Core"
-  s.dependency "Appodeal", "2.7.5"
+  s.dependency "React"
+  s.dependency "Appodeal", "2.8.1"
   s.dependency "StackConsentManager", "~> 1.0.1"
 end
 

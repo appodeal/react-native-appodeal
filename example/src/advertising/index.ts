@@ -33,6 +33,7 @@ export const initialize = (
         console.log(`Requested AndroidM writeExternalStorage: ${params.writeExternalStorage} accessCoarseLocation: ${params.accessCoarseLocation}`)
     );
     // Global settings
+    Appodeal.setSharedAdsInstanceAcrossActivities(true)
     Appodeal.disableLocationPermissionCheck()
     Appodeal.setTesting(testing)
     Appodeal.setTabletBanners(false)
