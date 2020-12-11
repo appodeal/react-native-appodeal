@@ -103,8 +103,8 @@ export default {
   setChildDirectedTreatment: (value: boolean) => {
     RNAppodeal.setChildDirectedTreatment(value)
   },
-  setOnLoadedTriggerBoth: (adTypes: AdTypeType, value: boolean) => {
-    RNAppodeal.setOnLoadedTriggerBoth(adTypes, value)
+  setOnLoadedTriggerBoth:(value: boolean) => {
+    RNAppodeal.setOnLoadedTriggerBoth(value)
   },
   disableNetwork: (network: string, adTypes: AdTypeType) => {
     RNAppodeal.disableNetwork(network, adTypes)

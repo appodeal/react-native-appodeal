@@ -268,7 +268,9 @@ Appodeal.muteVideosIfCallsMuted(bool);
 Appodeal.disableWriteExternalStoragePermissionCheck();
 // Request Android M permissions on app start
 // Call this method before initilisation
-Appodeal.requestAndroidMPermissions();
+Appodeal.requestAndroidMPermissions(params => 
+    console.log(`Requested AndroidM writeExternalStorage: ${params.writeExternalStorage} accessCoarseLocation: ${params.accessCoarseLocation}`)
+);
 ```
 
 ### Callbacks
@@ -352,7 +354,7 @@ Appodeal.addEventListener(AppodealRewardedEvent.REWARD, (event: any) =>
     console.log("Rewarded video finished. Amount: ", event.amount + ", currency: " + event.currency)
 )
 Appodeal.addEventListener(AppodealRewardedEvent.CLOSED, (event: any) =>
-    console.log("Rewarded video closed: ", event.isFinished)
+    console.log("Rewarded video closed, is finished: ", event.isFinished)
 )
 Appodeal.addEventListener(AppodealRewardedEvent.FAILED_TO_LOAD, () =>
     console.log("Rewarded video failed to load")
@@ -518,10 +520,20 @@ Banner view has explicit callbacks.
 
 ## Changelog
 
+2.8.2
+
+* Update Appodeal to 2.8.1 (Stable)
+
 2.8.1-Beta
 
-* Update Appodeal to 2.8.1 
+* Update Appodeal to 2.8.1 (Beta)
 * [Android] Add method `setSharedAdsInstanceAcrossActivities`
+
+2.7.7
+
+* [iOS] Fix `setOnLoadedTriggerBoth` method
+* [Android] Fix `requestAndroidMPermissions` method
+* Fix paramaters in `AppodealRewardedEvent.CLOSED` callback
 
 2.7.6
 

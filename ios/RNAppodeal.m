@@ -264,6 +264,12 @@ RCT_EXPORT_METHOD(setLogLevel:(APDLogLevel)logLevel) {
     });
 }
 
+RCT_EXPORT_METHOD(setOnLoadedTriggerBoth:(BOOL)flag) {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [Appodeal setTriggerPrecacheCallbacks:!flag];
+    });
+}
+
 RCT_EXPORT_METHOD(setChildDirectedTreatment:(BOOL)enabled) {
     dispatch_async(dispatch_get_main_queue(), ^{
         [Appodeal setChildDirectedTreatment:enabled];
@@ -463,7 +469,7 @@ RCT_EXPORT_METHOD(trackInAppPurchase:(double)amount currencyCode:(NSString *)cur
 
 - (void)nonSkippableVideoWillDismissAndWasFullyWatched:(BOOL)wasFullyWatched {
     NSDictionary *params = @{
-        @"fullyWatched": @(wasFullyWatched)
+        @"isFinished": @(wasFullyWatched)
     };
     [self sendEventWithName:kEventNonSkippableVideoClosed body:params];
 }
@@ -499,7 +505,7 @@ RCT_EXPORT_METHOD(trackInAppPurchase:(double)amount currencyCode:(NSString *)cur
 
 - (void)rewardedVideoWillDismissAndWasFullyWatched:(BOOL)wasFullyWatched {
     NSDictionary *params = @{
-        @"fullyWatched": @(wasFullyWatched)
+        @"isFinished": @(wasFullyWatched)
     };
     [self sendEventWithName:kEventRewardedVideoClosed body:params];
 }
@@ -528,10 +534,10 @@ RCT_EXPORT_METHOD(trackInAppPurchase:(double)amount currencyCode:(NSString *)cur
 
 #pragma mark - Noop
 
-RCT_EXPORT_METHOD(disableWriteExternalStoragePermissionCheck) {}
-RCT_EXPORT_METHOD(requestAndroidMPermissions) {}
-RCT_EXPORT_METHOD(muteVideosIfCallsMuted) {}
+RCT_EXPORT_METHOD(requestAndroidMPermissions:(RCTResponseSenderBlock)callback) {}
+RCT_EXPORT_METHOD(muteVideosIfCallsMuted:(BOOL)flag) {}
 RCT_EXPORT_METHOD(showTestScreen) {}
 RCT_EXPORT_METHOD(setSharedAdsInstanceAcrossActivities:(BOOL)flag) {}
+RCT_EXPORT_METHOD(disableWriteExternalStoragePermissionCheck) {}
 
 @end

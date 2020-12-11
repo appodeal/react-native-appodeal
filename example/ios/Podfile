@@ -9,24 +9,24 @@ source 'https://cdn.cocoapods.org/'
 
 def appodeal
   pod 'RNAppodeal', :path => '../../RNAppodeal.podspec' 
-  pod 'APDAdColonyAdapter', '2.8.1.1-Beta' 
-  pod 'APDAmazonAdsAdapter', '2.8.1.1-Beta' 
-  pod 'APDAppLovinAdapter', '2.8.1.1-Beta' 
-  pod 'APDBidMachineAdapter', '2.8.1.1-Beta' 
-  pod 'APDFacebookAudienceAdapter', '2.8.1.1-Beta' 
-  pod 'APDGoogleAdMobAdapter', '2.8.1.1-Beta' 
-  pod 'APDIronSourceAdapter', '2.8.1.1-Beta' 
-  pod 'APDMyTargetAdapter', '2.8.1.1-Beta' 
-  pod 'APDOguryAdapter', '2.8.1.1-Beta' 
-  pod 'APDSmaatoAdapter', '2.8.1.1-Beta' 
-  pod 'APDStartAppAdapter', '2.8.1.1-Beta' 
-  pod 'APDUnityAdapter', '2.8.1.1-Beta' 
-  pod 'APDVungleAdapter', '2.8.1.1-Beta' 
-  pod 'APDYandexAdapter', '2.8.1.1-Beta' 
+  pod 'APDAdColonyAdapter', '~> 2.8.1.1' 
+  pod 'APDAmazonAdsAdapter', '~> 2.8.1.1' 
+  pod 'APDAppLovinAdapter', '~> 2.8.1.1' 
+  pod 'APDBidMachineAdapter', '~> 2.8.1.1' 
+  pod 'APDFacebookAudienceAdapter', '~> 2.8.1.1' 
+  pod 'APDGoogleAdMobAdapter', '~> 2.8.1.1' 
+  pod 'APDIronSourceAdapter', '~> 2.8.1.1' 
+  pod 'APDMyTargetAdapter', '~> 2.8.1.1' 
+  pod 'APDOguryAdapter', '~> 2.8.1.1' 
+  pod 'APDSmaatoAdapter', '~> 2.8.1.1' 
+  pod 'APDStartAppAdapter', '~> 2.8.1.1' 
+  pod 'APDUnityAdapter', '~> 2.8.1.1' 
+  pod 'APDVungleAdapter', '~> 2.8.1.1' 
+  pod 'APDYandexAdapter', '~> 2.8.1.1' 
 end
 
 target 'Example' do
-  # Pods for Example
+  # Pods for example
   pod 'FBLazyVector', :path => "../node_modules/react-native/Libraries/FBLazyVector"
   pod 'FBReactNativeSpec', :path => "../node_modules/react-native/Libraries/FBReactNativeSpec"
   pod 'RCTRequired', :path => "../node_modules/react-native/Libraries/RCTRequired"

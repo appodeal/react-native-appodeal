@@ -15,6 +15,7 @@ export const initialize = (
     testing: boolean,
     callback: (consent: AppodealConsentStatus, regulation: AppodealConsentRegulation) => void
 ) => {
+    Appodeal.setLogLevel(constants.logLevel)
     // Setup callbacks
     registerListeners()
     // Set extras
@@ -26,10 +27,14 @@ export const initialize = (
     Appodeal.setAge(constants.user.age)
     Appodeal.setGender(constants.user.gender)
     Appodeal.setUserId(constants.user.id)
+    Appodeal.setOnLoadedTriggerBoth(false);
+    Appodeal.muteVideosIfCallsMuted(true);
+    Appodeal.requestAndroidMPermissions((params: any) => 
+        console.log(`Requested AndroidM writeExternalStorage: ${params.writeExternalStorage} accessCoarseLocation: ${params.accessCoarseLocation}`)
+    );
     // Global settings
     Appodeal.setSharedAdsInstanceAcrossActivities(true)
     Appodeal.disableLocationPermissionCheck()
-    Appodeal.setLogLevel(constants.logLevel)
     Appodeal.setTesting(testing)
     Appodeal.setTabletBanners(false)
     // Initialize Appodeal
@@ -136,7 +141,7 @@ const registerListeners = () => {
         console.log("Rewarded video finished. Amount: ", event.amount + ", currency: " + event.currency)
     )
     Appodeal.addEventListener(AppodealRewardedEvent.CLOSED, (event: any) =>
-        console.log("Rewarded video closed: ", event.isFinished)
+        console.log("Rewarded video closed, is finished: ", event.isFinished)
     )
     Appodeal.addEventListener(AppodealRewardedEvent.FAILED_TO_LOAD, () =>
         console.log("Rewarded video failed to load")

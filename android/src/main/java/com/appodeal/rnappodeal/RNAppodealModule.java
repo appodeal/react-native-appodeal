@@ -1,5 +1,6 @@
 package com.appodeal.rnappodeal;
 
+import android.telecom.Call;
 import android.widget.Toast;
 
 import com.explorestack.consent.Consent;
@@ -9,6 +10,7 @@ import com.explorestack.consent.ConsentInfoUpdateListener;
 import com.explorestack.consent.ConsentManager;
 import com.explorestack.consent.exception.ConsentManagerException;
 import com.facebook.react.bridge.LifecycleEventListener;
+import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
@@ -29,8 +31,11 @@ import com.appodeal.ads.NonSkippableVideoCallbacks;
 import com.appodeal.ads.RewardedVideoCallbacks;
 import com.appodeal.ads.utils.PermissionsHelper.AppodealPermissionCallbacks;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
-public class RNAppodealModule extends ReactContextBaseJavaModule implements InterstitialCallbacks, BannerCallbacks, NonSkippableVideoCallbacks, RewardedVideoCallbacks, AppodealPermissionCallbacks, LifecycleEventListener {
+
+public class RNAppodealModule extends ReactContextBaseJavaModule implements InterstitialCallbacks, BannerCallbacks, NonSkippableVideoCallbacks, RewardedVideoCallbacks, LifecycleEventListener {
 
     private final ReactApplicationContext reactContext;
     private ConsentForm consentForm;
@@ -49,7 +54,7 @@ public class RNAppodealModule extends ReactContextBaseJavaModule implements Inte
     }
 
     private String getPluginVersion() {
-        return "2.8.1";
+        return "2.8.2";
     }
 
     private void sendEventToJS(String eventName, WritableMap params) {
@@ -264,8 +269,8 @@ public class RNAppodealModule extends ReactContextBaseJavaModule implements Inte
     }
 
     @ReactMethod
-    public void setOnLoadedTriggerBoth(int adTypes, boolean flag) {
-        Appodeal.setTriggerOnLoadedOnPrecache(RNAppodealUtils.getAdTypesFormRNTypes(adTypes), flag);
+    public void setOnLoadedTriggerBoth(boolean flag) {
+        Appodeal.setTriggerOnLoadedOnPrecache(RNAppodealUtils.getAllTypes(), flag);
     }
 
     @ReactMethod
@@ -284,8 +289,32 @@ public class RNAppodealModule extends ReactContextBaseJavaModule implements Inte
     }
 
     @ReactMethod
-    public void requestAndroidMPermissions() {
-        Appodeal.requestAndroidMPermissions(getCurrentActivity(), this);
+    public void requestAndroidMPermissions(Callback callback) {
+        WritableMap params = Arguments.createMap();
+        RNAppodealDispatchGroup group = new RNAppodealDispatchGroup();
+        group.notify(new Runnable() {
+            @Override
+            public void run() {
+                if (callback != null) {
+                    callback.invoke(params);
+                }
+            };
+        });
+        group.enter();
+        group.enter();
+        Appodeal.requestAndroidMPermissions(getCurrentActivity(), new AppodealPermissionCallbacks() {
+            @Override
+            public void writeExternalStorageResponse(int i) {
+                params.putInt("writeExternalStorage", i);
+                group.leave();
+            }
+
+            @Override
+            public void accessCoarseLocationResponse(int i) {
+                params.putInt("accessCoarseLocation", i);
+                group.leave();
+            }
+        });
     }
 
     @ReactMethod
@@ -499,8 +528,7 @@ public class RNAppodealModule extends ReactContextBaseJavaModule implements Inte
     }
 
     @Override
-    public void onRewardedVideoClicked() {
-    }
+    public void onRewardedVideoClicked() { }
 
     @Override
     public void onNonSkippableVideoLoaded(boolean isPrecache) {
@@ -539,20 +567,6 @@ public class RNAppodealModule extends ReactContextBaseJavaModule implements Inte
     @Override
     public void onNonSkippableVideoExpired() {
         sendEventToJS("onNonSkippableVideoExpired", null);
-    }
-
-    @Override
-    public void accessCoarseLocationResponse(int response) {
-        WritableMap params = Arguments.createMap();
-        params.putBoolean("isGranted", response == PackageManager.PERMISSION_GRANTED);
-        sendEventToJS("accessCoarseLocationResponse", params);
-    }
-
-    @Override
-    public void writeExternalStorageResponse(int response) {
-        WritableMap params = Arguments.createMap();
-        params.putBoolean("isGranted", response == PackageManager.PERMISSION_GRANTED);
-        sendEventToJS("writeExternalStorageResponse", params);
     }
 
     @Override
