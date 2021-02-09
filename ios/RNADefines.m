@@ -47,15 +47,15 @@ NSString *const kEventNonSkippableVideoFinished        = @"onNonSkippableVideoFi
 @implementation RCTConvert (Appodeal)
 
 RCT_ENUM_CONVERTER(APDLogLevel, (@{
-                                   @"debug": @(APDLogLevelDebug),
-                                   @"verbose": @(APDLogLevelVerbose),
-                                   @"off": @(APDLogLevelOff),
-                                   }), APDLogLevelInfo, integerValue)
+    @"debug": @(APDLogLevelDebug),
+    @"verbose": @(APDLogLevelVerbose),
+    @"off": @(APDLogLevelOff),
+                                 }), APDLogLevelInfo, integerValue)
 
 RCT_ENUM_CONVERTER(AppodealUserGender, (@{
-                                          @"male": @(AppodealUserGenderMale),
-                                          @"female": @(AppodealUserGenderFemale),
-                                          }), AppodealUserGenderOther, integerValue)
+    @"male": @(AppodealUserGenderMale),
+    @"female": @(AppodealUserGenderFemale),
+                                        }), AppodealUserGenderOther, integerValue)
 
 + (RNAAdType)RNAAdType:(id)json RCT_DYNAMIC {
     return RNAAdTypeBannerTop;
@@ -67,40 +67,39 @@ RCT_ENUM_CONVERTER(AppodealUserGender, (@{
 #pragma mark - Utils
 
 NSString *RNAVersion() {
-    return @"2.8.2";
+    return @"2.9.0";
 }
 
 NSArray<NSString *> *RNASupportedMehtods() {
     return @[
-             kEventBannerLoaded,
-             kEventBannerFailedToLoad,
-             kEventBannerExpired,
-             kEventBannerShown,
-             kEventBannerClicked,
-             kEventInterstitialLoaded,
-             kEventInterstitialFailedToLoad,
-             kEventInterstitialShown,
-             kEventInterstitialFailedToPresent,
-             kEventInterstitialExpired,
-             kEventInterstitialClosed,
-             kEventInterstitialClicked,
-             kEventRewardedVideoLoaded,
-             kEventRewardedVideoFailedToLoad,
-             kEventRewardedVideoFailedToPresent,
-             kEventRewardedVideoExpired,
-             kEventRewardedVideoShown,
-             kEventRewardedVideoClosed,
-             kEventRewardedVideoFinished,
-             kEventNonSkippableVideoLoaded,
-             kEventNonSkippableVideoFailedToLoad,
-             kEventNonSkippableVideoFailedToPresent,
-             kEventNonSkippableVideoExpired,
-             kEventNonSkippableVideoShown,
-             kEventNonSkippableVideoClosed,
-             kEventNonSkippableVideoFinished
-             ];
+        kEventBannerLoaded,
+        kEventBannerFailedToLoad,
+        kEventBannerExpired,
+        kEventBannerShown,
+        kEventBannerClicked,
+        kEventInterstitialLoaded,
+        kEventInterstitialFailedToLoad,
+        kEventInterstitialShown,
+        kEventInterstitialFailedToPresent,
+        kEventInterstitialExpired,
+        kEventInterstitialClosed,
+        kEventInterstitialClicked,
+        kEventRewardedVideoLoaded,
+        kEventRewardedVideoFailedToLoad,
+        kEventRewardedVideoFailedToPresent,
+        kEventRewardedVideoExpired,
+        kEventRewardedVideoShown,
+        kEventRewardedVideoClosed,
+        kEventRewardedVideoFinished,
+        kEventNonSkippableVideoLoaded,
+        kEventNonSkippableVideoFailedToLoad,
+        kEventNonSkippableVideoFailedToPresent,
+        kEventNonSkippableVideoExpired,
+        kEventNonSkippableVideoShown,
+        kEventNonSkippableVideoClosed,
+        kEventNonSkippableVideoFinished
+    ];
 }
-
 
 AppodealAdType AppodealAdTypeFromRNAAdType(RNAAdType adType) {
     AppodealAdType result = 0;
@@ -134,7 +133,6 @@ AppodealAdType AppodealAdTypeFromRNAAdType(RNAAdType adType) {
     return result;
 }
 
-
 AppodealShowStyle AppodealShowStyleFromRNAAdType(RNAAdType adType) {
     if ((adType & RNAAdTypeInterstitial) > 0) {
         return AppodealShowStyleInterstitial;
@@ -158,7 +156,6 @@ AppodealShowStyle AppodealShowStyleFromRNAAdType(RNAAdType adType) {
     
     return 0;
 }
-
 
 BOOL isRNAAdTypeBanner(RNAAdType adType) {
     return ((adType & RNAAdTypeBanner) > 0 || (adType & RNAAdTypeBannerBottom) > 0 || (adType & RNAAdTypeBannerTop) > 0);
