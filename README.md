@@ -9,8 +9,8 @@ React Native package that adds Appodeal SDK support to your react-native applica
   + [Initialisation](#initialisation)
   + [Callbacks](#callbacks)
   + [Presentation](#presentation)
-* [Consent Manager](#consentmanager)
-* [Banner View](#bannerview)
+* [Consent Manager](#consent-manager)
+* [Banner View](#banner-view)
 * [Changelog](#changelog)
 
 ## Installation
