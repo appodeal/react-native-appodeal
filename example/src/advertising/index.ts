@@ -37,6 +37,7 @@ export const initialize = (
     Appodeal.disableLocationPermissionCheck()
     Appodeal.setTesting(testing)
     Appodeal.setTabletBanners(false)
+    Appodeal.disableNetwork("some_network_id", AppodealAdType.BANNER | AppodealAdType.INTERSTITIAL)
     // Initialize Appodeal
     Appodeal.synchroniseConsent(constants.appKey, (consent: AppodealConsentStatus, regulation: AppodealConsentRegulation) => {
         Appodeal.initialize(

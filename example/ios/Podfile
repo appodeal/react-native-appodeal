@@ -9,20 +9,20 @@ source 'https://cdn.cocoapods.org/'
 
 def appodeal
   pod 'RNAppodeal', :path => '../../RNAppodeal.podspec' 
-  pod 'APDAdColonyAdapter', '2.9.1.1' 
-  pod 'APDAmazonAdsAdapter', '2.9.1.1' 
-  pod 'APDAppLovinAdapter', '2.9.1.1' 
-  pod 'APDBidMachineAdapter', '2.9.1.1' 
-  pod 'APDFacebookAudienceAdapter', '2.9.1.1' 
-  pod 'APDGoogleAdMobAdapter', '2.9.1.1' 
-  pod 'APDIronSourceAdapter', '2.9.1.1' 
-  pod 'APDMyTargetAdapter', '2.9.1.1' 
-  pod 'APDOguryAdapter', '2.9.1.1' 
-  pod 'APDSmaatoAdapter', '2.9.1.1' 
-  pod 'APDStartAppAdapter', '2.9.1.1' 
-  pod 'APDUnityAdapter', '2.9.1.1' 
-  pod 'APDVungleAdapter', '2.9.1.1' 
-  pod 'APDYandexAdapter', '2.9.1.1' 
+  pod 'APDAdColonyAdapter', '2.10.0.1-Beta' 
+  pod 'APDAmazonAdsAdapter', '2.10.0.1-Beta' 
+  pod 'APDAppLovinAdapter', '2.10.0.1-Beta' 
+  pod 'APDBidMachineAdapter', '2.10.0.1-Beta' 
+  pod 'APDFacebookAudienceAdapter', '2.10.0.1-Beta' 
+  pod 'APDGoogleAdMobAdapter', '2.10.0.1-Beta' 
+  pod 'APDIronSourceAdapter', '2.10.0.1-Beta' 
+  pod 'APDMyTargetAdapter', '2.10.0.1-Beta' 
+  pod 'APDOguryAdapter', '2.10.0.1-Beta' 
+  pod 'APDSmaatoAdapter', '2.10.0.1-Beta' 
+  pod 'APDStartAppAdapter', '2.10.0.1-Beta' 
+  pod 'APDUnityAdapter', '2.10.0.1-Beta' 
+  pod 'APDVungleAdapter', '2.10.0.1-Beta' 
+  pod 'APDYandexAdapter', '2.10.0.1-Beta' 
 end
 
 target 'Example' do
@@ -67,4 +67,26 @@ target 'Example' do
 
   use_native_modules!
   use_frameworks!
+end
+
+post_install do |installer|
+  ## Fix for XCode 12.5
+  find_and_replace("../node_modules/react-native/ReactCommon/turbomodule/core/platform/ios/RCTTurboModuleManager.mm",
+                   "RCTBridgeModuleNameForClass(strongModule))",
+                   "RCTBridgeModuleNameForClass(Class(module)))"
+                   )
+end
+
+
+def find_and_replace(dir, findstr, replacestr)
+  Dir[dir].each do |name|
+      text = File.read(name)
+      replace = text.gsub(findstr, replacestr)
+      if text != replace
+          puts "Fix: " + name
+          File.open(name, "w") { |file| file.puts replace }
+          STDOUT.flush
+      end
+  end
+  Dir[dir + '*/'].each(&method(:find_and_replace))
 end

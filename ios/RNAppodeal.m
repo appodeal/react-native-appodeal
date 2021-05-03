@@ -276,15 +276,7 @@ RCT_EXPORT_METHOD(setChildDirectedTreatment:(BOOL)enabled) {
     });
 }
 
-RCT_EXPORT_METHOD(disableNetwork:(NSString *)name) {
-    dispatch_async(dispatch_get_main_queue(), ^{
-        AppodealAdType adType = 1 << 5 | AppodealAdTypeBanner | AppodealAdTypeNativeAd | AppodealAdTypeNonSkippableVideo | AppodealAdTypeRewardedVideo | AppodealAdTypeInterstitial;
-        [Appodeal disableNetworkForAdType:adType
-                                     name:name];
-    });
-}
-
-RCT_EXPORT_METHOD(disableNetworkType:(NSString *)name types:(NSInteger)adType) {
+RCT_EXPORT_METHOD(disableNetwork:(NSString *)name types:(NSInteger)adType) {
     dispatch_async(dispatch_get_main_queue(), ^{
         [Appodeal disableNetworkForAdType:AppodealAdTypeFromRNAAdType(adType) name:name];
     });

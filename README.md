@@ -188,9 +188,6 @@ Appodeal.setLogLevel(AppodealLogLevel.DEBUG);
 // Enable or disable child direct threatment
 // Call this method before initilisation
 Appodeal.setChildDirectedTreatment(false);
-// Disable network:
-// Call this method before initilisation
-Appodeal.disableNetwork("some_network");
 // Disable network for specific ad type:
 // Call this method before initilisation
 Appodeal.disableNetwork("some_network ", AppodealAdType.INTERSTITIAL);
@@ -519,6 +516,11 @@ Banner view has explicit callbacks.
 ```
 
 ## Changelog
+
+2.10.0-Beta
+
+* Update Appodeal to 2.10.0 (Beta)
+* [iOS] Fix `disableNetwork` method
 
 2.9.1
 
