@@ -31,11 +31,6 @@ export const RegulationSection = (props: RegulationSectionProps) => {
             <SectionHeader value="Regulation" />
             <Row title={"Regulation: " + regulations[props.regulation]} />
             <Row title={"Consent status: " + statuses[props.consent]} />
-            {props.synchronised ? (
-                <Row 
-                    title={"Force show consent dialog"} 
-                    onClick={() => Appodeal.forceShowConsentDialog(props.update)}/>
-            ) : null}
         </View>
     )
 }
