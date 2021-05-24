@@ -282,7 +282,7 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-Example/Pods-Example-resources.sh",
-				"${PODS_ROOT}/AppLovinSDK/applovin-ios-sdk-10.1.1/AppLovinSDKResources.bundle",
+				"${PODS_ROOT}/AppLovinSDK/applovin-ios-sdk-10.2.1/AppLovinSDKResources.bundle",
 				"${PODS_ROOT}/TapjoySDK/TapjoySDK_iOS_v12.7.0/Libraries/Tapjoy.embeddedframework/Tapjoy.framework/Versions/A/Resources/TapjoyResources.bundle",
 				"${PODS_ROOT}/YandexMobileAds/static/YandexMobileAds.framework/YandexMobileAdsBundle.bundle",
 			);
@@ -424,7 +424,7 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-Example-ExampleTests/Pods-Example-ExampleTests-resources.sh",
-				"${PODS_ROOT}/AppLovinSDK/applovin-ios-sdk-10.1.1/AppLovinSDKResources.bundle",
+				"${PODS_ROOT}/AppLovinSDK/applovin-ios-sdk-10.2.1/AppLovinSDKResources.bundle",
 				"${PODS_ROOT}/TapjoySDK/TapjoySDK_iOS_v12.7.0/Libraries/Tapjoy.embeddedframework/Tapjoy.framework/Versions/A/Resources/TapjoyResources.bundle",
 				"${PODS_ROOT}/YandexMobileAds/static/YandexMobileAds.framework/YandexMobileAdsBundle.bundle",
 			);

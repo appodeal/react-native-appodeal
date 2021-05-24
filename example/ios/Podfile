@@ -9,21 +9,20 @@ source 'https://cdn.cocoapods.org/'
 
 
 def appodeal
-  # pod 'RNAppodeal', :path => '../../RNAppodeal.podspec' 
-  pod 'APDAdColonyAdapter', '2.10.0.1-Beta' 
-  pod 'APDAmazonAdsAdapter', '2.10.0.1-Beta' 
-  pod 'APDAppLovinAdapter', '2.10.0.1-Beta' 
-  pod 'APDBidMachineAdapter', '2.10.0.1-Beta' 
-  pod 'APDFacebookAudienceAdapter', '2.10.0.1-Beta' 
-  pod 'APDGoogleAdMobAdapter', '2.10.0.1-Beta' 
-  pod 'APDIronSourceAdapter', '2.10.0.1-Beta' 
-  pod 'APDMyTargetAdapter', '2.10.0.1-Beta' 
-  pod 'APDOguryAdapter', '2.10.0.1-Beta' 
-  pod 'APDSmaatoAdapter', '2.10.0.1-Beta' 
-  pod 'APDStartAppAdapter', '2.10.0.1-Beta' 
-  pod 'APDUnityAdapter', '2.10.0.1-Beta' 
-  pod 'APDVungleAdapter', '2.10.0.1-Beta' 
-  pod 'APDYandexAdapter', '2.10.0.1-Beta' 
+  pod 'APDAdColonyAdapter', '2.10.1.1' 
+  pod 'APDAmazonAdsAdapter', '2.10.1.1' 
+  pod 'APDAppLovinAdapter', '2.10.1.1' 
+  pod 'APDBidMachineAdapter', '2.10.1.1' 
+  pod 'APDFacebookAudienceAdapter', '2.10.1.1' 
+  pod 'APDGoogleAdMobAdapter', '2.10.1.1' 
+  pod 'APDIronSourceAdapter', '2.10.1.1' 
+  pod 'APDMyTargetAdapter', '2.10.1.1' 
+  pod 'APDOguryAdapter', '2.10.1.1' 
+  pod 'APDSmaatoAdapter', '2.10.1.1' 
+  pod 'APDStartAppAdapter', '2.10.1.1' 
+  pod 'APDUnityAdapter', '2.10.1.1' 
+  pod 'APDVungleAdapter', '2.10.1.1' 
+  pod 'APDYandexAdapter', '2.10.1.1' 
 end
 
 target 'Example' do
@@ -49,7 +48,7 @@ post_install do |installer|
   fix_react_native_spec(installer)
 end
 
-def fix_react_native_spec(installer) {
+def fix_react_native_spec(installer) 
   installer.pods_project.targets.each do |target|
     if (target.name&.eql?('FBReactNativeSpec'))
       target.build_phases.each do |build_phase|
@@ -59,5 +58,5 @@ def fix_react_native_spec(installer) {
       end
     end
   end
-}
+end
 

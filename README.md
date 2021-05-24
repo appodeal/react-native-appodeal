@@ -517,6 +517,10 @@ Banner view has explicit callbacks.
 
 ## Changelog
 
+2.10.1 
+
+* Update Appodeal to 2.10.1 (Stable)
+
 2.10.0-Beta
 
 * Update Appodeal to 2.10.0 (Beta)
