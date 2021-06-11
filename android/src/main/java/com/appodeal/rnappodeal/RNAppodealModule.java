@@ -58,7 +58,9 @@ public class RNAppodealModule extends ReactContextBaseJavaModule implements Inte
     }
 
     private void sendEventToJS(String eventName, WritableMap params) {
-        reactContext.getJSModule(RCTDeviceEventEmitter.class).emit(eventName, params);
+        if (reactContext.hasActiveCatalystInstance()) {
+            reactContext.getJSModule(RCTDeviceEventEmitter.class).emit(eventName, params);
+        }
     }
 
     private int getConsentStatus() {
