@@ -24,7 +24,7 @@ Run following commands in project root directory
 #### iOS
 
 1. Go to `ios/` folder and open *Podfile*
-2. Add Appodeal adapters. See [Docs](https://wiki.appodeal.com/display/DE/iOS+SDK.+Integration+Guide)
+2. Add Appodeal adapters. See [Docs](https://wiki.appodeal.com/en/ios/get-started)
 
 > Note. Appodeal requires to use `use_frameworks!` . You need to remove Flipper dependency from Podfile and AppDelegate
 
@@ -75,7 +75,7 @@ allprojects {
 }
 ```
 
-> Note. You can change following implementation to use custom mediation setup. See [Docs](https://wiki.appodeal.com/display/DE/Android+SDK.+Integration+Guide)
+> Note. You can change following implementation to use custom mediation setup. See [Docs](https://wiki.appodeal.com/en/android/get-started)
 
 2. Enable `multidex` 
 
@@ -95,7 +95,7 @@ dependencies {
 }
 ```
 
-3. Set all required permissions in *AndroidManifest.xml*. See [Docs](https://wiki.appodeal.com/display/DE/Android+SDK.+Integration+Guide)
+3. Set all required permissions in *AndroidManifest.xml*. See [Docs](https://wiki.appodeal.com/en/android/get-started)
 
 ``` xml
 <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
