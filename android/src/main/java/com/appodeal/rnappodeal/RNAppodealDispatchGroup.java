@@ -4,8 +4,7 @@ public class RNAppodealDispatchGroup {
     private int count = 0;
     private Runnable runnable;
 
-    public RNAppodealDispatchGroup()
-    {
+    public RNAppodealDispatchGroup() {
         super();
         count = 0;
     }

@@ -58,7 +58,7 @@ Add dependencies into `build.gradle` (module: app)
 ``` groovy
 dependencies {
     ...
-    implementation 'com.appodeal.ads:sdk:2.10.0.+'
+    implementation 'com.appodeal.ads:sdk:2.10.2.+'
     ...
 }
 ```
@@ -516,6 +516,10 @@ Banner view has explicit callbacks.
 ```
 
 ## Changelog
+
+2.10.2
+
+* Update Appodeal to 2.10.2 (Stable)
 
 2.10.1 
 
