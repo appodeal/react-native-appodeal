@@ -24,7 +24,42 @@ Run following commands in project root directory
 #### iOS
 
 1. Go to `ios/` folder and open *Podfile*
-2. Add Appodeal adapters. See [Docs](https://wiki.appodeal.com/en/ios/get-started)
+2. Add Appodeal adapters. Add pods into `./ios/Podfile`:
+
+```ruby
+target 'App' do
+    config = use_native_modules!
+
+    use_react_native!(
+        :path => config[:reactNativePath],
+        :hermes_enabled => false
+    )
+
+    pod 'APDAdColonyAdapter'
+    pod 'APDAmazonAdsAdapter'
+    pod 'APDAppLovinAdapter' 
+    pod 'APDBidMachineAdapter'
+    pod 'APDFacebookAudienceAdapter'
+    pod 'APDGoogleAdMobAdapter'
+    pod 'APDIronSourceAdapter'
+    pod 'APDMyTargetAdapter'
+    pod 'APDOguryAdapter'
+    pod 'APDSmaatoAdapter'
+    pod 'APDStartAppAdapter'
+    pod 'APDUnityAdapter'
+    pod 'APDVungleAdapter'
+    pod 'APDYandexAdapter'
+
+    target 'AppTests' do
+        inherit! :complete
+    end
+
+    use_native_modules!
+    use_frameworks!
+end
+```
+
+You can change following implementation to use custom mediation setup. See [docs](https://wiki.appodeal.com/en/ios/get-started#iOSSDK.GetStarted-Step1.ImportSDK).
 
 > Note. Appodeal requires to use `use_frameworks!` . You need to remove Flipper dependency from Podfile and AppDelegate
 
@@ -40,12 +75,14 @@ Run following commands in project root directory
 </dict>
 ```
 
-Add *GADApplicationIdentifier* key (if you use APDGoogleAdMobAdapter).
+Add *GADApplicationIdentifier* key (if you use Admob adapter).
 
 ``` xml
 <key>GADApplicationIdentifier</key>
 <string>YOUR_ADMOB_APP_ID</string>
 ```
+
+For more information about Admob sync check out our [FAQ](https://faq.appodeal.com/en/articles/4185565-how-do-i-link-my-admob-account).
 
 6. Run your project ( `Cmd+R` )
 
@@ -144,6 +181,8 @@ In your *network_security_config.xml* file, add base-config that sets `cleartext
     </application>
 </manifest>
 ```
+
+For more information about Admob sync check out our [FAQ](https://faq.appodeal.com/en/articles/4185565-how-do-i-link-my-admob-account).
 
 ## Usage
 
@@ -407,7 +446,7 @@ Appodeal.hide(AppodealAdType.BANNER_TOP)
 
 Consent manager is used to provide GDPR and CCPA compliance. Consent manager SDK can be synchronized at any moment of application lifecycle. We recommend to synchronize it at application launch. Multiple synchronization calls are allowed.
 
-Required parameter is `appKey` - Appodeal API Key.
+Required parameter is `appKey` - Appodeal app key.
 
 To synchronise user consent you can use following methods. If user consent is required it will shows fullscreen Consent Dialog.
 Callback will return information about latest user consent and current regulation zone.
