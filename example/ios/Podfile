@@ -1,4 +1,4 @@
-platform :ios, '10.0'
+platform :ios, '11.0'
 require_relative '../node_modules/@react-native-community/cli-platform-ios/native_modules'
 require_relative '../node_modules/react-native/scripts/react_native_pods'
 
@@ -9,20 +9,18 @@ source 'https://cdn.cocoapods.org/'
 
 
 def appodeal
-  pod 'APDAdColonyAdapter', '2.10.2.1' 
-  pod 'APDAmazonAdsAdapter', '2.10.2.1' 
-  pod 'APDAppLovinAdapter', '2.10.2.1' 
-  pod 'APDBidMachineAdapter', '2.10.2.1' # Required 
-  pod 'APDFacebookAudienceAdapter', '2.10.2.1' 
-  pod 'APDGoogleAdMobAdapter', '2.10.2.1' 
-  pod 'APDIronSourceAdapter', '2.10.2.1' 
-  pod 'APDMyTargetAdapter', '2.10.2.1' 
-  pod 'APDOguryAdapter', '2.10.2.1' 
-  pod 'APDSmaatoAdapter', '2.10.2.1' 
-  pod 'APDStartAppAdapter', '2.10.2.1' 
-  pod 'APDUnityAdapter', '2.10.2.1' 
-  pod 'APDVungleAdapter', '2.10.2.1' 
-  pod 'APDYandexAdapter', '2.10.2.1' 
+  pod 'APDAdColonyAdapter', '2.10.3.1' 
+  pod 'APDAmazonAdsAdapter', '2.10.3.1' 
+  pod 'APDAppLovinAdapter', '2.10.3.1' 
+  pod 'APDBidMachineAdapter', '2.10.3.1' # Required
+  pod 'APDFacebookAudienceAdapter', '2.10.3.1' 
+  pod 'APDGoogleAdMobAdapter', '2.10.3.1' 
+  pod 'APDIronSourceAdapter', '2.10.3.1' 
+  pod 'APDMyTargetAdapter', '2.10.3.1' 
+  pod 'APDOguryAdapter', '2.10.3.1' 
+  pod 'APDUnityAdapter', '2.10.3.1' 
+  pod 'APDVungleAdapter', '2.10.3.1' 
+  pod 'APDYandexAdapter', '2.10.3.1' 
 end
 
 target 'Example' do
@@ -45,18 +43,5 @@ end
 
 post_install do |installer|
   react_native_post_install(installer)
-  fix_react_native_spec(installer)
+  __apply_Xcode_12_5_M1_post_install_workaround(installer)
 end
-
-def fix_react_native_spec(installer) 
-  installer.pods_project.targets.each do |target|
-    if (target.name&.eql?('FBReactNativeSpec'))
-      target.build_phases.each do |build_phase|
-        if (build_phase.respond_to?(:name) && build_phase.name.eql?('[CP-User] Generate Specs'))
-          target.build_phases.move(build_phase, 0)
-        end
-      end
-    end
-  end
-end
-

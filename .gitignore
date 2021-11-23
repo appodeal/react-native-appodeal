@@ -43,6 +43,7 @@ captures/
 .gradle
 local.properties
 *.iml
+*.hprof
 
 # BUCK
 buck-out/

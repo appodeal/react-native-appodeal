@@ -19,6 +19,8 @@ Run following commands in project root directory
 
 `$ npm install react-native-appodeal --save` 
 
+If you are using React Native version lower than 0.60 run following command:
+
 `$ react-native link react-native-appodeal` 
 
 #### iOS
@@ -95,7 +97,7 @@ Add dependencies into `build.gradle` (module: app)
 ``` groovy
 dependencies {
     ...
-    implementation 'com.appodeal.ads:sdk:2.10.2.+'
+    implementation 'com.appodeal.ads:sdk:2.10.3.+'
     ...
 }
 ```
@@ -555,6 +557,10 @@ Banner view has explicit callbacks.
 ```
 
 ## Changelog
+
+2.10.3
+
+* Update Appodeal to 2.10.3 (Stable)
 
 2.10.2
 
