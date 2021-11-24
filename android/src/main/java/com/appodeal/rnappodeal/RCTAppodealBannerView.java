@@ -6,6 +6,7 @@ import android.util.DisplayMetrics;
 import android.util.TypedValue;
 import android.view.View;
 
+import com.appodeal.ads.AdType;
 import com.appodeal.ads.Appodeal;
 import com.appodeal.ads.BannerCallbacks;
 import com.appodeal.ads.BannerView;
@@ -55,6 +56,8 @@ public class RCTAppodealBannerView extends ReactViewGroup implements BannerCallb
 
     public void setAdSize(String adSize) {
         int adType;
+        hide();
+
         if (adSize.equals("tablet")) {
             size = BannerSize.TABLET;
             adType = Appodeal.BANNER_VIEW;
@@ -72,10 +75,40 @@ public class RCTAppodealBannerView extends ReactViewGroup implements BannerCallb
                 Appodeal.cache(activity, adType);
             }
         }
+
+        setupAdView();
     }
 
     public void setPlacement(String placement) {
         this.placement = placement;
+    }
+
+    private void setupAdView() {
+        Activity activity = getReactContext().getCurrentActivity();
+        if (activity == null || this.adView != null) {
+            return;
+        }
+
+        View adView;
+
+        switch (size) {
+            case MREC:
+                adView = Appodeal.getMrecView(activity);
+                break;
+            case TABLET:
+                Appodeal.set728x90Banners(true);
+                adView = Appodeal.getBannerView(activity);
+                break;
+            default:
+                Appodeal.set728x90Banners(false);
+                adView = Appodeal.getBannerView(activity);
+                break;
+        }
+
+        if (adView != null) {
+            addView(adView);
+            this.adView = adView;
+        }
     }
 
     public void hide() {
@@ -86,37 +119,34 @@ public class RCTAppodealBannerView extends ReactViewGroup implements BannerCallb
     }
 
     private void showBannerView() {
-        Resources r = getReactContext().getResources();
-        DisplayMetrics dm = r.getDisplayMetrics();
-
-        int height;
-        View adView;
-        int adType;
-
         Activity activity = getReactContext().getCurrentActivity();
         if (activity == null) {
             return;
         }
 
+        int height;
+        int adType;
+
+        Resources r = getReactContext().getResources();
+        DisplayMetrics dm = r.getDisplayMetrics();
+
         switch (size) {
             case MREC:
                 adType = Appodeal.MREC;
                 height = 250;
-                adView = Appodeal.getMrecView(activity);
                 break;
             case TABLET:
                 adType = Appodeal.BANNER_VIEW;
                 height = 90;
                 Appodeal.set728x90Banners(true);
-                adView = Appodeal.getBannerView(activity);
                 break;
             default:
                 adType = Appodeal.BANNER_VIEW;
                 height = 50;
-                Appodeal.set728x90Banners(false);
-                adView = Appodeal.getBannerView(activity);
                 break;
         }
+
+        setupAdView();
 
         if (adView == null) {
             return;
@@ -127,7 +157,6 @@ public class RCTAppodealBannerView extends ReactViewGroup implements BannerCallb
 
         adView.setVisibility(VISIBLE);
         adView.setLayoutParams(new BannerView.LayoutParams(pxW, pxH));
-        addView(adView);
 
         if (this.placement != null) {
             Appodeal.show(activity, adType, placement);
@@ -141,7 +170,7 @@ public class RCTAppodealBannerView extends ReactViewGroup implements BannerCallb
     }
 
     private RCTEventEmitter getEmitter() {
-        return  getReactContext().getJSModule(RCTEventEmitter.class);
+        return getReactContext().getJSModule(RCTEventEmitter.class);
     }
 
     private int dp2px(int dp, DisplayMetrics dm) {
@@ -149,14 +178,20 @@ public class RCTAppodealBannerView extends ReactViewGroup implements BannerCallb
     }
 
     @Override
-    protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
-        super.onLayout(changed, left, top, right, bottom);
-        if (adView != null) { return; }
+    protected void onAttachedToWindow() {
+        super.onAttachedToWindow();
         showBannerView();
     }
 
     @Override
+    protected void onDetachedFromWindow() {
+        super.onDetachedFromWindow();
+        hide();
+    }
+
+    @Override
     public void onBannerLoaded(int height, boolean isPrecache) {
+        showBannerView();
         WritableMap params = Arguments.createMap();
         params.putInt("height", height);
         params.putBoolean("isPrecache", isPrecache);
