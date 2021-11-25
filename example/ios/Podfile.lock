@@ -451,7 +451,7 @@ PODS:
     - React-jsi (= 0.66.3)
     - React-logger (= 0.66.3)
     - React-perflogger (= 0.66.3)
-  - RNAppodeal (2.10.2):
+  - RNAppodeal (2.10.3):
     - Appodeal (= 2.10.3)
     - React
     - StackConsentManager (~> 1.1.2)
@@ -601,11 +601,8 @@ SPEC REPOS:
     - BDMMyTargetAdapter
     - BDMPangleAdapter
     - BDMVungleAdapter
-    - BidMachine
     - StackAnalytics
     - StackConsentManager
-    - StackIAB
-    - StackModules
   trunk:
     - AdColony
     - Ads-Global
@@ -728,7 +725,7 @@ SPEC CHECKSUMS:
   BDMMyTargetAdapter: ebd504fe35f2e96ca34ace51f730d49c5171cb7a
   BDMPangleAdapter: 8abeeacaef57a39db84681ff41b6f91e55adb873
   BDMVungleAdapter: 98f052cfe5b489bc1294746420669f012c8afc97
-  BidMachine: 5d318e0fb023a3dee4af3ec1dc53e4f574770d63
+  BidMachine: 4919ec9c4847b98108b11644979c98da28c3c4c2
   boost: a7c83b31436843459a1961bfd74b96033dc77234
   CriteoPublisherSdk: e0c7343d21474ac9a5381c002f2b3f40438f86ba
   DoubleConversion: 831926d9b8bf8166fd87886c4abab286c2422662
@@ -774,17 +771,17 @@ SPEC CHECKSUMS:
   React-RCTVibration: 50cfe7049167cfc7e83ac5542c6fff0c76791a9b
   React-runtimeexecutor: bbbdb3d8fcf327c6e2249ee71b6ef1764b7dc266
   ReactCommon: 9bac022ab71596f2b0fde1268272543184c63971
-  RNAppodeal: 2d517444d5356202d123867c185e145c4836dfd0
+  RNAppodeal: 3e26c13d0cc9a33862c8b6b3f9c61259ca36a61c
   StackAnalytics: f73189d1efb00ce0db74e7fe2836b76a4ebc24e9
   StackConsentManager: 760ff3055d40c3dd100456471157e1aeeaa5adde
-  StackIAB: 4883c72606861be98ad387f38fcd32ba5b53889d
-  StackModules: e8735fc690c074c41c38813fdc86cacbda749ea3
+  StackIAB: 49e1b3215c061f2bbe39198af34edd502bdee1ae
+  StackModules: 1c06d847d4bac095da46b8257ddb7b423ccfa305
   UnityAds: 9adbfd8ccc008e4e3e7b1bcf5666a126df4f1a8e
   VungleSDK-iOS: b370edd2e5787ecb25fc9332941deb1e1ca8176e
   YandexMobileAds: 8796ef1269362c2df9709914d28c17280b030d6b
   YandexMobileMetrica: 9e713c16bb6aca0ba63b84c8d7b8b86d32f4ecc4
   Yoga: 32a18c0e845e185f4a2a66ec76e1fd1f958f22fa
 
-PODFILE CHECKSUM: 1ce98541f30030cf55141ac790011817bc2fe2b5
+PODFILE CHECKSUM: d5045e457a190bf5617230d07a9283055a3a3128
 
 COCOAPODS: 1.11.2
