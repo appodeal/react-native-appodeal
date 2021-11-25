@@ -4,14 +4,20 @@ React Native package that adds Appodeal SDK support to your react-native applica
 
 ## Table of Contents
 
-* [Installation](#installation)
-* [Usage](#usage)
-  + [Initialisation](#initialisation)
-  + [Callbacks](#callbacks)
-  + [Presentation](#presentation)
-* [Consent Manager](#consent-manager)
-* [Banner View](#banner-view)
-* [Changelog](#changelog)
+- [react-native-appodeal](#react-native-appodeal)
+  - [Table of Contents](#table-of-contents)
+  - [Installation](#installation)
+      - [iOS](#ios)
+      - [Android](#android)
+  - [Usage](#usage)
+    - [Initialisation](#initialisation)
+    - [Callbacks](#callbacks)
+    - [Presentation](#presentation)
+  - [Consent Manager](#consent-manager)
+  - [Banner View](#banner-view)
+    - [Styling](#styling)
+    - [Callbacks](#callbacks-1)
+  - [Changelog](#changelog)
 
 ## Installation
 
@@ -19,7 +25,7 @@ Run following commands in project root directory
 
 `$ npm install react-native-appodeal --save` 
 
-If you are using React Native version lower than 0.60 run following command:
+If you are using React Native version **lower than 0.60** run following command:
 
 `$ react-native link react-native-appodeal` 
 
@@ -39,15 +45,13 @@ target 'App' do
 
     pod 'APDAdColonyAdapter'
     pod 'APDAmazonAdsAdapter'
-    pod 'APDAppLovinAdapter' 
+    pod 'APDAppLovinAdapter'
     pod 'APDBidMachineAdapter'
     pod 'APDFacebookAudienceAdapter'
     pod 'APDGoogleAdMobAdapter'
     pod 'APDIronSourceAdapter'
     pod 'APDMyTargetAdapter'
     pod 'APDOguryAdapter'
-    pod 'APDSmaatoAdapter'
-    pod 'APDStartAppAdapter'
     pod 'APDUnityAdapter'
     pod 'APDVungleAdapter'
     pod 'APDYandexAdapter'
@@ -108,6 +112,7 @@ Add repository into `build.gradle` (module: project)
 allprojects {
     repositories {
         ...
+        jcenter()
         maven { url "https://artifactory.appodeal.com/appodeal" }
         ...
     }
@@ -561,6 +566,7 @@ Banner view has explicit callbacks.
 2.10.3
 
 * Update Appodeal to 2.10.3 (Stable)
+* Improvements of AppodealBanner behaviour
 
 2.10.2
 
