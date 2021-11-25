@@ -56,7 +56,6 @@ public class RCTAppodealBannerView extends ReactViewGroup implements BannerCallb
 
     public void setAdSize(String adSize) {
         int adType;
-        hide();
 
         if (adSize.equals("tablet")) {
             size = BannerSize.TABLET;
@@ -76,6 +75,7 @@ public class RCTAppodealBannerView extends ReactViewGroup implements BannerCallb
             }
         }
 
+        hideBannerView();
         setupAdView();
     }
 
@@ -105,13 +105,11 @@ public class RCTAppodealBannerView extends ReactViewGroup implements BannerCallb
                 break;
         }
 
-        if (adView != null) {
-            addView(adView);
-            this.adView = adView;
-        }
+        addView(adView);
+        this.adView = adView;
     }
 
-    public void hide() {
+    public void hideBannerView() {
         if (adView != null) {
             removeView(adView);
             adView = null;
@@ -186,12 +184,11 @@ public class RCTAppodealBannerView extends ReactViewGroup implements BannerCallb
     @Override
     protected void onDetachedFromWindow() {
         super.onDetachedFromWindow();
-        hide();
+        hideBannerView();
     }
 
     @Override
     public void onBannerLoaded(int height, boolean isPrecache) {
-        showBannerView();
         WritableMap params = Arguments.createMap();
         params.putInt("height", height);
         params.putBoolean("isPrecache", isPrecache);

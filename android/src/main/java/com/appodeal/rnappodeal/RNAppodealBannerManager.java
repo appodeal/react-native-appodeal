@@ -30,7 +30,7 @@ public class RNAppodealBannerManager extends SimpleViewManager<RCTAppodealBanner
     @Override
     public void onDropViewInstance(@NonNull RCTAppodealBannerView view) {
         super.onDropViewInstance(view);
-        view.hide();
+        view.hideBannerView();
     }
 
     @Nullable
