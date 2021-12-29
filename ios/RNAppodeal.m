@@ -282,12 +282,6 @@ RCT_EXPORT_METHOD(disableNetwork:(NSString *)name types:(NSInteger)adType) {
     });
 }
 
-RCT_EXPORT_METHOD(disableLocationPermissionCheck) {
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [Appodeal setLocationTracking:NO];
-    });
-}
-
 RCT_EXPORT_METHOD(getVersion:(RCTResponseSenderBlock)callback) {
     dispatch_async(dispatch_get_main_queue(), ^{
         NSArray *params = @[
@@ -526,10 +520,8 @@ RCT_EXPORT_METHOD(trackInAppPurchase:(double)amount currencyCode:(NSString *)cur
 
 #pragma mark - Noop
 
-RCT_EXPORT_METHOD(requestAndroidMPermissions:(RCTResponseSenderBlock)callback) {}
 RCT_EXPORT_METHOD(muteVideosIfCallsMuted:(BOOL)flag) {}
 RCT_EXPORT_METHOD(showTestScreen) {}
 RCT_EXPORT_METHOD(setSharedAdsInstanceAcrossActivities:(BOOL)flag) {}
-RCT_EXPORT_METHOD(disableWriteExternalStoragePermissionCheck) {}
 
 @end

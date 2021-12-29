@@ -101,7 +101,7 @@ Add dependencies into `build.gradle` (module: app)
 ``` groovy
 dependencies {
     ...
-    implementation 'com.appodeal.ads:sdk:2.10.3.+'
+    implementation 'com.appodeal.ads:sdk:2.11.0.+'
     ...
 }
 ```
@@ -240,9 +240,6 @@ Appodeal.disableNetwork("some_network ", AppodealAdType.INTERSTITIAL);
 // Enable or disable triggering show for precache ads
 // Call this method before or after initilisation
 Appodeal.setOnLoadedTriggerBoth(true);
-// Disable location permission
-// Call this method before initilisation
-Appodeal.disableLocationPermissionCheck();
 ```
 
 * Segments and targeting. 
@@ -306,14 +303,6 @@ import {
 // Mute calls if calls muted on Android
 // Call this method before initilisation
 Appodeal.muteVideosIfCallsMuted(bool);
-// Disable write external permission warning on app start if its missing
-// Call this method before initilisation
-Appodeal.disableWriteExternalStoragePermissionCheck();
-// Request Android M permissions on app start
-// Call this method before initilisation
-Appodeal.requestAndroidMPermissions(params => 
-    console.log(`Requested AndroidM writeExternalStorage: ${params.writeExternalStorage} accessCoarseLocation: ${params.accessCoarseLocation}`)
-);
 ```
 
 ### Callbacks
@@ -563,6 +552,17 @@ Banner view has explicit callbacks.
 
 ## Changelog
 
+2.11.0
+
+* Update Appodeal to 2.11.0 (Stable)
+* Remove methods:
+
+``` javascript
+Appodeal.disableLocationPermissionCheck();
+Appodeal.disableWriteExternalStoragePermissionCheck();
+Appodeal.requestAndroidMPermissions(params => {});
+```
+ 
 2.10.3
 
 * Update Appodeal to 2.10.3 (Stable)
@@ -614,7 +614,6 @@ Banner view has explicit callbacks.
 2.8.0-Beta
 
 * Update Appodeal to 2.8.0 
-
 
 2.7.5
 

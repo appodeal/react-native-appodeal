@@ -1,12 +1,12 @@
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion 28
+    compileSdkVersion 31
     buildToolsVersion "28.0.3"
 
     defaultConfig {
         minSdkVersion 14
-        targetSdkVersion 28
+        targetSdkVersion 31
         versionCode 1
         versionName "1.0"
     }
@@ -34,8 +34,8 @@ repositories {
 dependencies {
     implementation 'com.facebook.react:react-native:+'
     // Appodeal
-    implementation 'com.appodeal.ads.sdk:core:2.10.3'
-    implementation 'com.appodeal.ads.sdk.networks:bidmachine:2.10.3.15'
+    implementation 'com.appodeal.ads.sdk:core:2.11.0'
+    implementation 'com.appodeal.ads.sdk.networks:bidmachine:2.11.0.17'
     // Consent manager
-    implementation 'com.explorestack:consent:1.0.1'
+    implementation 'com.explorestack:consent:1.0.5'
 }

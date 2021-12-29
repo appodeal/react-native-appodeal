@@ -1,6 +1,5 @@
 package com.appodeal.rnappodeal;
 
-import android.telecom.Call;
 import android.widget.Toast;
 
 import com.explorestack.consent.Consent;
@@ -10,7 +9,6 @@ import com.explorestack.consent.ConsentInfoUpdateListener;
 import com.explorestack.consent.ConsentManager;
 import com.explorestack.consent.exception.ConsentManagerException;
 import com.facebook.react.bridge.LifecycleEventListener;
-import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
@@ -22,17 +20,11 @@ import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.modules.core.DeviceEventManagerModule.RCTDeviceEventEmitter;
 import com.facebook.react.bridge.Arguments;
 
-import android.content.pm.PackageManager;
-
 import com.appodeal.ads.Appodeal;
 import com.appodeal.ads.BannerCallbacks;
 import com.appodeal.ads.InterstitialCallbacks;
 import com.appodeal.ads.NonSkippableVideoCallbacks;
 import com.appodeal.ads.RewardedVideoCallbacks;
-import com.appodeal.ads.utils.PermissionsHelper.AppodealPermissionCallbacks;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
 
 public class RNAppodealModule extends ReactContextBaseJavaModule implements InterstitialCallbacks, BannerCallbacks, NonSkippableVideoCallbacks, RewardedVideoCallbacks, LifecycleEventListener {
@@ -54,7 +46,7 @@ public class RNAppodealModule extends ReactContextBaseJavaModule implements Inte
     }
 
     private String getPluginVersion() {
-        return "2.10.3";
+        return "2.11.0";
     }
 
     private void sendEventToJS(String eventName, WritableMap params) {
@@ -278,45 +270,6 @@ public class RNAppodealModule extends ReactContextBaseJavaModule implements Inte
     @ReactMethod
     public void disableNetwork(String networkName, int adTypes) {
         Appodeal.disableNetwork(getCurrentActivity(), networkName, RNAppodealUtils.getAdTypesFormRNTypes(adTypes));
-    }
-
-    @ReactMethod
-    public void disableLocationPermissionCheck() {
-        Appodeal.disableLocationPermissionCheck();
-    }
-
-    @ReactMethod
-    public void disableWriteExternalStoragePermissionCheck() {
-        Appodeal.disableWriteExternalStoragePermissionCheck();
-    }
-
-    @ReactMethod
-    public void requestAndroidMPermissions(Callback callback) {
-        WritableMap params = Arguments.createMap();
-        RNAppodealDispatchGroup group = new RNAppodealDispatchGroup();
-        group.notify(new Runnable() {
-            @Override
-            public void run() {
-                if (callback != null) {
-                    callback.invoke(params);
-                }
-            };
-        });
-        group.enter();
-        group.enter();
-        Appodeal.requestAndroidMPermissions(getCurrentActivity(), new AppodealPermissionCallbacks() {
-            @Override
-            public void writeExternalStorageResponse(int i) {
-                params.putInt("writeExternalStorage", i);
-                group.leave();
-            }
-
-            @Override
-            public void accessCoarseLocationResponse(int i) {
-                params.putInt("accessCoarseLocation", i);
-                group.leave();
-            }
-        });
     }
 
     @ReactMethod

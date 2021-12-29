@@ -139,20 +139,11 @@ export default {
   hasConsent: (vendor: string, callback = handler) => {
     RNAppodeal.hasConsent(vendor, callback)
   },
-  requestAndroidMPermissions: (callback = handler) => {
-    RNAppodeal.requestAndroidMPermissions(callback)
-  },
   muteVideosIfCallsMuted: (value: boolean) => {
     RNAppodeal.muteVideosIfCallsMuted(value)
   },
   showTestScreen: () => {
     RNAppodeal.showTestScreen()
-  },
-  disableLocationPermissionCheck: () => {
-    RNAppodeal.disableLocationPermissionCheck()
-  },
-  disableWriteExternalStoragePermissionCheck: () => {
-    RNAppodeal.disableWriteExternalStoragePermissionCheck()
   },
   setSharedAdsInstanceAcrossActivities: (value: boolean) => {
     RNAppodeal.setSharedAdsInstanceAcrossActivities(value)
