@@ -555,6 +555,8 @@ Banner view has explicit callbacks.
 2.11.0
 
 * Update Appodeal to 2.11.0 (Stable)
+* Bump Android `compileSdkVersion` to **31**.
+* Bump Android `buildToolsVersion` to **31.0.0**
 * Remove methods:
 
 ``` javascript
