@@ -4,14 +4,15 @@ import {
     AppodealAdType,
     AppodealLogLevel, 
     AppodealGender,
-    AppodealConsentRegulation,
-    AppodealConsentStatus
+    AppodealCCPAConsentStatus,
+    AppodealGDPRConsentStatus,
+    AppodealPurchaseType
 } from './RNAppodealTypes';
 
 import * as AppodealInterstitialEvent from './events/interstiital';
 import * as AppodealRewardedEvent from './events/rewarded';
 import * as AppodealBannerEvent from './events/banner';
-import * as AppodealNonSkippableEvent from './events/nonskippable';
+import * as AppodealSdkEvent from './events/appodeal';
 
 
 export {
@@ -20,10 +21,11 @@ export {
     AppodealAdType,
     AppodealLogLevel,
     AppodealGender,
-    AppodealConsentRegulation,
-    AppodealConsentStatus,
+    AppodealCCPAConsentStatus,
+    AppodealGDPRConsentStatus,
+    AppodealPurchaseType,
     AppodealInterstitialEvent,
     AppodealRewardedEvent,
     AppodealBannerEvent,
-    AppodealNonSkippableEvent,
+    AppodealSdkEvent
 }

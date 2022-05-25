@@ -9,18 +9,23 @@ source 'https://cdn.cocoapods.org/'
 
 
 def appodeal
-  pod 'APDAdColonyAdapter', '2.11.0.1'
-  pod 'APDAmazonAdsAdapter', '2.11.0.1'
-  pod 'APDAppLovinAdapter', '2.11.0.1'
-  pod 'APDBidMachineAdapter', '2.11.0.1' # Required
-  pod 'APDFacebookAudienceAdapter', '2.11.0.1'
-  pod 'APDGoogleAdMobAdapter', '2.11.0.1'
-  pod 'APDIronSourceAdapter', '2.11.0.1'
-  pod 'APDMyTargetAdapter', '2.11.0.1'
-  pod 'APDOguryAdapter', '2.11.0.1'
-  pod 'APDUnityAdapter', '2.11.0.1'
-  pod 'APDVungleAdapter', '2.11.0.1'
-  pod 'APDYandexAdapter', '2.11.0.1'
+  pod 'APDAdColonyAdapter', '3.0.0.1-Beta'
+  pod 'APDAdjustAdapter', '3.0.0.1-Beta'
+  pod 'APDAmazonAdsAdapter', '3.0.0.1-Beta'
+  pod 'APDAppLovinAdapter', '3.0.0.1-Beta'
+  pod 'APDAppsFlyerAdapter', '3.0.0.1-Beta'
+  pod 'APDBidMachineAdapter', '3.0.0.1-Beta' # Required
+  pod 'APDFirebaseAdapter', '3.0.0.1-Beta'
+  pod 'APDGoogleAdMobAdapter', '3.0.0.1-Beta'
+  pod 'APDIABAdapter', '3.0.0.1-Beta' # Required
+  pod 'APDIronSourceAdapter', '3.0.0.1-Beta'
+  pod 'APDFacebookAdapter', '3.0.0.1-Beta'
+  pod 'APDMetaAudienceNetworkAdapter', '3.0.0.1-Beta'
+  pod 'APDMyTargetAdapter', '3.0.0.1-Beta'
+  pod 'APDStackAnalyticsAdapter', '3.0.0.1-Beta' # Required
+  pod 'APDUnityAdapter', '3.0.0.1-Beta'
+  pod 'APDVungleAdapter', '3.0.0.1-Beta'
+  pod 'APDYandexAdapter', '3.0.0.1-Beta'
 end
 
 target 'Example' do

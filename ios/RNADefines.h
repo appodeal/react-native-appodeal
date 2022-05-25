@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 #import <Appodeal/Appodeal.h>
 
+FOUNDATION_EXPORT NSString *const kEventAppodealInitialized;
+
 FOUNDATION_EXPORT NSString *const kEventBannerLoaded;
 FOUNDATION_EXPORT NSString *const kEventBannerFailedToLoad;
 FOUNDATION_EXPORT NSString *const kEventBannerExpired;
@@ -31,14 +33,6 @@ FOUNDATION_EXPORT NSString *const kEventRewardedVideoShown;
 FOUNDATION_EXPORT NSString *const kEventRewardedVideoClosed;
 FOUNDATION_EXPORT NSString *const kEventRewardedVideoFinished;
 
-FOUNDATION_EXPORT NSString *const kEventNonSkippableVideoLoaded;
-FOUNDATION_EXPORT NSString *const kEventNonSkippableVideoFailedToLoad;
-FOUNDATION_EXPORT NSString *const kEventNonSkippableVideoFailedToPresent;
-FOUNDATION_EXPORT NSString *const kEventNonSkippableVideoExpired;
-FOUNDATION_EXPORT NSString *const kEventNonSkippableVideoShown;
-FOUNDATION_EXPORT NSString *const kEventNonSkippableVideoClosed;
-FOUNDATION_EXPORT NSString *const kEventNonSkippableVideoFinished;
-
 NSString *RNAVersion(void);
 NSArray<NSString *> *RNASupportedMehtods(void);
 
@@ -49,13 +43,15 @@ typedef NS_OPTIONS(NSInteger, RNAAdType) {
     RNAAdTypeBannerBottom = 1 << 3,
     RNAAdTypeBannerTop = 1 << 4,
     RNAAdTypeRewardedVideo = 1 << 5,
-    RNAAdTypeNonSkippableVideo = 1 << 6,
     RNAAdTypeNative = 1 << 7,
     RNAAdTypeMREC = 1 << 8
 };
 
 AppodealAdType AppodealAdTypeFromRNAAdType(RNAAdType adType);
 AppodealShowStyle AppodealShowStyleFromRNAAdType(RNAAdType adType);
+APDCCPAUserConsent APDCCPAUserConsentFromRNConsent(NSInteger consent);
+APDGDPRUserConsent APDGDPRUserConsentFromRNConsent(NSInteger consent);
+APDPurchaseType APDPurchaseTypeFromRNPurchase(NSInteger type);
 BOOL isRNAAdTypeBanner(RNAAdType adType);
 CGSize RNAppodealBannerViewSizeFromString(NSString *size);
 NSString * NSStringFromAppodealBannerViewSize(CGSize size);

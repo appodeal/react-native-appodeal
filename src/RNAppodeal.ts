@@ -1,151 +1,387 @@
-'use strict';
+"use strict";
 
+import { NativeModules, NativeEventEmitter, EventEmitter } from "react-native";
 import {
-  NativeModules,
-  NativeEventEmitter
-} from 'react-native';
-import {
-  AdTypeType,
   AppodealLogLevel,
-  AppodealGender,
-  AppodealConsentStatus,
-  AppodealConsentRegulation
-} from './RNAppodealTypes'
+  AppodealGDPRConsentStatus,
+  AppodealCCPAConsentStatus,
+  AppodealPurchaseType,
+} from "./RNAppodealTypes";
 
 const RNAppodeal = NativeModules.RNAppodeal;
 
-type EventHandler = () => void
-type Event = string
-type ConsentHandler = (status: AppodealConsentStatus, regulation: AppodealConsentRegulation) => void
+type Map = { [key: string]: any };
+type EventHandler = (params?: any) => void;
+type Event = string;
+type AdType = number;
 
-const handler = () => {}
+const dummyHandler = () => {};
 const emitter = new NativeEventEmitter(RNAppodeal);
 const subscriptions = new Map<EventHandler, any>();
 
-const addEventListener = (event: Event, handler: EventHandler) => {
+const _addEventListener = (event: Event, handler: EventHandler) => {
   let listener = emitter.addListener(event, handler);
   subscriptions.set(handler, listener);
-  return { remove: () => removeEventListener(event, handler) };
+  return { remove: () => _removeEventListener(event, handler) };
 };
 
-const removeEventListener = (event: Event, handler: EventHandler) => {
+const _removeEventListener = (event: Event, handler: EventHandler) => {
   const listener = subscriptions.get(handler);
   listener.remove();
   subscriptions.delete(handler);
 };
 
-const removeAllListeners = () => {
+const _removeAllListeners = () => {
   subscriptions.forEach((listener, key, map) => {
     listener.remove();
     map.delete(key);
   });
 };
 
+/**
+ * Appodeal SDK interface
+ */
+export interface Appodeal {
+  /**
+   * Adds event listeners to Appodeal SDK
+   * @param event Event name
+   * @param handler Event listener callback handler
+   */
+  addEventListener(event: Event, handler: EventHandler): void;
+  /**
+   * Removes listener for specific event
+   * @param event Event name
+   * @param handler Event handler
+   */
+  removeEventListener(event: Event, handler: EventHandler): void;
+  /**
+   * Removes all event listener
+   */
+  removeAllListeners(): void;
+  /**
+   * Initialize Appodeal SDK
+   * @param appKey Application app key
+   * @param adTypes Ad types mask
+   */
+  initialize(appKey: string, adTypes: AdType): void;
+  /**
+   * Shows an ad if it has been loaded
+   * @param adTypes Ad type to be shown
+   * @param placement Optional placement name
+   * @param callback Optional callback indicating whether an ad was presented or not
+   */
+  show(adTypes: AdType, placement?: string, callback?: EventHandler);
+  /**
+   * Check if an ad is loaded
+   * @param adTypes Ad types
+   * @param callback Optional callback indicating whether an ad is loaded or not
+   */
+  isLoaded(adTypes: AdType, callback?: EventHandler);
+  /**
+   * Check if an ad can be shown for placement
+   * @param adTypes Ad types
+   * @param placement Optional placement name
+   * @param callback Optional callback indicating whether an ad can be shown or not
+   */
+  canShow(adTypes: AdType, placement?: string, callback?: EventHandler);
+  /**
+   * Hides presented ad
+   * @param adTypes Ad type mask
+   */
+  hide(adTypes: AdType);
+  /**
+   * Starting cache of an ad for specific ad type
+   * @param adTypes Ad types mask
+   */
+  cache(adTypes: AdType);
+  /**
+   * Enables or disables autocache for specific ad type
+   * @param adTypes Ad types masl
+   * @param value Boolean flag indicating whether the autocache should be enabled or not
+   */
+  setAutoCache(adTypes: AdType, value: boolean);
+  /**
+   * Check that loaded ad is precache or not
+   * @param adTypes Ad type
+   * @param callback Optional callback indicating whether an ad is precache
+   */
+  isPrecache(adTypes: AdType, callback?: EventHandler);
+  /**
+   * Force SDK use 728x90 or 320x50 banner size for top and bottom banner presentation size
+   * @param value Boolean flag indicating tablet or phone banner size
+   */
+  setTabletBanners(value: boolean);
+  /**
+   * Enables or disables smart sizing that fills full width for banners
+   * @param value Boolean flag indicating smart sizing supported
+   */
+  setSmartBanners(value: boolean);
+  /**
+   * Enables or disables banners refresh animation
+   * @param value Boolean flag indicating banner refresh animation enabled
+   */
+  setBannerAnimation(value: boolean);
+  /**
+   * Sets that application is for kids
+   * @param value Boolean flag indicating child directed treatment
+   */
+  setChildDirectedTreatment(value: boolean);
+  /**
+   * Update GDPR consent status
+   * @param value Consent status
+   */
+  updateGDPRConsent(value: AppodealGDPRConsentStatus);
+  /**
+   * Update CCPA consent status
+   * @param value Consent status
+   */
+  updateCCPAConsent(value: AppodealCCPAConsentStatus);
+  /**
+   * Enables or disables test mode
+   * @param value Boolean flag indicating test mode
+   */
+  setTesting(value: boolean);
+  /**
+   * Sets level of logged messages
+   * @param value Log level
+   */
+  setLogLevel(value: AppodealLogLevel);
+  /**
+   * Enables or disables firing of callback on load in case precache ad was loaded
+   * @param adTypes Ad type
+   * @param value Boolean flag indicating precache callbacks activity
+   */
+  setTriggerPrecacheCallbacks(adTypes: AdType, value: boolean);
+  /**
+   * Disables ad network for specific ad types
+   * @param network Network status
+   * @param adTypes Ad type mask
+   */
+  disableNetwork(network: string, adTypes: AdType);
+  /**
+   * Get Appodeal SDK version
+   * @param callback Callback returning current SDK version
+   */
+  getVersion(callback?: EventHandler);
+  /**
+   * Set user identifier
+   * @param id App specific user id
+   */
+  setUserId(id: string);
+  /**
+   * Set extras value in Appodeal SDK
+   * @param value Nullable extras value
+   * @param key Nonnull extras key
+   */
+  setExtrasValue(value: any | null, key: string);
+  /**
+   * Get Appodeal SDK extras
+   * @param callback Callback returning current SDK extras
+   */
+  getExtras(callback?: EventHandler);
+  /**
+   * Set custom state value in Appodeal SDK
+   * @param value Nullable custom state value
+   * @param key Nonnull custom state key
+   */
+  setCustomStateValue(value: any | null, key: string);
+  /**
+   * Get Appodeal SDK custom state
+   * @param callback Callback returning current SDK custom state
+   */
+  getCustomState(callback?: EventHandler);
+  /**
+   * Returns reward parameters for given placement
+   * @param placement Placement name
+   * @param callback Callback returning reward parameters
+   */
+  getRewardParameters(placement: string, callback?: EventHandler);
+  /**
+   * Returns predicted eCPM of loaded ad for ad type
+   * @param adType Ad type
+   * @param callback Callback returning predicted eCPM
+   */
+  predictedEcpm(adType: AdType, callback?: EventHandler);
+  /**
+   * Track in app purchase
+   * @param amount Purchase amount
+   * @param currency Purchase currency
+   */
+  trackInAppPurchase(amount: number, currency: string);
+  /**
+   * Validate and track in app purchase
+   * @param purchase Purchased product id
+   * @param type Purchased product type
+   * @param price Purchase price
+   * @param currency Purchase currency
+   * @param transaction Transaction id
+   * @param parameters Custom parameters
+   * @param callback Callback returning validation data
+   */
+  validateAndTrackInAppPurchase(
+    purchase: string,
+    type: AppodealPurchaseType,
+    price: string,
+    currency: string,
+    transaction: string,
+    parameters?: Map,
+    callback?: EventHandler
+  );
+  /**
+   * Track in app event
+   * @param name  Event name
+   * @param parameters Optional additional parameters
+   */
+  trackEvent(name: string, parameters?: Map);
+}
 
-export default {
-  ...RNAppodeal,
-  addEventListener,
-  removeEventListener,
-  removeAllListeners,
-  initialize: (appKey: String, adTypes: AdTypeType, consent?: boolean) => {
-    consent !== undefined ?
-      RNAppodeal.initialize(appKey, adTypes, consent) :
-      RNAppodeal.initializeWithConsentReport(appKey, adTypes)
+const appodeal: Appodeal = {
+  addEventListener: (event: Event, handler: EventHandler) => {
+    _addEventListener(event, handler);
   },
-  synchroniseConsent: (appKey: String, handler: ConsentHandler) => {
-    RNAppodeal.synchroniseConsent(appKey, handler)
+
+  removeEventListener: (event: Event, handler: EventHandler) => {
+    _removeEventListener(event, handler);
   },
-  show: (adTypes: AdTypeType, placement: string, callback = handler) => {
-    RNAppodeal.show(adTypes, placement, callback)
+
+  removeAllListeners: () => {
+    _removeAllListeners();
   },
-  isLoaded: (adTypes: AdTypeType, callback = handler) => {
-    RNAppodeal.isLoaded(adTypes, callback)
+
+  initialize: (appKey: string, adTypes: AdType) => {
+    RNAppodeal.initializeWithAppKey(appKey, adTypes);
   },
-  canShow: (adTypes: AdTypeType, placement: string, callback = handler) => {
-    RNAppodeal.canShow(adTypes, placement, callback)
+
+  show: (adTypes: AdType, placement?: string, callback?: EventHandler) => {
+    RNAppodeal.show(adTypes, placement || null, callback || dummyHandler);
   },
-  cache: (adTypes: AdTypeType) => {
-    RNAppodeal.cache(adTypes)
+
+  isLoaded: (adTypes: AdType, callback?: EventHandler) => {
+    RNAppodeal.isLoaded(adTypes, callback);
   },
-  hide: (adTypes: AdTypeType) => {
-    RNAppodeal.hide(adTypes)
+
+  canShow: (
+    adTypes: AdType,
+    placement?: string,
+    callback?: EventHandler
+  ) => {
+    RNAppodeal.canShow(adTypes, placement || null, callback || dummyHandler);
   },
-  setAutoCache: (adTypes: AdTypeType, value: boolean) => {
-    RNAppodeal.setAutoCache(adTypes, value)
+
+  hide: (adTypes: AdType) => {
+    RNAppodeal.hide(adTypes);
   },
-  isPrecache: (adTypes: AdTypeType, callback = handler) => {
-    RNAppodeal.isPrecache(adTypes, callback)
+
+  cache: (adTypes: AdType) => {
+    RNAppodeal.cache(adTypes);
   },
+
+  setAutoCache: (adTypes: AdType, value: boolean) => {
+    RNAppodeal.setAutoCache(adTypes, value);
+  },
+
+  isPrecache: (adTypes: AdType, callback?: EventHandler) => {
+    RNAppodeal.isPrecache(adTypes, callback || dummyHandler);
+  },
+
   setTabletBanners: (value: boolean) => {
-    RNAppodeal.setTabletBanners(value)
+    RNAppodeal.setTabletBanners(value);
   },
+
   setSmartBanners: (value: boolean) => {
-    RNAppodeal.setSmartBanners(value)
+    RNAppodeal.setSmartBanners(value);
   },
+
   setBannerAnimation: (value: boolean) => {
-    RNAppodeal.setBannerAnimation(value)
+    RNAppodeal.setBannerAnimation(value);
   },
-  setBannerBackground: (value: boolean) => {
-    RNAppodeal.setBannerBackground(value)
+
+  updateGDPRConsent: (value: AppodealGDPRConsentStatus) => {
+    RNAppodeal.updateGDPRConsent(value);
   },
-  updateConsent: (value: boolean) => {
-    RNAppodeal.updateConsent(value)
+
+  updateCCPAConsent: (value: AppodealCCPAConsentStatus) => {
+    RNAppodeal.updateCCPAConsent(value);
   },
-  forceShowConsentDialog: (callback = handler) => {
-    RNAppodeal.forceShowConsentDialog(callback);
-  },
-  setTesting: (value: boolean) => {
-    RNAppodeal.setTesting(value)
-  },
-  setLogLevel: (value: AppodealLogLevel) => {
-    RNAppodeal.setLogLevel(value)
-  },
+
   setChildDirectedTreatment: (value: boolean) => {
-    RNAppodeal.setChildDirectedTreatment(value)
+    RNAppodeal.setChildDirectedTreatment(value);
   },
-  setOnLoadedTriggerBoth:(value: boolean) => {
-    RNAppodeal.setOnLoadedTriggerBoth(value)
+
+  setTesting: (value: boolean) => {
+    RNAppodeal.setTesting(value);
   },
-  disableNetwork: (network: string, adTypes: AdTypeType) => {
-    RNAppodeal.disableNetwork(network, adTypes)
+
+  setLogLevel: (value: AppodealLogLevel) => {
+    RNAppodeal.setLogLevel(value);
   },
-  getVersion: (callback = handler) => {
-    RNAppodeal.getVersion(callback)
+
+  setTriggerPrecacheCallbacks: (adTypes: AdType, value: boolean) => {
+    RNAppodeal.setTriggerPrecacheCallbacks(adTypes, value);
   },
-  setSegmentFilter: (filter: { [key: string]: any }) => {
-    RNAppodeal.setSegmentFilter(filter)
+
+  disableNetwork: (network: string, adTypes: AdType) => {
+    RNAppodeal.disableNetwork(network, adTypes);
   },
-  setExtras: (extras: { [key: string]: any }) => {
-    RNAppodeal.setExtras(extras)
+
+  getVersion: (callback?: EventHandler) => {
+    RNAppodeal.getVersion(callback || dummyHandler);
   },
-  trackInAppPurchase: (amount: number, currency: string) => {
-    RNAppodeal.trackInAppPurchase(amount, currency)
-  },
-  getRewardParameters: (placement: string, callback = handler) => {
-    RNAppodeal.getRewardParameters(placement, callback)
-  },
-  predictedEcpm: (adType: AdTypeType, callback = handler) => {
-    RNAppodeal.predictedEcpm(adType, callback)
-  },
-  setAge: (age: string) => {
-    RNAppodeal.setAge(age)
-  },
-  setGender: (gender: AppodealGender) => {
-    RNAppodeal.setGender(gender)
-  },
+
   setUserId: (id: string) => {
-    RNAppodeal.setUserId(id)
+    RNAppodeal.setUserId(id);
   },
-  hasConsent: (vendor: string, callback = handler) => {
-    RNAppodeal.hasConsent(vendor, callback)
+  setExtrasValue: (value: any | null, key: string) => {
+    RNAppodeal.setExtrasValue(value, key);
   },
-  muteVideosIfCallsMuted: (value: boolean) => {
-    RNAppodeal.muteVideosIfCallsMuted(value)
+
+  getExtras: (callback?: EventHandler) => {
+    RNAppodeal.getExtras(callback || dummyHandler);
   },
-  showTestScreen: () => {
-    RNAppodeal.showTestScreen()
+
+  setCustomStateValue: (value: any | null, key: string) => {
+    RNAppodeal.setCustomStateValue(value, key);
   },
-  setSharedAdsInstanceAcrossActivities: (value: boolean) => {
-    RNAppodeal.setSharedAdsInstanceAcrossActivities(value)
-  }
+
+  getCustomState: (callback?: EventHandler) => {
+    RNAppodeal.getExtras(callback);
+  },
+
+  getRewardParameters: (placement: string, callback?: EventHandler) => {
+    RNAppodeal.getRewardParameters(placement, callback || dummyHandler);
+  },
+
+  predictedEcpm: (adType: AdType, callback?: EventHandler) => {
+    RNAppodeal.predictedEcpm(adType, callback || dummyHandler);
+  },
+
+  trackInAppPurchase: (amount: number, currency: string) => {
+    RNAppodeal.trackInAppPurchase(amount, currency);
+  },
+
+  validateAndTrackInAppPurchase: (
+    purchase: string,
+    type: AppodealPurchaseType,
+    price: string,
+    currency: string,
+    transaction: string,
+    parameters?: Map,
+    callback?: EventHandler
+  ) => {
+    RNAppodeal.validateAndTrackInAppPurchase(
+      purchase,
+      type,
+      price,
+      currency,
+      transaction,
+      parameters || null,
+      callback || dummyHandler
+    );
+  },
+
+  trackEvent: (name: string, parameters?: Map) => {
+    RNAppodeal.trackEvent(name, parameters || null);
+  },
 };
+
+export default appodeal;

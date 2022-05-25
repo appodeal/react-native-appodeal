@@ -12,6 +12,8 @@
 
 #pragma mark - Constants
 
+NSString *const kEventAppodealInitialized   = @"onAppodeallInitialized";
+
 NSString *const kEventBannerLoaded          = @"onBannerLoaded";
 NSString *const kEventBannerFailedToLoad    = @"onBannerFailedToLoad";
 NSString *const kEventBannerExpired         = @"onBannerExpired";
@@ -33,29 +35,22 @@ NSString *const kEventRewardedVideoExpired          = @"onRewardedVideoExpired";
 NSString *const kEventRewardedVideoShown            = @"onRewardedVideoShown";
 NSString *const kEventRewardedVideoClosed           = @"onRewardedVideoClosed";
 NSString *const kEventRewardedVideoFinished         = @"onRewardedVideoFinished";
-
-NSString *const kEventNonSkippableVideoLoaded          = @"onNonSkippableVideoLoaded";
-NSString *const kEventNonSkippableVideoFailedToLoad    = @"onNonSkippableVideoFailedToLoad";
-NSString *const kEventNonSkippableVideoFailedToPresent = @"onNonSkippableVideoFailedToShow";
-NSString *const kEventNonSkippableVideoExpired         = @"onNonSkippableVideoExpired";
-NSString *const kEventNonSkippableVideoShown           = @"onNonSkippableVideoShown";
-NSString *const kEventNonSkippableVideoClosed          = @"onNonSkippableVideoClosed";
-NSString *const kEventNonSkippableVideoFinished        = @"onNonSkippableVideoFinished";
+NSString *const kEventRewardedVideoClicked          = @"onRewardedVideoClicked";
 
 #pragma mark - Converter
 
 @implementation RCTConvert (Appodeal)
 
 RCT_ENUM_CONVERTER(APDLogLevel, (@{
-    @"debug": @(APDLogLevelDebug),
-    @"verbose": @(APDLogLevelVerbose),
-    @"off": @(APDLogLevelOff),
-                                 }), APDLogLevelInfo, integerValue)
+    @"debug":    @(APDLogLevelDebug),
+    @"verbose":  @(APDLogLevelVerbose),
+    @"off":      @(APDLogLevelOff),
+}), APDLogLevelInfo, integerValue)
 
 RCT_ENUM_CONVERTER(AppodealUserGender, (@{
-    @"male": @(AppodealUserGenderMale),
-    @"female": @(AppodealUserGenderFemale),
-                                        }), AppodealUserGenderOther, integerValue)
+    @"male":    @(AppodealUserGenderMale),
+    @"female":  @(AppodealUserGenderFemale),
+}), AppodealUserGenderOther, integerValue)
 
 + (RNAAdType)RNAAdType:(id)json RCT_DYNAMIC {
     return RNAAdTypeBannerTop;
@@ -67,11 +62,12 @@ RCT_ENUM_CONVERTER(AppodealUserGender, (@{
 #pragma mark - Utils
 
 NSString *RNAVersion() {
-    return @"2.11.0";
+    return @"3.0.0";
 }
 
 NSArray<NSString *> *RNASupportedMehtods() {
     return @[
+        kEventAppodealInitialized,
         kEventBannerLoaded,
         kEventBannerFailedToLoad,
         kEventBannerExpired,
@@ -91,13 +87,7 @@ NSArray<NSString *> *RNASupportedMehtods() {
         kEventRewardedVideoShown,
         kEventRewardedVideoClosed,
         kEventRewardedVideoFinished,
-        kEventNonSkippableVideoLoaded,
-        kEventNonSkippableVideoFailedToLoad,
-        kEventNonSkippableVideoFailedToPresent,
-        kEventNonSkippableVideoExpired,
-        kEventNonSkippableVideoShown,
-        kEventNonSkippableVideoClosed,
-        kEventNonSkippableVideoFinished
+        kEventRewardedVideoClicked
     ];
 }
 
@@ -115,19 +105,12 @@ AppodealAdType AppodealAdTypeFromRNAAdType(RNAAdType adType) {
         result |= AppodealAdTypeRewardedVideo;
     }
     
-    if ((adType & RNAAdTypeRewardedVideo) > 0) {
-        result |= AppodealAdTypeNonSkippableVideo;
-    }
-    
     if ((adType & RNAAdTypeNative) > 0) {
         result |= AppodealAdTypeNativeAd;
     }
     
     if ((adType & RNAAdTypeMREC) > 0) {
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated"
         result |= AppodealAdTypeMREC;
-#pragma clang diagnostic pop
     }
     
     return result;
@@ -150,11 +133,19 @@ AppodealShowStyle AppodealShowStyleFromRNAAdType(RNAAdType adType) {
         return AppodealShowStyleRewardedVideo;
     }
     
-    if ((adType & RNAAdTypeNonSkippableVideo) > 0) {
-        return AppodealShowStyleNonSkippableVideo;
-    }
-    
     return 0;
+}
+
+APDCCPAUserConsent APDCCPAUserConsentFromRNConsent(NSInteger consent) {
+    return (APDCCPAUserConsent)consent;
+}
+
+APDGDPRUserConsent APDGDPRUserConsentFromRNConsent(NSInteger consent) {
+    return (APDGDPRUserConsent)consent;
+}
+
+APDPurchaseType APDPurchaseTypeFromRNPurchase(NSInteger type) {
+    return (APDPurchaseType)type;
 }
 
 BOOL isRNAAdTypeBanner(RNAAdType adType) {

@@ -1,6 +1,6 @@
 #import "RNAppodeal.h"
-#import <StackConsentManager/StackConsentManager.h>
 #import "RNADefines.h"
+
 #import <React/RCTUtils.h>
 
 
@@ -8,13 +8,11 @@
 AppodealBannerDelegate,
 AppodealInterstitialDelegate,
 AppodealRewardedVideoDelegate,
-AppodealNonSkippableVideoDelegate,
-STKConsentManagerDisplayDelegate
+AppodealInitializationDelegate
 >
 
-@property (nonatomic, copy) RCTResponseSenderBlock consentCallback;
-
 @end
+
 
 @implementation RNAppodeal
 
@@ -29,112 +27,26 @@ NSArray *RNAppodealConsentParameters(void) {
 
 RCT_EXPORT_MODULE();
 
-- (void)initializeSdkWithAppKey:(NSString *)appKey
-                        adTypes:(AppodealAdType)adTypes
-                        consent:(NSNumber *)consent {
+#pragma mark - Method export
+
+RCT_EXPORT_METHOD(initializeWithAppKey:(nonnull NSString *)appKey
+                  adTypes:(NSInteger)adTypes) {
     dispatch_async(dispatch_get_main_queue(), ^{
         [Appodeal setFramework:APDFrameworkReactNative version:RNAVersion()];
         
         [Appodeal setRewardedVideoDelegate:self];
-        [Appodeal setNonSkippableVideoDelegate:self];
         [Appodeal setBannerDelegate:self];
         [Appodeal setInterstitialDelegate:self];
-        
-        if (consent != nil) {
-            [Appodeal initializeWithApiKey:appKey
-                                     types:adTypes
-                                hasConsent:consent.boolValue];
-        } else if (STKConsentManager.sharedManager.consent != nil) {
-            [Appodeal initializeWithApiKey:appKey
-                                     types:adTypes
-                             consentReport:STKConsentManager.sharedManager.consent];
-        } else {
-            [Appodeal initializeWithApiKey:appKey
-                                     types:adTypes
-                                hasConsent:NO];
-        }
+        [Appodeal setInitializationDelegate:self];
+
+        [Appodeal initializeWithApiKey:appKey
+                                 types:adTypes];
     });
 }
 
-#pragma mark - Method export
-
-RCT_EXPORT_METHOD(initialize:(NSString *)appKey types:(NSInteger)adType consent:(BOOL)consent) {
-    [self initializeSdkWithAppKey:appKey
-                          adTypes:AppodealAdTypeFromRNAAdType(adType)
-                          consent:@(consent)];
-}
-
-RCT_EXPORT_METHOD(initializeWithConsentReport:(NSString *)appKey types:(NSInteger)adType) {
-    [self initializeSdkWithAppKey:appKey
-                          adTypes:AppodealAdTypeFromRNAAdType(adType)
-                          consent:nil];
-}
-
-RCT_EXPORT_METHOD(synchroniseConsent:(NSString *)appKey callback:(RCTResponseSenderBlock)callback) {
-    dispatch_async(dispatch_get_main_queue(), ^{
-        __weak typeof(self) weakSelf = self;
-        [STKConsentManager.sharedManager synchronizeWithAppKey:appKey
-                                                    completion:^(NSError *error) {
-            __strong typeof(self) strongSelf = weakSelf;
-            if (error) {
-                NSLog(@"Error while synchronising consent manager: %@", error);
-            }
-            
-            if (STKConsentManager.sharedManager.shouldShowConsentDialog != STKConsentBoolTrue) {
-                callback ? callback(RNAppodealConsentParameters()) : nil;
-                return ;
-            }
-            
-            [STKConsentManager.sharedManager loadConsentDialog:^(NSError *error) {
-                if (error) {
-                    NSLog(@"Error while loading consent dialog: %@", error);
-                }
-                
-                if (!STKConsentManager.sharedManager.isConsentDialogReady) {
-                    callback ? callback(RNAppodealConsentParameters()) : nil;
-                    return ;
-                }
-                
-                strongSelf.consentCallback = callback;
-                [STKConsentManager.sharedManager showConsentDialogFromRootViewController:RCTPresentedViewController()
-                                                                                delegate:self];
-            }];
-        }];
-    });
-}
-
-RCT_EXPORT_METHOD(forceShowConsentDialog:(RCTResponseSenderBlock)callback) {
-    dispatch_async(dispatch_get_main_queue(), ^{
-        __weak typeof(self) weakSelf = self;
-        [STKConsentManager.sharedManager loadConsentDialog:^(NSError *error) {
-            __strong typeof(self) strongSelf = weakSelf;
-            if (error) {
-                NSLog(@"Error while loading consent dialog: %@", error);
-            }
-            
-            if (!STKConsentManager.sharedManager.isConsentDialogReady) {
-                callback ? callback(RNAppodealConsentParameters()) : nil;
-                return ;
-            }
-            
-            strongSelf.consentCallback = callback;
-            [STKConsentManager.sharedManager showConsentDialogFromRootViewController:RCTPresentedViewController()
-                                                                            delegate:self];
-        }];
-    });
-}
-
-RCT_EXPORT_METHOD(hasConsent:(NSString *)vendorBundle callback:(RCTResponseSenderBlock)callback) {
-    dispatch_async(dispatch_get_main_queue(), ^{
-        BOOL result = [STKConsentManager.sharedManager hasConsentForVendorBundle:vendorBundle];
-        NSArray *params = @[
-            @(result)
-        ];
-        callback(params);
-    });
-}
-
-RCT_EXPORT_METHOD(show:(int)showType placement:(NSString *)placement result:(RCTResponseSenderBlock)callback) {
+RCT_EXPORT_METHOD(show:(int)showType
+                  placement:(nullable NSString *)placement
+                  result:(nonnull RCTResponseSenderBlock)callback) {
     dispatch_async(dispatch_get_main_queue(), ^{
         BOOL result = [Appodeal showAd:AppodealShowStyleFromRNAAdType(showType)
                           forPlacement:placement
@@ -146,7 +58,8 @@ RCT_EXPORT_METHOD(show:(int)showType placement:(NSString *)placement result:(RCT
     });
 }
 
-RCT_EXPORT_METHOD(isLoaded:(int)showType result:(RCTResponseSenderBlock)callback) {
+RCT_EXPORT_METHOD(isLoaded:(int)showType
+                  result:(nonnull RCTResponseSenderBlock)callback) {
     dispatch_async(dispatch_get_main_queue(), ^{
         BOOL result = [Appodeal isReadyForShowWithStyle:AppodealShowStyleFromRNAAdType(showType)];
         NSArray *params = @[
@@ -156,7 +69,9 @@ RCT_EXPORT_METHOD(isLoaded:(int)showType result:(RCTResponseSenderBlock)callback
     });
 }
 
-RCT_EXPORT_METHOD(canShow:(NSInteger)showType placement:(NSString *)placement result:(RCTResponseSenderBlock)callback) {
+RCT_EXPORT_METHOD(canShow:(NSInteger)showType
+                  placement:(nullable NSString *)placement
+                  result:(nonnull RCTResponseSenderBlock)callback) {
     dispatch_async(dispatch_get_main_queue(), ^{
         BOOL result = [Appodeal canShow:AppodealAdTypeFromRNAAdType(showType) forPlacement:placement];
         NSArray *params = @[
@@ -166,13 +81,8 @@ RCT_EXPORT_METHOD(canShow:(NSInteger)showType placement:(NSString *)placement re
     });
 }
 
-RCT_EXPORT_METHOD(updateConsent:(BOOL)consent) {
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [Appodeal updateConsent:consent];
-    });
-}
-
-RCT_EXPORT_METHOD(predictedEcpm:(NSInteger)adType result:(RCTResponseSenderBlock)callback) {
+RCT_EXPORT_METHOD(predictedEcpm:(NSInteger)adType
+                  result:(nonnull RCTResponseSenderBlock)callback) {
     dispatch_async(dispatch_get_main_queue(), ^{
         double eCPM = [Appodeal predictedEcpmForAdType:AppodealAdTypeFromRNAAdType(adType)];
         NSArray *params = @[
@@ -194,13 +104,15 @@ RCT_EXPORT_METHOD(hide:(int)adType) {
     });
 }
 
-RCT_EXPORT_METHOD(setAutoCache:(NSInteger)adType autocache:(BOOL)autocache) {
+RCT_EXPORT_METHOD(setAutoCache:(NSInteger)adType
+                  autocache:(BOOL)autocache) {
     dispatch_async(dispatch_get_main_queue(), ^{
         [Appodeal setAutocache:autocache types:AppodealAdTypeFromRNAAdType(adType)];
     });
 }
 
-RCT_EXPORT_METHOD(isPrecache:(NSInteger)adType calls:(RCTResponseSenderBlock)callback) {
+RCT_EXPORT_METHOD(isPrecache:(NSInteger)adType
+                  calls:(nonnull RCTResponseSenderBlock)callback) {
     dispatch_async(dispatch_get_main_queue(), ^{
         BOOL result = [Appodeal isAutocacheEnabled:AppodealAdTypeFromRNAAdType(adType)];
         NSArray *params = @[
@@ -210,7 +122,8 @@ RCT_EXPORT_METHOD(isPrecache:(NSInteger)adType calls:(RCTResponseSenderBlock)cal
     });
 }
 
-RCT_EXPORT_METHOD(predictedEcpm:(NSInteger)adType calls:(RCTResponseSenderBlock)callback) {
+RCT_EXPORT_METHOD(predictedEcpm:(NSInteger)adType
+                  calls:(nonnull RCTResponseSenderBlock)callback) {
     dispatch_async(dispatch_get_main_queue(), ^{
         double eCPM = [Appodeal predictedEcpmForAdType:AppodealAdTypeFromRNAAdType(adType)];
         NSArray *params = @[
@@ -220,20 +133,25 @@ RCT_EXPORT_METHOD(predictedEcpm:(NSInteger)adType calls:(RCTResponseSenderBlock)
     });
 }
 
+#pragma mark - Consent
+
+RCT_EXPORT_METHOD(updateGDPRConsent:(NSInteger)consent) {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [Appodeal updateUserConsentGDPR:APDGDPRUserConsentFromRNConsent(consent)];
+    });
+}
+
+RCT_EXPORT_METHOD(updateCCPAConsent:(NSInteger)consent) {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [Appodeal updateUserConsentCCPA:APDCCPAUserConsentFromRNConsent(consent)];
+    });
+}
+
 #pragma mark - Banner
 
 RCT_EXPORT_METHOD(setSmartBanners:(BOOL)smartBanners) {
     dispatch_async(dispatch_get_main_queue(), ^{
         [Appodeal setSmartBannersEnabled:smartBanners];
-    });
-}
-
-RCT_EXPORT_METHOD(setBannerBackground:(BOOL)bannerBackground) {
-    dispatch_async(dispatch_get_main_queue(), ^{
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated"
-        [Appodeal setBannerBackgroundVisible:bannerBackground];
-#pragma clang diagnostic pop
     });
 }
 
@@ -250,7 +168,7 @@ RCT_EXPORT_METHOD(setTabletBanners:(BOOL)val) {
     });
 }
 
-#pragma mark Advanced features
+#pragma mark - Advanced features
 
 RCT_EXPORT_METHOD(setTesting:(BOOL)testingEnabled) {
     dispatch_async(dispatch_get_main_queue(), ^{
@@ -264,9 +182,11 @@ RCT_EXPORT_METHOD(setLogLevel:(APDLogLevel)logLevel) {
     });
 }
 
-RCT_EXPORT_METHOD(setOnLoadedTriggerBoth:(BOOL)flag) {
+RCT_EXPORT_METHOD(setTriggerPrecacheCallbacks:(NSInteger)adTypes
+                  flag:(BOOL)flag) {
     dispatch_async(dispatch_get_main_queue(), ^{
-        [Appodeal setTriggerPrecacheCallbacks:!flag];
+        [Appodeal setTriggerPrecacheCallbacks:flag
+                                        types:AppodealAdTypeFromRNAAdType(adTypes)];
     });
 }
 
@@ -276,7 +196,8 @@ RCT_EXPORT_METHOD(setChildDirectedTreatment:(BOOL)enabled) {
     });
 }
 
-RCT_EXPORT_METHOD(disableNetwork:(NSString *)name types:(NSInteger)adType) {
+RCT_EXPORT_METHOD(disableNetwork:(nonnull NSString *)name
+                  types:(NSInteger)adType) {
     dispatch_async(dispatch_get_main_queue(), ^{
         [Appodeal disableNetworkForAdType:AppodealAdTypeFromRNAAdType(adType) name:name];
     });
@@ -291,7 +212,8 @@ RCT_EXPORT_METHOD(getVersion:(RCTResponseSenderBlock)callback) {
     });
 }
 
-RCT_EXPORT_METHOD(isAutocacheEnabled:(NSInteger)types callback:(RCTResponseSenderBlock)callback) {
+RCT_EXPORT_METHOD(isAutocacheEnabled:(NSInteger)types
+                  callback:(RCTResponseSenderBlock)callback) {
     dispatch_async(dispatch_get_main_queue(), ^{
         BOOL result = [Appodeal isAutocacheEnabled:AppodealAdTypeFromRNAAdType(types)];
         NSArray *params = @[
@@ -301,9 +223,10 @@ RCT_EXPORT_METHOD(isAutocacheEnabled:(NSInteger)types callback:(RCTResponseSende
     });
 }
 
-RCT_EXPORT_METHOD(isInitialized:(int)types callback:(RCTResponseSenderBlock)callback) {
+RCT_EXPORT_METHOD(isInitialized:(int)types
+                  callback:(nonnull RCTResponseSenderBlock)callback) {
     dispatch_async(dispatch_get_main_queue(), ^{
-        BOOL result = [Appodeal isInitalizedForAdType:types];
+        BOOL result = [Appodeal isInitializedForAdType:types];
         NSArray *params = @[
             @(result)
         ];
@@ -313,9 +236,10 @@ RCT_EXPORT_METHOD(isInitialized:(int)types callback:(RCTResponseSenderBlock)call
 
 #pragma mark - Segments
 
-RCT_EXPORT_METHOD(getRewardParameters:(NSString *)placementName callback:(RCTResponseSenderBlock)callback) {
+RCT_EXPORT_METHOD(getRewardParameters:(nonnull NSString *)placement
+                  callback:(nonnull RCTResponseSenderBlock)callback) {
     dispatch_async(dispatch_get_main_queue(), ^{
-        NSObject <APDReward> *reward = [Appodeal rewardForPlacement:placementName];
+        NSObject <APDReward> *reward = [Appodeal rewardForPlacement:placement];
         NSArray *params = @[
             @(reward.amount),
             reward.currencyName ?: @""
@@ -324,46 +248,95 @@ RCT_EXPORT_METHOD(getRewardParameters:(NSString *)placementName callback:(RCTRes
     });
 }
 
-RCT_EXPORT_METHOD(setSegmentFilter:(NSDictionary *)filter) {
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [Appodeal setCustomState:filter];
-    });
-}
-
-#pragma mark - Extras
-
-RCT_EXPORT_METHOD(setExtras:(NSDictionary *)extras) {
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [Appodeal setExtras:extras];
-    });
-}
-
 #pragma mark - User Data
 
-RCT_EXPORT_METHOD(setUserId:(NSString *)userId) {
+RCT_EXPORT_METHOD(setUserId:(nonnull NSString *)userId) {
     dispatch_async(dispatch_get_main_queue(), ^{
         [Appodeal setUserId:userId];
     });
 }
 
-RCT_EXPORT_METHOD(setAge:(int)age) {
+RCT_EXPORT_METHOD(setExtrasValue:(nullable id)value
+                  key:(nonnull NSString *)key) {
     dispatch_async(dispatch_get_main_queue(), ^{
-        [Appodeal setUserAge:age];
+        [Appodeal setExtrasValue:value forKey:key];
     });
 }
 
-RCT_EXPORT_METHOD(setGender:(AppodealUserGender)gender) {
+RCT_EXPORT_METHOD(getExtras:(nonnull RCTResponseSenderBlock)callback) {
     dispatch_async(dispatch_get_main_queue(), ^{
-        [Appodeal setUserGender:gender];
+        NSDictionary *extras = [Appodeal extras];
+        NSMutableArray *params = [NSMutableArray arrayWithCapacity:1];
+        [params addObject:extras ?: NSNull.null];
+        callback(params);
     });
 }
 
-RCT_EXPORT_METHOD(trackInAppPurchase:(double)amount currencyCode:(NSString *)currency) {
+RCT_EXPORT_METHOD(setCustomStateValue:(nullable id)value
+                  key:(nonnull NSString *)key) {
     dispatch_async(dispatch_get_main_queue(), ^{
-        [APDSdk.sharedSdk trackInAppPurchase:@(amount)
-                                    currency:currency];
+        [Appodeal setCustomStateValue:value forKey:key];
     });
 }
+
+RCT_EXPORT_METHOD(getCustomState:(RCTResponseSenderBlock)callback) {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        NSDictionary *customState = [Appodeal customState];
+        NSMutableArray *params = [NSMutableArray arrayWithCapacity:1];
+        [params addObject:customState ?: NSNull.null];
+        callback(params);
+    });
+}
+
+#pragma mark - Purchases
+
+RCT_EXPORT_METHOD(trackInAppPurchase:(double)amount
+                  currencyCode:(nonnull NSString *)currency) {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [Appodeal trackInAppPurchase:@(amount)
+                            currency:currency];
+    });
+}
+
+RCT_EXPORT_METHOD(validateAndTrackInAppPurchase:(nonnull NSString *)purchase
+                  type:(NSInteger)type
+                  price:(nonnull NSString *)price
+                  currency:(nonnull NSString *)currency
+                  transaction:(nonnull NSString *)transaction
+                  parameters:(nullable NSDictionary *)parameters
+                  completion:(nonnull RCTResponseSenderBlock)comlpletion) {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [Appodeal validateAndTrackInAppPurchase:purchase
+                                           type:APDPurchaseTypeFromRNPurchase(type)
+                                          price:price
+                                       currency:currency
+                                  transactionId:transaction
+                           additionalParameters:parameters
+                                        success:^(NSDictionary *response) {
+            NSMutableArray *params = [NSMutableArray arrayWithCapacity:2];
+            [params addObject:response ?: NSNull.null];
+            [params addObject:NSNull.null];
+            comlpletion(params);
+        }
+                                        failure:^(NSError *error) {
+            NSMutableArray *params = [NSMutableArray arrayWithCapacity:2];
+            [params addObject:NSNull.null];
+            [params addObject:error ?: NSNull.null];
+            comlpletion(params);
+        }];
+    });
+}
+
+RCT_EXPORT_METHOD(trackEvent:(nonnull NSString *)event
+                  parameters:(nullable NSDictionary *)parameters) {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [Appodeal trackEvent:event
+            customParameters:parameters];
+    });
+}
+
+
+#pragma mark - Events
 
 - (NSArray<NSString *> *)supportedEvents {
     return RNASupportedMehtods();
@@ -428,42 +401,6 @@ RCT_EXPORT_METHOD(trackInAppPurchase:(double)amount currencyCode:(NSString *)cur
     [self sendEventWithName:kEventInterstitialClicked body:nil];
 }
 
-#pragma mark - AppodealNonSkippableVideoDelegate
-
-- (void)nonSkippableVideoDidLoadAdIsPrecache:(BOOL)precache {
-    NSDictionary *params = @{
-        @"isPrecache": @(precache)
-    };
-    [self sendEventWithName:kEventNonSkippableVideoLoaded body:params];
-}
-
-- (void)nonSkippableVideoDidFailToLoadAd {
-    [self sendEventWithName:kEventNonSkippableVideoFailedToLoad body:nil];
-}
-
-- (void)nonSkippableVideoDidExpired {
-    [self sendEventWithName:kEventNonSkippableVideoExpired body:nil];
-}
-
-- (void)nonSkippableVideoDidPresent {
-    [self sendEventWithName:kEventNonSkippableVideoShown body:nil];
-}
-
-- (void)nonSkippableVideoDidFailToPresentWithError:(NSError *)error {
-    [self sendEventWithName:kEventNonSkippableVideoFailedToPresent body:nil];
-}
-
-- (void)nonSkippableVideoWillDismissAndWasFullyWatched:(BOOL)wasFullyWatched {
-    NSDictionary *params = @{
-        @"isFinished": @(wasFullyWatched)
-    };
-    [self sendEventWithName:kEventNonSkippableVideoClosed body:params];
-}
-
-- (void)nonSkippableVideoDidFinish {
-    [self sendEventWithName:kEventNonSkippableVideoFinished body:nil];
-}
-
 #pragma mark - AppodealRewardedVideoDelegate
 
 - (void)rewardedVideoDidLoadAdIsPrecache:(BOOL)precache {
@@ -489,6 +426,10 @@ RCT_EXPORT_METHOD(trackInAppPurchase:(double)amount currencyCode:(NSString *)cur
     [self sendEventWithName:kEventRewardedVideoShown body:nil];
 }
 
+- (void)rewardedVideoDidClick {
+    [self sendEventWithName:kEventRewardedVideoExpired body:nil];
+}
+
 - (void)rewardedVideoWillDismissAndWasFullyWatched:(BOOL)wasFullyWatched {
     NSDictionary *params = @{
         @"isFinished": @(wasFullyWatched)
@@ -504,24 +445,14 @@ RCT_EXPORT_METHOD(trackInAppPurchase:(double)amount currencyCode:(NSString *)cur
     [self sendEventWithName:kEventRewardedVideoFinished body:params];
 }
 
-#pragma mark - STKConsentManagerDisplayDelegate
+#pragma mark - AppodealInitializationDelegate
 
-- (void)consentManagerWillShowDialog:(STKConsentManager *)consentManager {}
-
-- (void)consentManagerDidDismissDialog:(STKConsentManager *)consentManager {
-    self.consentCallback ? self.consentCallback(RNAppodealConsentParameters()) : nil;
-    self.consentCallback = nil;
-}
-
-- (void)consentManager:(STKConsentManager *)consentManager didFailToPresent:(NSError *)error {
-    self.consentCallback ? self.consentCallback(RNAppodealConsentParameters()) : nil;
-    self.consentCallback = nil;
+- (void)appodealSDKDidInitialize {
+    [self sendEventWithName:kEventAppodealInitialized body:nil];
 }
 
 #pragma mark - Noop
 
-RCT_EXPORT_METHOD(muteVideosIfCallsMuted:(BOOL)flag) {}
-RCT_EXPORT_METHOD(showTestScreen) {}
 RCT_EXPORT_METHOD(setSharedAdsInstanceAcrossActivities:(BOOL)flag) {}
 
 @end

@@ -1,52 +1,41 @@
+/* eslint-disable no-bitwise */
 import {
   Appodeal,
   AppodealAdType,
-  AppodealConsentStatus,
-  AppodealConsentRegulation,
   AppodealInterstitialEvent,
   AppodealRewardedEvent,
   AppodealBannerEvent,
-  AppodealLogLevel,
 } from 'react-native-appodeal';
-import {Platform} from 'react-native';
+import {constants} from './constnats';
 
-export const initialize = (
-  testing: boolean,
-  callback: (
-    consent: AppodealConsentStatus,
-    regulation: AppodealConsentRegulation,
-  ) => void,
-) => {
+export const initialize = (testing: boolean) => {
   Appodeal.setLogLevel(constants.logLevel);
   // Setup callbacks
   registerListeners();
-  // Set extras
-  Appodeal.setExtras({
-    some_number: 10,
-    some_string: 'string',
-  });
+
   // Set user settings
-  Appodeal.setAge(constants.user.age);
-  Appodeal.setGender(constants.user.gender);
   Appodeal.setUserId(constants.user.id);
-  Appodeal.setOnLoadedTriggerBoth(false);
-  Appodeal.muteVideosIfCallsMuted(true);
+  Appodeal.setCustomStateValue(constants.user.age, 'appodeal_user_age');
+  Appodeal.setCustomStateValue(constants.user.gender, 'appodeal_user_gender');
+
+  // Set extras
+  Appodeal.setExtrasValue('app_specific_key', 'app_specific_value');
+
   // Global settings
-  Appodeal.setSharedAdsInstanceAcrossActivities(true);
+  // Appodeal.setSharedAdsInstanceAcrossActivities(true);
+  Appodeal.setTriggerPrecacheCallbacks(constants.adTypes, false);
+  Appodeal.setLogLevel(constants.logLevel);
   Appodeal.setTesting(testing);
   Appodeal.setTabletBanners(false);
+
+  // Disable network
   Appodeal.disableNetwork(
     'some_network_id',
     AppodealAdType.BANNER | AppodealAdType.INTERSTITIAL,
   );
-  // Initialize Appodeal
-  Appodeal.synchroniseConsent(
-    constants.appKey,
-    (consent: AppodealConsentStatus, regulation: AppodealConsentRegulation) => {
-      Appodeal.initialize(constants.appKey, constants.adTypes);
-      callback(consent, regulation);
-    },
-  );
+
+  // Initialize
+  Appodeal.initialize(constants.appKey, constants.adTypes);
 };
 
 export enum BannerShowStyle {
@@ -70,24 +59,6 @@ export const bannerAdType = (style: BannerShowStyle) => {
   }
 };
 
-const constants = {
-  appKey:
-    Platform.OS === 'ios'
-      ? 'dee74c5129f53fc629a44a690a02296694e3eef99f2d3a5f'
-      : 'fee50c333ff3825fd6ad6d38cff78154de3025546d47a84f',
-  adTypes:
-    AppodealAdType.INTERSTITIAL |
-    AppodealAdType.REWARDED_VIDEO |
-    AppodealAdType.BANNER |
-    AppodealAdType.MREC,
-  logLevel: AppodealLogLevel.DEBUG,
-  user: {
-    age: 23,
-    gender: 'male',
-    id: 'some attribution id',
-  },
-};
-
 let levelsPlayed = 0;
 
 const registerListeners = () => {
@@ -98,11 +69,8 @@ const registerListeners = () => {
   Appodeal.addEventListener(AppodealInterstitialEvent.SHOWN, () => {
     console.log('Interstitial shown');
     levelsPlayed += 1;
-    Appodeal.setSegmentFilter({
-      levels_played: levelsPlayed,
-      player_rank: 'gold',
-      paid: false,
-    });
+    Appodeal.setCustomStateValue(levelsPlayed, 'levels_played');
+    Appodeal.setCustomStateValue('gold', 'player_rank');
   });
   Appodeal.addEventListener(AppodealInterstitialEvent.EXPIRED, () =>
     console.log('Interstitial expired'),
@@ -119,7 +87,6 @@ const registerListeners = () => {
   Appodeal.addEventListener(AppodealInterstitialEvent.FAILED_TO_SHOW, () =>
     console.log('Interstitial failed to show'),
   );
-
   // Banner callbacks
   Appodeal.addEventListener(AppodealBannerEvent.LOADED, (event: any) =>
     console.log(
