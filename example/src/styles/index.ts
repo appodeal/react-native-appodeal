@@ -61,6 +61,14 @@ export const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#ccc',
   },
+  link: {
+    position: 'absolute',
+    flex: 1,
+    width: '100%',
+    height: '100%',
+    backgroundColor: 'transparent',
+    alignContent: 'stretch',
+  },
   contentRowContainer: {
     flexDirection: 'row',
     paddingLeft: 15,
@@ -118,5 +126,8 @@ export const styles = StyleSheet.create({
     fontSize: 12,
     marginLeft: 8,
     marginRight: 8,
+  },
+  segmentedControl: {
+    margin: 8,
   },
 });

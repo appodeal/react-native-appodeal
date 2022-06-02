@@ -8,6 +8,12 @@ import {
 } from 'react-native-appodeal';
 import {constants} from './constnats';
 
+export enum SDKState {
+  PENDING = 0,
+  INITIALIZING = 1,
+  INITIALIZED = 2,
+}
+
 export const initialize = (testing: boolean) => {
   Appodeal.setLogLevel(constants.logLevel);
   // Setup callbacks
@@ -36,6 +42,10 @@ export const initialize = (testing: boolean) => {
 
   // Initialize
   Appodeal.initialize(constants.appKey, constants.adTypes);
+};
+
+export const isInitialized = () => {
+  return Appodeal.isInitialized(constants.adTypes);
 };
 
 export enum BannerShowStyle {

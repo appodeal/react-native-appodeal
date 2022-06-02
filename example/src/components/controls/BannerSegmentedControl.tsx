@@ -27,7 +27,7 @@ export const BannerSegmentedControl = (props: BannerSegmentedControlProps) => {
       <Text style={styles.sectionHeader}>Banner style</Text>
       <View style={styles.rowContainer}>
         <SegmentedControl
-          style={{margin: 8}}
+          style={styles.segmentedControl}
           values={showStyles}
           selectedIndex={index()}
           onChange={(event) =>

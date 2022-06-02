@@ -38,58 +38,43 @@ RCT_EXPORT_METHOD(initializeWithAppKey:(nonnull NSString *)appKey
         [Appodeal setBannerDelegate:self];
         [Appodeal setInterstitialDelegate:self];
         [Appodeal setInitializationDelegate:self];
-
+        
         [Appodeal initializeWithApiKey:appKey
-                                 types:adTypes];
+                                 types:AppodealAdTypeFromRNAAdType(adTypes)];
     });
 }
 
 RCT_EXPORT_METHOD(show:(int)showType
-                  placement:(nullable NSString *)placement
-                  result:(nonnull RCTResponseSenderBlock)callback) {
+                  placement:(nullable NSString *)placement) {
     dispatch_async(dispatch_get_main_queue(), ^{
-        BOOL result = [Appodeal showAd:AppodealShowStyleFromRNAAdType(showType)
-                          forPlacement:placement
-                    rootViewController:RCTPresentedViewController()];
-        NSArray *params = @[
-            @(result)
-        ];
-        callback(params);
+        [Appodeal showAd:AppodealShowStyleFromRNAAdType(showType)
+            forPlacement:placement
+      rootViewController:RCTPresentedViewController()];
     });
 }
 
-RCT_EXPORT_METHOD(isLoaded:(int)showType
-                  result:(nonnull RCTResponseSenderBlock)callback) {
+RCT_EXPORT_BLOCKING_SYNCHRONOUS_METHOD(isLoaded:(int)showType) {
+    __block NSNumber *isLoaded;
+    dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
     dispatch_async(dispatch_get_main_queue(), ^{
-        BOOL result = [Appodeal isReadyForShowWithStyle:AppodealShowStyleFromRNAAdType(showType)];
-        NSArray *params = @[
-            @(result)
-        ];
-        callback(params);
+        isLoaded = @([Appodeal isReadyForShowWithStyle:AppodealShowStyleFromRNAAdType(showType)]);
+        dispatch_semaphore_signal(semaphore);
     });
+    dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
+    return isLoaded;
 }
 
-RCT_EXPORT_METHOD(canShow:(NSInteger)showType
-                  placement:(nullable NSString *)placement
-                  result:(nonnull RCTResponseSenderBlock)callback) {
+RCT_EXPORT_BLOCKING_SYNCHRONOUS_METHOD(canShow:(NSInteger)showType
+                  placement:(nullable NSString *)placement) {
+    __block NSNumber *canShow;
+    dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
     dispatch_async(dispatch_get_main_queue(), ^{
-        BOOL result = [Appodeal canShow:AppodealAdTypeFromRNAAdType(showType) forPlacement:placement];
-        NSArray *params = @[
-            @(result)
-        ];
-        callback(params);
+        canShow = @([Appodeal canShow:AppodealAdTypeFromRNAAdType(showType)
+                          forPlacement:placement]);
+        dispatch_semaphore_signal(semaphore);
     });
-}
-
-RCT_EXPORT_METHOD(predictedEcpm:(NSInteger)adType
-                  result:(nonnull RCTResponseSenderBlock)callback) {
-    dispatch_async(dispatch_get_main_queue(), ^{
-        double eCPM = [Appodeal predictedEcpmForAdType:AppodealAdTypeFromRNAAdType(adType)];
-        NSArray *params = @[
-            @(eCPM)
-        ];
-        callback(params);
-    });
+    dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
+    return canShow;
 }
 
 RCT_EXPORT_METHOD(cache:(NSInteger)adType) {
@@ -111,26 +96,26 @@ RCT_EXPORT_METHOD(setAutoCache:(NSInteger)adType
     });
 }
 
-RCT_EXPORT_METHOD(isPrecache:(NSInteger)adType
-                  calls:(nonnull RCTResponseSenderBlock)callback) {
+RCT_EXPORT_BLOCKING_SYNCHRONOUS_METHOD(isPrecache:(NSInteger)adType) {
+    __block NSNumber *isPrecache;
+    dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
     dispatch_async(dispatch_get_main_queue(), ^{
-        BOOL result = [Appodeal isAutocacheEnabled:AppodealAdTypeFromRNAAdType(adType)];
-        NSArray *params = @[
-            @(result)
-        ];
-        callback(params);
+        isPrecache = @([Appodeal isAutocacheEnabled:AppodealAdTypeFromRNAAdType(adType)]);
+        dispatch_semaphore_signal(semaphore);
     });
+    dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
+    return isPrecache;
 }
 
-RCT_EXPORT_METHOD(predictedEcpm:(NSInteger)adType
-                  calls:(nonnull RCTResponseSenderBlock)callback) {
+RCT_EXPORT_BLOCKING_SYNCHRONOUS_METHOD(predictedEcpm:(NSInteger)adType) {
+    __block NSNumber *eCPM;
+    dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
     dispatch_async(dispatch_get_main_queue(), ^{
-        double eCPM = [Appodeal predictedEcpmForAdType:AppodealAdTypeFromRNAAdType(adType)];
-        NSArray *params = @[
-            @(eCPM)
-        ];
-        callback(params);
+        eCPM = @([Appodeal predictedEcpmForAdType:AppodealAdTypeFromRNAAdType(adType)]);
+        dispatch_semaphore_signal(semaphore);
     });
+    dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
+    return eCPM;
 }
 
 #pragma mark - Consent
@@ -203,49 +188,54 @@ RCT_EXPORT_METHOD(disableNetwork:(nonnull NSString *)name
     });
 }
 
-RCT_EXPORT_METHOD(getVersion:(RCTResponseSenderBlock)callback) {
+RCT_EXPORT_BLOCKING_SYNCHRONOUS_METHOD(getVersion) {
+    __block NSString *version;
+    dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
     dispatch_async(dispatch_get_main_queue(), ^{
-        NSArray *params = @[
-            [Appodeal getVersion]
-        ];
-        callback(params);
+        version = [Appodeal getVersion];
+        dispatch_semaphore_signal(semaphore);
     });
+    dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
+    return version;
 }
 
-RCT_EXPORT_METHOD(isAutocacheEnabled:(NSInteger)types
-                  callback:(RCTResponseSenderBlock)callback) {
+RCT_EXPORT_BLOCKING_SYNCHRONOUS_METHOD(isAutocacheEnabled:(NSInteger)types) {
+    __block NSNumber *isAutocache;
+    dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
     dispatch_async(dispatch_get_main_queue(), ^{
-        BOOL result = [Appodeal isAutocacheEnabled:AppodealAdTypeFromRNAAdType(types)];
-        NSArray *params = @[
-            @(result)
-        ];
-        callback(params);
+        isAutocache = @([Appodeal isAutocacheEnabled:AppodealAdTypeFromRNAAdType(types)]);
+        dispatch_semaphore_signal(semaphore);
     });
+    dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
+    return isAutocache;
 }
 
-RCT_EXPORT_METHOD(isInitialized:(int)types
-                  callback:(nonnull RCTResponseSenderBlock)callback) {
+RCT_EXPORT_BLOCKING_SYNCHRONOUS_METHOD(isInitialized:(int)types) {
+    __block NSNumber *isInitialized;
+    dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
     dispatch_async(dispatch_get_main_queue(), ^{
-        BOOL result = [Appodeal isInitializedForAdType:types];
-        NSArray *params = @[
-            @(result)
-        ];
-        callback(params);
+        isInitialized = @([Appodeal isInitializedForAdType:AppodealAdTypeFromRNAAdType(types)]);
+        dispatch_semaphore_signal(semaphore);
     });
+    dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
+    return isInitialized;
 }
 
 #pragma mark - Segments
 
-RCT_EXPORT_METHOD(getRewardParameters:(nonnull NSString *)placement
-                  callback:(nonnull RCTResponseSenderBlock)callback) {
+RCT_EXPORT_BLOCKING_SYNCHRONOUS_METHOD(getRewardParameters:(nonnull NSString *)placement) {
+    __block NSDictionary *params;
+    dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
     dispatch_async(dispatch_get_main_queue(), ^{
-        NSObject <APDReward> *reward = [Appodeal rewardForPlacement:placement];
-        NSArray *params = @[
-            @(reward.amount),
-            reward.currencyName ?: @""
-        ];
-        callback(params);
+        id <APDReward> reward = [Appodeal rewardForPlacement:placement];
+        params = @{
+            @"name": reward.currencyName,
+            @"amount": @(reward.amount)
+        };
+        dispatch_semaphore_signal(semaphore);
     });
+    dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
+    return params;
 }
 
 #pragma mark - User Data
@@ -263,13 +253,15 @@ RCT_EXPORT_METHOD(setExtrasValue:(nullable id)value
     });
 }
 
-RCT_EXPORT_METHOD(getExtras:(nonnull RCTResponseSenderBlock)callback) {
+RCT_EXPORT_BLOCKING_SYNCHRONOUS_METHOD(getExtras) {
+    __block NSDictionary *extras;
+    dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
     dispatch_async(dispatch_get_main_queue(), ^{
-        NSDictionary *extras = [Appodeal extras];
-        NSMutableArray *params = [NSMutableArray arrayWithCapacity:1];
-        [params addObject:extras ?: NSNull.null];
-        callback(params);
+        extras = [Appodeal extras];
+        dispatch_semaphore_signal(semaphore);
     });
+    dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
+    return extras;
 }
 
 RCT_EXPORT_METHOD(setCustomStateValue:(nullable id)value
@@ -279,13 +271,15 @@ RCT_EXPORT_METHOD(setCustomStateValue:(nullable id)value
     });
 }
 
-RCT_EXPORT_METHOD(getCustomState:(RCTResponseSenderBlock)callback) {
+RCT_EXPORT_BLOCKING_SYNCHRONOUS_METHOD(getCustomState) {
+    __block NSDictionary *customState;
+    dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
     dispatch_async(dispatch_get_main_queue(), ^{
-        NSDictionary *customState = [Appodeal customState];
-        NSMutableArray *params = [NSMutableArray arrayWithCapacity:1];
-        [params addObject:customState ?: NSNull.null];
-        callback(params);
+        customState = [Appodeal customState];
+        dispatch_semaphore_signal(semaphore);
     });
+    dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
+    return customState;
 }
 
 #pragma mark - Purchases
@@ -298,20 +292,15 @@ RCT_EXPORT_METHOD(trackInAppPurchase:(double)amount
     });
 }
 
-RCT_EXPORT_METHOD(validateAndTrackInAppPurchase:(nonnull NSString *)purchase
-                  type:(NSInteger)type
-                  price:(nonnull NSString *)price
-                  currency:(nonnull NSString *)currency
-                  transaction:(nonnull NSString *)transaction
-                  parameters:(nullable NSDictionary *)parameters
-                  completion:(nonnull RCTResponseSenderBlock)comlpletion) {
+RCT_EXPORT_METHOD(validateAndTrackInAppPurchase:(nonnull NSDictionary *)purchase
+                                    completion:(nonnull RCTResponseSenderBlock)comlpletion) {
     dispatch_async(dispatch_get_main_queue(), ^{
-        [Appodeal validateAndTrackInAppPurchase:purchase
-                                           type:APDPurchaseTypeFromRNPurchase(type)
-                                          price:price
-                                       currency:currency
-                                  transactionId:transaction
-                           additionalParameters:parameters
+        [Appodeal validateAndTrackInAppPurchase:purchase[@"productId"]
+                                           type:APDPurchaseTypeFromRNPurchase([purchase[@"productType"] intValue])
+                                          price:purchase[@"price"]
+                                       currency:purchase[@"currency"]
+                                  transactionId:purchase[@"transactionId"]
+                           additionalParameters:purchase[@"additionalParameters"]
                                         success:^(NSDictionary *response) {
             NSMutableArray *params = [NSMutableArray arrayWithCapacity:2];
             [params addObject:response ?: NSNull.null];
@@ -334,7 +323,6 @@ RCT_EXPORT_METHOD(trackEvent:(nonnull NSString *)event
             customParameters:parameters];
     });
 }
-
 
 #pragma mark - Events
 

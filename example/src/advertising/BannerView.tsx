@@ -9,7 +9,7 @@ interface BannerViewProps {
 }
 
 export const BannerView = (props: BannerViewProps) => {
-  const mrec = props.showStyle == BannerShowStyle.MREC;
+  const mrec = props.showStyle === BannerShowStyle.MREC;
 
   return isViewBannerStyle(props.showStyle) && props.visible ? (
     <AppodealBanner

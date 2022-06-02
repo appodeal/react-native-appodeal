@@ -10,6 +10,8 @@ export interface AdTypeType {
   readonly MREC: number
 }
 
+type Map = { [key: string]: any };
+
 export const AppodealAdType: AdTypeType = {
   NONE: 0,
   INTERSTITIAL: 1 << 0,
@@ -44,6 +46,23 @@ export enum AppodealCCPAConsentStatus {
   OPT_OUT = 2,
 }
 
-export enum AppodealPurchaseType {
+export interface AppodealReward {
+  name: string,
+  amount: string
+}
 
+export interface AppodealPurchase {
+  productId: string,
+  productType: AppodealPurchaseType,
+  price: number,
+  currency: string,
+  transactionId: string,
+  additionalParameters: Map | null
+}
+
+export enum AppodealPurchaseType {
+  CONSUMABLE = 0,
+  NON_CONSUMABLE = 1,
+  AUTO_RENEWABLE_SUBSCRIPTION = 2,
+  NON_RENEWING_SUBSCRIPTION = 3
 }

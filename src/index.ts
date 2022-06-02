@@ -6,7 +6,9 @@ import {
     AppodealGender,
     AppodealCCPAConsentStatus,
     AppodealGDPRConsentStatus,
-    AppodealPurchaseType
+    AppodealPurchaseType,
+    AppodealPurchase,
+    AppodealReward
 } from './RNAppodealTypes';
 
 import * as AppodealInterstitialEvent from './events/interstiital';
@@ -24,6 +26,8 @@ export {
     AppodealCCPAConsentStatus,
     AppodealGDPRConsentStatus,
     AppodealPurchaseType,
+    AppodealPurchase,
+    AppodealReward,
     AppodealInterstitialEvent,
     AppodealRewardedEvent,
     AppodealBannerEvent,

@@ -1,7 +1,8 @@
+/* eslint-disable no-bitwise */
 import React from 'react';
 import {AppodealAdType, Appodeal} from 'react-native-appodeal';
 import {View} from 'react-native';
-import {SectionHeader, Row, AdStatusFooter} from '..';
+import {SectionHeader, Row} from '..';
 import {BannerShowStyle} from '../../advertising';
 
 interface ShowSectionProps {
@@ -26,7 +27,7 @@ export const ShowSection = (props: ShowSectionProps) => {
         title="Show interstitial"
         onClick={() => Appodeal.show(AppodealAdType.INTERSTITIAL)}
       />
-      <AdStatusFooter adType={AppodealAdType.INTERSTITIAL} />
+      {/* <AdStatusFooter adType={AppodealAdType.INTERSTITIAL} /> */}
       <SectionHeader value="Rewarded ads" />
       {(props.autocache & AppodealAdType.REWARDED_VIDEO) > 0 ? null : (
         <Row
@@ -38,7 +39,7 @@ export const ShowSection = (props: ShowSectionProps) => {
         title="Show rewarded"
         onClick={() => Appodeal.show(AppodealAdType.REWARDED_VIDEO)}
       />
-      <AdStatusFooter adType={AppodealAdType.REWARDED_VIDEO} />
+      {/* <AdStatusFooter adType={AppodealAdType.REWARDED_VIDEO} /> */}
       <SectionHeader value={'Banner ' + props.bannerShowStyle} />
       {(props.autocache & AppodealAdType.BANNER) > 0 ? null : (
         <Row
@@ -50,7 +51,7 @@ export const ShowSection = (props: ShowSectionProps) => {
         title={props.bannerOnScreen ? 'Hide banner' : 'Show banner'}
         onClick={props.updateBanner}
       />
-      <AdStatusFooter adType={AppodealAdType.BANNER} />
+      {/* <AdStatusFooter adType={AppodealAdType.BANNER} /> */}
     </View>
   ) : null;
 };

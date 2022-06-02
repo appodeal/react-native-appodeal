@@ -1,12 +1,11 @@
 /* eslint-disable no-bitwise */
-import React, {useCallback, useEffect} from 'react';
+import React, {useEffect} from 'react';
 import {styles} from '../styles';
-import {initialize} from '../advertising';
+import {initialize, isInitialized, SDKState} from '../advertising';
 import {ShowSection} from '../components/sections/ShowSection';
 import {BannerSegmentedControl} from '../components/controls/BannerSegmentedControl';
 import {BannerView} from '../advertising/BannerView';
 import {AutocacheControl} from '../components/controls/AutocacheControl';
-import {AdvancedFeaturesSection} from '../components/sections/AdvancedFeaturesSection';
 import {InitialisationSection} from '../components/sections/InitialisationSection';
 import {ScrollView, SafeAreaView} from 'react-native';
 import {
@@ -16,45 +15,37 @@ import {
 } from 'react-native-appodeal';
 import {BannerShowStyle, isViewBannerStyle, bannerAdType} from '../advertising';
 
-interface HomeScreenState {
-  initialised: boolean;
-  initialising: boolean;
-  bannerOnScreen: boolean;
-  test: boolean;
-  autocache: number;
-  bannerShowStyle: BannerShowStyle;
-}
-
-const defaultState: HomeScreenState = {
-  initialised: false,
-  initialising: false,
-  bannerOnScreen: false,
-  test: true,
-  autocache: AppodealAdType.INTERSTITIAL | AppodealAdType.BANNER,
-  bannerShowStyle: BannerShowStyle.BOTTOM,
-};
-
 export const HomeScreen = () => {
-  const [state, setState] = React.useState<HomeScreenState>(defaultState);
+  const [state, setState] = React.useState(
+    isInitialized() ? SDKState.INITIALIZED : SDKState.PENDING,
+  );
 
-  const initSDK = useCallback(() => {
-    if (!state.initialising) {
+  const [autocache, setAutocache] = React.useState(
+    AppodealAdType.INTERSTITIAL | AppodealAdType.BANNER,
+  );
+
+  const [testMode, setTestMode] = React.useState(true);
+
+  const [bannerShowStyle, setBannerShowStyle] = React.useState(
+    BannerShowStyle.BOTTOM,
+  );
+
+  const [isBannerOnScreen, setBannerOnScreen] = React.useState(false);
+
+  const initSDK = () => {
+    if (state === SDKState.INITIALIZING) {
       return;
     }
 
-    if (!state.initialised) {
-      setState({...state, initialising: true});
+    if (state !== SDKState.INITIALIZED) {
+      setState(SDKState.INITIALIZING);
       Appodeal.addEventListener(AppodealSdkEvent.INITIALIZED, () => {
-        setState({...state, initialising: false, initialised: true});
+        setState(SDKState.INITIALIZED);
       });
     }
 
-    initialize(state.test);
-  }, [state.initialising]);
-
-  useEffect(() => {
-    initSDK();
-  }, [initSDK]);
+    initialize(testMode);
+  };
 
   useEffect(() => {
     const types = [
@@ -63,53 +54,44 @@ export const HomeScreen = () => {
       AppodealAdType.BANNER,
     ];
     types.forEach((adType) =>
-      Appodeal.setAutoCache(adType, (state.autocache & adType) > 0),
+      Appodeal.setAutoCache(adType, (autocache & adType) > 0),
     );
-  }, [state.autocache]);
+  }, [autocache]);
 
   const updateBanner = () => {
-    if (!isViewBannerStyle(state.bannerShowStyle)) {
-      if (state.bannerOnScreen) {
-        Appodeal.hide(bannerAdType(state.bannerShowStyle));
-      } else {
-        Appodeal.show(bannerAdType(state.bannerShowStyle));
+    if (!isViewBannerStyle(bannerShowStyle)) {
+      if (isBannerOnScreen) {
+        Appodeal.hide(bannerAdType(bannerShowStyle));
+        setBannerOnScreen(false);
+      } else if (Appodeal.canShow(bannerAdType(bannerShowStyle))) {
+        Appodeal.show(bannerAdType(bannerShowStyle));
+        setBannerOnScreen(true);
       }
+    } else {
+      setBannerOnScreen(!isBannerOnScreen);
     }
-    setState({
-      ...state,
-      bannerOnScreen: !state.bannerOnScreen,
-    });
   };
 
   return (
     <>
-      <BannerView
-        showStyle={state.bannerShowStyle}
-        visible={state.bannerOnScreen}
-      />
+      <BannerView showStyle={bannerShowStyle} visible={isBannerOnScreen} />
       <SafeAreaView style={styles.container}>
         <ScrollView style={styles.scrollView}>
-          <InitialisationSection
-            test={state.test}
-            initialising={state.initialising}
-            initialised={state.initialised}
-            onValueChange={(value, key) => setState({...state, [key]: value})}
-          />
-          <AdvancedFeaturesSection />
+          <InitialisationSection state={state} onInitialize={initSDK} />
           <AutocacheControl
-            mask={state.autocache}
-            onUpdate={(autocache) => setState({...state, autocache: autocache})}
+            mask={autocache}
+            onUpdate={(value) => setAutocache(value)}
           />
           <BannerSegmentedControl
-            visible={!state.initialised}
-            showStyle={state.bannerShowStyle}
-            onChange={(style) => setState({...state, bannerShowStyle: style})}
+            visible={state !== SDKState.INITIALIZED}
+            showStyle={bannerShowStyle}
+            onChange={setBannerShowStyle}
           />
           <ShowSection
-            visible={state.initialised}
-            autocache={state.autocache}
-            bannerOnScreen={state.bannerOnScreen}
-            bannerShowStyle={state.bannerShowStyle}
+            visible={state === SDKState.INITIALIZED}
+            autocache={autocache}
+            bannerOnScreen={isBannerOnScreen}
+            bannerShowStyle={bannerShowStyle}
             updateBanner={updateBanner}
           />
         </ScrollView>

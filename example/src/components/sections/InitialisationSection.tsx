@@ -1,53 +1,38 @@
 import React from 'react';
 import {View, Switch, ActivityIndicator} from 'react-native';
-import {SectionHeader, Row} from '..';
+import {SectionHeader, Row, LinkRow} from '..';
+import {SDKState} from '../../advertising';
 
 interface InitialisationSectionStateProps {
-  test: boolean;
-  initialised: boolean;
-  initialising: boolean;
+  state: SDKState;
 }
 
 interface InitialisationSectionDispatchProps {
-  onValueChange: (
-    value: boolean,
-    key: keyof InitialisationSectionStateProps,
-  ) => void;
+  onInitialize: () => void;
 }
 
 type InitialisationSectionProps = InitialisationSectionStateProps &
   InitialisationSectionDispatchProps;
 
 export const InitialisationSection = (props: InitialisationSectionProps) => {
+  const accessory = () => {
+    switch (props.state) {
+      case SDKState.PENDING:
+        return (
+          <Switch value={false} onValueChange={(_) => props.onInitialize()} />
+        );
+      case SDKState.INITIALIZED:
+        return <Switch value={true} disabled={true} />;
+      case SDKState.INITIALIZING:
+        return <ActivityIndicator />;
+    }
+  };
+
   return (
     <View>
       <SectionHeader value="Initialisation" />
-      <Row
-        title="Test mode"
-        accessory={() => (
-          <Switch
-            value={props.test}
-            disabled={props.initialised}
-            onValueChange={(value) => props.onValueChange(value, 'test')}
-          />
-        )}
-      />
-      <Row
-        title="Initialise"
-        accessory={() =>
-          props.initialising ? (
-            <ActivityIndicator />
-          ) : (
-            <Switch
-              value={props.initialised}
-              disabled={props.initialised}
-              onValueChange={(value) =>
-                props.onValueChange(value, 'initialising')
-              }
-            />
-          )
-        }
-      />
+      <Row title="Initialise" accessory={accessory} />
+      <LinkRow title="Advanced Features" route="/advanced_features" />
     </View>
   );
 };
