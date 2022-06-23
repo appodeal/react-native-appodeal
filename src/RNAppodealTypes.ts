@@ -51,18 +51,38 @@ export interface AppodealReward {
   amount: string
 }
 
-export interface AppodealPurchase {
+export interface AppodealIOSPurchase {
   productId: string,
-  productType: AppodealPurchaseType,
+  productType: AppodealIOSPurchaseType,
   price: number,
   currency: string,
   transactionId: string,
   additionalParameters: Map | null
 }
 
-export enum AppodealPurchaseType {
+export enum AppodealIOSPurchaseType {
   CONSUMABLE = 0,
   NON_CONSUMABLE = 1,
   AUTO_RENEWABLE_SUBSCRIPTION = 2,
   NON_RENEWING_SUBSCRIPTION = 3
+}
+
+export interface AppodealAndroidPurchase {
+  publicKey: string,
+  productType: AppodealAndroidPurchaseType,
+  signature: string,
+  purchaseData: string,
+  purchaseToken: string,
+  timestamp: number,
+  developerPayload: string,
+  price: string,
+  currency: string,
+  orderId: string,
+  sku: string,
+  additionalParameters: Map | null
+}
+
+export enum AppodealAndroidPurchaseType {
+  IN_APP = 0,
+  SUBSRIPTION = 1
 }

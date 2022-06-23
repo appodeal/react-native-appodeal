@@ -9,23 +9,32 @@ source 'https://cdn.cocoapods.org/'
 
 
 def appodeal
-  pod 'APDAdColonyAdapter', '3.0.0.1-Beta'
-  pod 'APDAdjustAdapter', '3.0.0.1-Beta'
-  pod 'APDAmazonAdsAdapter', '3.0.0.1-Beta'
-  pod 'APDAppLovinAdapter', '3.0.0.1-Beta'
-  pod 'APDAppsFlyerAdapter', '3.0.0.1-Beta'
-  pod 'APDBidMachineAdapter', '3.0.0.1-Beta' # Required
-  pod 'APDFirebaseAdapter', '3.0.0.1-Beta'
-  pod 'APDGoogleAdMobAdapter', '3.0.0.1-Beta'
-  pod 'APDIABAdapter', '3.0.0.1-Beta' # Required
-  pod 'APDIronSourceAdapter', '3.0.0.1-Beta'
-  pod 'APDFacebookAdapter', '3.0.0.1-Beta'
-  pod 'APDMetaAudienceNetworkAdapter', '3.0.0.1-Beta'
-  pod 'APDMyTargetAdapter', '3.0.0.1-Beta'
-  pod 'APDStackAnalyticsAdapter', '3.0.0.1-Beta' # Required
-  pod 'APDUnityAdapter', '3.0.0.1-Beta'
-  pod 'APDVungleAdapter', '3.0.0.1-Beta'
-  pod 'APDYandexAdapter', '3.0.0.1-Beta'
+  pod 'APDAdColonyAdapter', '3.0.0.1'
+  pod 'BDMAdColonyAdapter', '~> 1.9.4'
+  pod 'APDAdjustAdapter', '3.0.0.1'
+  pod 'APDAppLovinAdapter', '3.0.0.1'
+  pod 'APDAppsFlyerAdapter', '3.0.0.1'
+  pod 'APDBidMachineAdapter', '3.0.0.1' # Required
+  pod 'BDMCriteoAdapter', '~> 1.9.4'
+  pod 'BDMPangleAdapter', '~> 1.9.4.2'
+  pod 'BDMAmazonAdapter', '~> 1.9.4.2'
+  pod 'BDMSmaatoAdapter', '~> 1.9.4'
+  pod 'BDMTapjoyAdapter', '~> 1.9.4'
+  pod 'APDFirebaseAdapter', '3.0.0.1'
+  pod 'APDGoogleAdMobAdapter', '3.0.0.1'
+  pod 'APDIABAdapter', '3.0.0.1' # Required
+  pod 'BDMIABAdapter', '~> 1.9.4'
+  pod 'APDIronSourceAdapter', '3.0.0.1'
+  pod 'APDFacebookAdapter', '3.0.0.1'
+  pod 'APDMetaAudienceNetworkAdapter', '3.0.0.1'
+  pod 'BDMMetaAudienceAdapter', '~> 1.9.4'
+  pod 'APDMyTargetAdapter', '3.0.0.1'
+  pod 'BDMMyTargetAdapter', '~> 1.9.4'
+  pod 'APDStackAnalyticsAdapter', '3.0.0.1' # Required
+  pod 'APDUnityAdapter', '3.0.0.1'
+  pod 'APDVungleAdapter', '3.0.0.1'
+  pod 'BDMVungleAdapter', '~> 1.9.4'
+  pod 'APDYandexAdapter', '3.0.0.1'
 end
 
 target 'Example' do

@@ -25,7 +25,7 @@ export const initialize = (testing: boolean) => {
   Appodeal.setCustomStateValue(constants.user.gender, 'appodeal_user_gender');
 
   // Set extras
-  Appodeal.setExtrasValue('app_specific_key', 'app_specific_value');
+  Appodeal.setExtrasValue('app_specific_value', 'app_specific_key');
 
   // Global settings
   // Appodeal.setSharedAdsInstanceAcrossActivities(true);

@@ -34,8 +34,7 @@ repositories {
 dependencies {
     implementation 'com.facebook.react:react-native:+'
     // Appodeal
-    implementation 'com.appodeal.ads.sdk:core:2.11.0'
-    implementation 'com.appodeal.ads.sdk.networks:bidmachine:2.11.0.17'
-    // Consent manager
-    implementation 'com.explorestack:consent:1.0.5'
+    implementation 'com.appodeal.ads.sdk:core:3.0.0'
+    implementation 'com.appodeal.ads.sdk.networks:bidmachine:3.0.0.1'
+    implementation 'com.appodeal.ads.sdk.services:stack_analytics:3.0.0.0'
 }

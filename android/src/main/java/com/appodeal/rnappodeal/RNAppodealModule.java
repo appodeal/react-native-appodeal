@@ -1,21 +1,16 @@
 package com.appodeal.rnappodeal;
 
-import android.widget.Toast;
-
-import com.explorestack.consent.Consent;
-import com.explorestack.consent.ConsentForm;
-import com.explorestack.consent.ConsentFormListener;
-import com.explorestack.consent.ConsentInfoUpdateListener;
-import com.explorestack.consent.ConsentManager;
-import com.explorestack.consent.exception.ConsentManagerException;
+import com.appodeal.ads.inapp.InAppPurchase;
+import com.appodeal.ads.inapp.InAppPurchaseValidateCallback;
+import com.appodeal.ads.initializing.ApdInitializationCallback;
+import com.appodeal.ads.initializing.ApdInitializationError;
+import com.appodeal.ads.service.ServiceError;
 import com.facebook.react.bridge.LifecycleEventListener;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.bridge.Callback;
 import com.facebook.react.bridge.ReadableMap;
-import com.facebook.react.bridge.ReadableMapKeySetIterator;
-import com.facebook.react.bridge.ReadableType;
 import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.modules.core.DeviceEventManagerModule.RCTDeviceEventEmitter;
 import com.facebook.react.bridge.Arguments;
@@ -23,14 +18,15 @@ import com.facebook.react.bridge.Arguments;
 import com.appodeal.ads.Appodeal;
 import com.appodeal.ads.BannerCallbacks;
 import com.appodeal.ads.InterstitialCallbacks;
-import com.appodeal.ads.NonSkippableVideoCallbacks;
 import com.appodeal.ads.RewardedVideoCallbacks;
 
+import org.json.JSONObject;
+import java.util.List;
 
-public class RNAppodealModule extends ReactContextBaseJavaModule implements InterstitialCallbacks, BannerCallbacks, NonSkippableVideoCallbacks, RewardedVideoCallbacks, LifecycleEventListener {
+
+public class RNAppodealModule extends ReactContextBaseJavaModule implements InterstitialCallbacks, BannerCallbacks, RewardedVideoCallbacks, LifecycleEventListener {
 
     private final ReactApplicationContext reactContext;
-    private ConsentForm consentForm;
 
     public RNAppodealModule(ReactApplicationContext reactContext) {
         super(reactContext);
@@ -38,7 +34,6 @@ public class RNAppodealModule extends ReactContextBaseJavaModule implements Inte
         Appodeal.setFramework("react-native", getPluginVersion());
         Appodeal.setInterstitialCallbacks(this);
         Appodeal.setBannerCallbacks(this);
-        Appodeal.setNonSkippableVideoCallbacks(this);
         Appodeal.setRewardedVideoCallbacks(this);
 
         this.reactContext = reactContext;
@@ -46,7 +41,7 @@ public class RNAppodealModule extends ReactContextBaseJavaModule implements Inte
     }
 
     private String getPluginVersion() {
-        return "2.11.0";
+        return "3.0.0";
     }
 
     private void sendEventToJS(String eventName, WritableMap params) {
@@ -55,158 +50,45 @@ public class RNAppodealModule extends ReactContextBaseJavaModule implements Inte
         }
     }
 
-    private int getConsentStatus() {
-        ConsentManager manager = ConsentManager.getInstance(reactContext);
-        Consent.Status status = manager.getConsentStatus();
-        return  RNAppodealUtils.getConsentStatusIntFromStatus(status);
-    }
-
-    private int getConsentRegulation() {
-        ConsentManager manager = ConsentManager.getInstance(reactContext);
-        Consent.Zone zone = manager.getConsentZone();
-        return  RNAppodealUtils.getConsentRegualationIntFromZone(zone);
-    }
-
     @Override
     public String getName() {
         return "RNAppodeal";
     }
 
     @ReactMethod
-    public void showToast(String message) {
-        Toast.makeText(getReactApplicationContext(), message, 0).show();
+    public void initializeWithAppKey(String appKey, int adTypes) {
+        Appodeal.initialize(getCurrentActivity(),
+                appKey,
+                RNAppodealUtils.getAdTypesFormRNTypes(adTypes),
+                list -> sendEventToJS("onAppodeallInitialized", null)
+        );
+    }
+
+    @ReactMethod(isBlockingSynchronousMethod = true)
+    public boolean isInitialized(int adTypes) {
+        return Appodeal.isInitialized(RNAppodealUtils.getAdTypesFormRNTypes(adTypes));
     }
 
     @ReactMethod
-    public void initialize(String appKey, int adTypes, boolean consent) {
-        Appodeal.initialize(getCurrentActivity(), appKey, RNAppodealUtils.getAdTypesFormRNTypes(adTypes), consent);
-    }
-
-    @ReactMethod
-    public void initializeWithConsentReport(String appKey, int adTypes) {
-        Consent consent = ConsentManager.getInstance(reactContext).getConsent();
-        int types = RNAppodealUtils.getAdTypesFormRNTypes(adTypes);
-        if (consent != null) {
-            Appodeal.initialize(getCurrentActivity(), appKey, types, consent);
-        } else {
-            Appodeal.initialize(getCurrentActivity(), appKey, types, false);
-        }
-
-    }
-
-    @ReactMethod
-    public void synchroniseConsent(String appKey, Callback callback) {
-        ConsentManager.getInstance(reactContext).requestConsentInfoUpdate(appKey, new ConsentInfoUpdateListener() {
-            @Override
-            public void onConsentInfoUpdated(Consent consent) {
-                Consent.ShouldShow consentShouldShow = ConsentManager.getInstance(reactContext).shouldShowConsentDialog();
-                if (consentShouldShow == Consent.ShouldShow.TRUE) {
-                    forceShowConsentDialog(callback);
-                } else if (callback != null) {
-                    callback.invoke(getConsentStatus(), getConsentRegulation());
-                }
-            }
-
-            @Override
-            public void onFailedToUpdateConsentInfo(ConsentManagerException e) {
-                if (callback != null) {
-                    callback.invoke(getConsentStatus(), getConsentRegulation());
-                }
-            }
-        });
-    }
-
-    @ReactMethod
-    public void forceShowConsentDialog(Callback callback) {
-        // Create new Consent form listener
-        ConsentFormListener consentFormListener = new ConsentFormListener() {
-            @Override
-            public void onConsentFormLoaded() {
-                consentForm.showAsActivity();
-            }
-
-            @Override
-            public void onConsentFormError(ConsentManagerException error) {
-                consentForm = null;
-                if (callback != null) {
-                    callback.invoke(getConsentStatus(), getConsentRegulation());
-                }
-            }
-
-            @Override
-            public void onConsentFormOpened() {
-            }
-
-            @Override
-            public void onConsentFormClosed(Consent consent) {
-                consentForm = null;
-                if (callback != null) {
-                    callback.invoke(getConsentStatus(), getConsentRegulation());
-                }
-            }
-        };
-
-        consentForm = new ConsentForm.Builder(reactContext)
-                .withListener(consentFormListener)
-                .build();
-        consentForm.load();
-    }
-
-    @ReactMethod
-    public void hasConsent(String vendor, Callback callback) {
-        Consent.HasConsent result = ConsentManager.getInstance(reactContext).hasConsentForVendor(vendor);
-        if (callback != null) {
-            callback.invoke(result == Consent.HasConsent.TRUE);
-        }
-    }
-
-    @ReactMethod
-    public void show(int adTypes, String placement, Callback callback) {
+    public void show(int adTypes, String placement) {
         boolean result;
         if (placement == null) {
-            result = Appodeal.show(getCurrentActivity(), RNAppodealUtils.getAdTypesFormRNTypes(adTypes));
+            Appodeal.show(getCurrentActivity(), RNAppodealUtils.getAdTypesFormRNTypes(adTypes));
         } else {
-            result = Appodeal.show(getCurrentActivity(), RNAppodealUtils.getAdTypesFormRNTypes(adTypes), placement);
-        }
-        if (callback != null) {
-            callback.invoke(result);
+            Appodeal.show(getCurrentActivity(), RNAppodealUtils.getAdTypesFormRNTypes(adTypes), placement);
         }
     }
 
-    @ReactMethod
-    public void isLoaded(int adTypes, Callback callback) {
-        boolean result = Appodeal.isLoaded(RNAppodealUtils.getAdTypesFormRNTypes(adTypes));
-        if (callback != null) {
-            callback.invoke(result);
-        }
+    @ReactMethod(isBlockingSynchronousMethod = true)
+    public boolean isLoaded(int adTypes) {
+        return Appodeal.isLoaded(RNAppodealUtils.getAdTypesFormRNTypes(adTypes));
     }
 
-    @ReactMethod
-    public void canShow(int adTypes, String placement, Callback callback) {
-        boolean result = placement == null ?
+    @ReactMethod(isBlockingSynchronousMethod = true)
+    public boolean canShow(int adTypes, String placement) {
+       return placement == null ?
                 Appodeal.canShow(RNAppodealUtils.getAdTypesFormRNTypes(adTypes)) :
                 Appodeal.canShow(RNAppodealUtils.getAdTypesFormRNTypes(adTypes), placement);
-        if (callback != null) {
-            callback.invoke(result);
-        }
-    }
-
-    @ReactMethod
-    public void updateConsent(boolean consent) {
-        Appodeal.updateConsent(consent);
-    }
-
-    @ReactMethod
-    public void predictedEcpm(int adType, Callback callback) {
-        double ecpm = Appodeal.getPredictedEcpm(RNAppodealUtils.getAdTypesFormRNTypes(adType));
-        if (callback != null) {
-            callback.invoke(ecpm);
-        }
-    }
-
-    @ReactMethod
-    public void cache(int adTypes) {
-        Appodeal.cache(getCurrentActivity(), RNAppodealUtils.getAdTypesFormRNTypes(adTypes));
     }
 
     @ReactMethod
@@ -215,16 +97,18 @@ public class RNAppodealModule extends ReactContextBaseJavaModule implements Inte
     }
 
     @ReactMethod
+    public void cache(int adTypes) {
+        Appodeal.cache(getCurrentActivity(), RNAppodealUtils.getAdTypesFormRNTypes(adTypes));
+    }
+
+    @ReactMethod
     public void setAutoCache(int adTypes, boolean isEnabled) {
         Appodeal.setAutoCache(RNAppodealUtils.getAdTypesFormRNTypes(adTypes), isEnabled);
     }
 
-    @ReactMethod
-    public void isPrecache(int adType, Callback callback) {
-        boolean result = Appodeal.isPrecache(RNAppodealUtils.getAdTypesFormRNTypes(adType));
-        if (callback != null) {
-            callback.invoke(result);
-        }
+    @ReactMethod(isBlockingSynchronousMethod = true)
+    public boolean isPrecache(int adType) {
+        return Appodeal.isPrecache(RNAppodealUtils.getAdTypesFormRNTypes(adType));
     }
 
     @ReactMethod
@@ -243,8 +127,18 @@ public class RNAppodealModule extends ReactContextBaseJavaModule implements Inte
     }
 
     @ReactMethod
-    public void setBannerBackground(boolean flag) {
-        // not supported yet
+    public void updateGDPRConsent(int status) {
+        Appodeal.updateGDPRUserConsent(RNAppodealUtils.getGDPRUserConsentFromRNGDPRUserConsent(status));
+    }
+
+    @ReactMethod
+    public void updateCCPAConsent(int status) {
+        Appodeal.updateCCPAUserConsent(RNAppodealUtils.getCCPAUserConsentFromRNCCPAUserConsent(status));
+    }
+
+    @ReactMethod
+    public void setChildDirectedTreatment(boolean flag) {
+        Appodeal.setChildDirectedTreatment(flag);
     }
 
     @ReactMethod
@@ -258,13 +152,8 @@ public class RNAppodealModule extends ReactContextBaseJavaModule implements Inte
     }
 
     @ReactMethod
-    public void setChildDirectedTreatment(boolean flag) {
-        Appodeal.setChildDirectedTreatment(flag);
-    }
-
-    @ReactMethod
-    public void setOnLoadedTriggerBoth(boolean flag) {
-        Appodeal.setTriggerOnLoadedOnPrecache(RNAppodealUtils.getAllTypes(), flag);
+    public void setTriggerPrecacheCallbacks(int adTypes, boolean flag) {
+        Appodeal.setTriggerOnLoadedOnPrecache(RNAppodealUtils.getAdTypesFormRNTypes(adTypes), flag);
     }
 
     @ReactMethod
@@ -273,74 +162,77 @@ public class RNAppodealModule extends ReactContextBaseJavaModule implements Inte
     }
 
     @ReactMethod
-    public void muteVideosIfCallsMuted(boolean flag) {
-        Appodeal.muteVideosIfCallsMuted(flag);
+    public void setUserId(String id) {
+        Appodeal.setUserId(id);
     }
 
     @ReactMethod
-    public void showTestScreen() {
-        Appodeal.startTestActivity(getCurrentActivity());
+    public void setExtrasStringValue(String value, String key) {
+        Appodeal.setExtraData(key, value);
     }
 
     @ReactMethod
-    public void getVersion(Callback callback) {
-        if (callback != null) {
-            callback.invoke(Appodeal.getVersion());
-        }
+    public void setExtrasDoubleValue(double value, String key) {
+        Appodeal.setExtraData(key, value);
     }
 
     @ReactMethod
-    public void setSharedAdsInstanceAcrossActivities(boolean flag) {
-        Appodeal.setSharedAdsInstanceAcrossActivities(flag);
+    public void setExtrasIntegerValue(int value, String key) {
+        Appodeal.setExtraData(key, value);
     }
 
     @ReactMethod
-    public void setExtras(ReadableMap extras) {
-        ReadableMapKeySetIterator iterator = extras.keySetIterator();
-        while (iterator.hasNextKey()) {
-            String key = iterator.nextKey();
-            ReadableType type = extras.getType(key);
-            switch (type) {
-                case Boolean:
-                    Appodeal.setExtraData(key, extras.getBoolean(key));
-                    break;
-                case Number:
-                    Appodeal.setExtraData(key, extras.getDouble(key));
-                    break;
-                case String:
-                    Appodeal.setExtraData(key, extras.getString(key));
-                    break;
-            }
-        }
+    public void setExtrasBooleanValue(boolean value, String key) {
+        Appodeal.setExtraData(key, value);
     }
 
     @ReactMethod
-    public void setSegmentFilter(ReadableMap segmentFilter) {
-        ReadableMapKeySetIterator iterator = segmentFilter.keySetIterator();
-        while (iterator.hasNextKey()) {
-            String key = iterator.nextKey();
-            ReadableType type = segmentFilter.getType(key);
-            switch (type) {
-                case Boolean:
-                    Appodeal.setCustomFilter(key, segmentFilter.getBoolean(key));
-                    break;
-                case Number:
-                    Appodeal.setCustomFilter(key, segmentFilter.getDouble(key));
-                    break;
-                case String:
-                    Appodeal.setCustomFilter(key, segmentFilter.getString(key));
-                    break;
-            }
-        }
+    public void setExtrasMapValue(ReadableMap value, String key) {
+        Appodeal.setExtraData(key, value.toHashMap());
     }
 
     @ReactMethod
-    public void trackInAppPurchase(double amount, String currency) {
-        Appodeal.trackInAppPurchase(getCurrentActivity(), amount, currency);
+    public void removeExtrasValue(String key) {
+        Appodeal.setExtraData(key, (Object) null);
+    }
+
+    @ReactMethod(isBlockingSynchronousMethod = true)
+    public WritableMap getExtras() {
+        return Arguments.createMap();
     }
 
     @ReactMethod
-    public void getRewardParameters(ReadableMap args, Callback callback) {
+    public void setCustomStateStringValue(String value, String key) {
+        Appodeal.setCustomFilter(key, value);
+    }
+
+    @ReactMethod
+    public void setCustomStateDoubleValue(double value, String key) {
+        Appodeal.setCustomFilter(key, value);
+    }
+
+    @ReactMethod
+    public void setCustomStateIntegerValue(int value, String key) {
+        Appodeal.setCustomFilter(key, value);
+    }
+
+    @ReactMethod
+    public void setCustomStateBooleanValue(boolean value, String key) {
+        Appodeal.setCustomFilter(key, value);
+    }
+
+    @ReactMethod
+    public void removeCustomStateValue(String key) {
+        Appodeal.setCustomFilter(key, (Object) null);
+    }
+    
+    @ReactMethod(isBlockingSynchronousMethod = true)
+    public WritableMap getCustomState() {
+        return Arguments.createMap();
+    }
+
+    @ReactMethod(isBlockingSynchronousMethod = true)
+    public WritableMap getRewardParameters(ReadableMap args) {
         String placement = args.hasKey("placement") ? args.getString("placement") : null;
         WritableMap params = Arguments.createMap();
         if (placement == null) {
@@ -351,24 +243,78 @@ public class RNAppodealModule extends ReactContextBaseJavaModule implements Inte
             params.putString("currency", Appodeal.getRewardParameters(placement).second);
         }
 
-        if (callback != null) {
-            callback.invoke(params);
-        }
+        return params;
+    }
+
+    @ReactMethod(isBlockingSynchronousMethod = true)
+    public double predictedEcpm(int adType) {
+        double ecpm = Appodeal.getPredictedEcpm(RNAppodealUtils.getAdTypesFormRNTypes(adType));
+        return ecpm;
+    }
+
+    @ReactMethod(isBlockingSynchronousMethod = true)
+    public String getVersion() {
+        return Appodeal.getVersion();
     }
 
     @ReactMethod
-    public void setAge(int age) {
-        Appodeal.setUserAge(age);
+    public void trackInAppPurchase(double amount, String currency) {
+        Appodeal.trackInAppPurchase(getCurrentActivity(), amount, currency);
     }
 
     @ReactMethod
-    public void setUserId(String id) {
-        Appodeal.setUserId(id);
+    public void validateAndTrackInAppPurchase(ReadableMap params, Callback callback) {
+        InAppPurchase.Type productType = RNAppodealUtils.getPurchaseTypeFromRNPurchaseType(params.getInt("productType"));
+
+        InAppPurchase purchase = InAppPurchase.newBuilder(productType)
+                .withPublicKey(params.getString("publicKey"))
+                .withSignature(params.getString("signature"))
+                .withPurchaseData(params.getString("purchaseData"))
+                .withPurchaseToken(params.getString("purchaseToken"))
+                .withPurchaseTimestamp(params.getInt("timestamp"))
+                .withDeveloperPayload(params.getString("developerPayload"))
+                .withOrderId(params.getString("orderId"))
+                .withSku(params.getString("sku"))
+                .withPrice(params.getString("price"))
+                .withCurrency(params.getString("currency"))
+                .withAdditionalParams(RNAppodealUtils.getMapFromReadableMap(params.getMap("additionalParameters")))
+                .build();
+
+        Appodeal.validateInAppPurchase(getCurrentActivity(), purchase, new InAppPurchaseValidateCallback() {
+            @Override
+            public void onInAppPurchaseValidateSuccess(InAppPurchase inAppPurchase, List<ServiceError> list) {
+                WritableMap result = Arguments.createMap();
+
+                result.putString("publicKey", inAppPurchase.getPublicKey());
+                result.putString("signature", inAppPurchase.getSignature());
+                result.putString("purchaseData", inAppPurchase.getPurchaseData());
+                result.putString("purchaseToken", inAppPurchase.getPurchaseToken());
+                result.putInt("timestamp", (int)inAppPurchase.getPurchaseTimestamp());
+                result.putString("developerPayload", inAppPurchase.getDeveloperPayload());
+                result.putString("orderId", inAppPurchase.getOrderId());
+                result.putString("sku", inAppPurchase.getSku());
+                result.putString("price", inAppPurchase.getPrice());
+                result.putString("currency", inAppPurchase.getCurrency());
+                result.putInt("productType", RNAppodealUtils.getRNPurchaseTypeFromType(inAppPurchase.getType()));
+
+                if (callback != null) {
+                    callback.invoke(result, null);
+                }
+            }
+
+            @Override
+            public void onInAppPurchaseValidateFail(InAppPurchase inAppPurchase, List<ServiceError> list) {
+                String error = list.size() > 0 ? list.get(0).toString() : null;
+                if (callback != null) {
+                    callback.invoke(null, error);
+                }
+            }
+        });
     }
 
     @ReactMethod
-    public void setGender(String gender) {
-        Appodeal.setUserGender(RNAppodealUtils.getGenderFromString(gender));
+    public void trackEvent(String name, ReadableMap parameters) {
+        Appodeal.logEvent(name, parameters.toHashMap());
     }
 
     @Override
@@ -484,45 +430,6 @@ public class RNAppodealModule extends ReactContextBaseJavaModule implements Inte
 
     @Override
     public void onRewardedVideoClicked() { }
-
-    @Override
-    public void onNonSkippableVideoLoaded(boolean isPrecache) {
-        WritableMap params = Arguments.createMap();
-        params.putBoolean("isPrecache", isPrecache);
-        sendEventToJS("onNonSkippableVideoLoaded", params);
-    }
-
-    @Override
-    public void onNonSkippableVideoFailedToLoad() {
-        sendEventToJS("onNonSkippableVideoFailedToLoad", null);
-    }
-
-    @Override
-    public void onNonSkippableVideoShowFailed() {
-        sendEventToJS("onNonSkippableVideoFailedToShow", null);
-    }
-
-    @Override
-    public void onNonSkippableVideoShown() {
-        sendEventToJS("onNonSkippableVideoShown", null);
-    }
-
-    @Override
-    public void onNonSkippableVideoClosed(boolean isFinished) {
-        WritableMap params = Arguments.createMap();
-        params.putBoolean("isFinished", isFinished);
-        sendEventToJS("onNonSkippableVideoClosed", params);
-    }
-
-    @Override
-    public void onNonSkippableVideoFinished() {
-        sendEventToJS("onNonSkippableVideoFinished", null);
-    }
-
-    @Override
-    public void onNonSkippableVideoExpired() {
-        sendEventToJS("onNonSkippableVideoExpired", null);
-    }
 
     @Override
     public void onHostDestroy() {

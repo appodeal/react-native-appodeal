@@ -37,7 +37,7 @@ export const styles = StyleSheet.create({
     marginBottom: 8,
     textTransform: 'uppercase',
     color: '#999',
-    fontSize: 12,
+    fontSize: 14,
   },
   sectionFooter: {
     textAlign: 'center',
@@ -48,13 +48,13 @@ export const styles = StyleSheet.create({
   },
   rowContainer: {
     backgroundColor: 'transparent',
-    height: 46,
+    height: 44,
     alignItems: 'stretch',
   },
   borderContainer: {
     alignSelf: 'stretch',
     height: 1,
-    paddingLeft: 15,
+    paddingLeft: 16,
     backgroundColor: 'white',
   },
   border: {
@@ -71,7 +71,7 @@ export const styles = StyleSheet.create({
   },
   contentRowContainer: {
     flexDirection: 'row',
-    paddingLeft: 15,
+    paddingLeft: 16,
     flex: 1,
     alignItems: 'center',
     backgroundColor: 'white',
@@ -87,7 +87,12 @@ export const styles = StyleSheet.create({
   },
   rowTitle: {
     color: 'black',
-    fontSize: 14,
+    fontSize: 16,
+    marginRight: 16,
+  },
+  rowRightDetail: {
+    color: 'gray',
+    fontSize: 16,
     marginRight: 15,
   },
   banner: {
@@ -109,7 +114,7 @@ export const styles = StyleSheet.create({
     margin: 8,
     height: 26,
     borderRadius: 8,
-    fontSize: 14,
+    fontSize: 16,
     backgroundColor: '#53d769',
   },
   buttonPlain: {
@@ -118,12 +123,12 @@ export const styles = StyleSheet.create({
     alignSelf: 'stretch',
     margin: 8,
     borderRadius: 8,
-    fontSize: 14,
+    fontSize: 16,
     backgroundColor: '#ddd',
   },
   buttonText: {
     color: 'white',
-    fontSize: 12,
+    fontSize: 16,
     marginLeft: 8,
     marginRight: 8,
   },

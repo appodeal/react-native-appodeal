@@ -7,7 +7,8 @@ import {BannerSegmentedControl} from '../components/controls/BannerSegmentedCont
 import {BannerView} from '../advertising/BannerView';
 import {AutocacheControl} from '../components/controls/AutocacheControl';
 import {InitialisationSection} from '../components/sections/InitialisationSection';
-import {ScrollView, SafeAreaView} from 'react-native';
+import {ScrollView, SafeAreaView, Switch} from 'react-native';
+import {Row} from '../components';
 import {
   AppodealAdType,
   Appodeal,
@@ -72,12 +73,17 @@ export const HomeScreen = () => {
     }
   };
 
+  const testModeSwitch = () => (
+    <Switch value={testMode} onValueChange={setTestMode} />
+  );
+
   return (
     <>
       <BannerView showStyle={bannerShowStyle} visible={isBannerOnScreen} />
       <SafeAreaView style={styles.container}>
         <ScrollView style={styles.scrollView}>
           <InitialisationSection state={state} onInitialize={initSDK} />
+          <Row title="Test mode" accessory={testModeSwitch} />
           <AutocacheControl
             mask={autocache}
             onUpdate={(value) => setAutocache(value)}

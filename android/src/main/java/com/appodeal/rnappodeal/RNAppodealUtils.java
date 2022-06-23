@@ -2,8 +2,15 @@ package com.appodeal.rnappodeal;
 
 import com.appodeal.ads.Appodeal;
 import com.appodeal.ads.UserSettings;
+import com.appodeal.ads.inapp.InAppPurchase;
+import com.appodeal.ads.regulator.CCPAUserConsent;
+import com.appodeal.ads.regulator.GDPRUserConsent;
 import com.appodeal.ads.utils.Log;
-import com.explorestack.consent.Consent;
+import com.facebook.react.bridge.ReadableMap;
+
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 
 
 class RNAppodealUtils {
@@ -26,10 +33,6 @@ class RNAppodealUtils {
         }
         return result;
     }
-
-    static int getAllTypes() {
-        return Appodeal.INTERSTITIAL | Appodeal.BANNER | Appodeal.REWARDED_VIDEO | Appodeal.NON_SKIPPABLE_VIDEO | Appodeal.MREC;
-    }
     
     static int getAdTypesFormRNTypes(int types) {
         int result = 0;
@@ -48,49 +51,54 @@ class RNAppodealUtils {
         if ((types & (1 << 5)) > 0) {
             result |= Appodeal.REWARDED_VIDEO;
         }
-        if ((types & (1 << 6)) > 0) {
-            result |= Appodeal.NON_SKIPPABLE_VIDEO;
-        }
         if ((types & (1 << 8)) > 0) {
             result |= Appodeal.MREC;
         }
         return result;
     }
 
-    static int getConsentStatusIntFromStatus(Consent.Status status) {
-        int result = 0;
-        switch (status) {
-            case UNKNOWN:
-                result = 0;
-                break;
-            case NON_PERSONALIZED:
-                result = 1;
-                break;
-            case PARTLY_PERSONALIZED:
-                result = 2;
-                break;
-            case PERSONALIZED:
-                result = 3;
-                break;
+    static CCPAUserConsent getCCPAUserConsentFromRNCCPAUserConsent(int consent) {
+        CCPAUserConsent status = CCPAUserConsent.Unknown;
+        if (consent == 1) {
+            status = CCPAUserConsent.OptIn;
+        } else if (consent == 2) {
+            status = CCPAUserConsent.OptOut;
         }
-        return result;
+        return status;
     }
 
-    static int getConsentRegualationIntFromZone(Consent.Zone zone) {
-        int result = 0;
-        switch (zone) {
-            case UNKNOWN:
-                result = 0;
-                break;
-            case NONE:
-                result = 1;
-                break;
-            case GDPR:
-                result = 2;
-                break;
-            case CCPA:
-                result = 3;
-                break;
+    static GDPRUserConsent getGDPRUserConsentFromRNGDPRUserConsent(int consent) {
+        GDPRUserConsent status = GDPRUserConsent.Unknown;
+        if (consent == 1) {
+            status = GDPRUserConsent.Personalized;
+        } else if (consent == 2) {
+            status = GDPRUserConsent.NonPersonalized;
+        }
+        return status;
+    }
+
+    static InAppPurchase.Type getPurchaseTypeFromRNPurchaseType(int type) {
+        if (type == 0) {
+            return InAppPurchase.Type.InApp;
+        } else {
+            return InAppPurchase.Type.Subs;
+        }
+    }
+
+    static int getRNPurchaseTypeFromType(InAppPurchase.Type type) {
+        if (type == InAppPurchase.Type.InApp) {
+            return 0;
+        }
+        return 1;
+    }
+
+    static Map<String, String> getMapFromReadableMap(ReadableMap map) {
+        Map<String, String> result = new HashMap<>();
+        Iterator<Map.Entry<String, Object>> iterator = map.getEntryIterator();
+        while (iterator.hasNext()) {
+            Map.Entry<String, Object> entry = iterator.next();
+            Object value = entry.getValue();
+            result.put(entry.getKey(), entry.getValue().toString());
         }
         return result;
     }

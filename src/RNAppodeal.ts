@@ -1,11 +1,12 @@
 "use strict";
 
-import { NativeModules, NativeEventEmitter } from "react-native";
+import { NativeModules, NativeEventEmitter, Platform } from "react-native";
 import {
   AppodealLogLevel,
   AppodealGDPRConsentStatus,
   AppodealCCPAConsentStatus,
-  AppodealPurchase,
+  AppodealIOSPurchase,
+  AppodealAndroidPurchase,
   AppodealReward,
 } from "./RNAppodealTypes";
 
@@ -211,7 +212,7 @@ export interface Appodeal {
    * @param purchase Purchased product info
    */
   validateAndTrackInAppPurchase(
-    purchase: AppodealPurchase,
+    purchase: AppodealAndroidPurchase | AppodealIOSPurchase,
     callback?: EventHandler
   ): void;
   /**
@@ -320,7 +321,21 @@ const appodeal: Appodeal = {
   },
 
   setExtrasValue: (value: any | null, key: string): void => {
-    RNAppodeal.setExtrasValue(value, key);
+    if (Platform.OS == 'ios') {
+      RNAppodeal.setExtrasValue(value, key);
+    } else if (typeof(value) === 'string') {
+      RNAppodeal.setExtrasStringValue(value, key);
+    } else if (typeof(value) === 'number' && Number.isInteger(value)) {
+      RNAppodeal.setExtrasIntegerValue(value, key);
+    } else if (typeof(value) === 'number') {
+      RNAppodeal.setExtrasDoubleValue(value, key);
+    } else if (typeof(value) === 'boolean') {
+      RNAppodeal.setExtrasBooleanValue(value, key);
+    } else if (typeof(value) === 'object') {
+      RNAppodeal.setExtrasMapValue(value, key);
+    } else if (value === null) {
+      RNAppodeal.removeExtrasValue(key);
+    }
   },
 
   getExtras: (): Map => {
@@ -328,11 +343,23 @@ const appodeal: Appodeal = {
   },
 
   setCustomStateValue: (value: any | null, key: string): void => {
-    RNAppodeal.setCustomStateValue(value, key);
+    if (Platform.OS == 'ios') {
+      RNAppodeal.setCustomStateValue(value, key);
+    } else if (typeof(value) === 'string') {
+      RNAppodeal.setCustomStateStringValue(value, key);
+    } else if (typeof(value) === 'number' && Number.isInteger(value)) {
+      RNAppodeal.setCustomStateIntegerValue(value, key);
+    } else if (typeof(value) === 'number') {
+      RNAppodeal.setCustomStateDoubleValue(value, key);
+    } else if (typeof(value) === 'boolean') {
+      RNAppodeal.setCustomStateBooleanValue(value, key);
+    }  else if (value === null) {
+      RNAppodeal.removeCustomStateValue(key);
+    }
   },
 
   getCustomState: (): Map => {
-    return RNAppodeal.getExtras();
+    return RNAppodeal.getCustomState();
   },
 
   getRewardParameters: (placement: string): AppodealReward => {
@@ -348,7 +375,7 @@ const appodeal: Appodeal = {
   },
 
   validateAndTrackInAppPurchase: (
-    purchase: AppodealPurchase,
+    purchase: AppodealIOSPurchase | AppodealAndroidPurchase,
     callback?: EventHandler
   ) => {
     RNAppodeal.validateAndTrackInAppPurchase(

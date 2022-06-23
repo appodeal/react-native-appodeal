@@ -6,8 +6,10 @@ import {
     AppodealGender,
     AppodealCCPAConsentStatus,
     AppodealGDPRConsentStatus,
-    AppodealPurchaseType,
-    AppodealPurchase,
+    AppodealAndroidPurchase,
+    AppodealAndroidPurchaseType,
+    AppodealIOSPurchase,
+    AppodealIOSPurchaseType,
     AppodealReward
 } from './RNAppodealTypes';
 
@@ -25,8 +27,10 @@ export {
     AppodealGender,
     AppodealCCPAConsentStatus,
     AppodealGDPRConsentStatus,
-    AppodealPurchaseType,
-    AppodealPurchase,
+    AppodealAndroidPurchase,
+    AppodealAndroidPurchaseType,
+    AppodealIOSPurchase,
+    AppodealIOSPurchaseType,
     AppodealReward,
     AppodealInterstitialEvent,
     AppodealRewardedEvent,

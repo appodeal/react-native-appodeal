@@ -2,7 +2,7 @@ import React from 'react';
 import {styles} from '../styles';
 import {Text, View, TouchableHighlight} from 'react-native';
 import {Link} from '@react-navigation/native';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import Icon from 'react-native-vector-icons/Ionicons';
 
 export const SectionHeader = (props: {value: string}) => {
   return <Text style={styles.sectionHeader}>{props.value}</Text>;
@@ -41,7 +41,7 @@ export const LinkRow = (props: {title: string; route: string}) => {
             <Text style={styles.rowTitle}>{props.title}</Text>
           </View>
           <View style={styles.accessoryContainer}>
-            <Icon name="arrow-right" color="#ccc" size={22} />
+            <Icon name="chevron-forward-outline" color="#ccc" size={24} />
           </View>
         </View>
         <View style={styles.borderContainer}>

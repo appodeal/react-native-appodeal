@@ -15,13 +15,14 @@ export const App = () => {
       <StatusBar />
       <Stack.Navigator>
         <Stack.Screen
-          name="/home"
+          name="home"
           component={HomeScreen}
           options={{title: 'Appodeal SDK' + ' ' + Appodeal.getVersion()}}
         />
         <Stack.Screen
-          name="/advanced_features"
+          name="advanced_features"
           component={AdvancedFeaturesScreen}
+          options={{title: 'Advanced Features'}}
         />
       </Stack.Navigator>
     </NavigationContainer>
