@@ -415,7 +415,7 @@ RCT_EXPORT_METHOD(trackEvent:(nonnull NSString *)event
 }
 
 - (void)rewardedVideoDidClick {
-    [self sendEventWithName:kEventRewardedVideoExpired body:nil];
+    [self sendEventWithName:kEventRewardedVideoClicked body:nil];
 }
 
 - (void)rewardedVideoWillDismissAndWasFullyWatched:(BOOL)wasFullyWatched {

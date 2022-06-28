@@ -225,7 +225,7 @@ public class RNAppodealModule extends ReactContextBaseJavaModule implements Inte
     public void removeCustomStateValue(String key) {
         Appodeal.setCustomFilter(key, (Object) null);
     }
-    
+
     @ReactMethod(isBlockingSynchronousMethod = true)
     public WritableMap getCustomState() {
         return Arguments.createMap();
@@ -429,7 +429,7 @@ public class RNAppodealModule extends ReactContextBaseJavaModule implements Inte
     }
 
     @Override
-    public void onRewardedVideoClicked() { }
+    public void onRewardedVideoClicked() { sendEventToJS("onRewardedVideoClicked", null); }
 
     @Override
     public void onHostDestroy() {

@@ -13,7 +13,11 @@ React Native package that adds Appodeal SDK support to your react-native applica
     - [Initialisation](#initialisation)
     - [Callbacks](#callbacks)
     - [Presentation](#presentation)
-  - [Consent Manager](#consent-manager)
+  - [GDPR/CCPA](#gdprccpa)
+  - [Measurment](#measurment)
+    - [Ad Revenue](#ad-revenue)
+    - [Event Tracking](#event-tracking)
+    - [In-App Purchase validation](#in-app-purchase-validation)
   - [Banner View](#banner-view)
     - [Styling](#styling)
     - [Callbacks](#callbacks-1)
@@ -44,16 +48,30 @@ target 'App' do
     )
 
     pod 'APDAdColonyAdapter'
-    pod 'APDAmazonAdsAdapter'
+    pod 'BDMAdColonyAdapter'
+    pod 'APDAdjustAdapter'
     pod 'APDAppLovinAdapter'
+    pod 'APDAppsFlyerAdapter'
     pod 'APDBidMachineAdapter'
-    pod 'APDFacebookAudienceAdapter'
+    pod 'BDMCriteoAdapter'
+    pod 'BDMPangleAdapter'
+    pod 'BDMAmazonAdapter'
+    pod 'BDMSmaatoAdapter'
+    pod 'BDMTapjoyAdapter'
+    pod 'APDFirebaseAdapter'
     pod 'APDGoogleAdMobAdapter'
+    pod 'APDIABAdapter'
+    pod 'BDMIABAdapter'
     pod 'APDIronSourceAdapter'
+    pod 'APDFacebookAdapter'
+    pod 'APDMetaAudienceNetworkAdapter'
+    pod 'BDMMetaAudienceAdapter'
     pod 'APDMyTargetAdapter'
-    pod 'APDOguryAdapter'
+    pod 'BDMMyTargetAdapter'
+    pod 'APDStackAnalyticsAdapter'
     pod 'APDUnityAdapter'
     pod 'APDVungleAdapter'
+    pod 'BDMVungleAdapter'
     pod 'APDYandexAdapter'
 
     target 'AppTests' do
@@ -90,7 +108,29 @@ Add *GADApplicationIdentifier* key (if you use Admob adapter).
 
 For more information about Admob sync check out our [FAQ](https://faq.appodeal.com/en/articles/4185565-how-do-i-link-my-admob-account).
 
-6. Run your project ( `Cmd+R` )
+Add `FacebookAppID`, `FacebookClientToken` and other parameters according to [doc](https://developers.facebook.com/docs/ios/getting-started/#configure-your-project) (if you use Meta Analytics adapter)
+
+``` xml
+<key>CFBundleURLTypes</key>
+<array>
+  <dict>
+  <key>CFBundleURLSchemes</key>
+  <array>
+    <string>fbAPP-ID</string>
+  </array>
+  </dict>
+</array>
+<key>FacebookAppID</key>
+<string>APP-ID</string>
+<key>FacebookClientToken</key>
+<string>CLIENT-TOKEN</string>
+<key>FacebookDisplayName</key>
+<string>APP-NAME</string>
+```
+
+Add `GoogleService-Info.plist` according to [doc](https://firebase.google.com/docs/ios/setup#add-config-file) (if you use Firebase  adapter)
+
+1. Run your project ( `Cmd+R` )
 
 #### Android
 
@@ -101,7 +141,7 @@ Add dependencies into `build.gradle` (module: app)
 ``` groovy
 dependencies {
     ...
-    implementation 'com.appodeal.ads:sdk:2.11.0.+'
+    implementation 'com.appodeal.ads:sdk:3.0.0.+'
     ...
 }
 ```
@@ -191,6 +231,23 @@ In your *network_security_config.xml* file, add base-config that sets `cleartext
 
 For more information about Admob sync check out our [FAQ](https://faq.appodeal.com/en/articles/4185565-how-do-i-link-my-admob-account).
 
+6. Meta configuration (if you use Meta Analytics adapter)
+
+``` xml
+<manifest>
+    <application>
+       <meta-data
+            android:name="com.facebook.sdk.ApplicationId"
+            android:value="[META_APP_ID]" />
+        <meta-data
+            android:name="com.facebook.sdk.ClientToken"
+            android:value="META_CLIENT_TOKEN" />
+    </application>
+</manifest>
+```
+
+7. Add `google-services.json` according to [doc](https://firebase.google.com/docs/android/setup#add-config-file) (if you use Firebase  adapter)
+
 ## Usage
 
 Please, read iOS and Android docs at [wiki](https://wiki.appodeal.com/) to get deeper understanding how 
@@ -198,7 +255,7 @@ Appodeal SDK works.
 
 ### Initialisation
 
-1. Initialise Appodeal at application launch.
+1. Initialise Appodeal at the application launch.
 
 ``` javascript
 import {
@@ -207,8 +264,7 @@ import {
 } from 'react-native-appodeal';
 
 const adTypes = AppodealAdType.INTERSTITIAL | AppodealAdType.REWARDED_VIDEO | AppodealAdType.BANNER;
-const consent = true;
-Appodeal.initialize('Your app key', adTypes, consent)
+Appodeal.initialize('Your app key', adTypes)
 ```
 
 2. Configure SDK
@@ -239,7 +295,7 @@ Appodeal.setChildDirectedTreatment(false);
 Appodeal.disableNetwork("some_network ", AppodealAdType.INTERSTITIAL);
 // Enable or disable triggering show for precache ads
 // Call this method before or after initilisation
-Appodeal.setOnLoadedTriggerBoth(true);
+Appodeal.setTriggerPrecacheCallbacks(true, AppodealAdType.BANNER);
 ```
 
 * Segments and targeting. 
@@ -249,27 +305,24 @@ import {
     Appodeal,
     AppodealGender
 } from 'react-native-appodeal';
-// Set user age
-// Call this method before or after initilisation
-Appodeal.setAge(25);
-// Set user gender
-// Supported values are male | female
-// Call this method before of after initilisation
-Appodeal.setGender(AppodealGender.FEMALE);
 // Set specific user id from attribution system
 // Call this method before initilisation
 Appodeal.setUserId('some user ud')
+// Set user age
+// Call this method before or after initilisation
+Appodeal.setCustomStateValue(25, 'appodeal_user_age');
+// Set user gender
+// Supported values are male | female
+// Call this method before of after initilisation
+Appodeal.setCustomStateValue(AppodealGender.FEMALE, 'appodeal_user_gender');
+
 // Set segment filter
 // Call this method before of after initilisation
-Appodeal.setSegmentFilter({
-    "levels_played": levelsPlayed,
-    "player_rank": "gold",
-    "paid": false
-})
+Appodeal.setCustomStateValue(levelsPlayed, 'levels_played');
+Appodeal.setCustomStateValue(10, 'user_rank');
+Appodeal.setCustomStateValue(false, 'paid');
 // Set extras
-Appodeal.setExtras({
-    "attribuition_id": "some value",
-})
+Appodeal.setExtrasValue("some value", 'attribuition_id');
 ```
 
 * Banner specific
@@ -289,27 +342,26 @@ Appodeal.setSmartBanners(false);
 // Enable or disable banner refresh animation
 // Call this method before of after initilisation
 Appodeal.setBannerAnimation(true);
-// Enable or disable banner backgound
-// Call this method before of after initilisation
-Appodeal.setBannerBackground(true);
-```
-
-* Android specific
-
-``` javascript
-import {
-    Appodeal
-} from 'react-native-appodeal';
-// Mute calls if calls muted on Android
-// Call this method before initilisation
-Appodeal.muteVideosIfCallsMuted(bool);
 ```
 
 ### Callbacks
 
 Set callbacks listener to get track of ad lifecycle events. 
 
-1. Banner
+1. SDK
+
+``` javascript
+import {
+    Appodeal,
+    AppodealSdkEvent
+} from 'react-native-appodeal';
+
+Appodeal.addEventListener(AppodealSdkEvent.INITIALIZED, () =>
+    console.log("Appodeal SDK did initialize");
+);
+```
+
+2. Banner
 
 ``` javascript
 import {
@@ -319,22 +371,22 @@ import {
 
 Appodeal.addEventListener(AppodealBannerEvent.LOADED, (event: any) =>
     console.log("Banner loaded. Height: ", event.height + ", precache: " + event.isPrecache)
-)
+);
 Appodeal.addEventListener(AppodealBannerEvent.SHOWN, () =>
     console.log("Banner shown")
-)
+);
 Appodeal.addEventListener(AppodealBannerEvent.EXPIRED, () =>
     console.log("Banner expired")
-)
+);
 Appodeal.addEventListener(AppodealBannerEvent.CLICKED, () =>
-    console.log("Banner clicked")
-)
+    console.log("Banner was clicked")
+);
 Appodeal.addEventListener(AppodealBannerEvent.FAILED_TO_LOAD, () =>
     console.log("Banner failed to load")
-)
+);
 ```
 
-2. Interstitial
+3. Interstitial
 
 ``` javascript
 import {
@@ -344,28 +396,28 @@ import {
 
 Appodeal.addEventListener(AppodealInterstitialEvent.LOADED, (event: any) =>
     console.log("Interstitial loaded. Precache: ", event.isPrecache)
-)
-Appodeal.addEventListener(AppodealInterstitialEvent.SHOWN, () => {
+);
+Appodeal.addEventListener(AppodealInterstitialEvent.SHOWN, () => 
     console.log("Interstitial shown")
-})
+);
 Appodeal.addEventListener(AppodealInterstitialEvent.EXPIRED, () =>
     console.log("Interstitial expired")
-)
+);
 Appodeal.addEventListener(AppodealInterstitialEvent.CLICKED, () =>
-    console.log("Interstitial clicked")
-)
+    console.log("Interstitial was clicked")
+);
 Appodeal.addEventListener(AppodealInterstitialEvent.CLOSED, () =>
     console.log("Interstitial closed")
-)
+);
 Appodeal.addEventListener(AppodealInterstitialEvent.FAILED_TO_LOAD, () =>
     console.log("Interstitial failed to load")
-)
+);
 Appodeal.addEventListener(AppodealInterstitialEvent.FAILED_TO_SHOW, () =>
     console.log("Interstitial failed to show")
-)
+);
 ```
 
-3. Rewarded video
+4. Rewarded video
 
 ``` javascript
 import {
@@ -375,25 +427,28 @@ import {
 
 Appodeal.addEventListener(AppodealRewardedEvent.LOADED, (event: any) =>
     console.log("Rewarded video loaded. Precache: ", event.isPrecache)
-)
+);
 Appodeal.addEventListener(AppodealRewardedEvent.SHOWN, () =>
     console.log("Rewarded video shown")
-)
+);
 Appodeal.addEventListener(AppodealRewardedEvent.EXPIRED, () =>
     console.log("Rewarded video expired")
-)
+);
+Appodeal.addEventListener(AppodealRewardedEvent.CLICKED, () => 
+    console.log("Rewarded video was clicked")
+);
 Appodeal.addEventListener(AppodealRewardedEvent.REWARD, (event: any) =>
     console.log("Rewarded video finished. Amount: ", event.amount + ", currency: " + event.currency)
-)
+);
 Appodeal.addEventListener(AppodealRewardedEvent.CLOSED, (event: any) =>
     console.log("Rewarded video closed, is finished: ", event.isFinished)
-)
+);
 Appodeal.addEventListener(AppodealRewardedEvent.FAILED_TO_LOAD, () =>
     console.log("Rewarded video failed to load")
-)
+);
 Appodeal.addEventListener(AppodealRewardedEvent.FAILED_TO_SHOW, () =>
     console.log("Rewarded video failed to show")
-)
+);
 ```
 
 ### Presentation
@@ -412,13 +467,11 @@ Appodeal.cache(AppodealAdType.INTERSTITIAL)
 
 ``` javascript
 // Check that interstitial 
-Appodeal.canShow(AppodealAdType.INTERSTITIAL, 'your_placement', (result) =>
-    console.log("Interstitial ", result ? "can be shown" : "can not be shown")
-)
+const canShow = Appodeal.canShow(AppodealAdType.INTERSTITIAL, 'your_placement');
+console.log("Interstitial ", canShow ? "can be shown" : "can not be shown");
 // Check that banner is loaded 
-Appodeal.isLoaded(AppodealAdType.BANNER, (result) =>
-    console.log("Banner ", result ? "is loaded" : "is not loaded")
-)
+const isLoaded = Appodeal.isLoaded(AppodealAdType.BANNER);
+console.log("Banner ", isLoaded ? "is loaded" : "is not loaded");
 ```
 
 3. Show advertising
@@ -438,57 +491,82 @@ You can hide banner ad after it was shown. Call `hide` method with another ad ty
 Appodeal.hide(AppodealAdType.BANNER_TOP)
 ```
 
-## Consent Manager
+## GDPR/CCPA
 
-Consent manager is used to provide GDPR and CCPA compliance. Consent manager SDK can be synchronized at any moment of application lifecycle. We recommend to synchronize it at application launch. Multiple synchronization calls are allowed.
-
-Required parameter is `appKey` - Appodeal app key.
-
-To synchronise user consent you can use following methods. If user consent is required it will shows fullscreen Consent Dialog.
-Callback will return information about latest user consent and current regulation zone.
-
-Since the 2.7.0 version, Appdoeal SDK can be initialized directly with the Consent Report object of Consent Manager. If your application uses Consent Manager and you call the synchronize method before Appodeal initialization you don't need to pass boolean consent as an argument. SDK will check that the consent report exists and will use it. 
-
-> In case Appodeal will try to initialize without boolean consent or before the Consent Manager is synchronized it will use `false` boolean consent.
+Appodeal since 3.0.0 is supports GDPR and CCPA regulations by default. It will automatically detect regulation zone and show all required consent dialog at the very first initialization moment if it is needed. You are still able to use own custom approach. In this case set user consent prior Appodeal SDK initialization by using following code.
 
 ``` javascript
 import {
     Appodeal,
-    AppodealConsentStatus,
-    AppodealConsentRegulation,
+    AppodealGDPRConsentStatus,
+    AppodealCCPAConsentStatus,
 } from 'react-native-appodeal';
 
-Appodeal.synchroniseConsent('Your appKey', (consent: AppodealConsentStatus, regulation: AppodealConsentRegulation) => {
-    // Initialise Appodeal SDK here
-    Appodeal.initialize('Your appKey', adTypes);
-})
+// If user in GDPR use this method
+Appodeal.updateGDPRConsent(AppodealGDPRConsentStatus.PERSONALIZED);
+// If user in CCPA use this method
+Appodeal.updateCCPAConsent(AppodealCCPAConsentStatus.OPT_IN)
 ```
 
-You can force consent manager to show consent dialog at any moment of application lifecycle after consent manager was synchronised.
+## Measurment
+
+### Ad Revenue
+
+Ad revenue tracking is available by default for Firebase, AppsFlyer and Adjust. To use it you will need to add Appodeal's Firebase, AppsFlyer or Adjust adapters accordingly.
+
+### Event Tracking
+
+Event tracking is available for Firebase, AppsFlyer, Adjust and Meta. Add this adapters in your App and call following method:
+
+``` javascript
+import {
+    Appodeal
+} from 'react-native-appodeal';
+
+Appodeal.trackEvent('app_event');
+Appodeal.trackEvent('app_event', { 'some_key', 'some_value' });
+```
+
+### In-App Purchase validation
+
+In-App Purchase validation is available by AppsFlyer or Adjust MMPs. After validation purchase will track automatically. To use this you will need to one of Adjust or AppsFlyer adapters into the App, enable validation on MMP's side and call following method:
 
 ``` javascript
 import {
     Appodeal,
-    AppodealConsentStatus,
-    AppodealConsentRegulation,
+    AppodealIOSPurchaseType,
+    AppodealAndroidPurchaseType
 } from 'react-native-appodeal';
 
-Appodeal.forceShowConsentDialog((consent: AppodealConsentStatus, regulation: AppodealConsentRegulation) => {
-    // Handle updated data
-})
+if (Platform.OS === 'ios') {
+    Appodeal.validateAndTrackInAppPurchase({
+        productId: "Product ID",
+        productType: AppodealIOSPurchaseType.AUTO_RENEWABLE_SUBSCRIPTION,
+        price: 9.99,
+        currency: "USD",
+        transactionId: "Transaction ID"
+    }, (result, error) => 
+        console.log("Purchase validation ", result ? "successed" : "failed");
+    );
+} else if (Platform.OS === 'android') {
+    if (Platform.OS === 'ios') {
+    Appodeal.validateAndTrackInAppPurchase({
+        publicKey: "Public Key",
+        productType: AppodealAndroidPurchaseType.SUBSCRIPTION,
+        signature: "Signature",
+        purchaseData: "Purchase data",
+        purchaseToken: "Token",
+        timestamp: 12345678,
+        developerPayload: "payload",
+        price: "9.99",
+        currency: "USD",
+        orderId: "Order",
+        sku: "SKU"
+    }, (result, error) => 
+        console.log("Purchase validation ", result ? "successed" : "failed");
+    );
+}
 ```
-
-You can get consent result for specific vendor bundle, that registered in Appodeal system. Eg you can use your application id.
-
-``` javascript
-import { Appodeal } from 'react-native-appodeal';
-
-Appodeal.hasConsent('com.organisation.app', (consentResult: boolean) => {
-    // Handle updated data
-})
-```
-
-> Note. Usage of Consent Manager is not required. 
 
 ## Banner View
 
@@ -551,6 +629,11 @@ Banner view has explicit callbacks.
 ```
 
 ## Changelog
+
+3.0.0 
+
+* Update Appodeal to 3.0.0 
+* Refactor plugin API. See doc above
 
 2.11.0
 

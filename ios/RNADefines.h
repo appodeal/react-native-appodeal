@@ -30,6 +30,7 @@ FOUNDATION_EXPORT NSString *const kEventRewardedVideoFailedToLoad;
 FOUNDATION_EXPORT NSString *const kEventRewardedVideoFailedToPresent;
 FOUNDATION_EXPORT NSString *const kEventRewardedVideoExpired;
 FOUNDATION_EXPORT NSString *const kEventRewardedVideoShown;
+FOUNDATION_EXPORT NSString *const kEventRewardedVideoClicked;
 FOUNDATION_EXPORT NSString *const kEventRewardedVideoClosed;
 FOUNDATION_EXPORT NSString *const kEventRewardedVideoFinished;
 

@@ -84,5 +84,5 @@ export interface AppodealAndroidPurchase {
 
 export enum AppodealAndroidPurchaseType {
   IN_APP = 0,
-  SUBSRIPTION = 1
+  SUBSCRIPTION = 1
 }
