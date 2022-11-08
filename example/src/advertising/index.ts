@@ -5,6 +5,8 @@ import {
   AppodealInterstitialEvent,
   AppodealRewardedEvent,
   AppodealBannerEvent,
+  AppodealSdkEvent,
+  AppodealAdRevenue,
 } from 'react-native-appodeal';
 import {constants} from './constnats';
 
@@ -72,6 +74,16 @@ export const bannerAdType = (style: BannerShowStyle) => {
 let levelsPlayed = 0;
 
 const registerListeners = () => {
+  // SDK callbacks
+  Appodeal.addEventListener(AppodealSdkEvent.INITIALIZED, () =>
+    console.log('Appodeal SDK initialized'),
+  );
+  Appodeal.addEventListener(
+    AppodealSdkEvent.AD_REVENUE,
+    (revenue: AppodealAdRevenue) => {
+      console.log('Appodeal SDK did receive ad revenue: ', revenue);
+    },
+  );
   // Interstitial callbacks
   Appodeal.addEventListener(AppodealInterstitialEvent.LOADED, (event: any) =>
     console.log('Interstitial loaded. Precache: ', event.isPrecache),

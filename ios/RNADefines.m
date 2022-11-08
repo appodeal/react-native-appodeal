@@ -12,7 +12,8 @@
 
 #pragma mark - Constants
 
-NSString *const kEventAppodealInitialized   = @"onAppodeallInitialized";
+NSString *const kEventAppodealInitialized       = @"onAppodeallInitialized";
+NSString *const kEventAppodealDidReceiveRevenue = @"onAppodealDidReceiveRevenue";
 
 NSString *const kEventBannerLoaded          = @"onBannerLoaded";
 NSString *const kEventBannerFailedToLoad    = @"onBannerFailedToLoad";
@@ -62,12 +63,13 @@ RCT_ENUM_CONVERTER(AppodealUserGender, (@{
 #pragma mark - Utils
 
 NSString *RNAVersion() {
-    return @"3.0.0";
+    return @"3.0.1";
 }
 
 NSArray<NSString *> *RNASupportedMehtods() {
     return @[
         kEventAppodealInitialized,
+        kEventAppodealDidReceiveRevenue,
         kEventBannerLoaded,
         kEventBannerFailedToLoad,
         kEventBannerExpired,
@@ -111,6 +113,31 @@ AppodealAdType AppodealAdTypeFromRNAAdType(RNAAdType adType) {
     
     if ((adType & RNAAdTypeMREC) > 0) {
         result |= AppodealAdTypeMREC;
+    }
+    
+    return result;
+}
+
+RNAAdType RNAAdTypeFromaAppodealAdType(AppodealAdType adType) {
+    RNAAdType result = 0;
+    if ((adType & AppodealAdTypeInterstitial) > 0) {
+        result |= RNAAdTypeInterstitial;
+    }
+    
+    if ((adType & AppodealAdTypeBanner) > 0) {
+        result |= RNAAdTypeBanner;
+    }
+    
+    if ((adType & AppodealAdTypeRewardedVideo) > 0) {
+        result |= RNAAdTypeRewardedVideo;
+    }
+    
+    if ((adType & AppodealAdTypeNativeAd) > 0) {
+        result |= RNAAdTypeNative;
+    }
+    
+    if ((adType & AppodealAdTypeMREC) > 0) {
+        result |= RNAAdTypeMREC;
     }
     
     return result;

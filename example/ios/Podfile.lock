@@ -1,9 +1,5 @@
 PODS:
   - AdColony (4.9.0)
-  - Adjust (4.30.0):
-    - Adjust/Core (= 4.30.0)
-  - Adjust/Core (4.30.0)
-  - AdjustPurchase (1.0.1)
   - Ads-Global (4.3.1.9):
     - Ads-Global/BUAdSDK (= 4.3.1.9)
   - Ads-Global/APM (4.3.1.9):
@@ -19,126 +15,100 @@ PODS:
     - Ads-Global/APM
     - Ads-Global/BUFoundation
   - AmazonPublisherServicesSDK (4.4.3)
-  - APDAdColonyAdapter (3.0.0.1):
+  - APDAdColonyAdapter (3.0.1.1):
     - AdColony (= 4.9.0)
-    - Appodeal (= 3.0.0)
-  - APDAdjustAdapter (3.0.0.1):
-    - Adjust (~> 4.30.0)
-    - AdjustPurchase (= 1.0.1)
-    - Appodeal (= 3.0.0)
-  - APDAppLovinAdapter (3.0.0.1):
-    - AppLovinSDK (~> 11.4.2)
-    - Appodeal (= 3.0.0)
-  - APDAppsFlyerAdapter (3.0.0.1):
-    - Appodeal (= 3.0.0)
-    - AppsFlyer-AdRevenue (~> 6.5.0)
-    - AppsFlyerFramework (~> 6.6.1)
-  - APDBidMachineAdapter (3.0.0.1):
-    - Appodeal (= 3.0.0)
-    - BidMachine (= 1.9.4.1)
-  - APDFacebookAdapter (3.0.0.1):
-    - Appodeal (= 3.0.0)
+    - Appodeal (= 3.0.1)
+  - APDBidMachineAdapter (3.0.1.1):
+    - Appodeal (= 3.0.1)
+    - BidMachine (= 1.9.5.0)
+    - GoogleAppMeasurement
+    - GoogleUserMessagingPlatform
+    - GoogleUtilities
+  - APDFacebookAdapter (3.0.1.1):
+    - Appodeal (= 3.0.1)
     - FBSDKCoreKit (~> 12.3.2)
-  - APDFirebaseAdapter (3.0.0.1):
-    - Appodeal (= 3.0.0)
-    - Firebase/Analytics (~> 8.15.0)
-    - Firebase/Core (~> 8.15.0)
-    - Firebase/RemoteConfig (~> 8.15.0)
-    - GoogleAppMeasurement (~> 8.12)
-    - GoogleUserMessagingPlatform (>= 1.1)
-    - GoogleUtilities (~> 7.6)
-  - APDGoogleAdMobAdapter (3.0.0.1):
-    - Appodeal (= 3.0.0)
-    - Google-Mobile-Ads-SDK (= 9.5.0)
-    - GoogleAppMeasurement (~> 8.12)
-    - GoogleUserMessagingPlatform (>= 1.1)
-    - GoogleUtilities (~> 7.6)
-  - APDIABAdapter (3.0.0.1):
-    - Appodeal (= 3.0.0)
-  - APDIronSourceAdapter (3.0.0.1):
-    - Appodeal (= 3.0.0)
-    - IronSourceSDK (= 7.2.2.1)
-  - APDMetaAudienceNetworkAdapter (3.0.0.1):
-    - Appodeal (= 3.0.0)
-    - FBAudienceNetwork (= 6.11.1)
-  - APDMyTargetAdapter (3.0.0.1):
-    - Appodeal (= 3.0.0)
-    - myTargetSDK (~> 5.15.2)
-  - APDStackAnalyticsAdapter (3.0.0.1):
-    - Appodeal (= 3.0.0)
-    - StackAnalytics (~> 1.3.1)
-    - StackIAB (~> 1.7.0)
-    - StackModules (~> 1.2.0)
-  - APDUnityAdapter (3.0.0.1):
-    - Appodeal (= 3.0.0)
-    - UnityAds (= 4.2.1)
-  - APDVungleAdapter (3.0.0.1):
-    - Appodeal (= 3.0.0)
-    - VungleSDK-iOS (= 6.11.0)
-  - APDYandexAdapter (3.0.0.1):
-    - Appodeal (= 3.0.0)
-    - YandexMobileAds (= 5.0.2)
-  - AppLovinSDK (11.4.2)
-  - Appodeal (3.0.0):
+  - APDFirebaseAdapter (3.0.1.1):
+    - Appodeal (= 3.0.1)
+    - Firebase/Analytics (~> 9.6.0)
+    - Firebase/Core (~> 9.6.0)
+    - Firebase/RemoteConfig (~> 9.6.0)
+    - GoogleAppMeasurement
+    - GoogleUserMessagingPlatform
+    - GoogleUtilities
+  - APDGoogleAdMobAdapter (3.0.1.1):
+    - Appodeal (= 3.0.1)
+    - Google-Mobile-Ads-SDK (= 9.11.0)
+    - GoogleAppMeasurement
+    - GoogleUserMessagingPlatform
+    - GoogleUtilities
+  - APDIABAdapter (3.0.1.1):
+    - Appodeal (= 3.0.1)
+  - APDIronSourceAdapter (3.0.1.1):
+    - Appodeal (= 3.0.1)
+    - IronSourceSDK (= 7.2.5.0)
+  - APDMetaAudienceNetworkAdapter (3.0.1.1):
+    - Appodeal (= 3.0.1)
+    - FBAudienceNetwork (= 6.12.0)
+  - APDMyTargetAdapter (3.0.1.1):
+    - Appodeal (= 3.0.1)
+    - myTargetSDK (~> 5.16.0)
+  - APDStackAnalyticsAdapter (3.0.1.1):
+    - Appodeal (= 3.0.1)
+    - StackAnalytics (~> 1.4.0)
+    - StackIAB (~> 1.8.0)
+    - StackModules (~> 1.3.0)
+  - APDUnityAdapter (3.0.1.1):
+    - Appodeal (= 3.0.1)
+    - UnityAds (= 4.4.1)
+  - APDVungleAdapter (3.0.1.1):
+    - Appodeal (= 3.0.1)
+    - VungleSDK-iOS (= 6.12.0)
+  - APDYandexAdapter (3.0.1.1):
+    - Appodeal (= 3.0.1)
+    - YandexMobileAds (= 5.2.1)
+  - Appodeal (3.0.1):
     - Protobuf
     - StackConsentManager (~> 1.2.0)
-    - StackIAB (~> 1.7.0)
-    - StackModules (~> 1.2.0)
+    - StackIAB (~> 1.8.0)
+    - StackModules (~> 1.3.0)
     - StackProtobuf (~> 0.8.0)
-  - AppsFlyer-AdRevenue (6.5.4):
-    - AppsFlyerFramework (~> 6)
-  - AppsFlyerFramework (6.6.1):
-    - AppsFlyerFramework/Main (= 6.6.1)
-  - AppsFlyerFramework/Main (6.6.1)
-  - BDMAdColonyAdapter (1.9.4.1):
-    - AdColony (= 4.9.0)
-    - BidMachine (~> 1.9.4.0)
-  - BDMAmazonAdapter (1.9.4.2):
+  - BDMAmazonAdapter (1.9.5.0):
     - AmazonPublisherServicesSDK (= 4.4.3)
-    - BidMachine (~> 1.9.4.0)
-  - BDMCriteoAdapter (1.9.4.1):
-    - BidMachine (~> 1.9.4.0)
+    - BidMachine (~> 1.9.5.0)
+  - BDMCriteoAdapter (1.9.5.0):
+    - BidMachine (~> 1.9.5.0)
     - CriteoPublisherSdk (= 4.5.0)
-  - BDMIABAdapter (1.9.4.0):
-    - BDMIABAdapter/IAB (= 1.9.4.0)
-  - BDMIABAdapter/IAB (1.9.4.0):
-    - BDMIABAdapter/MRAID
-    - BDMIABAdapter/NAST
-    - BDMIABAdapter/VAST
-  - BDMIABAdapter/MRAID (1.9.4.0):
-    - BidMachine (~> 1.9.4.0)
-    - StackIAB (~> 1.7.1)
-  - BDMIABAdapter/NAST (1.9.4.0):
-    - BidMachine (~> 1.9.4.0)
-    - StackIAB (~> 1.7.1)
-  - BDMIABAdapter/VAST (1.9.4.0):
-    - BidMachine (~> 1.9.4.0)
-    - StackIAB (~> 1.7.1)
-  - BDMMetaAudienceAdapter (1.9.4.1):
-    - BidMachine (~> 1.9.4.0)
-    - FBAudienceNetwork (= 6.11.1)
-  - BDMMyTargetAdapter (1.9.4.1):
-    - BidMachine (~> 1.9.4.0)
-    - myTargetSDK (= 5.15.2)
-  - BDMPangleAdapter (1.9.4.2):
+  - BDMIABAdapter (1.9.5.0):
+    - BidMachine (~> 1.9.5.0)
+    - StackIAB (= 1.8.0)
+  - BDMMetaAudienceAdapter (1.9.5.1):
+    - BidMachine (~> 1.9.5.0)
+    - FBAudienceNetwork (= 6.12.0)
+  - BDMMyTargetAdapter (1.9.5.1):
+    - BidMachine (~> 1.9.5.0)
+    - myTargetSDK (= 5.16.0)
+  - BDMNotsyAdapter (1.9.5.1):
+    - BidMachine (~> 1.9.5.0)
+    - Google-Mobile-Ads-SDK (= 9.11.0)
+  - BDMPangleAdapter (1.9.5.0):
     - Ads-Global (= 4.3.1.9)
-    - BidMachine (~> 1.9.4.0)
-  - BDMSmaatoAdapter (1.9.4.1):
-    - BidMachine (~> 1.9.4.0)
-    - smaato-ios-sdk (= 21.7.5)
-    - smaato-ios-sdk/Modules/UnifiedBidding (= 21.7.5)
-  - BDMTapjoyAdapter (1.9.4.1):
-    - BidMachine (~> 1.9.4.0)
+    - BidMachine (~> 1.9.5.0)
+  - BDMSmaatoAdapter (1.9.5.1):
+    - BidMachine (~> 1.9.5.0)
+    - smaato-ios-sdk (= 21.7.8)
+    - smaato-ios-sdk/Modules/UnifiedBidding (= 21.7.8)
+  - BDMTapjoyAdapter (1.9.5.0):
+    - BidMachine (~> 1.9.5.0)
     - TapjoySDK (= 12.10.0)
-  - BDMVungleAdapter (1.9.4.1):
-    - BidMachine (~> 1.9.4.0)
-    - VungleSDK-iOS (= 6.11.0)
-  - BidMachine (1.9.4.1):
-    - BidMachine/Core (= 1.9.4.1)
-  - BidMachine/Core (1.9.4.1):
+  - BDMVungleAdapter (1.9.5.0):
+    - BidMachine (~> 1.9.5.0)
+    - VungleSDK-iOS (= 6.12.0)
+  - BidMachine (1.9.5.0):
+    - BidMachine/Core (= 1.9.5.0)
+  - BidMachine/Core (1.9.5.0):
     - Protobuf (~> 3.9)
-    - StackModules (~> 1.2.1)
-    - StackProtobuf (~> 0.8.1)
+    - StackModules (~> 1.3.0)
+    - StackProtobuf (~> 0.8.3)
   - boost (1.76.0)
   - BURelyFoundation_Global (0.0.1.57):
     - BURelyFoundation_Global/NETWork (= 0.0.1.57)
@@ -149,148 +119,151 @@ PODS:
   - DoubleConversion (1.1.6)
   - FBAEMKit (12.3.2):
     - FBSDKCoreKit_Basics (= 12.3.2)
-  - FBAudienceNetwork (6.11.1)
-  - FBLazyVector (0.68.2)
-  - FBReactNativeSpec (0.68.2):
-    - RCT-Folly (= 2021.06.28.00-v2)
-    - RCTRequired (= 0.68.2)
-    - RCTTypeSafety (= 0.68.2)
-    - React-Core (= 0.68.2)
-    - React-jsi (= 0.68.2)
-    - ReactCommon/turbomodule/core (= 0.68.2)
+  - FBAudienceNetwork (6.12.0)
+  - FBLazyVector (0.70.3)
+  - FBReactNativeSpec (0.70.3):
+    - RCT-Folly (= 2021.07.22.00)
+    - RCTRequired (= 0.70.3)
+    - RCTTypeSafety (= 0.70.3)
+    - React-Core (= 0.70.3)
+    - React-jsi (= 0.70.3)
+    - ReactCommon/turbomodule/core (= 0.70.3)
   - FBSDKCoreKit (12.3.2):
     - FBAEMKit (= 12.3.2)
     - FBSDKCoreKit_Basics (= 12.3.2)
   - FBSDKCoreKit_Basics (12.3.2)
-  - Firebase/Analytics (8.15.0):
+  - Firebase/Analytics (9.6.0):
     - Firebase/Core
-  - Firebase/Core (8.15.0):
+  - Firebase/Core (9.6.0):
     - Firebase/CoreOnly
-    - FirebaseAnalytics (~> 8.15.0)
-  - Firebase/CoreOnly (8.15.0):
-    - FirebaseCore (= 8.15.0)
-  - Firebase/RemoteConfig (8.15.0):
+    - FirebaseAnalytics (~> 9.6.0)
+  - Firebase/CoreOnly (9.6.0):
+    - FirebaseCore (= 9.6.0)
+  - Firebase/RemoteConfig (9.6.0):
     - Firebase/CoreOnly
-    - FirebaseRemoteConfig (~> 8.15.0)
-  - FirebaseABTesting (8.15.0):
-    - FirebaseCore (~> 8.0)
-  - FirebaseAnalytics (8.15.0):
-    - FirebaseAnalytics/AdIdSupport (= 8.15.0)
-    - FirebaseCore (~> 8.0)
-    - FirebaseInstallations (~> 8.0)
+    - FirebaseRemoteConfig (~> 9.6.0)
+  - FirebaseABTesting (9.6.0):
+    - FirebaseCore (~> 9.0)
+  - FirebaseAnalytics (9.6.0):
+    - FirebaseAnalytics/AdIdSupport (= 9.6.0)
+    - FirebaseCore (~> 9.0)
+    - FirebaseInstallations (~> 9.0)
     - GoogleUtilities/AppDelegateSwizzler (~> 7.7)
     - GoogleUtilities/MethodSwizzler (~> 7.7)
     - GoogleUtilities/Network (~> 7.7)
     - "GoogleUtilities/NSData+zlib (~> 7.7)"
-    - nanopb (~> 2.30908.0)
-  - FirebaseAnalytics/AdIdSupport (8.15.0):
-    - FirebaseCore (~> 8.0)
-    - FirebaseInstallations (~> 8.0)
-    - GoogleAppMeasurement (= 8.15.0)
+    - nanopb (< 2.30910.0, >= 2.30908.0)
+  - FirebaseAnalytics/AdIdSupport (9.6.0):
+    - FirebaseCore (~> 9.0)
+    - FirebaseInstallations (~> 9.0)
+    - GoogleAppMeasurement (= 9.6.0)
     - GoogleUtilities/AppDelegateSwizzler (~> 7.7)
     - GoogleUtilities/MethodSwizzler (~> 7.7)
     - GoogleUtilities/Network (~> 7.7)
     - "GoogleUtilities/NSData+zlib (~> 7.7)"
-    - nanopb (~> 2.30908.0)
-  - FirebaseCore (8.15.0):
-    - FirebaseCoreDiagnostics (~> 8.0)
+    - nanopb (< 2.30910.0, >= 2.30908.0)
+  - FirebaseCore (9.6.0):
+    - FirebaseCoreDiagnostics (~> 9.0)
+    - FirebaseCoreInternal (~> 9.0)
     - GoogleUtilities/Environment (~> 7.7)
     - GoogleUtilities/Logger (~> 7.7)
-  - FirebaseCoreDiagnostics (8.15.0):
-    - GoogleDataTransport (~> 9.1)
+  - FirebaseCoreDiagnostics (9.6.0):
+    - GoogleDataTransport (< 10.0.0, >= 9.1.4)
     - GoogleUtilities/Environment (~> 7.7)
     - GoogleUtilities/Logger (~> 7.7)
-    - nanopb (~> 2.30908.0)
-  - FirebaseInstallations (8.15.0):
-    - FirebaseCore (~> 8.0)
+    - nanopb (< 2.30910.0, >= 2.30908.0)
+  - FirebaseCoreInternal (9.6.0):
+    - "GoogleUtilities/NSData+zlib (~> 7.7)"
+  - FirebaseInstallations (9.6.0):
+    - FirebaseCore (~> 9.0)
     - GoogleUtilities/Environment (~> 7.7)
     - GoogleUtilities/UserDefaults (~> 7.7)
-    - PromisesObjC (< 3.0, >= 1.2)
-  - FirebaseRemoteConfig (8.15.0):
-    - FirebaseABTesting (~> 8.0)
-    - FirebaseCore (~> 8.0)
-    - FirebaseInstallations (~> 8.0)
+    - PromisesObjC (~> 2.1)
+  - FirebaseRemoteConfig (9.6.0):
+    - FirebaseABTesting (~> 9.0)
+    - FirebaseCore (~> 9.0)
+    - FirebaseInstallations (~> 9.0)
     - GoogleUtilities/Environment (~> 7.7)
     - "GoogleUtilities/NSData+zlib (~> 7.7)"
   - fmt (6.2.1)
   - glog (0.3.5)
-  - Google-Mobile-Ads-SDK (9.5.0):
+  - Google-Mobile-Ads-SDK (9.11.0):
     - GoogleAppMeasurement (< 10.0, >= 7.0)
     - GoogleUserMessagingPlatform (>= 1.1)
-  - GoogleAppMeasurement (8.15.0):
-    - GoogleAppMeasurement/AdIdSupport (= 8.15.0)
+  - GoogleAppMeasurement (9.6.0):
+    - GoogleAppMeasurement/AdIdSupport (= 9.6.0)
     - GoogleUtilities/AppDelegateSwizzler (~> 7.7)
     - GoogleUtilities/MethodSwizzler (~> 7.7)
     - GoogleUtilities/Network (~> 7.7)
     - "GoogleUtilities/NSData+zlib (~> 7.7)"
-    - nanopb (~> 2.30908.0)
-  - GoogleAppMeasurement/AdIdSupport (8.15.0):
-    - GoogleAppMeasurement/WithoutAdIdSupport (= 8.15.0)
+    - nanopb (< 2.30910.0, >= 2.30908.0)
+  - GoogleAppMeasurement/AdIdSupport (9.6.0):
+    - GoogleAppMeasurement/WithoutAdIdSupport (= 9.6.0)
     - GoogleUtilities/AppDelegateSwizzler (~> 7.7)
     - GoogleUtilities/MethodSwizzler (~> 7.7)
     - GoogleUtilities/Network (~> 7.7)
     - "GoogleUtilities/NSData+zlib (~> 7.7)"
-    - nanopb (~> 2.30908.0)
-  - GoogleAppMeasurement/WithoutAdIdSupport (8.15.0):
+    - nanopb (< 2.30910.0, >= 2.30908.0)
+  - GoogleAppMeasurement/WithoutAdIdSupport (9.6.0):
     - GoogleUtilities/AppDelegateSwizzler (~> 7.7)
     - GoogleUtilities/MethodSwizzler (~> 7.7)
     - GoogleUtilities/Network (~> 7.7)
     - "GoogleUtilities/NSData+zlib (~> 7.7)"
-    - nanopb (~> 2.30908.0)
-  - GoogleDataTransport (9.1.4):
+    - nanopb (< 2.30910.0, >= 2.30908.0)
+  - GoogleDataTransport (9.2.0):
     - GoogleUtilities/Environment (~> 7.7)
     - nanopb (< 2.30910.0, >= 2.30908.0)
     - PromisesObjC (< 3.0, >= 1.2)
-  - GoogleUserMessagingPlatform (2.0.0)
-  - GoogleUtilities (7.7.0):
-    - GoogleUtilities/AppDelegateSwizzler (= 7.7.0)
-    - GoogleUtilities/Environment (= 7.7.0)
-    - GoogleUtilities/ISASwizzler (= 7.7.0)
-    - GoogleUtilities/Logger (= 7.7.0)
-    - GoogleUtilities/MethodSwizzler (= 7.7.0)
-    - GoogleUtilities/Network (= 7.7.0)
-    - "GoogleUtilities/NSData+zlib (= 7.7.0)"
-    - GoogleUtilities/Reachability (= 7.7.0)
-    - GoogleUtilities/SwizzlerTestHelpers (= 7.7.0)
-    - GoogleUtilities/UserDefaults (= 7.7.0)
-  - GoogleUtilities/AppDelegateSwizzler (7.7.0):
+  - GoogleUserMessagingPlatform (2.0.1)
+  - GoogleUtilities (7.8.0):
+    - GoogleUtilities/AppDelegateSwizzler (= 7.8.0)
+    - GoogleUtilities/Environment (= 7.8.0)
+    - GoogleUtilities/ISASwizzler (= 7.8.0)
+    - GoogleUtilities/Logger (= 7.8.0)
+    - GoogleUtilities/MethodSwizzler (= 7.8.0)
+    - GoogleUtilities/Network (= 7.8.0)
+    - "GoogleUtilities/NSData+zlib (= 7.8.0)"
+    - GoogleUtilities/Reachability (= 7.8.0)
+    - GoogleUtilities/SwizzlerTestHelpers (= 7.8.0)
+    - GoogleUtilities/UserDefaults (= 7.8.0)
+  - GoogleUtilities/AppDelegateSwizzler (7.8.0):
     - GoogleUtilities/Environment
     - GoogleUtilities/Logger
     - GoogleUtilities/Network
-  - GoogleUtilities/Environment (7.7.0):
+  - GoogleUtilities/Environment (7.8.0):
     - PromisesObjC (< 3.0, >= 1.2)
-  - GoogleUtilities/ISASwizzler (7.7.0)
-  - GoogleUtilities/Logger (7.7.0):
+  - GoogleUtilities/ISASwizzler (7.8.0)
+  - GoogleUtilities/Logger (7.8.0):
     - GoogleUtilities/Environment
-  - GoogleUtilities/MethodSwizzler (7.7.0):
+  - GoogleUtilities/MethodSwizzler (7.8.0):
     - GoogleUtilities/Logger
-  - GoogleUtilities/Network (7.7.0):
+  - GoogleUtilities/Network (7.8.0):
     - GoogleUtilities/Logger
     - "GoogleUtilities/NSData+zlib"
     - GoogleUtilities/Reachability
-  - "GoogleUtilities/NSData+zlib (7.7.0)"
-  - GoogleUtilities/Reachability (7.7.0):
+  - "GoogleUtilities/NSData+zlib (7.8.0)"
+  - GoogleUtilities/Reachability (7.8.0):
     - GoogleUtilities/Logger
-  - GoogleUtilities/SwizzlerTestHelpers (7.7.0):
+  - GoogleUtilities/SwizzlerTestHelpers (7.8.0):
     - GoogleUtilities/MethodSwizzler
-  - GoogleUtilities/UserDefaults (7.7.0):
+  - GoogleUtilities/UserDefaults (7.8.0):
     - GoogleUtilities/Logger
-  - IronSourceSDK (7.2.2.1)
-  - myTargetSDK (5.15.2):
+  - IronSourceSDK (7.2.5.0)
+  - myTargetSDK (5.16.0):
     - myTrackerSDK (~> 3.0.3)
-  - myTrackerSDK (3.0.6)
-  - nanopb (2.30908.0):
-    - nanopb/decode (= 2.30908.0)
-    - nanopb/encode (= 2.30908.0)
-  - nanopb/decode (2.30908.0)
-  - nanopb/encode (2.30908.0)
-  - OMSDK_Appodeal (1.3.27)
+  - myTrackerSDK (3.0.7)
+  - nanopb (2.30909.0):
+    - nanopb/decode (= 2.30909.0)
+    - nanopb/encode (= 2.30909.0)
+  - nanopb/decode (2.30909.0)
+  - nanopb/encode (2.30909.0)
+  - OMSDK_Appodeal (1.3.37)
   - OneKit-Pangle/BaseKit (1.1.21-pangle)
   - OneKit-Pangle/Database (1.1.21-pangle):
     - OneKit-Pangle/Service
   - OneKit-Pangle/Service (1.1.21-pangle)
-  - PromisesObjC (2.1.0)
-  - Protobuf (3.21.1)
+  - PromisesObjC (2.1.1)
+  - Protobuf (3.21.9)
   - RangersAPM-Pangle/Core (2.3.2-pangle):
     - OneKit-Pangle/BaseKit (= 1.1.21-pangle)
   - RangersAPM-Pangle/Crash (2.3.2-pangle):
@@ -309,447 +282,447 @@ PODS:
     - RangersAPM-Pangle/Core
     - RangersAPM-Pangle/HMD
     - RangersAPM-Pangle/Public
-  - RCT-Folly (2021.06.28.00-v2):
+  - RCT-Folly (2021.07.22.00):
     - boost
     - DoubleConversion
     - fmt (~> 6.2.1)
     - glog
-    - RCT-Folly/Default (= 2021.06.28.00-v2)
-  - RCT-Folly/Default (2021.06.28.00-v2):
+    - RCT-Folly/Default (= 2021.07.22.00)
+  - RCT-Folly/Default (2021.07.22.00):
     - boost
     - DoubleConversion
     - fmt (~> 6.2.1)
     - glog
-  - RCTRequired (0.68.2)
-  - RCTTypeSafety (0.68.2):
-    - FBLazyVector (= 0.68.2)
-    - RCT-Folly (= 2021.06.28.00-v2)
-    - RCTRequired (= 0.68.2)
-    - React-Core (= 0.68.2)
-  - React (0.68.2):
-    - React-Core (= 0.68.2)
-    - React-Core/DevSupport (= 0.68.2)
-    - React-Core/RCTWebSocket (= 0.68.2)
-    - React-RCTActionSheet (= 0.68.2)
-    - React-RCTAnimation (= 0.68.2)
-    - React-RCTBlob (= 0.68.2)
-    - React-RCTImage (= 0.68.2)
-    - React-RCTLinking (= 0.68.2)
-    - React-RCTNetwork (= 0.68.2)
-    - React-RCTSettings (= 0.68.2)
-    - React-RCTText (= 0.68.2)
-    - React-RCTVibration (= 0.68.2)
-  - React-callinvoker (0.68.2)
-  - React-Codegen (0.68.2):
-    - FBReactNativeSpec (= 0.68.2)
-    - RCT-Folly (= 2021.06.28.00-v2)
-    - RCTRequired (= 0.68.2)
-    - RCTTypeSafety (= 0.68.2)
-    - React-Core (= 0.68.2)
-    - React-jsi (= 0.68.2)
-    - React-jsiexecutor (= 0.68.2)
-    - ReactCommon/turbomodule/core (= 0.68.2)
-  - React-Core (0.68.2):
+  - RCTRequired (0.70.3)
+  - RCTTypeSafety (0.70.3):
+    - FBLazyVector (= 0.70.3)
+    - RCTRequired (= 0.70.3)
+    - React-Core (= 0.70.3)
+  - React (0.70.3):
+    - React-Core (= 0.70.3)
+    - React-Core/DevSupport (= 0.70.3)
+    - React-Core/RCTWebSocket (= 0.70.3)
+    - React-RCTActionSheet (= 0.70.3)
+    - React-RCTAnimation (= 0.70.3)
+    - React-RCTBlob (= 0.70.3)
+    - React-RCTImage (= 0.70.3)
+    - React-RCTLinking (= 0.70.3)
+    - React-RCTNetwork (= 0.70.3)
+    - React-RCTSettings (= 0.70.3)
+    - React-RCTText (= 0.70.3)
+    - React-RCTVibration (= 0.70.3)
+  - React-bridging (0.70.3):
+    - RCT-Folly (= 2021.07.22.00)
+    - React-jsi (= 0.70.3)
+  - React-callinvoker (0.70.3)
+  - React-Codegen (0.70.3):
+    - FBReactNativeSpec (= 0.70.3)
+    - RCT-Folly (= 2021.07.22.00)
+    - RCTRequired (= 0.70.3)
+    - RCTTypeSafety (= 0.70.3)
+    - React-Core (= 0.70.3)
+    - React-jsi (= 0.70.3)
+    - React-jsiexecutor (= 0.70.3)
+    - ReactCommon/turbomodule/core (= 0.70.3)
+  - React-Core (0.70.3):
     - glog
-    - RCT-Folly (= 2021.06.28.00-v2)
-    - React-Core/Default (= 0.68.2)
-    - React-cxxreact (= 0.68.2)
-    - React-jsi (= 0.68.2)
-    - React-jsiexecutor (= 0.68.2)
-    - React-perflogger (= 0.68.2)
+    - RCT-Folly (= 2021.07.22.00)
+    - React-Core/Default (= 0.70.3)
+    - React-cxxreact (= 0.70.3)
+    - React-jsi (= 0.70.3)
+    - React-jsiexecutor (= 0.70.3)
+    - React-perflogger (= 0.70.3)
     - Yoga
-  - React-Core/CoreModulesHeaders (0.68.2):
+  - React-Core/CoreModulesHeaders (0.70.3):
     - glog
-    - RCT-Folly (= 2021.06.28.00-v2)
+    - RCT-Folly (= 2021.07.22.00)
     - React-Core/Default
-    - React-cxxreact (= 0.68.2)
-    - React-jsi (= 0.68.2)
-    - React-jsiexecutor (= 0.68.2)
-    - React-perflogger (= 0.68.2)
+    - React-cxxreact (= 0.70.3)
+    - React-jsi (= 0.70.3)
+    - React-jsiexecutor (= 0.70.3)
+    - React-perflogger (= 0.70.3)
     - Yoga
-  - React-Core/Default (0.68.2):
+  - React-Core/Default (0.70.3):
     - glog
-    - RCT-Folly (= 2021.06.28.00-v2)
-    - React-cxxreact (= 0.68.2)
-    - React-jsi (= 0.68.2)
-    - React-jsiexecutor (= 0.68.2)
-    - React-perflogger (= 0.68.2)
+    - RCT-Folly (= 2021.07.22.00)
+    - React-cxxreact (= 0.70.3)
+    - React-jsi (= 0.70.3)
+    - React-jsiexecutor (= 0.70.3)
+    - React-perflogger (= 0.70.3)
     - Yoga
-  - React-Core/DevSupport (0.68.2):
+  - React-Core/DevSupport (0.70.3):
     - glog
-    - RCT-Folly (= 2021.06.28.00-v2)
-    - React-Core/Default (= 0.68.2)
-    - React-Core/RCTWebSocket (= 0.68.2)
-    - React-cxxreact (= 0.68.2)
-    - React-jsi (= 0.68.2)
-    - React-jsiexecutor (= 0.68.2)
-    - React-jsinspector (= 0.68.2)
-    - React-perflogger (= 0.68.2)
+    - RCT-Folly (= 2021.07.22.00)
+    - React-Core/Default (= 0.70.3)
+    - React-Core/RCTWebSocket (= 0.70.3)
+    - React-cxxreact (= 0.70.3)
+    - React-jsi (= 0.70.3)
+    - React-jsiexecutor (= 0.70.3)
+    - React-jsinspector (= 0.70.3)
+    - React-perflogger (= 0.70.3)
     - Yoga
-  - React-Core/RCTActionSheetHeaders (0.68.2):
+  - React-Core/RCTActionSheetHeaders (0.70.3):
     - glog
-    - RCT-Folly (= 2021.06.28.00-v2)
+    - RCT-Folly (= 2021.07.22.00)
     - React-Core/Default
-    - React-cxxreact (= 0.68.2)
-    - React-jsi (= 0.68.2)
-    - React-jsiexecutor (= 0.68.2)
-    - React-perflogger (= 0.68.2)
+    - React-cxxreact (= 0.70.3)
+    - React-jsi (= 0.70.3)
+    - React-jsiexecutor (= 0.70.3)
+    - React-perflogger (= 0.70.3)
     - Yoga
-  - React-Core/RCTAnimationHeaders (0.68.2):
+  - React-Core/RCTAnimationHeaders (0.70.3):
     - glog
-    - RCT-Folly (= 2021.06.28.00-v2)
+    - RCT-Folly (= 2021.07.22.00)
     - React-Core/Default
-    - React-cxxreact (= 0.68.2)
-    - React-jsi (= 0.68.2)
-    - React-jsiexecutor (= 0.68.2)
-    - React-perflogger (= 0.68.2)
+    - React-cxxreact (= 0.70.3)
+    - React-jsi (= 0.70.3)
+    - React-jsiexecutor (= 0.70.3)
+    - React-perflogger (= 0.70.3)
     - Yoga
-  - React-Core/RCTBlobHeaders (0.68.2):
+  - React-Core/RCTBlobHeaders (0.70.3):
     - glog
-    - RCT-Folly (= 2021.06.28.00-v2)
+    - RCT-Folly (= 2021.07.22.00)
     - React-Core/Default
-    - React-cxxreact (= 0.68.2)
-    - React-jsi (= 0.68.2)
-    - React-jsiexecutor (= 0.68.2)
-    - React-perflogger (= 0.68.2)
+    - React-cxxreact (= 0.70.3)
+    - React-jsi (= 0.70.3)
+    - React-jsiexecutor (= 0.70.3)
+    - React-perflogger (= 0.70.3)
     - Yoga
-  - React-Core/RCTImageHeaders (0.68.2):
+  - React-Core/RCTImageHeaders (0.70.3):
     - glog
-    - RCT-Folly (= 2021.06.28.00-v2)
+    - RCT-Folly (= 2021.07.22.00)
     - React-Core/Default
-    - React-cxxreact (= 0.68.2)
-    - React-jsi (= 0.68.2)
-    - React-jsiexecutor (= 0.68.2)
-    - React-perflogger (= 0.68.2)
+    - React-cxxreact (= 0.70.3)
+    - React-jsi (= 0.70.3)
+    - React-jsiexecutor (= 0.70.3)
+    - React-perflogger (= 0.70.3)
     - Yoga
-  - React-Core/RCTLinkingHeaders (0.68.2):
+  - React-Core/RCTLinkingHeaders (0.70.3):
     - glog
-    - RCT-Folly (= 2021.06.28.00-v2)
+    - RCT-Folly (= 2021.07.22.00)
     - React-Core/Default
-    - React-cxxreact (= 0.68.2)
-    - React-jsi (= 0.68.2)
-    - React-jsiexecutor (= 0.68.2)
-    - React-perflogger (= 0.68.2)
+    - React-cxxreact (= 0.70.3)
+    - React-jsi (= 0.70.3)
+    - React-jsiexecutor (= 0.70.3)
+    - React-perflogger (= 0.70.3)
     - Yoga
-  - React-Core/RCTNetworkHeaders (0.68.2):
+  - React-Core/RCTNetworkHeaders (0.70.3):
     - glog
-    - RCT-Folly (= 2021.06.28.00-v2)
+    - RCT-Folly (= 2021.07.22.00)
     - React-Core/Default
-    - React-cxxreact (= 0.68.2)
-    - React-jsi (= 0.68.2)
-    - React-jsiexecutor (= 0.68.2)
-    - React-perflogger (= 0.68.2)
+    - React-cxxreact (= 0.70.3)
+    - React-jsi (= 0.70.3)
+    - React-jsiexecutor (= 0.70.3)
+    - React-perflogger (= 0.70.3)
     - Yoga
-  - React-Core/RCTSettingsHeaders (0.68.2):
+  - React-Core/RCTSettingsHeaders (0.70.3):
     - glog
-    - RCT-Folly (= 2021.06.28.00-v2)
+    - RCT-Folly (= 2021.07.22.00)
     - React-Core/Default
-    - React-cxxreact (= 0.68.2)
-    - React-jsi (= 0.68.2)
-    - React-jsiexecutor (= 0.68.2)
-    - React-perflogger (= 0.68.2)
+    - React-cxxreact (= 0.70.3)
+    - React-jsi (= 0.70.3)
+    - React-jsiexecutor (= 0.70.3)
+    - React-perflogger (= 0.70.3)
     - Yoga
-  - React-Core/RCTTextHeaders (0.68.2):
+  - React-Core/RCTTextHeaders (0.70.3):
     - glog
-    - RCT-Folly (= 2021.06.28.00-v2)
+    - RCT-Folly (= 2021.07.22.00)
     - React-Core/Default
-    - React-cxxreact (= 0.68.2)
-    - React-jsi (= 0.68.2)
-    - React-jsiexecutor (= 0.68.2)
-    - React-perflogger (= 0.68.2)
+    - React-cxxreact (= 0.70.3)
+    - React-jsi (= 0.70.3)
+    - React-jsiexecutor (= 0.70.3)
+    - React-perflogger (= 0.70.3)
     - Yoga
-  - React-Core/RCTVibrationHeaders (0.68.2):
+  - React-Core/RCTVibrationHeaders (0.70.3):
     - glog
-    - RCT-Folly (= 2021.06.28.00-v2)
+    - RCT-Folly (= 2021.07.22.00)
     - React-Core/Default
-    - React-cxxreact (= 0.68.2)
-    - React-jsi (= 0.68.2)
-    - React-jsiexecutor (= 0.68.2)
-    - React-perflogger (= 0.68.2)
+    - React-cxxreact (= 0.70.3)
+    - React-jsi (= 0.70.3)
+    - React-jsiexecutor (= 0.70.3)
+    - React-perflogger (= 0.70.3)
     - Yoga
-  - React-Core/RCTWebSocket (0.68.2):
+  - React-Core/RCTWebSocket (0.70.3):
     - glog
-    - RCT-Folly (= 2021.06.28.00-v2)
-    - React-Core/Default (= 0.68.2)
-    - React-cxxreact (= 0.68.2)
-    - React-jsi (= 0.68.2)
-    - React-jsiexecutor (= 0.68.2)
-    - React-perflogger (= 0.68.2)
+    - RCT-Folly (= 2021.07.22.00)
+    - React-Core/Default (= 0.70.3)
+    - React-cxxreact (= 0.70.3)
+    - React-jsi (= 0.70.3)
+    - React-jsiexecutor (= 0.70.3)
+    - React-perflogger (= 0.70.3)
     - Yoga
-  - React-CoreModules (0.68.2):
-    - RCT-Folly (= 2021.06.28.00-v2)
-    - RCTTypeSafety (= 0.68.2)
-    - React-Codegen (= 0.68.2)
-    - React-Core/CoreModulesHeaders (= 0.68.2)
-    - React-jsi (= 0.68.2)
-    - React-RCTImage (= 0.68.2)
-    - ReactCommon/turbomodule/core (= 0.68.2)
-  - React-cxxreact (0.68.2):
+  - React-CoreModules (0.70.3):
+    - RCT-Folly (= 2021.07.22.00)
+    - RCTTypeSafety (= 0.70.3)
+    - React-Codegen (= 0.70.3)
+    - React-Core/CoreModulesHeaders (= 0.70.3)
+    - React-jsi (= 0.70.3)
+    - React-RCTImage (= 0.70.3)
+    - ReactCommon/turbomodule/core (= 0.70.3)
+  - React-cxxreact (0.70.3):
     - boost (= 1.76.0)
     - DoubleConversion
     - glog
-    - RCT-Folly (= 2021.06.28.00-v2)
-    - React-callinvoker (= 0.68.2)
-    - React-jsi (= 0.68.2)
-    - React-jsinspector (= 0.68.2)
-    - React-logger (= 0.68.2)
-    - React-perflogger (= 0.68.2)
-    - React-runtimeexecutor (= 0.68.2)
-  - React-jsi (0.68.2):
+    - RCT-Folly (= 2021.07.22.00)
+    - React-callinvoker (= 0.70.3)
+    - React-jsi (= 0.70.3)
+    - React-jsinspector (= 0.70.3)
+    - React-logger (= 0.70.3)
+    - React-perflogger (= 0.70.3)
+    - React-runtimeexecutor (= 0.70.3)
+  - React-jsi (0.70.3):
     - boost (= 1.76.0)
     - DoubleConversion
     - glog
-    - RCT-Folly (= 2021.06.28.00-v2)
-    - React-jsi/Default (= 0.68.2)
-  - React-jsi/Default (0.68.2):
+    - RCT-Folly (= 2021.07.22.00)
+    - React-jsi/Default (= 0.70.3)
+  - React-jsi/Default (0.70.3):
     - boost (= 1.76.0)
     - DoubleConversion
     - glog
-    - RCT-Folly (= 2021.06.28.00-v2)
-  - React-jsiexecutor (0.68.2):
+    - RCT-Folly (= 2021.07.22.00)
+  - React-jsiexecutor (0.70.3):
     - DoubleConversion
     - glog
-    - RCT-Folly (= 2021.06.28.00-v2)
-    - React-cxxreact (= 0.68.2)
-    - React-jsi (= 0.68.2)
-    - React-perflogger (= 0.68.2)
-  - React-jsinspector (0.68.2)
-  - React-logger (0.68.2):
+    - RCT-Folly (= 2021.07.22.00)
+    - React-cxxreact (= 0.70.3)
+    - React-jsi (= 0.70.3)
+    - React-perflogger (= 0.70.3)
+  - React-jsinspector (0.70.3)
+  - React-logger (0.70.3):
     - glog
-  - react-native-safe-area-context (4.2.5):
+  - react-native-safe-area-context (4.4.1):
     - RCT-Folly
     - RCTRequired
     - RCTTypeSafety
-    - React
+    - React-Core
     - ReactCommon/turbomodule/core
   - react-native-segmented-control (2.2.2):
     - React-Core
-  - React-perflogger (0.68.2)
-  - React-RCTActionSheet (0.68.2):
-    - React-Core/RCTActionSheetHeaders (= 0.68.2)
-  - React-RCTAnimation (0.68.2):
-    - RCT-Folly (= 2021.06.28.00-v2)
-    - RCTTypeSafety (= 0.68.2)
-    - React-Codegen (= 0.68.2)
-    - React-Core/RCTAnimationHeaders (= 0.68.2)
-    - React-jsi (= 0.68.2)
-    - ReactCommon/turbomodule/core (= 0.68.2)
-  - React-RCTBlob (0.68.2):
-    - RCT-Folly (= 2021.06.28.00-v2)
-    - React-Codegen (= 0.68.2)
-    - React-Core/RCTBlobHeaders (= 0.68.2)
-    - React-Core/RCTWebSocket (= 0.68.2)
-    - React-jsi (= 0.68.2)
-    - React-RCTNetwork (= 0.68.2)
-    - ReactCommon/turbomodule/core (= 0.68.2)
-  - React-RCTImage (0.68.2):
-    - RCT-Folly (= 2021.06.28.00-v2)
-    - RCTTypeSafety (= 0.68.2)
-    - React-Codegen (= 0.68.2)
-    - React-Core/RCTImageHeaders (= 0.68.2)
-    - React-jsi (= 0.68.2)
-    - React-RCTNetwork (= 0.68.2)
-    - ReactCommon/turbomodule/core (= 0.68.2)
-  - React-RCTLinking (0.68.2):
-    - React-Codegen (= 0.68.2)
-    - React-Core/RCTLinkingHeaders (= 0.68.2)
-    - React-jsi (= 0.68.2)
-    - ReactCommon/turbomodule/core (= 0.68.2)
-  - React-RCTNetwork (0.68.2):
-    - RCT-Folly (= 2021.06.28.00-v2)
-    - RCTTypeSafety (= 0.68.2)
-    - React-Codegen (= 0.68.2)
-    - React-Core/RCTNetworkHeaders (= 0.68.2)
-    - React-jsi (= 0.68.2)
-    - ReactCommon/turbomodule/core (= 0.68.2)
-  - React-RCTSettings (0.68.2):
-    - RCT-Folly (= 2021.06.28.00-v2)
-    - RCTTypeSafety (= 0.68.2)
-    - React-Codegen (= 0.68.2)
-    - React-Core/RCTSettingsHeaders (= 0.68.2)
-    - React-jsi (= 0.68.2)
-    - ReactCommon/turbomodule/core (= 0.68.2)
-  - React-RCTText (0.68.2):
-    - React-Core/RCTTextHeaders (= 0.68.2)
-  - React-RCTVibration (0.68.2):
-    - RCT-Folly (= 2021.06.28.00-v2)
-    - React-Codegen (= 0.68.2)
-    - React-Core/RCTVibrationHeaders (= 0.68.2)
-    - React-jsi (= 0.68.2)
-    - ReactCommon/turbomodule/core (= 0.68.2)
-  - React-runtimeexecutor (0.68.2):
-    - React-jsi (= 0.68.2)
-  - ReactCommon/turbomodule/core (0.68.2):
+  - React-perflogger (0.70.3)
+  - React-RCTActionSheet (0.70.3):
+    - React-Core/RCTActionSheetHeaders (= 0.70.3)
+  - React-RCTAnimation (0.70.3):
+    - RCT-Folly (= 2021.07.22.00)
+    - RCTTypeSafety (= 0.70.3)
+    - React-Codegen (= 0.70.3)
+    - React-Core/RCTAnimationHeaders (= 0.70.3)
+    - React-jsi (= 0.70.3)
+    - ReactCommon/turbomodule/core (= 0.70.3)
+  - React-RCTBlob (0.70.3):
+    - RCT-Folly (= 2021.07.22.00)
+    - React-Codegen (= 0.70.3)
+    - React-Core/RCTBlobHeaders (= 0.70.3)
+    - React-Core/RCTWebSocket (= 0.70.3)
+    - React-jsi (= 0.70.3)
+    - React-RCTNetwork (= 0.70.3)
+    - ReactCommon/turbomodule/core (= 0.70.3)
+  - React-RCTImage (0.70.3):
+    - RCT-Folly (= 2021.07.22.00)
+    - RCTTypeSafety (= 0.70.3)
+    - React-Codegen (= 0.70.3)
+    - React-Core/RCTImageHeaders (= 0.70.3)
+    - React-jsi (= 0.70.3)
+    - React-RCTNetwork (= 0.70.3)
+    - ReactCommon/turbomodule/core (= 0.70.3)
+  - React-RCTLinking (0.70.3):
+    - React-Codegen (= 0.70.3)
+    - React-Core/RCTLinkingHeaders (= 0.70.3)
+    - React-jsi (= 0.70.3)
+    - ReactCommon/turbomodule/core (= 0.70.3)
+  - React-RCTNetwork (0.70.3):
+    - RCT-Folly (= 2021.07.22.00)
+    - RCTTypeSafety (= 0.70.3)
+    - React-Codegen (= 0.70.3)
+    - React-Core/RCTNetworkHeaders (= 0.70.3)
+    - React-jsi (= 0.70.3)
+    - ReactCommon/turbomodule/core (= 0.70.3)
+  - React-RCTSettings (0.70.3):
+    - RCT-Folly (= 2021.07.22.00)
+    - RCTTypeSafety (= 0.70.3)
+    - React-Codegen (= 0.70.3)
+    - React-Core/RCTSettingsHeaders (= 0.70.3)
+    - React-jsi (= 0.70.3)
+    - ReactCommon/turbomodule/core (= 0.70.3)
+  - React-RCTText (0.70.3):
+    - React-Core/RCTTextHeaders (= 0.70.3)
+  - React-RCTVibration (0.70.3):
+    - RCT-Folly (= 2021.07.22.00)
+    - React-Codegen (= 0.70.3)
+    - React-Core/RCTVibrationHeaders (= 0.70.3)
+    - React-jsi (= 0.70.3)
+    - ReactCommon/turbomodule/core (= 0.70.3)
+  - React-runtimeexecutor (0.70.3):
+    - React-jsi (= 0.70.3)
+  - ReactCommon/turbomodule/core (0.70.3):
     - DoubleConversion
     - glog
-    - RCT-Folly (= 2021.06.28.00-v2)
-    - React-callinvoker (= 0.68.2)
-    - React-Core (= 0.68.2)
-    - React-cxxreact (= 0.68.2)
-    - React-jsi (= 0.68.2)
-    - React-logger (= 0.68.2)
-    - React-perflogger (= 0.68.2)
-  - RNAppodeal (3.0.0):
-    - Appodeal (= 3.0.0)
+    - RCT-Folly (= 2021.07.22.00)
+    - React-bridging (= 0.70.3)
+    - React-callinvoker (= 0.70.3)
+    - React-Core (= 0.70.3)
+    - React-cxxreact (= 0.70.3)
+    - React-jsi (= 0.70.3)
+    - React-logger (= 0.70.3)
+    - React-perflogger (= 0.70.3)
+  - RNAppodeal (3.0.1):
+    - Appodeal (= 3.0.1)
     - React
-  - RNScreens (3.13.1):
+  - RNScreens (3.18.2):
     - React-Core
     - React-RCTImage
-  - RNVectorIcons (9.1.0):
+  - RNVectorIcons (9.2.0):
     - React-Core
-  - smaato-ios-sdk (21.7.5):
-    - smaato-ios-sdk/Full (= 21.7.5)
-  - smaato-ios-sdk/Banner (21.7.5):
+  - smaato-ios-sdk (21.7.8):
+    - smaato-ios-sdk/Full (= 21.7.8)
+  - smaato-ios-sdk/Banner (21.7.8):
     - smaato-ios-sdk/Modules/Banner
     - smaato-ios-sdk/Modules/Core
     - smaato-ios-sdk/Modules/RichMedia
-  - smaato-ios-sdk/Full (21.7.5):
+  - smaato-ios-sdk/Full (21.7.8):
     - smaato-ios-sdk/Banner
     - smaato-ios-sdk/Interstitial
     - smaato-ios-sdk/Native
     - smaato-ios-sdk/Outstream
     - smaato-ios-sdk/RewardedAds
-  - smaato-ios-sdk/Interstitial (21.7.5):
+  - smaato-ios-sdk/Interstitial (21.7.8):
     - smaato-ios-sdk/Modules/Interstitial
     - smaato-ios-sdk/Modules/RichMedia
     - smaato-ios-sdk/Modules/Video
-  - smaato-ios-sdk/Modules/Banner (21.7.5):
+  - smaato-ios-sdk/Modules/Banner (21.7.8):
     - smaato-ios-sdk/Modules/Core
-  - smaato-ios-sdk/Modules/Core (21.7.5)
-  - smaato-ios-sdk/Modules/Interstitial (21.7.5):
+  - smaato-ios-sdk/Modules/Core (21.7.8)
+  - smaato-ios-sdk/Modules/Interstitial (21.7.8):
     - smaato-ios-sdk/Modules/Core
-  - smaato-ios-sdk/Modules/Native (21.7.5):
+  - smaato-ios-sdk/Modules/Native (21.7.8):
     - smaato-ios-sdk/Modules/Core
-  - smaato-ios-sdk/Modules/OpenMeasurement (21.7.5):
+  - smaato-ios-sdk/Modules/OpenMeasurement (21.7.8):
     - smaato-ios-sdk/Modules/Core
-  - smaato-ios-sdk/Modules/Outstream (21.7.5):
+  - smaato-ios-sdk/Modules/Outstream (21.7.8):
     - smaato-ios-sdk/Modules/Banner
     - smaato-ios-sdk/Modules/Core
     - smaato-ios-sdk/Modules/RichMedia
-  - smaato-ios-sdk/Modules/RewardedAds (21.7.5):
+  - smaato-ios-sdk/Modules/RewardedAds (21.7.8):
     - smaato-ios-sdk/Modules/Core
-  - smaato-ios-sdk/Modules/RichMedia (21.7.5):
-    - smaato-ios-sdk/Modules/Core
-    - smaato-ios-sdk/Modules/OpenMeasurement
-  - smaato-ios-sdk/Modules/UnifiedBidding (21.7.5):
-    - smaato-ios-sdk/Modules/Core
-  - smaato-ios-sdk/Modules/Video (21.7.5):
+  - smaato-ios-sdk/Modules/RichMedia (21.7.8):
     - smaato-ios-sdk/Modules/Core
     - smaato-ios-sdk/Modules/OpenMeasurement
-  - smaato-ios-sdk/Native (21.7.5):
+  - smaato-ios-sdk/Modules/UnifiedBidding (21.7.8):
+    - smaato-ios-sdk/Modules/Core
+  - smaato-ios-sdk/Modules/Video (21.7.8):
+    - smaato-ios-sdk/Modules/Core
+    - smaato-ios-sdk/Modules/OpenMeasurement
+  - smaato-ios-sdk/Native (21.7.8):
     - smaato-ios-sdk/Modules/Core
     - smaato-ios-sdk/Modules/Native
-  - smaato-ios-sdk/Outstream (21.7.5):
+  - smaato-ios-sdk/Outstream (21.7.8):
     - smaato-ios-sdk/Modules/Outstream
-  - smaato-ios-sdk/RewardedAds (21.7.5):
+  - smaato-ios-sdk/RewardedAds (21.7.8):
     - smaato-ios-sdk/Modules/RewardedAds
     - smaato-ios-sdk/Modules/Video
-  - StackAnalytics (1.3.2):
-    - StackAnalytics/Full (= 1.3.2)
-    - StackModules (~> 1.2.0)
-  - StackAnalytics/Base (1.3.2):
-    - StackModules (~> 1.2.0)
-  - StackAnalytics/Crashes (1.3.2):
-    - StackModules (~> 1.2.0)
-  - StackAnalytics/Full (1.3.2):
+  - StackAnalytics (1.4.0):
+    - StackAnalytics/Full (= 1.4.0)
+    - StackModules (~> 1.3.0)
+  - StackAnalytics/Base (1.4.0):
+    - StackModules (~> 1.3.0)
+  - StackAnalytics/Crashes (1.4.0):
+    - StackModules (~> 1.3.0)
+  - StackAnalytics/Full (1.4.0):
     - StackAnalytics/Base
     - StackAnalytics/Crashes
-    - StackModules (~> 1.2.0)
+    - StackModules (~> 1.3.0)
   - StackConsentManager (1.2.2)
-  - StackIAB (1.7.1):
-    - StackIAB/StackIABAssets (= 1.7.1)
-    - StackIAB/StackMRAIDKit (= 1.7.1)
-    - StackIAB/StackNASTKit (= 1.7.1)
-    - StackIAB/StackOpenMeasure (= 1.7.1)
-    - StackIAB/StackRichMedia (= 1.7.1)
-    - StackIAB/StackVASTAssets (= 1.7.1)
-    - StackIAB/StackVASTKit (= 1.7.1)
-    - StackIAB/StackVideoPlayer (= 1.7.1)
-    - StackIAB/StackXML (= 1.7.1)
-    - StackModules (~> 1.2.1)
-  - StackIAB/StackIABAssets (1.7.1):
-    - StackModules (~> 1.2.1)
-  - StackIAB/StackMRAIDKit (1.7.1):
+  - StackIAB (1.8.0):
+    - StackIAB/StackIABAssets (= 1.8.0)
+    - StackIAB/StackMRAIDKit (= 1.8.0)
+    - StackIAB/StackNASTKit (= 1.8.0)
+    - StackIAB/StackOpenMeasure (= 1.8.0)
+    - StackIAB/StackRichMedia (= 1.8.0)
+    - StackIAB/StackVASTAssets (= 1.8.0)
+    - StackIAB/StackVASTKit (= 1.8.0)
+    - StackIAB/StackVideoPlayer (= 1.8.0)
+    - StackIAB/StackXML (= 1.8.0)
+    - StackModules (~> 1.3.0)
+  - StackIAB/StackIABAssets (1.8.0):
+    - StackModules (~> 1.3.0)
+  - StackIAB/StackMRAIDKit (1.8.0):
     - StackIAB/StackIABAssets
     - StackIAB/StackOpenMeasure
-    - StackModules (~> 1.2.1)
-  - StackIAB/StackNASTKit (1.7.1):
+    - StackModules (~> 1.3.0)
+  - StackIAB/StackNASTKit (1.8.0):
     - StackIAB/StackVASTKit
-    - StackModules (~> 1.2.1)
-  - StackIAB/StackOpenMeasure (1.7.1):
+    - StackModules (~> 1.3.0)
+  - StackIAB/StackOpenMeasure (1.8.0):
     - OMSDK_Appodeal (~> 1.3.27)
-    - StackModules (~> 1.2.1)
-  - StackIAB/StackRichMedia (1.7.1):
+    - StackModules (~> 1.3.0)
+  - StackIAB/StackRichMedia (1.8.0):
     - StackIAB/StackIABAssets
     - StackIAB/StackVASTAssets
     - StackIAB/StackVideoPlayer
-    - StackModules (~> 1.2.1)
-  - StackIAB/StackVASTAssets (1.7.1):
+    - StackModules (~> 1.3.0)
+  - StackIAB/StackVASTAssets (1.8.0):
     - StackIAB/StackIABAssets
     - StackIAB/StackXML
-    - StackModules (~> 1.2.1)
-  - StackIAB/StackVASTKit (1.7.1):
+    - StackModules (~> 1.3.0)
+  - StackIAB/StackVASTKit (1.8.0):
     - StackIAB/StackMRAIDKit
     - StackIAB/StackVASTAssets
     - StackIAB/StackVideoPlayer
-    - StackModules (~> 1.2.1)
-  - StackIAB/StackVideoPlayer (1.7.1):
-    - StackModules (~> 1.2.1)
-  - StackIAB/StackXML (1.7.1):
-    - StackModules (~> 1.2.1)
-  - StackModules (1.2.2):
-    - StackModules/StackProductPresentation (= 1.2.2)
-  - StackModules/StackFoundation (1.2.2)
-  - StackModules/StackProductPresentation (1.2.2):
+    - StackModules (~> 1.3.0)
+  - StackIAB/StackVideoPlayer (1.8.0):
+    - StackModules (~> 1.3.0)
+  - StackIAB/StackXML (1.8.0):
+    - StackModules (~> 1.3.0)
+  - StackModules (1.3.2):
+    - StackModules/StackProductPresentation (= 1.3.2)
+  - StackModules/StackFoundation (1.3.2)
+  - StackModules/StackProductPresentation (1.3.2):
     - StackModules/StackUIKit
-  - StackModules/StackUIKit (1.2.2):
+  - StackModules/StackUIKit (1.3.2):
     - StackModules/StackFoundation
-  - StackProtobuf (0.8.1):
+  - StackProtobuf (0.8.3):
     - Protobuf (~> 3.13)
   - TapjoySDK (12.10.0)
-  - UnityAds (4.2.1)
-  - VungleSDK-iOS (6.11.0)
-  - YandexMobileAds (5.0.2):
-    - YandexMobileAds/Static (= 5.0.2)
-  - YandexMobileAds/Static (5.0.2):
+  - UnityAds (4.4.1)
+  - VungleSDK-iOS (6.12.0)
+  - YandexMobileAds (5.2.1):
+    - YandexMobileAds/Static (= 5.2.1)
+  - YandexMobileAds/Static (5.2.1):
     - YandexMobileMetrica (< 5.0.0, >= 4.0.0)
-  - YandexMobileMetrica (4.2.0):
-    - YandexMobileMetrica/Static (= 4.2.0)
-  - YandexMobileMetrica/Static (4.2.0):
-    - YandexMobileMetrica/Static/Core (= 4.2.0)
-    - YandexMobileMetrica/Static/Crashes (= 4.2.0)
-  - YandexMobileMetrica/Static/Core (4.2.0)
-  - YandexMobileMetrica/Static/Crashes (4.2.0):
+  - YandexMobileMetrica (4.4.0):
+    - YandexMobileMetrica/Static (= 4.4.0)
+  - YandexMobileMetrica/Static (4.4.0):
+    - YandexMobileMetrica/Static/Core (= 4.4.0)
+    - YandexMobileMetrica/Static/Crashes (= 4.4.0)
+  - YandexMobileMetrica/Static/Core (4.4.0)
+  - YandexMobileMetrica/Static/Crashes (4.4.0):
     - YandexMobileMetrica/Static/Core
   - Yoga (1.14.0)
 
 DEPENDENCIES:
-  - APDAdColonyAdapter (= 3.0.0.1)
-  - APDAdjustAdapter (= 3.0.0.1)
-  - APDAppLovinAdapter (= 3.0.0.1)
-  - APDAppsFlyerAdapter (= 3.0.0.1)
-  - APDBidMachineAdapter (= 3.0.0.1)
-  - APDFacebookAdapter (= 3.0.0.1)
-  - APDFirebaseAdapter (= 3.0.0.1)
-  - APDGoogleAdMobAdapter (= 3.0.0.1)
-  - APDIABAdapter (= 3.0.0.1)
-  - APDIronSourceAdapter (= 3.0.0.1)
-  - APDMetaAudienceNetworkAdapter (= 3.0.0.1)
-  - APDMyTargetAdapter (= 3.0.0.1)
-  - APDStackAnalyticsAdapter (= 3.0.0.1)
-  - APDUnityAdapter (= 3.0.0.1)
-  - APDVungleAdapter (= 3.0.0.1)
-  - APDYandexAdapter (= 3.0.0.1)
-  - BDMAdColonyAdapter (~> 1.9.4)
-  - BDMAmazonAdapter (~> 1.9.4.2)
-  - BDMCriteoAdapter (~> 1.9.4)
-  - BDMIABAdapter (~> 1.9.4)
-  - BDMMetaAudienceAdapter (~> 1.9.4)
-  - BDMMyTargetAdapter (~> 1.9.4)
-  - BDMPangleAdapter (~> 1.9.4.2)
-  - BDMSmaatoAdapter (~> 1.9.4)
-  - BDMTapjoyAdapter (~> 1.9.4)
-  - BDMVungleAdapter (~> 1.9.4)
+  - APDAdColonyAdapter (= 3.0.1.1)
+  - APDBidMachineAdapter (= 3.0.1.1)
+  - APDFacebookAdapter (= 3.0.1.1)
+  - APDFirebaseAdapter (= 3.0.1.1)
+  - APDGoogleAdMobAdapter (= 3.0.1.1)
+  - APDIABAdapter (= 3.0.1.1)
+  - APDIronSourceAdapter (= 3.0.1.1)
+  - APDMetaAudienceNetworkAdapter (= 3.0.1.1)
+  - APDMyTargetAdapter (= 3.0.1.1)
+  - APDStackAnalyticsAdapter (= 3.0.1.1)
+  - APDUnityAdapter (= 3.0.1.1)
+  - APDVungleAdapter (= 3.0.1.1)
+  - APDYandexAdapter (= 3.0.1.1)
+  - BDMAmazonAdapter (~> 1.9.5)
+  - BDMCriteoAdapter (~> 1.9.5)
+  - BDMIABAdapter (~> 1.9.5)
+  - BDMMetaAudienceAdapter (~> 1.9.5)
+  - BDMMyTargetAdapter (~> 1.9.5)
+  - BDMNotsyAdapter (~> 1.9.5)
+  - BDMPangleAdapter (~> 1.9.5)
+  - BDMSmaatoAdapter (~> 1.9.5)
+  - BDMTapjoyAdapter (~> 1.9.5)
+  - BDMVungleAdapter (~> 1.9.5)
   - boost (from `../node_modules/react-native/third-party-podspecs/boost.podspec`)
   - DoubleConversion (from `../node_modules/react-native/third-party-podspecs/DoubleConversion.podspec`)
   - FBLazyVector (from `../node_modules/react-native/Libraries/FBLazyVector`)
@@ -759,10 +732,10 @@ DEPENDENCIES:
   - RCTRequired (from `../node_modules/react-native/Libraries/RCTRequired`)
   - RCTTypeSafety (from `../node_modules/react-native/Libraries/TypeSafety`)
   - React (from `../node_modules/react-native/`)
+  - React-bridging (from `../node_modules/react-native/ReactCommon`)
   - React-callinvoker (from `../node_modules/react-native/ReactCommon/callinvoker`)
   - React-Codegen (from `build/generated/ios`)
   - React-Core (from `../node_modules/react-native/`)
-  - React-Core/DevSupport (from `../node_modules/react-native/`)
   - React-Core/RCTWebSocket (from `../node_modules/react-native/`)
   - React-CoreModules (from `../node_modules/react-native/React/CoreModules`)
   - React-cxxreact (from `../node_modules/react-native/ReactCommon/cxxreact`)
@@ -791,11 +764,7 @@ DEPENDENCIES:
 
 SPEC REPOS:
   https://github.com/appodeal/CocoaPods.git:
-    - AdjustPurchase
     - APDAdColonyAdapter
-    - APDAdjustAdapter
-    - APDAppLovinAdapter
-    - APDAppsFlyerAdapter
     - APDBidMachineAdapter
     - APDFacebookAdapter
     - APDFirebaseAdapter
@@ -809,30 +778,24 @@ SPEC REPOS:
     - APDVungleAdapter
     - APDYandexAdapter
     - Appodeal
-    - BDMAdColonyAdapter
     - BDMAmazonAdapter
     - BDMCriteoAdapter
     - BDMIABAdapter
     - BDMMetaAudienceAdapter
     - BDMMyTargetAdapter
+    - BDMNotsyAdapter
     - BDMPangleAdapter
     - BDMSmaatoAdapter
     - BDMTapjoyAdapter
     - BDMVungleAdapter
-    - BidMachine
     - OMSDK_Appodeal
     - StackAnalytics
     - StackConsentManager
-    - StackIAB
     - StackModules
   trunk:
     - AdColony
-    - Adjust
     - Ads-Global
     - AmazonPublisherServicesSDK
-    - AppLovinSDK
-    - AppsFlyer-AdRevenue
-    - AppsFlyerFramework
     - BidMachine
     - BURelyFoundation_Global
     - CriteoPublisherSdk
@@ -845,6 +808,7 @@ SPEC REPOS:
     - FirebaseAnalytics
     - FirebaseCore
     - FirebaseCoreDiagnostics
+    - FirebaseCoreInternal
     - FirebaseInstallations
     - FirebaseRemoteConfig
     - fmt
@@ -863,7 +827,6 @@ SPEC REPOS:
     - RangersAPM-Pangle
     - smaato-ios-sdk
     - StackIAB
-    - StackModules
     - StackProtobuf
     - TapjoySDK
     - UnityAds
@@ -890,6 +853,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/Libraries/TypeSafety"
   React:
     :path: "../node_modules/react-native/"
+  React-bridging:
+    :path: "../node_modules/react-native/ReactCommon"
   React-callinvoker:
     :path: "../node_modules/react-native/ReactCommon/callinvoker"
   React-Codegen:
@@ -947,117 +912,111 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   AdColony: 4f3738dc633d7aaa8ec60729df973076cc8e97ed
-  Adjust: 6ed5493e91e9a77f6515d94f640bb72506a06b9d
-  AdjustPurchase: f3001b385bde7725fb18b696789cb046cedd0c75
   Ads-Global: 167ddabcf74a82c41f7074dc286697418ee22b60
   AmazonPublisherServicesSDK: cd88ef55d5afaa6483bcb04b977e1585a95f9211
-  APDAdColonyAdapter: 76198c7fce9988815fdb812c3bc50e0384777842
-  APDAdjustAdapter: 0cdf697f374d01de64036fb831e67eded2a3ca86
-  APDAppLovinAdapter: cbfde1553036ce11ac771f375e727365e2fb76c3
-  APDAppsFlyerAdapter: 301835dea81bd5ad6fc08a224e0484ead8f3af07
-  APDBidMachineAdapter: 11e77ce59a91a8cc422cc8b3c34886f4130d2e32
-  APDFacebookAdapter: f2f5e6f6b555780886ddd3ce34f3ec0dfbb52a4f
-  APDFirebaseAdapter: e87db23fc4c1953b94164eb7ea805404226e3bc4
-  APDGoogleAdMobAdapter: e0d5bdeec36376a3e5da4f2aba02b30d214ea6e6
-  APDIABAdapter: 1877fddceb4eb9b32e3e58631b3c868776586708
-  APDIronSourceAdapter: 08903d7d05d10635384d4c9acad7fa3e3cda42f3
-  APDMetaAudienceNetworkAdapter: b5f1bb98fda100a0fa5f2d1fbd1f378dbe56ca75
-  APDMyTargetAdapter: 4ea94e3649f4706f4575d8ed6cf04fb56c0590db
-  APDStackAnalyticsAdapter: 32846b1f0a36453d471ec3239cb868ba2ce4cb1d
-  APDUnityAdapter: bac6132127366c152a2414e23663a1b681ad0096
-  APDVungleAdapter: c73e27d9e644735ecbf83c30b8a38afdcee29d95
-  APDYandexAdapter: 54b20d07779a02f418b905bb0fcfd7a03238b1a9
-  AppLovinSDK: 119a0b2a743f9d9c6002c58776b1013778a65084
-  Appodeal: b1940db7eaae7b1ed7ca425a56b3fd76e0588f5a
-  AppsFlyer-AdRevenue: dc145404655ff980a9938c9db145144d4ebe7ffd
-  AppsFlyerFramework: 5e4b385a27dc6179e132b1617f76809412eb2f88
-  BDMAdColonyAdapter: 1f00947d9d3a53ba74ab8a915cc0e4f9a60ad40d
-  BDMAmazonAdapter: b8debd72d49ee691e047dfbbc7d9604b0b3ac833
-  BDMCriteoAdapter: 08febf6a3bbddffd18951bfd347e3b04b9b5c8ff
-  BDMIABAdapter: aa060c17b3f6e0abda98113001171ce3e0dd1cfb
-  BDMMetaAudienceAdapter: e729b62661d224a97ffcfeb02c95a56e447e8846
-  BDMMyTargetAdapter: 2fc68c628befd9d4958c89b11c302b0e33b258e8
-  BDMPangleAdapter: 07f64ce726e5c167c30da8042f0c5b0c9d521f53
-  BDMSmaatoAdapter: 4b30f9a053e5e83d4eb1a38ad430fe2796ab7e88
-  BDMTapjoyAdapter: d80283175e256950c34c089a80d1f30bc0824cbe
-  BDMVungleAdapter: c268e52f8924dc3186bc483777a6623d9e293ff2
-  BidMachine: 1e3aa86a75b65acb3ddbf788869fe39a9a5a5f74
+  APDAdColonyAdapter: 0c870155604fa3cdfb6c26ba3d61632a9692890c
+  APDBidMachineAdapter: 87e6837db8675adbe2efc25ef4e9ccecac8595f0
+  APDFacebookAdapter: 8210d8cff560971c039e2d3542c565bd6be09caa
+  APDFirebaseAdapter: 76209889479ea068005b09165e0e0f3e26015019
+  APDGoogleAdMobAdapter: 7e3e8b0e96be563fd52f75800c496899de31fffe
+  APDIABAdapter: 5dcde13fa074987e1018d04f2d8533d00cb7f76f
+  APDIronSourceAdapter: d217b9bed4f1cc30e9097fb79baf5a5603a606fc
+  APDMetaAudienceNetworkAdapter: 0564d191b04422f03b2a5f75f832a2aed2859bad
+  APDMyTargetAdapter: d55e0c8f1e0345da4945f1224bf4bd6d3e8a0637
+  APDStackAnalyticsAdapter: 065397755f56bad7a3ece7dfce34c05421f72a15
+  APDUnityAdapter: 165672258ed18d68e0a87b8d51139f552a1722bc
+  APDVungleAdapter: 88771eeba6b815626836909fb4d8f007f6e8d68c
+  APDYandexAdapter: 269179a8e2dc8d599fe34bc03bd7e116804e34da
+  Appodeal: b62e1581b03744ee3dd61d02cc9fdeb33dd5a002
+  BDMAmazonAdapter: c7d882fa63473c904f98d3bcb89ca688e2a20d71
+  BDMCriteoAdapter: b63c1d5fadf0a5685d96dc425ed611a627ec3ddd
+  BDMIABAdapter: 9e5690d0075ce27fc81d2256bf1e079328b22c3b
+  BDMMetaAudienceAdapter: 51d1ed73b44a1bc473ec2ca0d5b5fc2331ac3acb
+  BDMMyTargetAdapter: 52067545d2f9cc1beb26ec673678cee85aba6933
+  BDMNotsyAdapter: 1d8a00859cb6687be155370edda79dd919b53087
+  BDMPangleAdapter: d4e9b52651dca8ea5cf2984713cdd6998d664694
+  BDMSmaatoAdapter: 15a609822d38fe13409863775bff28f7059c7031
+  BDMTapjoyAdapter: 669e0e8c7095be3eb61168628ee716d474619f22
+  BDMVungleAdapter: 6378405890c8a13b7b3a1c14ef7ce3b0b5bb2ef9
+  BidMachine: c808e61ecc9f46903700c612de0c45b52c8cf806
   boost: a7c83b31436843459a1961bfd74b96033dc77234
   BURelyFoundation_Global: 5b03b5340630fa62fb9cd6eac52c5f57d4b0c17b
   CriteoPublisherSdk: 26f16f975d6c0392ee7060626268e2f2d7ed2d82
-  DoubleConversion: 831926d9b8bf8166fd87886c4abab286c2422662
+  DoubleConversion: 5189b271737e1565bdce30deb4a08d647e3f5f54
   FBAEMKit: 955ca52eba8219c20f90774e8c6ff8bc7b3192a3
-  FBAudienceNetwork: 78c7565dbc7df3a24013b4dccdc69a0d0ded8404
-  FBLazyVector: a7a655862f6b09625d11c772296b01cd5164b648
-  FBReactNativeSpec: 81ce99032d5b586fddd6a38d450f8595f7e04be4
+  FBAudienceNetwork: e0fcc9091fced34910ed0b6da06f129db46ac9e6
+  FBLazyVector: 3b313c3fb52b597f7a9b430798e6367d2b9f07e5
+  FBReactNativeSpec: 99a7ecb7e9665d96f2fea706b0844e2f3117f381
   FBSDKCoreKit: 678f64eda3f0ff25c189c2ebbfe87b1d96a85a6d
   FBSDKCoreKit_Basics: 6bee7c1f0932432901781203fa5e587ec5099148
-  Firebase: 5f8193dff4b5b7c5d5ef72ae54bb76c08e2b841d
-  FirebaseABTesting: 10cbce8db9985ae2e3847ea44e9947dd18f94e10
-  FirebaseAnalytics: 7761cbadb00a717d8d0939363eb46041526474fa
-  FirebaseCore: 5743c5785c074a794d35f2fff7ecc254a91e08b1
-  FirebaseCoreDiagnostics: 92e07a649aeb66352b319d43bdd2ee3942af84cb
-  FirebaseInstallations: 40bd9054049b2eae9a2c38ef1c3dd213df3605cd
-  FirebaseRemoteConfig: 2d6e2cfdb49af79535c8af8a80a4a5009038ec2b
+  Firebase: 5ae8b7cf8efce559a653aef0ad95bab3f427c351
+  FirebaseABTesting: 61826730ce9eee8781ba99a2b3420e9bce148dc9
+  FirebaseAnalytics: 89ad762c6c3852a685794174757e2c60a36b6a82
+  FirebaseCore: 2082fffcd855f95f883c0a1641133eb9bbe76d40
+  FirebaseCoreDiagnostics: 99a495094b10a57eeb3ae8efa1665700ad0bdaa6
+  FirebaseCoreInternal: bca76517fe1ed381e989f5e7d8abb0da8d85bed3
+  FirebaseInstallations: 0a115432c4e223c5ab20b0dbbe4cbefa793a0e8e
+  FirebaseRemoteConfig: ee09d77a7d7c7e31da6a0d1cf956cd611c85609c
   fmt: ff9d55029c625d3757ed641535fd4a75fedc7ce9
-  glog: 476ee3e89abb49e07f822b48323c51c57124b572
-  Google-Mobile-Ads-SDK: caf686ba55108412e02a3eedb136e12e488dbfaa
-  GoogleAppMeasurement: 4c19f031220c72464d460c9daa1fb5d1acce958e
-  GoogleDataTransport: 5fffe35792f8b96ec8d6775f5eccd83c998d5a3b
-  GoogleUserMessagingPlatform: ab890ce5f6620f293a21b6bdd82e416a2c73aeca
-  GoogleUtilities: e0913149f6b0625b553d70dae12b49fc62914fd1
-  IronSourceSDK: 2c5aa482ea7c5e85ff934d2c8bb34fe3ceb54f43
-  myTargetSDK: e79ecceb7ce283f274202ff8e8b64b854ac8edad
-  myTrackerSDK: 4fc38a0c56573d58761f3e85dbad483077fd0d2d
-  nanopb: a0ba3315591a9ae0a16a309ee504766e90db0c96
-  OMSDK_Appodeal: e12d3006f60cae5700ff8effcb75a312f6a830a5
+  glog: 04b94705f318337d7ead9e6d17c019bd9b1f6b1b
+  Google-Mobile-Ads-SDK: e0322ce0f304126547185fa254dfe66ac66153d8
+  GoogleAppMeasurement: 6de2b1a69e4326eb82ee05d138f6a5cb7311bcb1
+  GoogleDataTransport: 1c8145da7117bd68bbbed00cf304edb6a24de00f
+  GoogleUserMessagingPlatform: 5f8b30daf181805317b6b985bb51c1ff3beca054
+  GoogleUtilities: 1d20a6ad97ef46f67bbdec158ce00563a671ebb7
+  IronSourceSDK: 59c9e16fa10f7b27e07df9edfbcf5a4bfc9ccfb3
+  myTargetSDK: f7f09df5c9934bf19b18fa1bdbc8d990f655df70
+  myTrackerSDK: 3b21ddcc191b818d0f39a518413ff98bf6544c76
+  nanopb: b552cce312b6c8484180ef47159bc0f65a1f0431
+  OMSDK_Appodeal: 9b6015e83dfbfc7988375efdb81cdcd373f5180a
   OneKit-Pangle: 68a778c39d36ed8feffd667a6b49225427bcf286
-  PromisesObjC: 99b6f43f9e1044bd87a95a60beff28c2c44ddb72
-  Protobuf: 9e88c1e667d75aa2491d211f26ccddde4e8ad4cf
+  PromisesObjC: ab77feca74fa2823e7af4249b8326368e61014cb
+  Protobuf: 02524ec14183fe08fb259741659e79683788158b
   RangersAPM-Pangle: 97c8fe91af08574a739cc72a714b735efb6c891f
-  RCT-Folly: 4d8508a426467c48885f1151029bc15fa5d7b3b8
-  RCTRequired: 3e917ea5377751094f38145fdece525aa90545a0
-  RCTTypeSafety: c43c072a4bd60feb49a9570b0517892b4305c45e
-  React: 176dd882de001854ced260fad41bb68a31aa4bd0
-  React-callinvoker: c2864d1818d6e64928d2faf774a3800dfc38fe1f
-  React-Codegen: 98b6f97f0a7abf7d67e4ce435c77c05b7a95cf05
-  React-Core: fdaa2916b1c893f39f02cff0476d1fb0cab1e352
-  React-CoreModules: fd8705b80699ec36c2cdd635c2ce9d874b9cfdfc
-  React-cxxreact: 1832d971f7b0cb2c7b943dc0ec962762c90c906e
-  React-jsi: 72af715135abe8c3f0dcf3b2548b71d048b69a7e
-  React-jsiexecutor: b7b553412f2ec768fe6c8f27cd6bafdb9d8719e6
-  React-jsinspector: c5989c77cb89ae6a69561095a61cce56a44ae8e8
-  React-logger: a0833912d93b36b791b7a521672d8ee89107aff1
-  react-native-safe-area-context: ebf8c413eb8b5f7c392a036a315eb7b46b96845f
+  RCT-Folly: 0080d0a6ebf2577475bda044aa59e2ca1f909cda
+  RCTRequired: 5cf7e7d2f12699724b59f90350257a422eaa9492
+  RCTTypeSafety: 3f3ead9673d1ab8bb1aea85b0894ab3220f8f06e
+  React: 30a333798d1fcf595e8a4108bbaa0f125a655f4a
+  React-bridging: 92396c03ab446756ddfb7a8e2baff3bcf19eec7d
+  React-callinvoker: bb66a41b41fa0b7c5f3cc626693a63c9ea0d6252
+  React-Codegen: a2a944a9688fae870be0a2ecdca37284034b25c2
+  React-Core: a689b4d1bd13e15915a05c9918c2b01df96cd811
+  React-CoreModules: d262214db6b704b042bc5c0735b06c346a371d7f
+  React-cxxreact: 81d5bf256313bf96cb925eb0e654103291161a17
+  React-jsi: 7f99dc3055bec9a0eeb4230f8b6ac873514c8421
+  React-jsiexecutor: 7e2e1772ef7b97168c880eeaf3749d8c145ffd6e
+  React-jsinspector: 0553c9fe7218e1f127be070bd5a4d2fc19fb8190
+  React-logger: cffcc09e8aba8a3014be8d18da7f922802e9f19e
+  react-native-safe-area-context: 99b24a0c5acd0d5dcac2b1a7f18c49ea317be99a
   react-native-segmented-control: 65df6cd0619b780b3843d574a72d4c7cec396097
-  React-perflogger: a18b4f0bd933b8b24ecf9f3c54f9bf65180f3fe6
-  React-RCTActionSheet: 547fe42fdb4b6089598d79f8e1d855d7c23e2162
-  React-RCTAnimation: bc9440a1c37b06ae9ebbb532d244f607805c6034
-  React-RCTBlob: a1295c8e183756d7ef30ba6e8f8144dfe8a19215
-  React-RCTImage: a30d1ee09b1334067fbb6f30789aae2d7ac150c9
-  React-RCTLinking: ffc6d5b88d1cb9aca13c54c2ec6507fbf07f2ac4
-  React-RCTNetwork: f807a2facab6cf5cf36d592e634611de9cf12d81
-  React-RCTSettings: 861806819226ed8332e6a8f90df2951a34bb3e7f
-  React-RCTText: f3fb464cc41a50fc7a1aba4deeb76a9ad8282cb9
-  React-RCTVibration: 79040b92bfa9c3c2d2cb4f57e981164ec7ab9374
-  React-runtimeexecutor: b960b687d2dfef0d3761fbb187e01812ebab8b23
-  ReactCommon: 095366164a276d91ea704ce53cb03825c487a3f2
-  RNAppodeal: 0a13011980e7c9382205bdac815535c0f57b7124
-  RNScreens: 40a2cb40a02a609938137a1e0acfbf8fc9eebf19
-  RNVectorIcons: 7923e585eaeb139b9f4531d25a125a1500162a0b
-  smaato-ios-sdk: bc1f78e079ac0ef88f9cdbe29205db0af405ce61
-  StackAnalytics: 5c465076e41647d7d8ae1e29b45ca48256219488
+  React-perflogger: 082b4293f0b3914ff41da35a6c06ac4490fcbcc8
+  React-RCTActionSheet: 83da3030deb5dea54b398129f56540a44e64d3ae
+  React-RCTAnimation: bac3a4f4c0436554d9f7fbb1352a0cdcb1fb0f1c
+  React-RCTBlob: d2c8830ac6b4d55d5624469829fe6d0ef1d534d1
+  React-RCTImage: 26ad032b09f90ae5d2283ec19f0c455c444c8189
+  React-RCTLinking: 4a8d16586df11fff515a6c52ff51a02c47a20499
+  React-RCTNetwork: 843fc75a70f0b5760de0bf59468585f41209bcf0
+  React-RCTSettings: 54e59255f94462951b45f84c3f81aedc27cf8615
+  React-RCTText: c32e2a60827bd232b2bc95941b9926ccf1c2be4c
+  React-RCTVibration: b9a58ffdd18446f43d493a4b0ecd603ee86be847
+  React-runtimeexecutor: e9b1f9310158a1e265bcdfdfd8c62d6174b947a2
+  ReactCommon: 01064177e66d652192c661de899b1076da962fd9
+  RNAppodeal: a6d78d727a4342bdba231319ef2bb93a51fd9681
+  RNScreens: 34cc502acf1b916c582c60003dc3089fa01dc66d
+  RNVectorIcons: fcc2f6cb32f5735b586e66d14103a74ce6ad61f8
+  smaato-ios-sdk: f2c145efd3e3e322795d892c9a88eb499339262a
+  StackAnalytics: cb0aebd802551f76992b03067aee061fbc78bdb9
   StackConsentManager: ac09704d4a8ddfc1091fd8eb6a9e02dc5f797574
-  StackIAB: e3bcab84f45fdb2b70fdea2b59db372642d0dceb
-  StackModules: a2fb2d4e51f613af088c576a297d6c6208f4da84
-  StackProtobuf: 599ee5dfb2b6943e8f5769d92526ee6177b7bbc7
+  StackIAB: 9ae73f23fdcc061dd47d32484396fc80f307d5f1
+  StackModules: f32f02e62fbe40cbf22d753616e5542e4f7d23a2
+  StackProtobuf: 4ce3cf175993834536fbb7260a278400cabeb463
   TapjoySDK: 3dcd899e69eb3e36f231390c95c7105730619bcb
-  UnityAds: a2274b216f9ed1e4d1d74c08178f21223f08e17a
-  VungleSDK-iOS: 5d0c27330a1d793d1f628a1f0e227113c9f8a478
-  YandexMobileAds: 761e7844016da8f391d16e485640d828d48c3672
-  YandexMobileMetrica: f5f9c605eaaba33ff6ab2b6bc3259035ca60ed87
-  Yoga: 99652481fcd320aefa4a7ef90095b95acd181952
+  UnityAds: 1af6c4fdd7030c2593c58f520504e167561175ab
+  VungleSDK-iOS: 1936f966dd5828d171fc514343741480bf219496
+  YandexMobileAds: 3d7708df615f92815a3acedf9869da46d0b4d65e
+  YandexMobileMetrica: baf7cea47cb87fc9af963c4f747ce8dd7df3d7c0
+  Yoga: 2ed968a4f060a92834227c036279f2736de0fce3
 
-PODFILE CHECKSUM: 7ec015f637bbecab94f465151e9504a609d8e170
+PODFILE CHECKSUM: b14b631c442e787a8c8525fc844d72d75a32ece4
 
 COCOAPODS: 1.11.3

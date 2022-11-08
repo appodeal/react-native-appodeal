@@ -350,6 +350,8 @@ Set callbacks listener to get track of ad lifecycle events.
 
 1. SDK
 
+Initialization callback. Fired when SDK is fully initialized
+
 ``` javascript
 import {
     Appodeal,
@@ -360,6 +362,30 @@ Appodeal.addEventListener(AppodealSdkEvent.INITIALIZED, () =>
     console.log("Appodeal SDK did initialize");
 );
 ```
+
+Ad revenue callback. Fired when SDK is shown ad impression and register revenue
+
+```javascript
+Appodeal.addEventListener(
+    AppodealSdkEvent.AD_REVENUE,
+    (revenue: AppodealAdRevenue) => {
+        console.log('Appodeal SDK did receive ad revenue: ', revenue);
+    },
+);
+```
+
+where ad revenue is object that contains:
+
+|Property|Type|Desctiption|
+|---|---|---|
+|networkName|string|Name of Ad Network|
+|adUnitName|string|Name of Appodeal Ad Unit|
+|placement|string|Name of impression placement|
+|revenuePrecision|string|Revenue precision|
+|demandSource|string|Demand Source name. Bidder name in case of impression from real time bidding or name of ad network|
+|currency|string|Revenue currency. USD|
+|revenue|number|Revenue amount|
+|adType|AppodealAdType|Impression ad type|
 
 2. Banner
 
@@ -629,6 +655,11 @@ Banner view has explicit callbacks.
 ```
 
 ## Changelog
+
+3.0.1
+
+* Update Appodeal to 3.0.1 
+* Add ad revenue callback
 
 3.0.0 
 

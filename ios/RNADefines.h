@@ -10,6 +10,7 @@
 #import <Appodeal/Appodeal.h>
 
 FOUNDATION_EXPORT NSString *const kEventAppodealInitialized;
+FOUNDATION_EXPORT NSString *const kEventAppodealDidReceiveRevenue;
 
 FOUNDATION_EXPORT NSString *const kEventBannerLoaded;
 FOUNDATION_EXPORT NSString *const kEventBannerFailedToLoad;
@@ -49,6 +50,7 @@ typedef NS_OPTIONS(NSInteger, RNAAdType) {
 };
 
 AppodealAdType AppodealAdTypeFromRNAAdType(RNAAdType adType);
+RNAAdType RNAAdTypeFromaAppodealAdType(AppodealAdType adType);
 AppodealShowStyle AppodealShowStyleFromRNAAdType(RNAAdType adType);
 APDCCPAUserConsent APDCCPAUserConsentFromRNConsent(NSInteger consent);
 APDGDPRUserConsent APDGDPRUserConsentFromRNConsent(NSInteger consent);

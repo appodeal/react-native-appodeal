@@ -86,3 +86,14 @@ export enum AppodealAndroidPurchaseType {
   IN_APP = 0,
   SUBSCRIPTION = 1
 }
+
+export interface AppodealAdRevenue {
+  networkName: string,
+  adUnitName: string,
+  placement: string,
+  revenuePrecision: string,
+  demandSource: string,
+  currency: string,
+  revenue: number,
+  adType: AdTypeType
+}

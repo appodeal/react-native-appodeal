@@ -10,7 +10,8 @@ import {
     AppodealAndroidPurchaseType,
     AppodealIOSPurchase,
     AppodealIOSPurchaseType,
-    AppodealReward
+    AppodealReward,
+    AppodealAdRevenue
 } from './RNAppodealTypes';
 
 import * as AppodealInterstitialEvent from './events/interstiital';
@@ -32,8 +33,9 @@ export {
     AppodealIOSPurchase,
     AppodealIOSPurchaseType,
     AppodealReward,
+    AppodealAdRevenue,
     AppodealInterstitialEvent,
     AppodealRewardedEvent,
     AppodealBannerEvent,
-    AppodealSdkEvent
+    AppodealSdkEvent,
 }

@@ -8,7 +8,8 @@
 AppodealBannerDelegate,
 AppodealInterstitialDelegate,
 AppodealRewardedVideoDelegate,
-AppodealInitializationDelegate
+AppodealInitializationDelegate,
+AppodealAdRevenueDelegate
 >
 
 @end
@@ -38,6 +39,7 @@ RCT_EXPORT_METHOD(initializeWithAppKey:(nonnull NSString *)appKey
         [Appodeal setBannerDelegate:self];
         [Appodeal setInterstitialDelegate:self];
         [Appodeal setInitializationDelegate:self];
+        [Appodeal setAdRevenueDelegate:self];
         
         [Appodeal initializeWithApiKey:appKey
                                  types:AppodealAdTypeFromRNAAdType(adTypes)];
@@ -437,6 +439,23 @@ RCT_EXPORT_METHOD(trackEvent:(nonnull NSString *)event
 
 - (void)appodealSDKDidInitialize {
     [self sendEventWithName:kEventAppodealInitialized body:nil];
+}
+
+#pragma mark - AppodealAdRevenueDelegate
+
+- (void)didReceiveRevenueForAd:(id<AppodealAdRevenue>)ad {
+    NSDictionary *params = @{
+        @"networkName": ad.networkName,
+        @"adUnitName": ad.adUnitName,
+        @"placement": ad.placement,
+        @"revenuePrecision": ad.revenuePrecision,
+        @"demandSource": ad.demandSource,
+        @"currency": ad.currency,
+        @"revenue": @(ad.revenue),
+        @"adType": @(RNAAdTypeFromaAppodealAdType(ad.adType))
+    };
+    
+    [self sendEventWithName:kEventAppodealDidReceiveRevenue body:params];
 }
 
 #pragma mark - Noop
