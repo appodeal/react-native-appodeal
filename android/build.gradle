@@ -34,7 +34,12 @@ repositories {
 dependencies {
     implementation 'com.facebook.react:react-native:+'
     // Appodeal
-    implementation 'com.appodeal.ads.sdk:core:3.0.0'
-    implementation 'com.appodeal.ads.sdk.networks:bidmachine:3.0.0.1'
-    implementation 'com.appodeal.ads.sdk.services:stack_analytics:3.0.0.0'
+    implementation 'com.appodeal.ads.sdk:core:3.0.1'
+    implementation 'com.appodeal.ads.sdk.networks:appodeal:3.0.1.0'
+    implementation 'com.appodeal.ads.sdk.networks:bidmachine:3.0.1.0'
+    implementation 'com.appodeal.ads.sdk.networks:mraid:3.0.1.0'
+    implementation 'com.appodeal.ads.sdk.networks:nast:3.0.1.0'
+    implementation 'com.appodeal.ads.sdk.services:sentry_analytics:3.0.1.0'
+    implementation 'com.appodeal.ads.sdk.services:stack_analytics:3.0.1.0'
+    implementation 'com.appodeal.ads.sdk.networks:vast:3.0.1.0'
 }

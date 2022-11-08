@@ -3,6 +3,7 @@ package com.appodeal.rnappodeal;
 import com.appodeal.ads.Appodeal;
 import com.appodeal.ads.UserSettings;
 import com.appodeal.ads.inapp.InAppPurchase;
+import com.appodeal.ads.modules.common.internal.adtype.AppodealAdType;
 import com.appodeal.ads.regulator.CCPAUserConsent;
 import com.appodeal.ads.regulator.GDPRUserConsent;
 import com.appodeal.ads.utils.Log;
@@ -53,6 +54,29 @@ class RNAppodealUtils {
         }
         if ((types & (1 << 8)) > 0) {
             result |= Appodeal.MREC;
+        }
+        return result;
+    }
+
+    static int getRNTypesFromAdType(int types) {
+        int result = 0;
+        if ((types & Appodeal.INTERSTITIAL) > 0) {
+            result |= 1;
+        }
+        if ((types & Appodeal.BANNER) > 0) {
+            result |= (1 << 2);
+        }
+        if ((types & Appodeal.BANNER_BOTTOM) > 0) {
+            result |= (1 << 3);
+        }
+        if ((types & Appodeal.BANNER_TOP) > 0) {
+            result |= (1 << 4);
+        }
+        if ((types & Appodeal.REWARDED_VIDEO) > 0) {
+            result |= (1 << 5);
+        }
+        if ((types & Appodeal.MREC) > 0) {
+            result |= (1 << 8);
         }
         return result;
     }

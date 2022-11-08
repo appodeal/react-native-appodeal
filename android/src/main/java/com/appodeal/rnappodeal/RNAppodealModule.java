@@ -4,6 +4,8 @@ import com.appodeal.ads.inapp.InAppPurchase;
 import com.appodeal.ads.inapp.InAppPurchaseValidateCallback;
 import com.appodeal.ads.initializing.ApdInitializationCallback;
 import com.appodeal.ads.initializing.ApdInitializationError;
+import com.appodeal.ads.revenue.AdRevenueCallbacks;
+import com.appodeal.ads.revenue.RevenueInfo;
 import com.appodeal.ads.service.ServiceError;
 import com.facebook.react.bridge.LifecycleEventListener;
 import com.facebook.react.bridge.ReactApplicationContext;
@@ -24,7 +26,7 @@ import org.json.JSONObject;
 import java.util.List;
 
 
-public class RNAppodealModule extends ReactContextBaseJavaModule implements InterstitialCallbacks, BannerCallbacks, RewardedVideoCallbacks, LifecycleEventListener {
+public class RNAppodealModule extends ReactContextBaseJavaModule implements InterstitialCallbacks, AdRevenueCallbacks, BannerCallbacks, RewardedVideoCallbacks, LifecycleEventListener {
 
     private final ReactApplicationContext reactContext;
 
@@ -35,6 +37,7 @@ public class RNAppodealModule extends ReactContextBaseJavaModule implements Inte
         Appodeal.setInterstitialCallbacks(this);
         Appodeal.setBannerCallbacks(this);
         Appodeal.setRewardedVideoCallbacks(this);
+        Appodeal.setAdRevenueCallbacks(this);
 
         this.reactContext = reactContext;
         this.reactContext.addLifecycleEventListener(this);
@@ -315,6 +318,21 @@ public class RNAppodealModule extends ReactContextBaseJavaModule implements Inte
     @ReactMethod
     public void trackEvent(String name, ReadableMap parameters) {
         Appodeal.logEvent(name, parameters.toHashMap());
+    }
+
+    @Override
+    public void onAdRevenueReceive(RevenueInfo revenueInfo) {
+        WritableMap params = Arguments.createMap();
+        params.putString("networkName", revenueInfo.getNetworkName());
+        params.putString("adUnitName", revenueInfo.getAdUnitName());
+        params.putString("placement", revenueInfo.getPlacement());
+        params.putString("revenuePrecision", revenueInfo.getRevenuePrecision());
+        params.putString("demandSource", revenueInfo.getDemandSource());
+        params.putString("currency", revenueInfo.getCurrency());
+        params.putDouble("revenue", revenueInfo.getRevenue());
+        params.putDouble("adType", RNAppodealUtils.getRNTypesFromAdType(revenueInfo.getAdType()));
+
+        sendEventToJS("onAppodealDidReceiveRevenue", params);
     }
 
     @Override
