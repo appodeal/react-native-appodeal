@@ -53,4 +53,3 @@ public class RNAppodealBannerManager extends SimpleViewManager<RCTAppodealBanner
         return "RNAppodealBannerView";
     }
 }
-
