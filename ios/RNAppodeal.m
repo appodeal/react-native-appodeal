@@ -67,12 +67,12 @@ RCT_EXPORT_BLOCKING_SYNCHRONOUS_METHOD(isLoaded:(int)showType) {
 }
 
 RCT_EXPORT_BLOCKING_SYNCHRONOUS_METHOD(canShow:(NSInteger)showType
-                  placement:(nullable NSString *)placement) {
+                                       placement:(nullable NSString *)placement) {
     __block NSNumber *canShow;
     dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
     dispatch_async(dispatch_get_main_queue(), ^{
         canShow = @([Appodeal canShow:AppodealAdTypeFromRNAAdType(showType)
-                          forPlacement:placement]);
+                         forPlacement:placement]);
         dispatch_semaphore_signal(semaphore);
     });
     dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
@@ -230,10 +230,9 @@ RCT_EXPORT_BLOCKING_SYNCHRONOUS_METHOD(getRewardParameters:(nonnull NSString *)p
     dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
     dispatch_async(dispatch_get_main_queue(), ^{
         id <APDReward> reward = [Appodeal rewardForPlacement:placement];
-        params = @{
-            @"name": reward.currencyName,
-            @"amount": @(reward.amount)
-        };
+        NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:2];
+        params[@"amount"] = @(reward.amount);
+        params[@"currency"] = reward.currencyName ?: @"";
         dispatch_semaphore_signal(semaphore);
     });
     dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
@@ -295,7 +294,7 @@ RCT_EXPORT_METHOD(trackInAppPurchase:(double)amount
 }
 
 RCT_EXPORT_METHOD(validateAndTrackInAppPurchase:(nonnull NSDictionary *)purchase
-                                    completion:(nonnull RCTResponseSenderBlock)comlpletion) {
+                  completion:(nonnull RCTResponseSenderBlock)comlpletion) {
     dispatch_async(dispatch_get_main_queue(), ^{
         [Appodeal validateAndTrackInAppPurchase:purchase[@"productId"]
                                            type:APDPurchaseTypeFromRNPurchase([purchase[@"productType"] intValue])
@@ -428,10 +427,10 @@ RCT_EXPORT_METHOD(trackEvent:(nonnull NSString *)event
 }
 
 - (void)rewardedVideoDidFinish:(float)rewardAmount name:(NSString *)rewardName {
-    NSDictionary *params = @{
-        @"amount": @(rewardAmount),
-        @"name": rewardName ?: @""
-    };
+    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:2];
+    params[@"amount"] = @(rewardAmount);
+    params[@"currency"] = rewardName ?: @"";
+    
     [self sendEventWithName:kEventRewardedVideoFinished body:params];
 }
 
@@ -444,16 +443,15 @@ RCT_EXPORT_METHOD(trackEvent:(nonnull NSString *)event
 #pragma mark - AppodealAdRevenueDelegate
 
 - (void)didReceiveRevenueForAd:(id<AppodealAdRevenue>)ad {
-    NSDictionary *params = @{
-        @"networkName": ad.networkName,
-        @"adUnitName": ad.adUnitName,
-        @"placement": ad.placement,
-        @"revenuePrecision": ad.revenuePrecision,
-        @"demandSource": ad.demandSource,
-        @"currency": ad.currency,
-        @"revenue": @(ad.revenue),
-        @"adType": @(RNAAdTypeFromaAppodealAdType(ad.adType))
-    };
+    NSMutableDictionary *params = [NSMutableDictionary new];
+    params[@"networkName"] = ad.networkName;
+    params[@"adUnitName"] = ad.adUnitName;
+    params[@"placement"] = ad.placement;
+    params[@"revenuePrecision"] = ad.revenuePrecision;
+    params[@"demandSource"] = ad.demandSource;
+    params[@"currency"] = ad.currency;
+    params[@"revenue"] = @(ad.revenue);
+    params[@"adType"] = @(RNAAdTypeFromaAppodealAdType(ad.adType));
     
     [self sendEventWithName:kEventAppodealDidReceiveRevenue body:params];
 }
