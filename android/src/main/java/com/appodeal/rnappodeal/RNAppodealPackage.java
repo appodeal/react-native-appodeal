@@ -1,5 +1,7 @@
 package com.appodeal.rnappodeal;
 
+import androidx.annotation.NonNull;
+
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -12,6 +14,7 @@ import com.facebook.react.bridge.JavaScriptModule;
 
 
 public class RNAppodealPackage implements ReactPackage {
+    @NonNull
     @Override
     public List<NativeModule> createNativeModules(ReactApplicationContext reactContext) {
       return Arrays.<NativeModule>asList(
@@ -24,10 +27,12 @@ public class RNAppodealPackage implements ReactPackage {
       return Collections.emptyList();
     }
 
+    @NonNull
     @Override
     public List<ViewManager> createViewManagers(ReactApplicationContext reactContext) {
       return Arrays.<ViewManager>asList(
-              new RNAppodealBannerManager()
+              new RNAppodealBannerManager(),
+              new RNAppodealMrecManager()
       );
     }
 }

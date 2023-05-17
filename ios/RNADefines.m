@@ -12,7 +12,7 @@
 
 #pragma mark - Constants
 
-NSString *const kEventAppodealInitialized       = @"onAppodeallInitialized";
+NSString *const kEventAppodealInitialized       = @"onAppodealInitialized";
 NSString *const kEventAppodealDidReceiveRevenue = @"onAppodealDidReceiveRevenue";
 
 NSString *const kEventBannerLoaded          = @"onBannerLoaded";
@@ -182,8 +182,6 @@ BOOL isRNAAdTypeBanner(RNAAdType adType) {
 CGSize RNAppodealBannerViewSizeFromString(NSString *size) {
     if ([size isEqualToString:@"tablet"]) {
         return kAppodealUnitSize_728x90;
-    } else if ([size isEqualToString:@"mrec"]) {
-        return CGSizeMake(300, 250);
     } else {
         return kAPDAdSize320x50;
     }
@@ -192,8 +190,6 @@ CGSize RNAppodealBannerViewSizeFromString(NSString *size) {
 NSString *NSStringFromAppodealBannerViewSize(CGSize size) {
     if (CGSizeEqualToSize(size, kAppodealUnitSize_728x90)) {
         return @"tablet";
-    } else if (CGSizeEqualToSize(size, CGSizeMake(300, 250))) {
-        return @"mrec";
     } else {
         return @"phone";
     }

@@ -3,17 +3,38 @@ import React from 'react';
 import {AppodealAdType, Appodeal} from 'react-native-appodeal';
 import {View} from 'react-native';
 import {SectionHeader, Row} from '..';
-import {BannerShowStyle} from '../../advertising';
+import {
+  BannerShowStyle,
+  bannerAdType,
+  isViewBannerStyle,
+} from '../../advertising';
+import {BannerView, MrecView} from '../../advertising/BannerView';
+import {Spacer} from '../Spacer';
 
 interface ShowSectionProps {
   visible: boolean;
   autocache: number;
   bannerShowStyle: BannerShowStyle;
-  bannerOnScreen: boolean;
-  updateBanner(): void;
 }
 
 export const ShowSection = (props: ShowSectionProps) => {
+  const [isBannerPresented, setBannerPresented] = React.useState(false);
+  const [isMrecPresented, setMrecPresented] = React.useState(false);
+
+  const updateBanner = () => {
+    if (!isViewBannerStyle(props.bannerShowStyle)) {
+      if (isBannerPresented) {
+        Appodeal.hide(bannerAdType(props.bannerShowStyle));
+        setBannerPresented(false);
+      } else if (Appodeal.canShow(bannerAdType(props.bannerShowStyle))) {
+        Appodeal.show(bannerAdType(props.bannerShowStyle));
+        setBannerPresented(true);
+      }
+    } else {
+      setBannerPresented(!isBannerPresented);
+    }
+  };
+
   return props.visible ? (
     <View>
       <SectionHeader value="Interstitial" />
@@ -48,10 +69,21 @@ export const ShowSection = (props: ShowSectionProps) => {
         />
       )}
       <Row
-        title={props.bannerOnScreen ? 'Hide banner' : 'Show banner'}
-        onClick={props.updateBanner}
+        title={isBannerPresented ? 'Hide banner' : 'Show banner'}
+        onClick={updateBanner}
+      />
+      <BannerView
+        showStyle={props.bannerShowStyle}
+        visible={isBannerPresented}
       />
       {/* <AdStatusFooter adType={AppodealAdType.BANNER} /> */}
+      <SectionHeader value={'MREC'} />
+      <Row
+        title={!isMrecPresented ? 'Show MREC' : 'Hide MREC'}
+        onClick={() => setMrecPresented(!isMrecPresented)}
+      />
+      <MrecView visible={isMrecPresented} />
+      <Spacer value={350} />
     </View>
   ) : null;
 };

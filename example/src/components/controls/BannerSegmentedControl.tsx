@@ -15,7 +15,6 @@ export const BannerSegmentedControl = (props: BannerSegmentedControlProps) => {
     BannerShowStyle.BOTTOM,
     BannerShowStyle.TOP,
     BannerShowStyle.VIEW,
-    BannerShowStyle.MREC,
   ];
 
   const index = () => {

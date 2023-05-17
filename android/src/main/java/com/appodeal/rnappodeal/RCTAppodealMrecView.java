@@ -8,8 +8,8 @@ import android.view.View;
 import android.widget.FrameLayout;
 
 import com.appodeal.ads.Appodeal;
-import com.appodeal.ads.BannerCallbacks;
 import com.appodeal.ads.BannerView;
+import com.appodeal.ads.MrecCallbacks;
 import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.ReactContext;
 import com.facebook.react.bridge.WritableMap;
@@ -18,13 +18,7 @@ import com.facebook.react.uimanager.events.RCTEventEmitter;
 import com.facebook.react.views.view.ReactViewGroup;
 
 
-public class RCTAppodealBannerView extends ReactViewGroup implements BannerCallbacks {
-    enum BannerSize {
-        PHONE,
-        TABLET
-    }
-
-    private BannerSize size = BannerSize.PHONE;
+public class RCTAppodealMrecView extends ReactViewGroup implements MrecCallbacks {
     private String placement = "default";
 
     private FrameLayout container;
@@ -43,29 +37,16 @@ public class RCTAppodealBannerView extends ReactViewGroup implements BannerCallb
         }
     };
 
-    public RCTAppodealBannerView(ThemedReactContext context) {
+    public RCTAppodealMrecView(ThemedReactContext context) {
         super(context);
+        cacheAdIfNeeded();
+        addContainerIfNeeded();
     }
 
     @Override
     public void requestLayout() {
         super.requestLayout();
         post(measureAndLayout);
-    }
-
-    public BannerSize getSize() {
-        return this.size;
-    }
-
-    public void setAdSize(String adSize) {
-        if (adSize.equals("tablet")) {
-            this.size = BannerSize.TABLET;
-        } else {
-            this.size = BannerSize.PHONE;
-        }
-
-        cacheAdIfNeeded();
-        addContainerIfNeeded();
     }
 
     public void setPlacement(String placement) {
@@ -76,7 +57,7 @@ public class RCTAppodealBannerView extends ReactViewGroup implements BannerCallb
         Activity activity = getReactContext().getCurrentActivity();
         if (container != null && activity != null) {
             container.removeAllViews();
-            Appodeal.hide(activity, Appodeal.BANNER_VIEW);
+            Appodeal.hide(activity, Appodeal.MREC);
         }
     }
 
@@ -89,16 +70,14 @@ public class RCTAppodealBannerView extends ReactViewGroup implements BannerCallb
                 return;
             }
 
-            Appodeal.set728x90Banners(size == RCTAppodealBannerView.BannerSize.TABLET);
-            adView = Appodeal.getBannerView(activity);
+            adView = Appodeal.getMrecView(activity);
 
-            int height = getEstimatedHeight();
 
             Resources r = getReactContext().getResources();
             DisplayMetrics dm = r.getDisplayMetrics();
 
             int pxW = r.getDisplayMetrics().widthPixels;
-            int pxH = dp2px(height, dm);
+            int pxH = dp2px(250, dm);
 
             LayoutParams bannerLayoutParams = new BannerView.LayoutParams(pxW, pxH);
 
@@ -108,18 +87,18 @@ public class RCTAppodealBannerView extends ReactViewGroup implements BannerCallb
             container.addView(adView);
 
             if (placement != null) {
-                Appodeal.show(activity, Appodeal.BANNER_VIEW, placement);
+                Appodeal.show(activity, Appodeal.MREC, placement);
             } else {
-                Appodeal.show(activity, Appodeal.BANNER_VIEW);
+                Appodeal.show(activity, Appodeal.MREC);
             }
         }, 250L);
     }
 
     private void cacheAdIfNeeded() {
-        if (!Appodeal.isAutoCacheEnabled(Appodeal.BANNER_VIEW)) {
+        if (!Appodeal.isAutoCacheEnabled(Appodeal.MREC)) {
             Activity activity = getReactContext().getCurrentActivity();
             if (activity != null) {
-                Appodeal.cache(activity, Appodeal.BANNER_VIEW);
+                Appodeal.cache(activity, Appodeal.MREC);
             }
         }
     }
@@ -129,13 +108,6 @@ public class RCTAppodealBannerView extends ReactViewGroup implements BannerCallb
             container = new FrameLayout(getReactContext());
             addView(container);
         }
-    }
-
-    private int getEstimatedHeight() {
-        if (size == BannerSize.TABLET) {
-            return 90;
-        }
-        return 50;
     }
 
     private ReactContext getReactContext() {
@@ -151,31 +123,31 @@ public class RCTAppodealBannerView extends ReactViewGroup implements BannerCallb
     }
 
     @Override
-    public void onBannerLoaded(int height, boolean isPrecache) {
+    public void onMrecLoaded(boolean isPrecache) {
         WritableMap params = Arguments.createMap();
-        params.putInt("height", height);
+        params.putInt("height", 250);
         params.putBoolean("isPrecache", isPrecache);
-        getEmitter().receiveEvent(getId(), "onBannerLoaded", params);
+        getEmitter().receiveEvent(getId(), "onMrecLoaded", params);
     }
 
     @Override
-    public void onBannerFailedToLoad() {
-        getEmitter().receiveEvent(getId(), "onBannerFailedToLoad", null);
+    public void onMrecFailedToLoad() {
+        getEmitter().receiveEvent(getId(), "onMrecFailedToLoad", null);
     }
 
     @Override
-    public void onBannerClicked() {
-        getEmitter().receiveEvent(getId(), "onBannerClicked", null);
+    public void onMrecClicked() {
+        getEmitter().receiveEvent(getId(), "onMrecClicked", null);
     }
 
     @Override
-    public void onBannerExpired() {
-        getEmitter().receiveEvent(getId(), "onBannerExpired", null);
+    public void onMrecExpired() {
+        getEmitter().receiveEvent(getId(), "onMrecExpired", null);
     }
 
     @Override
-    public void onBannerShowFailed() { }
+    public void onMrecShowFailed() { }
 
     @Override
-    public void onBannerShown() { }
+    public void onMrecShown() { }
 }

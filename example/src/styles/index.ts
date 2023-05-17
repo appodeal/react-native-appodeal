@@ -97,12 +97,14 @@ export const styles = StyleSheet.create({
   },
   banner: {
     height: 50,
+    marginVertical: 8,
     width: '100%',
     backgroundColor: 'hsl(0, 0%, 97%)',
     alignContent: 'stretch',
   },
   mrec: {
     height: 250,
+    marginVertical: 8,
     width: '100%',
     backgroundColor: 'hsl(0, 0%, 97%)',
     alignContent: 'stretch',

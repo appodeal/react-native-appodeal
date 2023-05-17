@@ -54,11 +54,10 @@ export enum BannerShowStyle {
   BOTTOM = 'Bottom',
   TOP = 'Top',
   VIEW = 'View',
-  MREC = 'MREC',
 }
 
 export const isViewBannerStyle = (style: BannerShowStyle) =>
-  style === BannerShowStyle.VIEW || style === BannerShowStyle.MREC;
+  style === BannerShowStyle.VIEW;
 
 export const bannerAdType = (style: BannerShowStyle) => {
   switch (style) {

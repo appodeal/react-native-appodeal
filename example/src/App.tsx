@@ -6,6 +6,8 @@ import {StatusBar} from 'react-native';
 import {HomeScreen} from './screens/HomeScreen';
 import {AdvancedFeaturesScreen} from './screens/AdvancedFeaturesScreen';
 import {Appodeal} from 'react-native-appodeal';
+import {BannerView} from './advertising/BannerView';
+import {BannerShowStyle} from './advertising';
 
 const Stack = createNativeStackNavigator();
 
@@ -24,7 +26,18 @@ export const App = () => {
           component={AdvancedFeaturesScreen}
           options={{title: 'Advanced Features'}}
         />
+        <Stack.Screen
+          name="banner_screen"
+          component={BannerScreen}
+          options={{title: 'Banner Screen'}}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );
 };
+
+const BannerScreen = () => (
+  <>
+    <BannerView visible={true} showStyle={BannerShowStyle.VIEW} />
+  </>
+);

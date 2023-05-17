@@ -2,10 +2,8 @@ import React from 'react';
 import { requireNativeComponent, StyleProp, ViewStyle } from 'react-native';
 
 
-interface AppodealBannerProps {
-	adSize: AdSize,
+interface AppodealMrecProps {
 	placement?: string,
-	usesSmartSizing?: boolean
 	onAdLoaded?: Function,
 	onAdFailedToLoad?: Function,
 	onAdClicked?: Function,
@@ -13,12 +11,9 @@ interface AppodealBannerProps {
 	style?: StyleProp<ViewStyle>
 }
 
-type AdSize = 'phone' | 'tablet';
 
-interface NativeAppodealBannerProps {
-	adSize: AdSize,
+interface NativeAppodealMrecProps {
 	placement?: string,
-	usesSmartSizing?: boolean,
 	onAdLoaded?: Function,
 	onAdFailedToLoad?: Function,
 	onAdClicked?: Function,
@@ -26,13 +21,12 @@ interface NativeAppodealBannerProps {
 	style?: StyleProp<ViewStyle>,
 }
 
-const RNAppodealBannerView = requireNativeComponent<NativeAppodealBannerProps>('RNAppodealBannerView');
 
-const AppodealBanner = (props: AppodealBannerProps) => {
+const RNAppodealMrecView = requireNativeComponent<NativeAppodealMrecProps>('RNAppodealMrecView');
+
+const AppodealMrec = (props: AppodealMrecProps) => {
 	const { 
-		adSize, 
 		placement, 
-		usesSmartSizing,
 		onAdLoaded, 
 		onAdFailedToLoad, 
 		onAdClicked, 
@@ -41,24 +35,17 @@ const AppodealBanner = (props: AppodealBannerProps) => {
 		...restProps 
 	} = props
 
-	const height: Record<AdSize, number> = {
-		phone: 50,
-		tablet: 90
-	};
-
 	return (
-		<RNAppodealBannerView 
-			adSize={adSize}
+		<RNAppodealMrecView 
 			onAdLoaded={onAdLoaded}
 			onAdFailedToLoad={onAdFailedToLoad}
 			onAdClicked={onAdClicked}
 			onAdExpired={onAdExpired}
 			placement={placement}
-			usesSmartSizing={usesSmartSizing}
-			style={[style, {height: height[adSize]}]}
+			style={[style, {height: 250}]}
 			{...restProps}
 			/>
 		);
 }
 
-export default AppodealBanner;
+export default AppodealMrec;

@@ -17,27 +17,24 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 
-public class RNAppodealBannerManager extends SimpleViewManager<RCTAppodealBannerView> {
-    private final List<WeakReference<RCTAppodealBannerView>> instances = new ArrayList<>();
-
-    @ReactProp(name = "adSize")
-    public void setSize(RCTAppodealBannerView view, String size) { view.setAdSize(size); }
+public class RNAppodealMrecManager extends SimpleViewManager<RCTAppodealMrecView> {
+    private final List<WeakReference<RCTAppodealMrecView>> instances = new ArrayList<>();
 
     @ReactProp(name = "placement")
-    public void setPlacement(RCTAppodealBannerView view, String placement) { view.setPlacement(placement); }
+    public void setPlacement(RCTAppodealMrecView view, String placement) { view.setPlacement(placement); }
 
     @NonNull
     @Override
-    public RCTAppodealBannerView createViewInstance(@NonNull ThemedReactContext context) {
-        RCTAppodealBannerView banner = new RCTAppodealBannerView(context);
+    public RCTAppodealMrecView createViewInstance(@NonNull ThemedReactContext context) {
+        RCTAppodealMrecView banner = new RCTAppodealMrecView(context);
         // Setup callbacks
-        Appodeal.setBannerCallbacks(banner);
+        Appodeal.setMrecCallbacks(banner);
         // Hide previously created banners
         // Iterate through instances in forward direction
-        Iterator<WeakReference<RCTAppodealBannerView>> iterator = this.instances.iterator();
+        Iterator<WeakReference<RCTAppodealMrecView>> iterator = this.instances.iterator();
         while (iterator.hasNext()) {
-            WeakReference<RCTAppodealBannerView> reference = iterator.next();
-            RCTAppodealBannerView mBanner = reference.get();
+            WeakReference<RCTAppodealMrecView> reference = iterator.next();
+            RCTAppodealMrecView mBanner = reference.get();
             if (mBanner != null) {
                 mBanner.hideBannerView();
             }
@@ -50,23 +47,23 @@ public class RNAppodealBannerManager extends SimpleViewManager<RCTAppodealBanner
     }
 
     @Override
-    public void onDropViewInstance(@NonNull RCTAppodealBannerView view) {
+    public void onDropViewInstance(@NonNull RCTAppodealMrecView view) {
         super.onDropViewInstance(view);
         view.hideBannerView();
 
         // Trying to show a previous banner
         // Iterate through instances in reverse direction
-        ListIterator<WeakReference<RCTAppodealBannerView>> iterator = instances.listIterator(instances.size());
+        ListIterator<WeakReference<RCTAppodealMrecView>> iterator = instances.listIterator(instances.size());
         while (iterator.hasPrevious()) {
-            WeakReference<RCTAppodealBannerView> reference = iterator.previous();
-            RCTAppodealBannerView banner = reference.get();
+            WeakReference<RCTAppodealMrecView> reference = iterator.previous();
+            RCTAppodealMrecView banner = reference.get();
             if (banner == null) {
                 continue;
             }
 
             if (banner == view) {
                 iterator.remove();
-            } else if (banner.getSize() == view.getSize()) {
+            } else {
                 banner.showBannerView();
                 break;
             }
@@ -77,19 +74,19 @@ public class RNAppodealBannerManager extends SimpleViewManager<RCTAppodealBanner
     @Override
     public Map<String, Object> getExportedCustomDirectEventTypeConstants() {
         return MapBuilder.of(
-                "onBannerLoaded",
+                "onMrecLoaded",
                 MapBuilder.of("registrationName", "onAdLoaded"),
-                "onBannerFailedToLoad",
+                "onMrecFailedToLoad",
                 MapBuilder.of("registrationName", "onAdFailedToLoad"),
-                "onBannerClicked",
+                "onMrecClicked",
                 MapBuilder.of("registrationName", "onAdClicked"),
-                "onBannerExpired",
+                "onMrecExpired",
                 MapBuilder.of("registrationName", "onAdExpired")
         );
     }
 
     @Override
     public String getName() {
-        return "RNAppodealBannerView";
+        return "RNAppodealMrecView";
     }
 }

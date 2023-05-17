@@ -63,7 +63,7 @@ public class RNAppodealModule extends ReactContextBaseJavaModule implements Inte
         Appodeal.initialize(getCurrentActivity(),
                 appKey,
                 RNAppodealUtils.getAdTypesFormRNTypes(adTypes),
-                list -> sendEventToJS("onAppodeallInitialized", null)
+                list -> sendEventToJS("onAppodealInitialized", null)
         );
     }
 

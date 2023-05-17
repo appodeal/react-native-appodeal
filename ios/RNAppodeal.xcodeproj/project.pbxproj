@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4202C1632A14FEA40075560D /* RNAppodealMrecViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4202C1622A14FEA40075560D /* RNAppodealMrecViewManager.m */; };
 		423911F7233CBDEA00C47FA0 /* RNADefines.m in Sources */ = {isa = PBXBuildFile; fileRef = 423911F6233CBDEA00C47FA0 /* RNADefines.m */; };
 		42E9D361233D3A74003F3784 /* RNAppodealBannerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 42E9D360233D3A74003F3784 /* RNAppodealBannerView.m */; };
 		42E9D365233D3F7B003F3784 /* RNAppodealBannerViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 42E9D364233D3F7B003F3784 /* RNAppodealBannerViewManager.m */; };
@@ -27,6 +28,8 @@
 
 /* Begin PBXFileReference section */
 		134814201AA4EA6300B7C361 /* libRNAppodeal.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libRNAppodeal.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		4202C1612A14FEA40075560D /* RNAppodealMrecViewManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RNAppodealMrecViewManager.h; sourceTree = "<group>"; };
+		4202C1622A14FEA40075560D /* RNAppodealMrecViewManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RNAppodealMrecViewManager.m; sourceTree = "<group>"; };
 		423911F5233CBDEA00C47FA0 /* RNADefines.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RNADefines.h; sourceTree = "<group>"; };
 		423911F6233CBDEA00C47FA0 /* RNADefines.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RNADefines.m; sourceTree = "<group>"; };
 		42E9D35F233D3A74003F3784 /* RNAppodealBannerView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RNAppodealBannerView.h; sourceTree = "<group>"; };
@@ -63,6 +66,8 @@
 				42E9D360233D3A74003F3784 /* RNAppodealBannerView.m */,
 				42E9D363233D3F7B003F3784 /* RNAppodealBannerViewManager.h */,
 				42E9D364233D3F7B003F3784 /* RNAppodealBannerViewManager.m */,
+				4202C1612A14FEA40075560D /* RNAppodealMrecViewManager.h */,
+				4202C1622A14FEA40075560D /* RNAppodealMrecViewManager.m */,
 			);
 			name = Banner;
 			sourceTree = "<group>";
@@ -138,6 +143,7 @@
 			files = (
 				423911F7233CBDEA00C47FA0 /* RNADefines.m in Sources */,
 				42E9D361233D3A74003F3784 /* RNAppodealBannerView.m in Sources */,
+				4202C1632A14FEA40075560D /* RNAppodealMrecViewManager.m in Sources */,
 				42E9D365233D3F7B003F3784 /* RNAppodealBannerViewManager.m in Sources */,
 				B3E7B58A1CC2AC0600A0062D /* RNAppodeal.m in Sources */,
 			);

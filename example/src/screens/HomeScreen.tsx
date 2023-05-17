@@ -4,17 +4,16 @@ import {styles} from '../styles';
 import {initialize, isInitialized, SDKState} from '../advertising';
 import {ShowSection} from '../components/sections/ShowSection';
 import {BannerSegmentedControl} from '../components/controls/BannerSegmentedControl';
-import {BannerView} from '../advertising/BannerView';
 import {AutocacheControl} from '../components/controls/AutocacheControl';
 import {InitialisationSection} from '../components/sections/InitialisationSection';
 import {ScrollView, SafeAreaView, Switch} from 'react-native';
-import {Row} from '../components';
+import {LinkRow, Row} from '../components';
 import {
   AppodealAdType,
   Appodeal,
   AppodealSdkEvent,
 } from 'react-native-appodeal';
-import {BannerShowStyle, isViewBannerStyle, bannerAdType} from '../advertising';
+import {BannerShowStyle} from '../advertising';
 
 export const HomeScreen = () => {
   const [state, setState] = React.useState(
@@ -30,8 +29,6 @@ export const HomeScreen = () => {
   const [bannerShowStyle, setBannerShowStyle] = React.useState(
     BannerShowStyle.BOTTOM,
   );
-
-  const [isBannerOnScreen, setBannerOnScreen] = React.useState(false);
 
   const initSDK = () => {
     if (state === SDKState.INITIALIZING) {
@@ -59,27 +56,12 @@ export const HomeScreen = () => {
     );
   }, [autocache]);
 
-  const updateBanner = () => {
-    if (!isViewBannerStyle(bannerShowStyle)) {
-      if (isBannerOnScreen) {
-        Appodeal.hide(bannerAdType(bannerShowStyle));
-        setBannerOnScreen(false);
-      } else if (Appodeal.canShow(bannerAdType(bannerShowStyle))) {
-        Appodeal.show(bannerAdType(bannerShowStyle));
-        setBannerOnScreen(true);
-      }
-    } else {
-      setBannerOnScreen(!isBannerOnScreen);
-    }
-  };
-
   const testModeSwitch = () => (
     <Switch value={testMode} onValueChange={setTestMode} />
   );
 
   return (
     <>
-      <BannerView showStyle={bannerShowStyle} visible={isBannerOnScreen} />
       <SafeAreaView style={styles.container}>
         <ScrollView style={styles.scrollView}>
           <InitialisationSection state={state} onInitialize={initSDK} />
@@ -88,6 +70,7 @@ export const HomeScreen = () => {
             mask={autocache}
             onUpdate={(value) => setAutocache(value)}
           />
+          <LinkRow title="Banner Screen" route="/banner_screen" />
           <BannerSegmentedControl
             visible={state !== SDKState.INITIALIZED}
             showStyle={bannerShowStyle}
@@ -96,9 +79,7 @@ export const HomeScreen = () => {
           <ShowSection
             visible={state === SDKState.INITIALIZED}
             autocache={autocache}
-            bannerOnScreen={isBannerOnScreen}
             bannerShowStyle={bannerShowStyle}
-            updateBanner={updateBanner}
           />
         </ScrollView>
       </SafeAreaView>

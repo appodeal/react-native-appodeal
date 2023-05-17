@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 #import <React/RCTBridge.h>
 #import <React/RCTView.h>
+#import <Appodeal/Appodeal.h>
+
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -20,6 +22,15 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) RCTBubblingEventBlock onAdFailedToLoad;
 @property (nonatomic, copy) RCTBubblingEventBlock onAdClicked;
 @property (nonatomic, copy) RCTBubblingEventBlock onAdExpired;
+
+@property (nonatomic, strong, readonly) APDBannerView *bannerView;
+
+- (void)setAdSize:(NSString *)adSize;
+
+@end
+
+
+@interface RNAppodealMrecView : RNAppodealBannerView
 
 @end
 

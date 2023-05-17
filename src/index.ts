@@ -1,5 +1,7 @@
 import { default as Appodeal } from './RNAppodeal';
 import { default as AppodealBanner } from './RNAppodealBanner';
+import { default as AppodealMrec } from './RNAppodealMrec';
+
 import { 
     AppodealAdType,
     AppodealLogLevel, 
@@ -23,6 +25,7 @@ import * as AppodealSdkEvent from './events/appodeal';
 export {
     Appodeal,
     AppodealBanner,
+    AppodealMrec,
     AppodealAdType,
     AppodealLogLevel,
     AppodealGender,

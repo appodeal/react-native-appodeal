@@ -38,18 +38,15 @@
     [self.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
     
     CGSize size = RNAppodealBannerViewSizeFromString(adSize);
-    if (size.height == 250) {
-        NSAssert([Appodeal isInitializedForAdType:AppodealAdTypeMREC],
-                 @"Appodeal should be initialised with AppodealAdTypeMREC before trying to add AppodealBanner in hierachy");
-        self.bannerView = [[APDMRECView alloc] init];
-    } else {
-        NSAssert([Appodeal isInitializedForAdType:AppodealAdTypeBanner],
-                 @"Appodeal should be initialised with AppodealAdTypeBanner before trying to add AppodealBanner in hierachy");
-        self.bannerView = [[APDBannerView alloc] initWithSize:size
-                                           rootViewController:rootViewController];
-    }
+    NSAssert([Appodeal isInitializedForAdType:AppodealAdTypeBanner],
+             @"Appodeal should be initialised with AppodealAdTypeBanner before trying to add AppodealBanner in hierachy");
+    
+    // Create banner
+    self.bannerView = [[APDBannerView alloc] initWithSize:size
+                                        rootViewController:rootViewController];
     self.bannerView.delegate = self;
     self.bannerView.frame = self.bounds;
+    
     [self.bannerView loadAd];
 }
 
@@ -84,3 +81,25 @@
 }
 
 @end
+
+
+@implementation RNAppodealMrecView
+
+- (instancetype)initWithFrame:(CGRect)frame {
+    if (self = [super initWithFrame:frame]) {
+        self.bannerView = [[APDMRECView alloc] init];
+        self.bannerView.delegate = self;
+        self.bannerView.frame = frame;
+        
+        [self.bannerView loadAd];
+    }
+    return self;
+}
+
+- (void)setAdSize:(NSString *)adSize {
+    [NSException raise:@"Unsupported method"
+                format:@"RNAppodealMrecView doesn't supporting -setAdSize:"];
+}
+
+@end
+
