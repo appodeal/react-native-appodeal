@@ -2,14 +2,21 @@ package com.appodeal.rnappodeal;
 
 import android.app.Activity;
 import android.content.res.Resources;
+import android.os.Handler;
+import android.os.Looper;
 import android.util.DisplayMetrics;
 import android.util.TypedValue;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.FrameLayout;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import com.appodeal.ads.Appodeal;
 import com.appodeal.ads.BannerView;
 import com.appodeal.ads.MrecCallbacks;
+import com.appodeal.ads.MrecView;
 import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.ReactContext;
 import com.facebook.react.bridge.WritableMap;
@@ -19,28 +26,28 @@ import com.facebook.react.views.view.ReactViewGroup;
 
 
 public class RCTAppodealMrecView extends ReactViewGroup implements MrecCallbacks {
-    private String placement = "default";
+    private static final String defaultPlacement = "default";
+    private static final Handler handler = new Handler(Looper.getMainLooper());
 
-    private FrameLayout container;
+    private String placement = defaultPlacement;
 
-    private final Runnable measureAndLayout = new Runnable() {
-        @Override
-        public void run() {
-            for (int i = 0; i < getChildCount(); i++) {
-                View child = getChildAt(i);
-                child.measure(
-                        MeasureSpec.makeMeasureSpec(getMeasuredWidth(), MeasureSpec.EXACTLY),
-                        MeasureSpec.makeMeasureSpec(getMeasuredHeight(), MeasureSpec.EXACTLY)
-                );
-                child.layout(0, 0, child.getMeasuredWidth(), child.getMeasuredHeight());
-            }
+    @Nullable
+    private Runnable showRunnable = null;
+
+    private final Runnable measureAndLayout = () -> {
+        for (int i = 0; i < getChildCount(); i++) {
+            View child = getChildAt(i);
+            child.measure(
+                    MeasureSpec.makeMeasureSpec(getMeasuredWidth(), MeasureSpec.EXACTLY),
+                    MeasureSpec.makeMeasureSpec(getMeasuredHeight(), MeasureSpec.EXACTLY)
+            );
+            child.layout(0, 0, child.getMeasuredWidth(), child.getMeasuredHeight());
         }
     };
 
     public RCTAppodealMrecView(ThemedReactContext context) {
         super(context);
         cacheAdIfNeeded();
-        addContainerIfNeeded();
     }
 
     @Override
@@ -53,45 +60,43 @@ public class RCTAppodealMrecView extends ReactViewGroup implements MrecCallbacks
         this.placement = placement;
     }
 
-    public void hideBannerView() {
-        Activity activity = getReactContext().getCurrentActivity();
-        if (container != null && activity != null) {
-            container.removeAllViews();
-            Appodeal.hide(activity, Appodeal.MREC);
-        }
+    public String getPlacement() {
+        return placement;
     }
 
-    public void showBannerView() {
-        postDelayed(() -> {
+    public void showBannerView(@NonNull MrecView bannerView) {
+        showRunnable = () -> {
             Activity activity = getReactContext().getCurrentActivity();
-            View adView;
+            if (activity == null) return;
 
-            if (activity == null || container == null) {
-                return;
-            }
+            Resources resources = getReactContext().getResources();
+            DisplayMetrics dm = resources.getDisplayMetrics();
+            int widthPixels = resources.getDisplayMetrics().widthPixels;
+            int heightPixels = dp2px(250, dm);
 
-            adView = Appodeal.getMrecView(activity);
+            LayoutParams bannerLayoutParams = new BannerView.LayoutParams(widthPixels, heightPixels);
+            bannerView.setLayoutParams(bannerLayoutParams);
+            bannerView.setVisibility(VISIBLE);
 
+            removeAllViews();
+            setVisibility(VISIBLE);
+            addView(bannerView);
 
-            Resources r = getReactContext().getResources();
-            DisplayMetrics dm = r.getDisplayMetrics();
+            bannerView.bringToFront();
 
-            int pxW = r.getDisplayMetrics().widthPixels;
-            int pxH = dp2px(250, dm);
+            String showPlacement = placement == null ? defaultPlacement : placement;
+            Appodeal.show(activity, Appodeal.MREC, showPlacement);
+        };
+        handler.postDelayed(showRunnable, 250L);
+    }
 
-            LayoutParams bannerLayoutParams = new BannerView.LayoutParams(pxW, pxH);
-
-            adView.setLayoutParams(bannerLayoutParams);
-            adView.setVisibility(VISIBLE);
-
-            container.addView(adView);
-
-            if (placement != null) {
-                Appodeal.show(activity, Appodeal.MREC, placement);
-            } else {
-                Appodeal.show(activity, Appodeal.MREC);
-            }
-        }, 250L);
+    public void hideBannerView(@NonNull MrecView bannerView) {
+        removeAllViews();
+        ViewGroup parent = (ViewGroup) bannerView.getParent();
+        if (parent != null) {
+            parent.removeView(bannerView);
+        }
+        handler.removeCallbacks(showRunnable);
     }
 
     private void cacheAdIfNeeded() {
@@ -100,13 +105,6 @@ public class RCTAppodealMrecView extends ReactViewGroup implements MrecCallbacks
             if (activity != null) {
                 Appodeal.cache(activity, Appodeal.MREC);
             }
-        }
-    }
-
-    private void addContainerIfNeeded() {
-        if (container == null) {
-            container = new FrameLayout(getReactContext());
-            addView(container);
         }
     }
 

@@ -2,15 +2,13 @@
 import React from 'react';
 import {styles} from '../styles';
 import {ScrollView, SafeAreaView, View, Switch, Text} from 'react-native';
-import {LinkRow, Row, SectionHeader} from '../components';
+import {Row, SectionHeader} from '../components';
 import SegmentedControl from '@react-native-community/segmented-control';
 import {
   Appodeal,
   AppodealGDPRConsentStatus,
   AppodealCCPAConsentStatus,
 } from 'react-native-appodeal';
-import {BannerView} from '../advertising/BannerView';
-import {BannerShowStyle} from '../advertising';
 
 let _consentStatusGDPR = AppodealGDPRConsentStatus.UNKNOWN;
 let _consentStatusCCPA = AppodealCCPAConsentStatus.UNKNOWN;
@@ -98,8 +96,6 @@ export const AdvancedFeaturesScreen = () => {
               }}
             />
           </View>
-          <BannerView visible={true} showStyle={BannerShowStyle.VIEW} />
-          <LinkRow title="Banner Screen" route="/banner_screen" />
           <SectionHeader value="CCPA Consent Status" />
           <View style={styles.rowContainer}>
             <SegmentedControl

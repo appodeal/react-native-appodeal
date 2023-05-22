@@ -7,7 +7,7 @@ import {BannerSegmentedControl} from '../components/controls/BannerSegmentedCont
 import {AutocacheControl} from '../components/controls/AutocacheControl';
 import {InitialisationSection} from '../components/sections/InitialisationSection';
 import {ScrollView, SafeAreaView, Switch} from 'react-native';
-import {LinkRow, Row} from '../components';
+import {Row} from '../components';
 import {
   AppodealAdType,
   Appodeal,
@@ -70,7 +70,6 @@ export const HomeScreen = () => {
             mask={autocache}
             onUpdate={(value) => setAutocache(value)}
           />
-          <LinkRow title="Banner Screen" route="/banner_screen" />
           <BannerSegmentedControl
             visible={state !== SDKState.INITIALIZED}
             showStyle={bannerShowStyle}

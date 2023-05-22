@@ -1,6 +1,10 @@
 package com.appodeal.rnappodeal;
 
+import android.content.Context;
+
 import com.appodeal.ads.Appodeal;
+import com.appodeal.ads.BannerView;
+import com.appodeal.ads.MrecView;
 import com.facebook.react.common.MapBuilder;
 import com.facebook.react.uimanager.SimpleViewManager;
 import com.facebook.react.uimanager.ThemedReactContext;
@@ -18,7 +22,11 @@ import androidx.annotation.Nullable;
 
 
 public class RNAppodealMrecManager extends SimpleViewManager<RCTAppodealMrecView> {
+    @NonNull
     private final List<WeakReference<RCTAppodealMrecView>> instances = new ArrayList<>();
+
+    @NonNull
+    private WeakReference<MrecView> apdMrecView = new WeakReference<>(null);
 
     @ReactProp(name = "placement")
     public void setPlacement(RCTAppodealMrecView view, String placement) { view.setPlacement(placement); }
@@ -31,43 +39,51 @@ public class RNAppodealMrecManager extends SimpleViewManager<RCTAppodealMrecView
         Appodeal.setMrecCallbacks(banner);
         // Hide previously created banners
         // Iterate through instances in forward direction
-        Iterator<WeakReference<RCTAppodealMrecView>> iterator = this.instances.iterator();
-        while (iterator.hasNext()) {
-            WeakReference<RCTAppodealMrecView> reference = iterator.next();
-            RCTAppodealMrecView mBanner = reference.get();
-            if (mBanner != null) {
-                mBanner.hideBannerView();
+        MrecView apdMrecView = getApdMrecView(context);
+        for (WeakReference<RCTAppodealMrecView> reference : instances) {
+            RCTAppodealMrecView previousBanner = reference.get();
+            if (previousBanner != null) {
+                previousBanner.hideBannerView(apdMrecView);
             }
         }
         // Save instance
-        banner.showBannerView();
-        this.instances.add(new WeakReference<>(banner));
-
+        banner.showBannerView(apdMrecView);
+        instances.add(new WeakReference<>(banner));
         return banner;
     }
 
     @Override
     public void onDropViewInstance(@NonNull RCTAppodealMrecView view) {
         super.onDropViewInstance(view);
-        view.hideBannerView();
+        MrecView apdMrecView = getApdMrecView(view.getContext());
+        view.hideBannerView(apdMrecView);
 
         // Trying to show a previous banner
         // Iterate through instances in reverse direction
         ListIterator<WeakReference<RCTAppodealMrecView>> iterator = instances.listIterator(instances.size());
         while (iterator.hasPrevious()) {
             WeakReference<RCTAppodealMrecView> reference = iterator.previous();
-            RCTAppodealMrecView banner = reference.get();
-            if (banner == null) {
+            RCTAppodealMrecView previousBanner = reference.get();
+            if (previousBanner == null) {
                 continue;
             }
-
-            if (banner == view) {
+            if (previousBanner == view) {
                 iterator.remove();
             } else {
-                banner.showBannerView();
+                previousBanner.showBannerView(apdMrecView);
                 break;
             }
         }
+    }
+
+    @NonNull
+    public MrecView getApdMrecView(@NonNull Context context) {
+        MrecView mrecView = apdMrecView.get();
+        if (mrecView == null) {
+            mrecView = Appodeal.getMrecView(context.getApplicationContext());
+            apdMrecView = new WeakReference<>(mrecView);
+        }
+        return mrecView;
     }
 
     @Nullable
