@@ -1,11 +1,17 @@
 package com.appodeal.rnappodeal;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.res.Resources;
+import android.os.Handler;
+import android.os.Looper;
 import android.util.DisplayMetrics;
 import android.util.TypedValue;
 import android.view.View;
-import android.widget.FrameLayout;
+import android.view.ViewGroup;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import com.appodeal.ads.Appodeal;
 import com.appodeal.ads.BannerCallbacks;
@@ -13,37 +19,34 @@ import com.appodeal.ads.BannerView;
 import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.ReactContext;
 import com.facebook.react.bridge.WritableMap;
-import com.facebook.react.uimanager.ThemedReactContext;
 import com.facebook.react.uimanager.events.RCTEventEmitter;
 import com.facebook.react.views.view.ReactViewGroup;
 
-
 public class RCTAppodealBannerView extends ReactViewGroup implements BannerCallbacks {
-    enum BannerSize {
-        PHONE,
-        TABLET
-    }
+
+    enum BannerSize {PHONE, TABLET}
+
+    private static final String defaultPlacement = "default";
+    private static final Handler handler = new Handler(Looper.getMainLooper());
 
     private BannerSize size = BannerSize.PHONE;
-    private String placement = "default";
+    private String placement = defaultPlacement;
 
-    private FrameLayout container;
+    @Nullable
+    private Runnable showRunnable = null;
 
-    private final Runnable measureAndLayout = new Runnable() {
-        @Override
-        public void run() {
-            for (int i = 0; i < getChildCount(); i++) {
-                View child = getChildAt(i);
-                child.measure(
-                        MeasureSpec.makeMeasureSpec(getMeasuredWidth(), MeasureSpec.EXACTLY),
-                        MeasureSpec.makeMeasureSpec(getMeasuredHeight(), MeasureSpec.EXACTLY)
-                );
-                child.layout(0, 0, child.getMeasuredWidth(), child.getMeasuredHeight());
-            }
+    private final Runnable measureAndLayout = () -> {
+        for (int i = 0; i < getChildCount(); i++) {
+            View child = getChildAt(i);
+            child.measure(
+                    MeasureSpec.makeMeasureSpec(getMeasuredWidth(), MeasureSpec.EXACTLY),
+                    MeasureSpec.makeMeasureSpec(getMeasuredHeight(), MeasureSpec.EXACTLY)
+            );
+            child.layout(0, 0, child.getMeasuredWidth(), child.getMeasuredHeight());
         }
     };
 
-    public RCTAppodealBannerView(ThemedReactContext context) {
+    public RCTAppodealBannerView(Context context) {
         super(context);
     }
 
@@ -53,66 +56,63 @@ public class RCTAppodealBannerView extends ReactViewGroup implements BannerCallb
         post(measureAndLayout);
     }
 
-    public BannerSize getSize() {
-        return this.size;
-    }
-
     public void setAdSize(String adSize) {
         if (adSize.equals("tablet")) {
             this.size = BannerSize.TABLET;
         } else {
             this.size = BannerSize.PHONE;
         }
-
         cacheAdIfNeeded();
-        addContainerIfNeeded();
+    }
+
+    public BannerSize getSize() {
+        return this.size;
     }
 
     public void setPlacement(String placement) {
         this.placement = placement;
     }
 
-    public void hideBannerView() {
-        Activity activity = getReactContext().getCurrentActivity();
-        if (container != null && activity != null) {
-            container.removeAllViews();
-            Appodeal.hide(activity, Appodeal.BANNER_VIEW);
-        }
+    public String getPlacement() {
+        return placement;
     }
 
-    public void showBannerView() {
-        postDelayed(() -> {
+    public void showBannerView(@NonNull BannerView bannerView) {
+        showRunnable = () -> {
             Activity activity = getReactContext().getCurrentActivity();
-            View adView;
-
-            if (activity == null || container == null) {
-                return;
-            }
+            if (activity == null) return;
 
             Appodeal.set728x90Banners(size == RCTAppodealBannerView.BannerSize.TABLET);
-            adView = Appodeal.getBannerView(activity);
 
             int height = getEstimatedHeight();
+            Resources resources = getReactContext().getResources();
+            DisplayMetrics dm = resources.getDisplayMetrics();
+            int widthPixels = resources.getDisplayMetrics().widthPixels;
+            int heightPixels = dp2px(height, dm);
 
-            Resources r = getReactContext().getResources();
-            DisplayMetrics dm = r.getDisplayMetrics();
+            LayoutParams bannerLayoutParams = new BannerView.LayoutParams(widthPixels, heightPixels);
+            bannerView.setLayoutParams(bannerLayoutParams);
+            bannerView.setVisibility(VISIBLE);
 
-            int pxW = r.getDisplayMetrics().widthPixels;
-            int pxH = dp2px(height, dm);
+            removeAllViews();
+            setVisibility(VISIBLE);
+            addView(bannerView);
 
-            LayoutParams bannerLayoutParams = new BannerView.LayoutParams(pxW, pxH);
+            bannerView.bringToFront();
 
-            adView.setLayoutParams(bannerLayoutParams);
-            adView.setVisibility(VISIBLE);
+            String showPlacement = placement == null ? defaultPlacement : placement;
+            Appodeal.show(activity, Appodeal.BANNER_VIEW, showPlacement);
+        };
+        handler.postDelayed(showRunnable, 250L);
+    }
 
-            container.addView(adView);
-
-            if (placement != null) {
-                Appodeal.show(activity, Appodeal.BANNER_VIEW, placement);
-            } else {
-                Appodeal.show(activity, Appodeal.BANNER_VIEW);
-            }
-        }, 250L);
+    public void hideBannerView(@NonNull BannerView bannerView) {
+        removeAllViews();
+        ViewGroup parent = (ViewGroup) bannerView.getParent();
+        if (parent != null) {
+            parent.removeView(bannerView);
+        }
+        handler.removeCallbacks(showRunnable);
     }
 
     private void cacheAdIfNeeded() {
@@ -121,13 +121,6 @@ public class RCTAppodealBannerView extends ReactViewGroup implements BannerCallb
             if (activity != null) {
                 Appodeal.cache(activity, Appodeal.BANNER_VIEW);
             }
-        }
-    }
-
-    private void addContainerIfNeeded() {
-        if (container == null) {
-            container = new FrameLayout(getReactContext());
-            addView(container);
         }
     }
 
@@ -174,8 +167,10 @@ public class RCTAppodealBannerView extends ReactViewGroup implements BannerCallb
     }
 
     @Override
-    public void onBannerShowFailed() { }
+    public void onBannerShowFailed() {
+    }
 
     @Override
-    public void onBannerShown() { }
+    public void onBannerShown() {
+    }
 }
