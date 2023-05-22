@@ -21,6 +21,8 @@ React Native package that adds Appodeal SDK support to your react-native applica
   - [Banner View](#banner-view)
     - [Styling](#styling)
     - [Callbacks](#callbacks-1)
+  - [MREC View](#mrec-view)
+    - [Callbacks](#callbacks-2)
   - [Changelog](#changelog)
 
 ## Installation
@@ -602,9 +604,6 @@ Banners are available in 3 sizes:
 
 * `phone` (320x50)
 * `tablet` (728x90)
-* `mrec` (MREC)
-
-> Note if you want to show MREC banners in your app, you need to initialise Appodeal SDK with *AppodealAdType. MREC*
 
 Appodeal Banner View can be used only *after* Appodeal SDK was initialized. You can show only *one* banner on the screen.
 Static banners (top or bottom) can't be used in one session with _AppodealBanner_. 
@@ -636,7 +635,6 @@ Height property of banner styles should corresponds to *adSize* attribute. We re
 |---|---|
 | 'phone' | 50 |
 | 'tablet' | 90 |
-| 'mrec' | 250 |
 
 ### Callbacks
 
@@ -651,6 +649,41 @@ Banner view has explicit callbacks.
     onAdExpired = {() => console.log("Banner view expired")}
     onAdClicked = {() => console.log("Banner view is clicked")}
     onAdFailedToLoad = {() => console.log("Banner view is failed to load")}
+/>
+```
+
+## MREC View
+
+AppodealMrec is a component that allows you to display ads in a MREC (banner with size of 300x250) format (know as _AppodealMrecView_).
+
+Appodeal MREC View can be used only *after* Appodeal SDK was initialized. You can show only *one* MREC on the screen.
+
+``` javascript
+import {
+    AppodealMrec
+} from 'react-native-appodeal';
+
+<AppodealMrec
+    style = {{
+        backgroundColor: 'hsl(0, 0%, 97%)',
+        alignContent: 'stretch',
+    }}
+/>
+```
+
+When banner is added on screen it starts to load ad automatically event if autocache is disabled.
+
+### Callbacks
+
+MREC view has explicit callbacks. 
+
+``` javascript
+<AppodealMrec
+    style = {styles.mrec}
+    onAdLoaded = {() => console.log("MREC view did load")}
+    onAdExpired = {() => console.log("MREC view expired")}
+    onAdClicked = {() => console.log("MREC view is clicked")}
+    onAdFailedToLoad = {() => console.log("MREC view is failed to load")}
 />
 ```
 
