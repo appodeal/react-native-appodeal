@@ -10,7 +10,7 @@ Pod::Spec.new do |s|
   s.homepage     = "https://appodeal.com"
   s.license      = "MIT"
   s.author       = { "author" => "appodeal.com" }
-  s.platform     = :ios, "10.0"
+  s.platform     = :ios, "12.0"
   s.source       = { :git => package['repository']['url'], :tag => "master" }
   s.source_files = "ios/**/*.{h,m}"
   
@@ -18,7 +18,7 @@ Pod::Spec.new do |s|
   s.static_framework = true
 
   s.dependency "React"
-  s.dependency "Appodeal", "3.0.2"
+  s.dependency "Appodeal", "3.1.3-beta.1"
 end
 
   

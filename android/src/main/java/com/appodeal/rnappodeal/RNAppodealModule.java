@@ -44,7 +44,7 @@ public class RNAppodealModule extends ReactContextBaseJavaModule implements Inte
     }
 
     private String getPluginVersion() {
-        return "3.0.2";
+        return "3.1.3";
     }
 
     private void sendEventToJS(String eventName, WritableMap params) {
@@ -161,7 +161,7 @@ public class RNAppodealModule extends ReactContextBaseJavaModule implements Inte
 
     @ReactMethod
     public void disableNetwork(String networkName, int adTypes) {
-        Appodeal.disableNetwork(getCurrentActivity(), networkName, RNAppodealUtils.getAdTypesFormRNTypes(adTypes));
+        Appodeal.disableNetwork(networkName, RNAppodealUtils.getAdTypesFormRNTypes(adTypes));
     }
 
     @ReactMethod
@@ -239,11 +239,11 @@ public class RNAppodealModule extends ReactContextBaseJavaModule implements Inte
         String placement = args.hasKey("placement") ? args.getString("placement") : null;
         WritableMap params = Arguments.createMap();
         if (placement == null) {
-            params.putDouble("amount", Appodeal.getRewardParameters().first);
-            params.putString("currency", Appodeal.getRewardParameters().second);
+            params.putDouble("amount", Appodeal.getReward().getAmount());
+            params.putString("currency", Appodeal.getReward().getCurrency());
         } else {
-            params.putDouble("amount", Appodeal.getRewardParameters(placement).first);
-            params.putString("currency", Appodeal.getRewardParameters(placement).second);
+            params.putDouble("amount", Appodeal.getReward(placement).getAmount());
+            params.putString("currency", Appodeal.getReward(placement).getCurrency());
         }
 
         return params;

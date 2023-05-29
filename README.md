@@ -689,6 +689,12 @@ MREC view has explicit callbacks.
 
 ## Changelog
 
+3.1.3-Beta
+
+* Update Appodeal to 3.1.3-beta.1
+* Update Banner View for Android
+* Split Mrec and Banner Views
+
 3.0.2
 
 * Update Appodeal to 3.0.2

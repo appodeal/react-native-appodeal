@@ -3,7 +3,6 @@ package com.appodeal.rnappodeal;
 import com.appodeal.ads.Appodeal;
 import com.appodeal.ads.UserSettings;
 import com.appodeal.ads.inapp.InAppPurchase;
-import com.appodeal.ads.modules.common.internal.adtype.AppodealAdType;
 import com.appodeal.ads.regulator.CCPAUserConsent;
 import com.appodeal.ads.regulator.GDPRUserConsent;
 import com.appodeal.ads.utils.Log;
@@ -15,16 +14,6 @@ import java.util.Map;
 
 
 class RNAppodealUtils {
-    public static UserSettings.Gender getGenderFromString(String gender) {
-        UserSettings.Gender result = UserSettings.Gender.OTHER;
-        if (gender.equals("male")) {
-            result = UserSettings.Gender.MALE;
-        } else if (gender.equals("female")) {
-            result = UserSettings.Gender.FEMALE;
-        }
-        return result;
-    }
-
     static Log.LogLevel getLogLevelFromString(String logLevel) {
         Log.LogLevel result = Log.LogLevel.none;
         if (logLevel.equals("debug")) {
