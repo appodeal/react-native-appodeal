@@ -143,7 +143,7 @@ Add dependencies into `build.gradle` (module: app)
 ``` groovy
 dependencies {
     ...
-    implementation 'com.appodeal.ads:sdk:3.0.2.+'
+    implementation 'com.appodeal.ads:sdk:3.1.3.+'
     ...
 }
 ```
@@ -688,6 +688,10 @@ MREC view has explicit callbacks.
 ```
 
 ## Changelog
+
+3.1.3
+
+* Switch to stable release
 
 3.1.3-Beta
 

@@ -18,7 +18,7 @@ Pod::Spec.new do |s|
   s.static_framework = true
 
   s.dependency "React"
-  s.dependency "Appodeal", "3.1.3-beta.1"
+  s.dependency "Appodeal", "3.1.3"
 end
 
   

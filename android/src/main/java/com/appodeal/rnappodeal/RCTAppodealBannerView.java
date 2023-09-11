@@ -93,6 +93,7 @@ public class RCTAppodealBannerView extends ReactViewGroup implements BannerCallb
             LayoutParams bannerLayoutParams = new BannerView.LayoutParams(widthPixels, heightPixels);
             bannerView.setLayoutParams(bannerLayoutParams);
             bannerView.setVisibility(VISIBLE);
+            bannerView.setDescendantFocusability(ViewGroup.FOCUS_BLOCK_DESCENDANTS);
 
             removeAllViews();
             setVisibility(VISIBLE);

@@ -1,21 +1,43 @@
+def safeExtGet(prop, fallback) {
+    rootProject.ext.has(prop) ? rootProject.ext.get(prop) : fallback
+}
+
+buildscript {
+    repositories {
+        mavenCentral()
+        maven {
+            url 'https://maven.google.com/'
+            name 'Google'
+        }
+    }
+
+    dependencies {
+        classpath 'com.android.tools.build:gradle:4.0.0'
+    }
+}
+
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion 31
-    buildToolsVersion "31.0.0"
+    compileSdkVersion safeExtGet('compileSdkVersion', 28)
+    buildToolsVersion safeExtGet('buildToolsVersion', '29.0.2')
 
     defaultConfig {
-        minSdkVersion 14
-        targetSdkVersion 31
+        minSdkVersion safeExtGet('minSdkVersion', 16)
+        targetSdkVersion safeExtGet('targetSdkVersion', 28)
         versionCode 1
         versionName "1.0"
+        ndk {
+            abiFilters "armeabi-v7a", "x86"
+            00
+        }
     }
     lintOptions {
-        abortOnError false
         warning 'InvalidPackage'
     }
-    dexOptions {
-        javaMaxHeapSize "4g"
+    testOptions {
+        unitTests.includeAndroidResources = true
+        unitTests.returnDefaultValues = true
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -24,19 +46,19 @@ android {
 }
 
 repositories {
-    jcenter() 
     mavenCentral()
-    maven {
-        url "https://artifactory.appodeal.com/appodeal-beta-public"
-    }
+    maven { url "https://maven.google.com" }
+     maven { url "https://artifactory.appodeal.com/appodeal" }
 }
 
+
 dependencies {
-    implementation 'com.facebook.react:react-native:+'
-    // Appodeal
-    implementation 'com.appodeal.ads.sdk:core:3.1.3-beta.1'
-    implementation 'com.appodeal.ads.sdk.networks:bidmachine:3.1.3.0-beta.1'
-    implementation 'com.appodeal.ads.sdk.networks:iab:3.1.3.0-beta.1'
-    implementation 'com.appodeal.ads.sdk.services:sentry_analytics:3.1.3.0-beta.1'
-    implementation 'com.appodeal.ads.sdk.services:stack_analytics:3.1.3.0-beta.1'
+    implementation "com.facebook.react:react-native:${safeExtGet('reactNativeVersion', '+')}"
+    implementation "com.android.installreferrer:installreferrer:${safeExtGet('installReferrerVersion', '2.1')}"
+        // Appodeal
+    implementation 'com.appodeal.ads.sdk:core:3.1.3'
+    implementation 'com.appodeal.ads.sdk.networks:bidmachine:3.1.3.0'
+    implementation 'com.appodeal.ads.sdk.networks:iab:3.1.3.0'
+    implementation 'com.appodeal.ads.sdk.services:sentry_analytics:3.1.3.0'
+    implementation 'com.appodeal.ads.sdk.services:stack_analytics:3.1.3.0'
 }
