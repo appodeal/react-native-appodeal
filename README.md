@@ -689,7 +689,7 @@ MREC view has explicit callbacks.
 
 ## Changelog
 
-3.1.3
+3.1.4
 
 * Switch to stable release
 
