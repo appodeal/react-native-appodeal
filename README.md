@@ -689,6 +689,10 @@ MREC view has explicit callbacks.
 
 ## Changelog
 
+3.2.0-Beta
+
+* Update Appodeal to 3.2.0-beta.1
+
 3.1.4
 
 * Switch to stable release

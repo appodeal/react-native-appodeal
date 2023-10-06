@@ -359,13 +359,15 @@
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-Example/Pods-Example-resources.sh",
 				"${PODS_ROOT}/Ads-Global/SDK/PAGAdSDK.bundle",
-				"${PODS_ROOT}/AppLovinSDK/applovin-ios-sdk-11.10.1/AppLovinSDKResources.bundle",
+				"${PODS_ROOT}/AppLovinSDK/applovin-ios-sdk-11.11.3/AppLovinSDKResources.bundle",
+				"${PODS_ROOT}/BigoADS/BigoADS/BigoADSRes.bundle",
 				"${PODS_ROOT}/YandexMobileAds/static/YandexMobileAds.xcframework/YandexMobileAdsBundle.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/PAGAdSDK.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/AppLovinSDKResources.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/BigoADSRes.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/YandexMobileAdsBundle.bundle",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -425,6 +427,15 @@
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-Example-ExampleTests/Pods-Example-ExampleTests-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Adjust/Adjust.framework",
+				"${BUILT_PRODUCTS_DIR}/DivKit/DivKit.framework",
+				"${BUILT_PRODUCTS_DIR}/DivKit_Base/BasePublic.framework",
+				"${BUILT_PRODUCTS_DIR}/DivKit_BaseTiny/BaseTinyPublic.framework",
+				"${BUILT_PRODUCTS_DIR}/DivKit_BaseUI/BaseUIPublic.framework",
+				"${BUILT_PRODUCTS_DIR}/DivKit_CommonCore/CommonCorePublic.framework",
+				"${BUILT_PRODUCTS_DIR}/DivKit_LayoutKit/LayoutKit.framework",
+				"${BUILT_PRODUCTS_DIR}/DivKit_LayoutKitInterface/LayoutKitInterface.framework",
+				"${BUILT_PRODUCTS_DIR}/DivKit_Networking/NetworkingPublic.framework",
+				"${BUILT_PRODUCTS_DIR}/DivKit_Serialization/Serialization.framework",
 				"${BUILT_PRODUCTS_DIR}/DoubleConversion/DoubleConversion.framework",
 				"${BUILT_PRODUCTS_DIR}/FirebaseABTesting/FirebaseABTesting.framework",
 				"${BUILT_PRODUCTS_DIR}/FirebaseCore/FirebaseCore.framework",
@@ -464,15 +475,26 @@
 				"${BUILT_PRODUCTS_DIR}/react-native-safe-area-context/react_native_safe_area_context.framework",
 				"${BUILT_PRODUCTS_DIR}/react-native-segmented-control/react_native_segmented_control.framework",
 				"${PODS_XCFRAMEWORKS_BUILD_DIR}/AmazonPublisherServicesSDK/DTBiOSSDK.framework/DTBiOSSDK",
+				"${PODS_XCFRAMEWORKS_BUILD_DIR}/BigoADS/OMSDK_Bigosg.framework/OMSDK_Bigosg",
 				"${PODS_XCFRAMEWORKS_BUILD_DIR}/FBAEMKit/FBAEMKit.framework/FBAEMKit",
 				"${PODS_XCFRAMEWORKS_BUILD_DIR}/FBSDKCoreKit/FBSDKCoreKit.framework/FBSDKCoreKit",
 				"${PODS_XCFRAMEWORKS_BUILD_DIR}/FBSDKCoreKit_Basics/FBSDKCoreKit_Basics.framework/FBSDKCoreKit_Basics",
+				"${PODS_XCFRAMEWORKS_BUILD_DIR}/Fyber_Marketplace_SDK/IASDKCore.framework/IASDKCore",
 				"${PODS_XCFRAMEWORKS_BUILD_DIR}/OMSDK_Appodeal/OMSDK_Appodeal.framework/OMSDK_Appodeal",
 				"${PODS_XCFRAMEWORKS_BUILD_DIR}/smaato-ios-sdk/Modules/OpenMeasurement/OMSDK_Smaato.framework/OMSDK_Smaato",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Adjust.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DivKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BasePublic.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BaseTinyPublic.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BaseUIPublic.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CommonCorePublic.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/LayoutKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/LayoutKitInterface.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NetworkingPublic.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Serialization.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DoubleConversion.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseABTesting.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseCore.framework",
@@ -512,9 +534,11 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/react_native_safe_area_context.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/react_native_segmented_control.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DTBiOSSDK.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/OMSDK_Bigosg.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBAEMKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKCoreKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKCoreKit_Basics.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IASDKCore.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/OMSDK_Appodeal.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/OMSDK_Smaato.framework",
 			);
@@ -531,13 +555,15 @@
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-Example-ExampleTests/Pods-Example-ExampleTests-resources.sh",
 				"${PODS_ROOT}/Ads-Global/SDK/PAGAdSDK.bundle",
-				"${PODS_ROOT}/AppLovinSDK/applovin-ios-sdk-11.10.1/AppLovinSDKResources.bundle",
+				"${PODS_ROOT}/AppLovinSDK/applovin-ios-sdk-11.11.3/AppLovinSDKResources.bundle",
+				"${PODS_ROOT}/BigoADS/BigoADS/BigoADSRes.bundle",
 				"${PODS_ROOT}/YandexMobileAds/static/YandexMobileAds.xcframework/YandexMobileAdsBundle.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/PAGAdSDK.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/AppLovinSDKResources.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/BigoADSRes.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/YandexMobileAdsBundle.bundle",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -553,6 +579,15 @@
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-Example/Pods-Example-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Adjust/Adjust.framework",
+				"${BUILT_PRODUCTS_DIR}/DivKit/DivKit.framework",
+				"${BUILT_PRODUCTS_DIR}/DivKit_Base/BasePublic.framework",
+				"${BUILT_PRODUCTS_DIR}/DivKit_BaseTiny/BaseTinyPublic.framework",
+				"${BUILT_PRODUCTS_DIR}/DivKit_BaseUI/BaseUIPublic.framework",
+				"${BUILT_PRODUCTS_DIR}/DivKit_CommonCore/CommonCorePublic.framework",
+				"${BUILT_PRODUCTS_DIR}/DivKit_LayoutKit/LayoutKit.framework",
+				"${BUILT_PRODUCTS_DIR}/DivKit_LayoutKitInterface/LayoutKitInterface.framework",
+				"${BUILT_PRODUCTS_DIR}/DivKit_Networking/NetworkingPublic.framework",
+				"${BUILT_PRODUCTS_DIR}/DivKit_Serialization/Serialization.framework",
 				"${BUILT_PRODUCTS_DIR}/DoubleConversion/DoubleConversion.framework",
 				"${BUILT_PRODUCTS_DIR}/FirebaseABTesting/FirebaseABTesting.framework",
 				"${BUILT_PRODUCTS_DIR}/FirebaseCore/FirebaseCore.framework",
@@ -592,15 +627,26 @@
 				"${BUILT_PRODUCTS_DIR}/react-native-safe-area-context/react_native_safe_area_context.framework",
 				"${BUILT_PRODUCTS_DIR}/react-native-segmented-control/react_native_segmented_control.framework",
 				"${PODS_XCFRAMEWORKS_BUILD_DIR}/AmazonPublisherServicesSDK/DTBiOSSDK.framework/DTBiOSSDK",
+				"${PODS_XCFRAMEWORKS_BUILD_DIR}/BigoADS/OMSDK_Bigosg.framework/OMSDK_Bigosg",
 				"${PODS_XCFRAMEWORKS_BUILD_DIR}/FBAEMKit/FBAEMKit.framework/FBAEMKit",
 				"${PODS_XCFRAMEWORKS_BUILD_DIR}/FBSDKCoreKit/FBSDKCoreKit.framework/FBSDKCoreKit",
 				"${PODS_XCFRAMEWORKS_BUILD_DIR}/FBSDKCoreKit_Basics/FBSDKCoreKit_Basics.framework/FBSDKCoreKit_Basics",
+				"${PODS_XCFRAMEWORKS_BUILD_DIR}/Fyber_Marketplace_SDK/IASDKCore.framework/IASDKCore",
 				"${PODS_XCFRAMEWORKS_BUILD_DIR}/OMSDK_Appodeal/OMSDK_Appodeal.framework/OMSDK_Appodeal",
 				"${PODS_XCFRAMEWORKS_BUILD_DIR}/smaato-ios-sdk/Modules/OpenMeasurement/OMSDK_Smaato.framework/OMSDK_Smaato",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Adjust.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DivKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BasePublic.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BaseTinyPublic.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BaseUIPublic.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CommonCorePublic.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/LayoutKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/LayoutKitInterface.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NetworkingPublic.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Serialization.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DoubleConversion.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseABTesting.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseCore.framework",
@@ -640,9 +686,11 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/react_native_safe_area_context.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/react_native_segmented_control.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DTBiOSSDK.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/OMSDK_Bigosg.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBAEMKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKCoreKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKCoreKit_Basics.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IASDKCore.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/OMSDK_Appodeal.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/OMSDK_Smaato.framework",
 			);
@@ -797,6 +845,7 @@
 					"\"${PODS_XCFRAMEWORKS_BUILD_DIR}/APDYandexAdapter\"",
 					/usr/lib/swift,
 				);
+				MARKETING_VERSION = 3.2.0;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -845,6 +894,7 @@
 					"\"${PODS_XCFRAMEWORKS_BUILD_DIR}/APDYandexAdapter\"",
 					/usr/lib/swift,
 				);
+				MARKETING_VERSION = 3.2.0;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
