@@ -31,6 +31,11 @@ Run following commands in project root directory
 
 `$ npm install react-native-appodeal --save` 
 
+> There are beta versions of Appodeal SDK available on the React Native. To 
+> install beta version of the plugin please add a tag `@beta` to the installation command:
+> 
+> ```$ npm install react-native-appodeal@beta --save```
+
 If you are using React Native version **lower than 0.60** run following command:
 
 `$ react-native link react-native-appodeal` 
