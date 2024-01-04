@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 #import <Appodeal/Appodeal.h>
+#import <StackConsentManager/StackConsentManager-Swift.h>
+
 
 FOUNDATION_EXPORT NSString *const kEventAppodealInitialized;
 FOUNDATION_EXPORT NSString *const kEventAppodealDidReceiveRevenue;
@@ -49,12 +51,12 @@ typedef NS_OPTIONS(NSInteger, RNAAdType) {
     RNAAdTypeMREC = 1 << 8
 };
 
+
 AppodealAdType AppodealAdTypeFromRNAAdType(RNAAdType adType);
 RNAAdType RNAAdTypeFromaAppodealAdType(AppodealAdType adType);
 AppodealShowStyle AppodealShowStyleFromRNAAdType(RNAAdType adType);
-APDCCPAUserConsent APDCCPAUserConsentFromRNConsent(NSInteger consent);
-APDGDPRUserConsent APDGDPRUserConsentFromRNConsent(NSInteger consent);
 APDPurchaseType APDPurchaseTypeFromRNPurchase(NSInteger type);
 BOOL isRNAAdTypeBanner(RNAAdType adType);
 CGSize RNAppodealBannerViewSizeFromString(NSString *size);
-NSString * NSStringFromAppodealBannerViewSize(CGSize size);
+NSString *NSStringFromAppodealBannerViewSize(CGSize size);
+NSNumber *RNAppodealConsentStatusFrom(APDConsentStatus status);

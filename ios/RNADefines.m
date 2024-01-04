@@ -62,11 +62,11 @@ RCT_ENUM_CONVERTER(AppodealUserGender, (@{
 
 #pragma mark - Utils
 
-NSString *RNAVersion() {
-    return @"3.2.1";
+NSString *RNAVersion(void) {
+    return @"3.2.2";
 }
 
-NSArray<NSString *> *RNASupportedMehtods() {
+NSArray<NSString *> *RNASupportedMehtods(void) {
     return @[
         kEventAppodealInitialized,
         kEventAppodealDidReceiveRevenue,
@@ -163,14 +163,6 @@ AppodealShowStyle AppodealShowStyleFromRNAAdType(RNAAdType adType) {
     return 0;
 }
 
-APDCCPAUserConsent APDCCPAUserConsentFromRNConsent(NSInteger consent) {
-    return (APDCCPAUserConsent)consent;
-}
-
-APDGDPRUserConsent APDGDPRUserConsentFromRNConsent(NSInteger consent) {
-    return (APDGDPRUserConsent)consent;
-}
-
 APDPurchaseType APDPurchaseTypeFromRNPurchase(NSInteger type) {
     return (APDPurchaseType)type;
 }
@@ -193,4 +185,8 @@ NSString *NSStringFromAppodealBannerViewSize(CGSize size) {
     } else {
         return @"phone";
     }
+}
+
+NSNumber *RNAppodealConsentStatusFrom(APDConsentStatus status) {
+    return @(status);
 }

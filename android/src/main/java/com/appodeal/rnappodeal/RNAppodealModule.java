@@ -1,5 +1,8 @@
 package com.appodeal.rnappodeal;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import com.appodeal.ads.inapp.InAppPurchase;
 import com.appodeal.ads.inapp.InAppPurchaseValidateCallback;
 import com.appodeal.ads.initializing.ApdInitializationCallback;
@@ -7,7 +10,16 @@ import com.appodeal.ads.initializing.ApdInitializationError;
 import com.appodeal.ads.revenue.AdRevenueCallbacks;
 import com.appodeal.ads.revenue.RevenueInfo;
 import com.appodeal.ads.service.ServiceError;
+import com.appodeal.consent.ConsentForm;
+import com.appodeal.consent.ConsentInfoUpdateCallback;
+import com.appodeal.consent.ConsentManager;
+import com.appodeal.consent.ConsentManagerError;
+import com.appodeal.consent.ConsentUpdateRequestParameters;
+import com.appodeal.consent.OnConsentFormDismissedListener;
+import com.appodeal.consent.OnConsentFormLoadFailureListener;
+import com.appodeal.consent.OnConsentFormLoadSuccessListener;
 import com.facebook.react.bridge.LifecycleEventListener;
+import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
@@ -44,7 +56,7 @@ public class RNAppodealModule extends ReactContextBaseJavaModule implements Inte
     }
 
     private String getPluginVersion() {
-        return "3.2.1";
+        return "3.2.2";
     }
 
     private void sendEventToJS(String eventName, WritableMap params) {
@@ -89,7 +101,7 @@ public class RNAppodealModule extends ReactContextBaseJavaModule implements Inte
 
     @ReactMethod(isBlockingSynchronousMethod = true)
     public boolean canShow(int adTypes, String placement) {
-       return placement == null ?
+        return placement == null ?
                 Appodeal.canShow(RNAppodealUtils.getAdTypesFormRNTypes(adTypes)) :
                 Appodeal.canShow(RNAppodealUtils.getAdTypesFormRNTypes(adTypes), placement);
     }
@@ -129,14 +141,75 @@ public class RNAppodealModule extends ReactContextBaseJavaModule implements Inte
         Appodeal.setBannerAnimation(flag);
     }
 
-    @ReactMethod
-    public void updateGDPRConsent(int status) {
-        Appodeal.updateGDPRUserConsent(RNAppodealUtils.getGDPRUserConsentFromRNGDPRUserConsent(status));
+    @ReactMethod(isBlockingSynchronousMethod = true)
+    public int consentStatus() {
+        return RNAppodealUtils.getRNAppodealConsentStatusFromStatus(ConsentManager.getStatus());
     }
 
     @ReactMethod
-    public void updateCCPAConsent(int status) {
-        Appodeal.updateCCPAUserConsent(RNAppodealUtils.getCCPAUserConsentFromRNCCPAUserConsent(status));
+    public void requestConsentInfoUpdateWithAppKey(String appKey, final Promise promise) {
+        ConsentUpdateRequestParameters parameters = new ConsentUpdateRequestParameters(getCurrentActivity(), appKey);
+        ConsentManager.requestConsentInfoUpdate(parameters, new ConsentInfoUpdateCallback() {
+            @Override
+            public void onUpdated() {
+                WritableMap params = Arguments.createMap();
+                params.putInt("status", RNAppodealUtils.getRNAppodealConsentStatusFromStatus(ConsentManager.getStatus()));
+                promise.resolve(params);
+            }
+
+            @Override
+            public void onFailed(@NonNull ConsentManagerError consentManagerError) {
+                promise.reject("APD_REQUEST_CONSENT_INFO_UPDATE_ERROR", consentManagerError.getLocalizedMessage());
+            }
+        });
+    }
+
+    @ReactMethod
+    public void showConsentFormIfNeeded(final Promise promise) {
+        ConsentManager.loadAndShowConsentFormIfRequired(getCurrentActivity(), new OnConsentFormDismissedListener() {
+            @Override
+            public void onConsentFormDismissed(@Nullable ConsentManagerError consentManagerError) {
+                if (consentManagerError != null) {
+                    promise.reject("APD_SHOW_CONSENT_FORM_IF_NEEDED_ERROR", consentManagerError.getLocalizedMessage());
+                } else {
+                    WritableMap params = Arguments.createMap();
+                    params.putInt("status", RNAppodealUtils.getRNAppodealConsentStatusFromStatus(ConsentManager.getStatus()));
+                    promise.resolve(params);
+                }
+            }
+        });
+    }
+
+    @ReactMethod
+    public void showConsentForm(final Promise promise) {
+        ConsentManager.load(getCurrentActivity(), new OnConsentFormLoadSuccessListener() {
+                    @Override
+                    public void onConsentFormLoadSuccess(@NonNull ConsentForm consentForm) {
+                        consentForm.show(getCurrentActivity(), new OnConsentFormDismissedListener() {
+                            @Override
+                            public void onConsentFormDismissed(@Nullable ConsentManagerError consentManagerError) {
+                                if (consentManagerError != null) {
+                                    promise.reject("APD_SHOW_CONSENT_FORM_ERROR", consentManagerError.getLocalizedMessage());
+                                } else {
+                                    WritableMap params = Arguments.createMap();
+                                    params.putInt("status", RNAppodealUtils.getRNAppodealConsentStatusFromStatus(ConsentManager.getStatus()));
+                                    promise.resolve(params);
+                                }
+                            }
+                        });
+                    }
+                },
+                new OnConsentFormLoadFailureListener() {
+                    @Override
+                    public void onConsentFormLoadFailure(@NonNull ConsentManagerError consentManagerError) {
+                        promise.reject("APD_SHOW_CONSENT_FORM_ERROR", consentManagerError.getLocalizedMessage());
+                    }
+                });
+    }
+
+    @ReactMethod
+    public void  revokeConsent() {
+        ConsentManager.revoke(getCurrentActivity());
     }
 
     @ReactMethod

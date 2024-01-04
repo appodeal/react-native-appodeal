@@ -34,16 +34,11 @@ export enum AppodealGender {
   MALE = 2,
 }
 
-export enum AppodealGDPRConsentStatus {
+export enum AppodealConsentStatus {
   UNKNOWN = 0,
-  PERSONALIZED = 1,
-  NON_PERSONALIZED = 2
-}
-
-export enum AppodealCCPAConsentStatus {
-  UNKNOWN = 0,
-  OPT_IN = 1,
-  OPT_OUT = 2,
+  REQUIRED = 1,
+  NOT_REQUIRED = 2,
+  OBTAINED = 3
 }
 
 export interface AppodealReward {

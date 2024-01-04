@@ -4,24 +4,16 @@ import {styles} from '../styles';
 import {ScrollView, SafeAreaView, View, Switch, Text} from 'react-native';
 import {Row, SectionHeader} from '../components';
 import SegmentedControl from '@react-native-community/segmented-control';
-import {
-  Appodeal,
-  AppodealGDPRConsentStatus,
-  AppodealCCPAConsentStatus,
-} from 'react-native-appodeal';
+import {Appodeal, AppodealConsentStatus} from 'react-native-appodeal';
+import {constants} from '../advertising/constants';
 
-let _consentStatusGDPR = AppodealGDPRConsentStatus.UNKNOWN;
-let _consentStatusCCPA = AppodealCCPAConsentStatus.UNKNOWN;
 let _smartBanners = true;
 let _tabletBanners = false;
 
 export const AdvancedFeaturesScreen = () => {
-  const [consentStatusGDPR, setConsentStatusGDPR] =
-    React.useState(_consentStatusGDPR);
-
-  const [consentStatusCCPA, setConsentStatusCCPA] =
-    React.useState(_consentStatusCCPA);
-
+  const [consentStatus, setConsentStatus] = React.useState(
+    Appodeal.consentStatus(),
+  );
   const [smartBanners, setSmartBanners] = React.useState(_smartBanners);
   const [tabletBanners, setTabletBanners] = React.useState(_tabletBanners);
 
@@ -58,7 +50,11 @@ export const AdvancedFeaturesScreen = () => {
     <>
       <SectionHeader value="Extras" />
       {Object.entries(Appodeal.getExtras()).map((entry) => (
-        <Row title={entry[0]} accessory={() => subtitleAccessory(entry[1])} />
+        <Row
+          key={entry[0]}
+          title={entry[0]}
+          accessory={() => subtitleAccessory(entry[1])}
+        />
       ))}
     </>
   );
@@ -76,6 +72,19 @@ export const AdvancedFeaturesScreen = () => {
     </>
   );
 
+  const consentStatusString = () => {
+    switch (consentStatus) {
+      case AppodealConsentStatus.OBTAINED:
+        return 'Obtained';
+      case AppodealConsentStatus.NOT_REQUIRED:
+        return 'Not Required';
+      case AppodealConsentStatus.REQUIRED:
+        return 'Required';
+      default:
+        return 'Unknown';
+    }
+  };
+
   return (
     <>
       <SafeAreaView style={styles.container}>
@@ -83,32 +92,53 @@ export const AdvancedFeaturesScreen = () => {
           <SectionHeader value="Appearance" />
           <Row title="Smart banners" accessory={smartBannersSwitch} />
           <Row title="Tablet banners" accessory={tabletBannersSwitch} />
-          <SectionHeader value="GDPR Consent Status" />
-          <View style={styles.rowContainer}>
-            <SegmentedControl
-              style={styles.segmentedControl}
-              values={gdpr}
-              selectedIndex={consentStatusGDPR}
-              onChange={(event) => {
-                _consentStatusGDPR = event.nativeEvent.selectedSegmentIndex;
-                setConsentStatusGDPR(_consentStatusGDPR);
-                Appodeal.updateGDPRConsent(_consentStatusGDPR);
-              }}
-            />
-          </View>
-          <SectionHeader value="CCPA Consent Status" />
-          <View style={styles.rowContainer}>
-            <SegmentedControl
-              style={styles.segmentedControl}
-              values={ccpa}
-              selectedIndex={consentStatusCCPA}
-              onChange={(event) => {
-                _consentStatusCCPA = event.nativeEvent.selectedSegmentIndex;
-                setConsentStatusCCPA(_consentStatusCCPA);
-                Appodeal.updateCCPAConsent(_consentStatusCCPA);
-              }}
-            />
-          </View>
+          <SectionHeader value="User Consent" />
+          <Row
+            title="Status"
+            accessory={() => subtitleAccessory(consentStatusString())}
+          />
+          <Row
+            title="Request update"
+            onClick={() =>
+              Appodeal.requestConsentInfoUpdate(constants.appKey)
+                .then((status) => setConsentStatus(status))
+                .catch((error) => console.log(error))
+                .finally(() =>
+                  console.log('Appodeal did update consent information'),
+                )
+            }
+          />
+          <Row
+            title="Show Form"
+            accessory={() => subtitleAccessory('Force')}
+            onClick={() =>
+              Appodeal.showConsentForm()
+                .then((status) => setConsentStatus(status))
+                .catch((error) => console.log(error))
+                .finally(() =>
+                  console.log('Appodeal did update consent information'),
+                )
+            }
+          />
+          <Row
+            title="Show Form"
+            accessory={() => subtitleAccessory('If Needed')}
+            onClick={() =>
+              Appodeal.showConsentFormIfNeeded()
+                .then((status) => setConsentStatus(status))
+                .catch((error) => console.log(error))
+                .finally(() =>
+                  console.log('Appodeal did update consent information'),
+                )
+            }
+          />
+          <Row
+            title="Revoke"
+            onClick={() => {
+              Appodeal.revokeConsent();
+              setConsentStatus(Appodeal.consentStatus());
+            }}
+          />
           {Object.keys(Appodeal.getExtras()).length > 0
             ? extrasSections()
             : null}

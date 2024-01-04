@@ -48,16 +48,19 @@ android {
 repositories {
     mavenCentral()
     maven { url "https://maven.google.com" }
-     maven { url "https://artifactory.appodeal.com/appodeal" }
+    maven { url "https://artifactory.appodeal.com/appodeal-beta-public" }
 }
 
 
 dependencies {
     implementation "com.facebook.react:react-native:${safeExtGet('reactNativeVersion', '+')}"
     implementation "com.android.installreferrer:installreferrer:${safeExtGet('installReferrerVersion', '2.1')}"
-    
+
     // Appodeal
-    implementation 'com.appodeal.ads.sdk:core:3.2.0'
-    implementation 'com.appodeal.ads.sdk.services:sentry_analytics:3.2.0.0'
-    implementation 'com.appodeal.ads.sdk.services:stack_analytics:3.2.0.0'
+    implementation 'com.appodeal.ads.sdk:core:3.2.1-beta.1'
+    implementation 'com.appodeal.ads.sdk.networks:bidmachine:3.2.1.0-beta.1'
+    implementation 'com.appodeal.ads.sdk.networks:bidon:3.2.1.0-beta.1'
+    implementation 'com.appodeal.ads.sdk.services:sentry_analytics:3.2.1.0-beta.1'
+    implementation 'com.appodeal.ads.sdk.services:stack_analytics:3.2.1.0-beta.1'
+    implementation 'com.appodeal.ads.sdk.networks:iab:3.2.1.0-beta.1'
 }

@@ -8,7 +8,7 @@ import {
   AppodealSdkEvent,
   AppodealAdRevenue,
 } from 'react-native-appodeal';
-import {constants} from './constnats';
+import {constants} from './constants';
 
 export enum SDKState {
   PENDING = 0,

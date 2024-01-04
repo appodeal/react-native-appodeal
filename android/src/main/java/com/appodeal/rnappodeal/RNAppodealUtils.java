@@ -6,6 +6,8 @@ import com.appodeal.ads.inapp.InAppPurchase;
 import com.appodeal.ads.regulator.CCPAUserConsent;
 import com.appodeal.ads.regulator.GDPRUserConsent;
 import com.appodeal.ads.utils.Log;
+import com.appodeal.consent.Consent;
+import com.appodeal.consent.ConsentStatus;
 import com.facebook.react.bridge.ReadableMap;
 
 import java.util.HashMap;
@@ -23,7 +25,7 @@ class RNAppodealUtils {
         }
         return result;
     }
-    
+
     static int getAdTypesFormRNTypes(int types) {
         int result = 0;
         if ((types & (1 << 0)) > 0) {
@@ -70,24 +72,17 @@ class RNAppodealUtils {
         return result;
     }
 
-    static CCPAUserConsent getCCPAUserConsentFromRNCCPAUserConsent(int consent) {
-        CCPAUserConsent status = CCPAUserConsent.Unknown;
-        if (consent == 1) {
-            status = CCPAUserConsent.OptIn;
-        } else if (consent == 2) {
-            status = CCPAUserConsent.OptOut;
+    static int getRNAppodealConsentStatusFromStatus(ConsentStatus status) {
+        switch (status) {
+            case Required:
+                return 1;
+            case NotRequired:
+                return 2;
+            case Obtained:
+                return 3;
+            default:
+                return 0;
         }
-        return status;
-    }
-
-    static GDPRUserConsent getGDPRUserConsentFromRNGDPRUserConsent(int consent) {
-        GDPRUserConsent status = GDPRUserConsent.Unknown;
-        if (consent == 1) {
-            status = GDPRUserConsent.Personalized;
-        } else if (consent == 2) {
-            status = GDPRUserConsent.NonPersonalized;
-        }
-        return status;
     }
 
     static InAppPurchase.Type getPurchaseTypeFromRNPurchaseType(int type) {

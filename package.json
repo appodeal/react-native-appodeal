@@ -1,6 +1,6 @@
 {
   "name": "react-native-appodeal",
-  "version": "3.2.1",
+  "version": "3.2.2",
   "description": "React Native Module created to support Appodeal SDK for iOS and Android platforms",
   "repository": {
     "type": "git",

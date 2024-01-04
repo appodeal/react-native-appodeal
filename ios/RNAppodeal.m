@@ -2,6 +2,7 @@
 #import "RNADefines.h"
 
 #import <React/RCTUtils.h>
+#import <StackConsentManager/StackConsentManager-Swift.h>
 
 
 @interface RNAppodeal () <
@@ -14,17 +15,11 @@ AppodealAdRevenueDelegate
 
 @end
 
+BOOL kAPDCOPPA = NO;
 
 @implementation RNAppodeal
 
 @synthesize bridge = _bridge;
-
-NSArray *RNAppodealConsentParameters(void) {
-    return @[
-        @(STKConsentManager.sharedManager.consentStatus),
-        @(STKConsentManager.sharedManager.regulation)
-    ];
-}
 
 RCT_EXPORT_MODULE();
 
@@ -122,15 +117,81 @@ RCT_EXPORT_BLOCKING_SYNCHRONOUS_METHOD(predictedEcpm:(NSInteger)adType) {
 
 #pragma mark - Consent
 
-RCT_EXPORT_METHOD(updateGDPRConsent:(NSInteger)consent) {
+RCT_EXPORT_METHOD(revokeConsent) {
     dispatch_async(dispatch_get_main_queue(), ^{
-        [Appodeal updateUserConsentGDPR:APDGDPRUserConsentFromRNConsent(consent)];
+        [APDConsentManager.shared revoke];
     });
 }
 
-RCT_EXPORT_METHOD(updateCCPAConsent:(NSInteger)consent) {
+RCT_EXPORT_BLOCKING_SYNCHRONOUS_METHOD(consentStatus) {
+    __block NSNumber *status;
+    dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
     dispatch_async(dispatch_get_main_queue(), ^{
-        [Appodeal updateUserConsentCCPA:APDCCPAUserConsentFromRNConsent(consent)];
+        status = RNAppodealConsentStatusFrom(APDConsentManager.shared.status);
+        dispatch_semaphore_signal(semaphore);
+    });
+    dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
+    return status;
+}
+
+RCT_EXPORT_METHOD(requestConsentInfoUpdateWithAppKey:(NSString *)appKey
+                  resolve:(RCTPromiseResolveBlock)resolve
+                  reject:(RCTPromiseRejectBlock)reject) {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        APDConsentUpdateRequestParameters *parameters = [[APDConsentUpdateRequestParameters alloc] initWithAppKey:appKey
+                                                                                                 mediationSdkName:@"appodeal"
+                                                                                              mediationSdkVersion:[Appodeal getVersion]
+                                                                                                            COPPA:kAPDCOPPA];
+        [APDConsentManager.shared requestConsentInfoUpdateWithParameters:parameters
+                                                              completion:^(NSError *error) {
+            if (error != nil) {
+                reject(@"APD_REQUEST_CONSENT_INFO_UPDATE_ERROR", error.localizedDescription, error);
+            } else {
+                NSDictionary *parameters = @{
+                    @"status": RNAppodealConsentStatusFrom(APDConsentManager.shared.status)
+                };
+                resolve(parameters);
+            }
+        }];
+    });
+}
+
+RCT_EXPORT_METHOD(showConsentFormIfNeeded:(RCTPromiseResolveBlock)resolve
+                  reject:(RCTPromiseRejectBlock)reject) {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [APDConsentManager.shared loadAndPresentIfNeededWithRootViewController:RCTPresentedViewController()
+                                                                    completion:^(NSError *error) {
+            if (error != nil) {
+                reject(@"APD_SHOW_CONSENT_FORM_IF_NEEDED_ERROR", error.localizedDescription, error);
+            } else {
+                NSDictionary *parameters = @{
+                    @"status": RNAppodealConsentStatusFrom(APDConsentManager.shared.status)
+                };
+                resolve(parameters);
+            }
+        }];
+    });
+}
+
+RCT_EXPORT_METHOD(showConsentForm:(RCTPromiseResolveBlock)resolve
+                  reject:(RCTPromiseRejectBlock)reject) {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [APDConsentManager.shared loadWithCompletion:^(APDConsentDialog *dialog, NSError *error) {
+            if (error != nil) {
+                reject(@"APD_SHOW_CONSENT_FORM_ERROR", error.localizedDescription, error);
+            } else {
+                [dialog presentWithRootViewController:RCTPresentedViewController() completion:^(NSError *error) {
+                    if (error != nil) {
+                        reject(@"APD_SHOW_CONSENT_FORM_ERROR", error.localizedDescription, error);
+                    } else {
+                        NSDictionary *parameters = @{
+                            @"status": RNAppodealConsentStatusFrom(APDConsentManager.shared.status)
+                        };
+                        resolve(parameters);
+                    }
+                }];
+            }
+        }];
     });
 }
 
@@ -179,6 +240,7 @@ RCT_EXPORT_METHOD(setTriggerPrecacheCallbacks:(NSInteger)adTypes
 
 RCT_EXPORT_METHOD(setChildDirectedTreatment:(BOOL)enabled) {
     dispatch_async(dispatch_get_main_queue(), ^{
+        kAPDCOPPA = enabled;
         [Appodeal setChildDirectedTreatment:enabled];
     });
 }

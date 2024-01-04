@@ -3,8 +3,7 @@
 import { NativeModules, NativeEventEmitter, Platform } from "react-native";
 import {
   AppodealLogLevel,
-  AppodealGDPRConsentStatus,
-  AppodealCCPAConsentStatus,
+  AppodealConsentStatus,
   AppodealIOSPurchase,
   AppodealAndroidPurchase,
   AppodealReward,
@@ -130,15 +129,26 @@ export interface Appodeal {
    */
   setChildDirectedTreatment(value: boolean): void;
   /**
-   * Update GDPR consent status
-   * @param value Consent status
+   * Returns current user consent status
    */
-  updateGDPRConsent(value: AppodealGDPRConsentStatus): void;
+  consentStatus(): AppodealConsentStatus;
   /**
-   * Update CCPA consent status
-   * @param value Consent status
+   * Revokes user consent
    */
-  updateCCPAConsent(value: AppodealCCPAConsentStatus): void;
+  revokeConsent(): void;
+  /**
+   * Request consent parameters
+   * @param appKey Appodeal app key
+   */
+  requestConsentInfoUpdate(appKey: string): Promise<AppodealConsentStatus>;
+  /**
+   * Shows consent form if consent status is REQUIRED
+   */
+  showConsentFormIfNeeded(): Promise<AppodealConsentStatus>;
+  /**
+   * Shows consent form
+   */
+  showConsentForm(): Promise<AppodealConsentStatus>;
   /**
    * Enables or disables test mode
    * @param value Boolean flag indicating test mode
@@ -245,7 +255,7 @@ const appodeal: Appodeal = {
   },
 
   show: (adTypes: AdType, placement?: string): void => {
-      RNAppodeal.show(adTypes, placement || null)
+    RNAppodeal.show(adTypes, placement || null);
   },
 
   isLoaded: (adTypes: AdType): boolean => {
@@ -284,12 +294,32 @@ const appodeal: Appodeal = {
     RNAppodeal.setBannerAnimation(value);
   },
 
-  updateGDPRConsent: (value: AppodealGDPRConsentStatus): void => {
-    RNAppodeal.updateGDPRConsent(value);
+  consentStatus: (): AppodealConsentStatus => {
+    return RNAppodeal.consentStatus();
   },
 
-  updateCCPAConsent: (value: AppodealCCPAConsentStatus): void => {
-    RNAppodeal.updateCCPAConsent(value);
+  revokeConsent: (): void => {
+    RNAppodeal.revokeConsent();
+  },
+
+  requestConsentInfoUpdate: (
+    appKey: string
+  ): Promise<AppodealConsentStatus> => {
+    return RNAppodeal.requestConsentInfoUpdateWithAppKey(appKey).then(
+      (parameters) => parameters.status
+    );
+  },
+
+  showConsentFormIfNeeded: (): Promise<AppodealConsentStatus> => {
+    return RNAppodeal.showConsentFormIfNeeded().then(
+      (parameters) => parameters.status
+    );
+  },
+
+  showConsentForm: () => {
+    return RNAppodeal.showConsentForm().then(
+      (parameters) => parameters.status
+    );
   },
 
   setChildDirectedTreatment: (value: boolean): void => {
@@ -321,17 +351,17 @@ const appodeal: Appodeal = {
   },
 
   setExtrasValue: (value: any | null, key: string): void => {
-    if (Platform.OS == 'ios') {
+    if (Platform.OS == "ios") {
       RNAppodeal.setExtrasValue(value, key);
-    } else if (typeof(value) === 'string') {
+    } else if (typeof value === "string") {
       RNAppodeal.setExtrasStringValue(value, key);
-    } else if (typeof(value) === 'number' && Number.isInteger(value)) {
+    } else if (typeof value === "number" && Number.isInteger(value)) {
       RNAppodeal.setExtrasIntegerValue(value, key);
-    } else if (typeof(value) === 'number') {
+    } else if (typeof value === "number") {
       RNAppodeal.setExtrasDoubleValue(value, key);
-    } else if (typeof(value) === 'boolean') {
+    } else if (typeof value === "boolean") {
       RNAppodeal.setExtrasBooleanValue(value, key);
-    } else if (typeof(value) === 'object') {
+    } else if (typeof value === "object") {
       RNAppodeal.setExtrasMapValue(value, key);
     } else if (value === null) {
       RNAppodeal.removeExtrasValue(key);
@@ -343,17 +373,17 @@ const appodeal: Appodeal = {
   },
 
   setCustomStateValue: (value: any | null, key: string): void => {
-    if (Platform.OS == 'ios') {
+    if (Platform.OS == "ios") {
       RNAppodeal.setCustomStateValue(value, key);
-    } else if (typeof(value) === 'string') {
+    } else if (typeof value === "string") {
       RNAppodeal.setCustomStateStringValue(value, key);
-    } else if (typeof(value) === 'number' && Number.isInteger(value)) {
+    } else if (typeof value === "number" && Number.isInteger(value)) {
       RNAppodeal.setCustomStateIntegerValue(value, key);
-    } else if (typeof(value) === 'number') {
+    } else if (typeof value === "number") {
       RNAppodeal.setCustomStateDoubleValue(value, key);
-    } else if (typeof(value) === 'boolean') {
+    } else if (typeof value === "boolean") {
       RNAppodeal.setCustomStateBooleanValue(value, key);
-    }  else if (value === null) {
+    } else if (value === null) {
       RNAppodeal.removeCustomStateValue(key);
     }
   },
