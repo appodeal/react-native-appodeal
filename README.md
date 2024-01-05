@@ -148,7 +148,7 @@ Add dependencies into `build.gradle` (module: app)
 ``` groovy
 dependencies {
     ...
-    implementation 'com.appodeal.ads:sdk:3.2.0.+'
+    implementation 'com.appodeal.ads:sdk:3.2.1.0-beta.1'
     ...
 }
 ```
@@ -526,19 +526,52 @@ Appodeal.hide(AppodealAdType.BANNER_TOP)
 
 ## GDPR/CCPA
 
-Appodeal since 3.0.0 is supports GDPR and CCPA regulations by default. It will automatically detect regulation zone and show all required consent dialog at the very first initialization moment if it is needed. You are still able to use own custom approach. In this case set user consent prior Appodeal SDK initialization by using following code.
+Appodeal since 3.0.0 is supports GDPR and CCPA regulations by default. It will automatically detect 
+regulation zone and show all required consent dialog at the very first initialization moment if it is needed. 
+
+> Since **v3.2.2** plugin fully supports TCFv2 and Google UMP. To properly set UMP messages 
+> please read [the following guide](https://docs.appodeal.com/advanced/google-cmp-and-tcfv2-support).
+
+If you need more control of user consent in your app you can manually request consent information update,
+show form or revokes previously obtained user consent
 
 ``` javascript
+
 import {
     Appodeal,
-    AppodealGDPRConsentStatus,
-    AppodealCCPAConsentStatus,
+    AppodealConsentStatus
 } from 'react-native-appodeal';
 
-// If user in GDPR use this method
-Appodeal.updateGDPRConsent(AppodealGDPRConsentStatus.PERSONALIZED);
-// If user in CCPA use this method
-Appodeal.updateCCPAConsent(AppodealCCPAConsentStatus.OPT_IN)
+// Get current consent status
+switch (Appodeal.consentStatus()) {
+    case AppodealConsentStatus.UNKNOWN: 
+        // The SDK did not request consent info update yet
+    case AppodealConsentStatus.REQUIRED:
+        // A user is under regulations and should provides a consent
+    case AppodealConsentStatus.NOT_REQUIRED:
+        // A user is not under regulations
+    case AppodealConsentStatus.OBTAINED:
+        // A user is under regulations and and already provides a consent
+}
+
+// Request consent info update promise that returns updated status
+Appodeal.requestConsentInfoUpdate('Your app key')
+    .then((status) => console.log(status))
+    .catch((error) => console.log(error))
+
+// Load and show consent form only if consent status is REQUIRED
+Appodeal.showConsentFormIfNeeded()
+    .then((status) => console.log(status))
+    .catch((error) => console.log(error))
+
+// Force load and show consent form 
+Appodeal.showConsentForm()
+    .then((status) => console.log(status))
+    .catch((error) => console.log(error))
+
+// Removes previously obtained consent
+Appodeal.revokeConsent();
+
 ```
 
 ## Measurment
@@ -694,17 +727,33 @@ MREC view has explicit callbacks.
 
 ## Changelog
 
+3.2.2-Beta 
+
+* Update Appodeal 3.2.1-beta.1
+* Supports TCFv2 and Google UMP
+* Removes `updateGDPRConsent`
+* Removes `updateCCPAConsent`
+* Adds `consentStatus`
+* Adds `requestConsentInfoUpdate`
+* Adds `showConsentFormIfNeeded`
+* Adds `showConsentForm`
+* Adds `revokeConsent`
+
+
 3.2.1
 
 * Update Appodeal to 3.2.0 (stable)
+
 
 3.2.0-Beta
 
 * Update Appodeal to 3.2.0-beta.1
 
+
 3.1.4
 
 * Switch to stable release
+
 
 3.1.3-Beta
 
@@ -712,19 +761,23 @@ MREC view has explicit callbacks.
 * Update Banner View for Android
 * Split Mrec and Banner Views
 
+
 3.0.2
 
 * Update Appodeal to 3.0.2
- 
+
+
 3.0.1
 
 * Update Appodeal to 3.0.1 
 * Add ad revenue callback
 
+
 3.0.0 
 
 * Update Appodeal to 3.0.0 
 * Refactor plugin API. See doc above
+
 
 2.11.0
 
@@ -739,23 +792,28 @@ Appodeal.disableWriteExternalStoragePermissionCheck();
 Appodeal.requestAndroidMPermissions(params => {});
 ```
  
+
 2.10.3
 
 * Update Appodeal to 2.10.3 (Stable)
 * Improvements of AppodealBanner behaviour
 
+
 2.10.2
 
 * Update Appodeal to 2.10.2 (Stable)
+
 
 2.10.1 
 
 * Update Appodeal to 2.10.1 (Stable)
 
+
 2.10.0-Beta
 
 * Update Appodeal to 2.10.0 (Beta)
 * [iOS] Fix `disableNetwork` method
+
 
 2.9.1
 
@@ -766,20 +824,24 @@ Appodeal.requestAndroidMPermissions(params => {});
 
 * Update Appodeal to 2.9.0 (Beta)
 
+
 2.8.2
 
 * Update Appodeal to 2.8.1 (Stable)
+
 
 2.8.1-Beta
 
 * Update Appodeal to 2.8.1 (Beta)
 * [Android] Add method `setSharedAdsInstanceAcrossActivities`
 
+
 2.7.7
 
 * [iOS] Fix `setOnLoadedTriggerBoth` method
 * [Android] Fix `requestAndroidMPermissions` method
 * Fix paramaters in `AppodealRewardedEvent.CLOSED` callback
+
 
 2.7.6
 
@@ -791,14 +853,17 @@ Appodeal.requestAndroidMPermissions(params => {});
 
 * Update Appodeal to 2.8.0 
 
+
 2.7.5
 
 * [iOS] Add smart banners to banner view. Change pod dependency to Appodeal to 2.7.4
+
 
 2.7.4
 
 * [iOS] Update Appodeal to 2.7.4
 * [Android] Fixes in banner view
+
 
 2.7.3-Beta
 
@@ -810,10 +875,12 @@ Appodeal.requestAndroidMPermissions(params => {});
 * Update Appodeal to 2.7.2-Beta
 * Add deeper Consent Manager integration
 
+
 2.6.5
 
 * Update Appodeal to 2.6.5
 * Fix iOS banner view
+
 
 2.6.4
 
@@ -821,11 +888,13 @@ Appodeal.requestAndroidMPermissions(params => {});
 * Add banner view and MREC support
 * Add Consent Manager support
 
+
 2.6.3
 
 * Update Appodeal to 2.6.3
 * Refactor plugin
 * Update dependency management
+
 
 2.1.4 
 

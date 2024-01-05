@@ -17,9 +17,6 @@ export const AdvancedFeaturesScreen = () => {
   const [smartBanners, setSmartBanners] = React.useState(_smartBanners);
   const [tabletBanners, setTabletBanners] = React.useState(_tabletBanners);
 
-  let gdpr = ['Unknown', 'Personalized', 'Non personalized'];
-  let ccpa = ['Unknown', 'Opt In', 'Opt Out'];
-
   const smartBannersSwitch = () => (
     <Switch
       value={smartBanners}

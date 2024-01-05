@@ -9,8 +9,8 @@ source "https://github.com/appodeal/CocoaPods.git"
 source "https://cdn.cocoapods.org/"
 
 def appodeal
-  # pod "APDAdColonyAdapter", "3.2.1.0-beta.1"
-  # pod "BidMachineAdColonyAdapter", "~> 2.4.0"
+  pod "APDAdColonyAdapter", "3.2.1.0-beta.1"
+  pod "BidMachineAdColonyAdapter", "~> 2.4.0"
   pod "APDAdjustAdapter", "3.2.1.0-beta.1"
   pod "APDAppLovinAdapter", "3.2.1.0-beta.1"
   pod "BidonAdapterAppLovin", "~> 0.4.7"

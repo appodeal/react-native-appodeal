@@ -1,4 +1,5 @@
 PODS:
+  - AdColony (4.9.0)
   - Adjust (4.37.0):
     - Adjust/Core (= 4.37.0)
   - Adjust/Core (4.37.0)
@@ -10,6 +11,9 @@ PODS:
   - Ads-Global/Dep_Compatible (5.2.1.0):
     - BURelyFoundation_Global/Pangle (~> 0.1.1.0)
   - AmazonPublisherServicesSDK (4.7.6)
+  - APDAdColonyAdapter (3.2.1.0-beta.1):
+    - AdColony (= 4.9.0)
+    - Appodeal (= 3.2.1-beta.1)
   - APDAdjustAdapter (3.2.1.0-beta.1):
     - Adjust (~> 4.37.0)
     - AdjustPurchase (= 1.0.1)
@@ -117,6 +121,9 @@ PODS:
     - BidMachine/ModulesCore
   - BidMachine/ModulesCore (2.4.0.0):
     - BidMachine/ApiCore
+  - BidMachineAdColonyAdapter (2.4.0.0):
+    - AdColony (= 4.9.0)
+    - BidMachine (~> 2.4.0.0)
   - BidMachineAmazonAdapter (2.4.0.0):
     - AmazonPublisherServicesSDK (= 4.7.6)
     - BidMachine (~> 2.4.0.0)
@@ -801,6 +808,7 @@ PODS:
   - Yoga (1.14.0)
 
 DEPENDENCIES:
+  - APDAdColonyAdapter (= 3.2.1.0-beta.1)
   - APDAdjustAdapter (= 3.2.1.0-beta.1)
   - APDAppLovinAdapter (= 3.2.1.0-beta.1)
   - APDAppsFlyerAdapter (= 3.2.1.0-beta.1)
@@ -822,6 +830,7 @@ DEPENDENCIES:
   - APDUnityAdapter (= 3.2.1.0-beta.1)
   - APDVungleAdapter (= 3.2.1.0-beta.1)
   - APDYandexAdapter (= 3.2.1.0-beta.1)
+  - BidMachineAdColonyAdapter (~> 2.4.0)
   - BidMachineAmazonAdapter (= 2.4.0)
   - BidMachineCriteoAdapter (~> 2.4.0)
   - BidMachineMetaAudienceAdapter (~> 2.4.0)
@@ -885,6 +894,7 @@ DEPENDENCIES:
 SPEC REPOS:
   https://github.com/appodeal/CocoaPods.git:
     - AdjustPurchase
+    - APDAdColonyAdapter
     - APDAdjustAdapter
     - APDAppLovinAdapter
     - APDAppsFlyerAdapter
@@ -908,6 +918,7 @@ SPEC REPOS:
     - APDYandexAdapter
     - Appodeal
     - BidMachine
+    - BidMachineAdColonyAdapter
     - BidMachineAmazonAdapter
     - BidMachineCriteoAdapter
     - BidMachineMetaAudienceAdapter
@@ -923,6 +934,7 @@ SPEC REPOS:
     - StackModules
     - StackProtobuf
   trunk:
+    - AdColony
     - Adjust
     - Ads-Global
     - AmazonPublisherServicesSDK
@@ -1057,10 +1069,12 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon/yoga"
 
 SPEC CHECKSUMS:
+  AdColony: af8b7414f317641e0e1e9d23a7b739879e40e4b9
   Adjust: 86a6935688251ca6cea371f9b284578ccf3d981b
   AdjustPurchase: a6688375a589f10a455adb9217c7de55eba93d63
   Ads-Global: 4a4434e2041e974a4f4e2d6aeb0bc003f2f05925
   AmazonPublisherServicesSDK: 42e44affd14820c7ca17e55934fe8e53f5fb9ca0
+  APDAdColonyAdapter: 5c4c8071626614e97580a299c8db51fe49c1d25a
   APDAdjustAdapter: 53d0d28d0478b69bee9317cbc5c017b5db699e7b
   APDAppLovinAdapter: 951c7da7a697f7f0ec9b3629192ab79e60380bfc
   APDAppsFlyerAdapter: 48390a3095684b005f7da23f2c501abe1f833b74
@@ -1087,6 +1101,7 @@ SPEC CHECKSUMS:
   AppsFlyer-AdRevenue: a38170b0b59f74cd07c7a9b91ee026f147b5c968
   AppsFlyerFramework: fdc5c2fa3a3cfcd62eae58dfba4b8f59c6c77219
   BidMachine: f5969d3a6ca86154fe607c7f50c69ac3b0a05f34
+  BidMachineAdColonyAdapter: 417270a66e63511a06fef064e507b4988df88441
   BidMachineAmazonAdapter: aed4ef61e8e780c25e00d17af2c27e39f23c6894
   BidMachineCriteoAdapter: 43a2fca76e05ccdcc6afa0838177c874d39cc818
   BidMachineMetaAudienceAdapter: b5aa268f49be02556c50bc1994f8a87317a94ae5
@@ -1188,6 +1203,6 @@ SPEC CHECKSUMS:
   YandexMobileMetrica: f5368ee93f286c793d73b58da00929babfc897c1
   Yoga: 2ed968a4f060a92834227c036279f2736de0fce3
 
-PODFILE CHECKSUM: 281adeffcf508f4d32bd16998c9bfbbccbb0f638
+PODFILE CHECKSUM: 85970ffe548d4c4be3d1a540c769d618bcc80365
 
 COCOAPODS: 1.14.3
