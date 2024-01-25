@@ -11,95 +11,89 @@ PODS:
   - Ads-Global/Dep_Compatible (5.2.1.0):
     - BURelyFoundation_Global/Pangle (~> 0.1.1.0)
   - AmazonPublisherServicesSDK (4.7.6)
-  - APDAdColonyAdapter (3.2.1.0-beta.1):
+  - APDAdColonyAdapter (3.2.1.0):
     - AdColony (= 4.9.0)
-    - Appodeal (= 3.2.1-beta.1)
-  - APDAdjustAdapter (3.2.1.0-beta.1):
+    - Appodeal (= 3.2.1)
+  - APDAdjustAdapter (3.2.1.0):
     - Adjust (~> 4.37.0)
     - AdjustPurchase (= 1.0.1)
-    - Appodeal (= 3.2.1-beta.1)
-  - APDAppLovinAdapter (3.2.1.0-beta.1):
+    - Appodeal (= 3.2.1)
+  - APDAppLovinAdapter (3.2.1.0):
     - AppLovinSDK (~> 12.1.0)
-    - Appodeal (= 3.2.1-beta.1)
-  - APDAppsFlyerAdapter (3.2.1.0-beta.1):
-    - Appodeal (= 3.2.1-beta.1)
+    - Appodeal (= 3.2.1)
+  - APDAppsFlyerAdapter (3.2.1.0):
+    - Appodeal (= 3.2.1)
     - AppsFlyer-AdRevenue (~> 6.9.1)
     - AppsFlyerFramework (~> 6.12.2)
-  - APDBidMachineAdapter (3.2.1.0-beta.1):
-    - Appodeal (= 3.2.1-beta.1)
+  - APDBidMachineAdapter (3.2.1.0):
+    - Appodeal (= 3.2.1)
     - BidMachine (~> 2.4.0)
-    - GoogleAppMeasurement
-    - GoogleUserMessagingPlatform
-    - GoogleUtilities
-  - APDBidonAdapter (3.2.1.0-beta.1):
-    - Appodeal (= 3.2.1-beta.1)
+  - APDBidonAdapter (3.2.1.0):
+    - Appodeal (= 3.2.1)
     - Bidon (~> 0.4.7)
-    - GoogleAppMeasurement
-    - GoogleUserMessagingPlatform
-    - GoogleUtilities
-  - APDBigoAdsAdapter (3.2.1.0-beta.1):
-    - Appodeal (= 3.2.1-beta.1)
+  - APDBigoAdsAdapter (3.2.1.0):
+    - Appodeal (= 3.2.1)
     - BigoADS (~> 4.1.1)
-  - APDDTExchangeAdapter (3.2.1.0-beta.1):
-    - Appodeal (= 3.2.1-beta.1)
+  - APDDTExchangeAdapter (3.2.1.0):
+    - Appodeal (= 3.2.1)
     - Fyber_Marketplace_SDK (~> 8.2.6)
-  - APDFacebookAdapter (3.2.1.0-beta.1):
-    - Appodeal (= 3.2.1-beta.1)
+  - APDFacebookAdapter (3.2.1.0):
+    - Appodeal (= 3.2.1)
     - FBSDKCoreKit (~> 16.0.1)
-  - APDFirebaseAdapter (3.2.1.0-beta.1):
-    - Appodeal (= 3.2.1-beta.1)
+  - APDFirebaseAdapter (3.2.1.0):
+    - Appodeal (= 3.2.1)
     - Firebase/Analytics (~> 10.15)
     - Firebase/Core (~> 10.15)
     - Firebase/RemoteConfig (~> 10.15)
     - GoogleAppMeasurement
     - GoogleUserMessagingPlatform
     - GoogleUtilities
-  - APDGoogleAdMobAdapter (3.2.1.0-beta.1):
-    - Appodeal (= 3.2.1-beta.1)
+  - APDGoogleAdMobAdapter (3.2.1.0):
+    - Appodeal (= 3.2.1)
     - Google-Mobile-Ads-SDK (= 10.14.0)
     - GoogleAppMeasurement
     - GoogleUserMessagingPlatform
     - GoogleUtilities
-  - APDIABAdapter (3.2.1.0-beta.1):
-    - Appodeal (= 3.2.1-beta.1)
-  - APDInMobiAdapter (3.2.1.0-beta.1):
-    - Appodeal (= 3.2.1-beta.1)
+  - APDIABAdapter (3.2.1.0):
+    - Appodeal (= 3.2.1)
+  - APDInMobiAdapter (3.2.1.0):
+    - Appodeal (= 3.2.1)
     - InMobiSDK (~> 10.6.0)
-  - APDIronSourceAdapter (3.2.1.0-beta.1):
-    - Appodeal (= 3.2.1-beta.1)
+  - APDIronSourceAdapter (3.2.1.0):
+    - Appodeal (= 3.2.1)
     - IronSourceSDK (= 7.6.0)
-  - APDMetaAudienceNetworkAdapter (3.2.1.0-beta.1):
-    - Appodeal (= 3.2.1-beta.1)
+  - APDMetaAudienceNetworkAdapter (3.2.1.0):
+    - Appodeal (= 3.2.1)
     - FBAudienceNetwork (= 6.12.0)
-  - APDMintegralAdapter (3.2.1.0-beta.1):
-    - Appodeal (= 3.2.1-beta.1)
+  - APDMintegralAdapter (3.2.1.0):
+    - Appodeal (= 3.2.1)
     - MintegralAdSDK (~> 7.5.3)
-  - APDMyTargetAdapter (3.2.1.0-beta.1):
-    - Appodeal (= 3.2.1-beta.1)
+  - APDMyTargetAdapter (3.2.1.0):
+    - Appodeal (= 3.2.1)
     - myTargetSDK (~> 5.20.1)
-  - APDStackAnalyticsAdapter (3.2.1.0-beta.1):
-    - Appodeal (= 3.2.1-beta.1)
+  - APDStackAnalyticsAdapter (3.2.1.0):
+    - Appodeal (= 3.2.1)
     - StackAnalytics (~> 1.4.4)
     - StackIAB (~> 2.3.0)
     - StackModules (~> 1.6.0)
-  - APDStackCrashReporterAdapter (3.2.1.0-beta.1):
-    - Appodeal (= 3.2.1-beta.1)
+  - APDStackCrashReporterAdapter (3.2.1.0):
+    - Appodeal (= 3.2.1)
     - StackAnalytics (~> 1.4.4)
     - StackIAB (~> 2.3.0)
     - StackModules (~> 1.6.0)
-  - APDUnityAdapter (3.2.1.0-beta.1):
-    - Appodeal (= 3.2.1-beta.1)
+  - APDUnityAdapter (3.2.1.0):
+    - Appodeal (= 3.2.1)
     - UnityAds (= 4.9.2)
-  - APDVungleAdapter (3.2.1.0-beta.1):
-    - Appodeal (= 3.2.1-beta.1)
+  - APDVungleAdapter (3.2.1.0):
+    - Appodeal (= 3.2.1)
     - VungleAds (= 7.2.0)
-  - APDYandexAdapter (3.2.1.0-beta.1):
-    - Appodeal (= 3.2.1-beta.1)
+  - APDYandexAdapter (3.2.1.0):
+    - Appodeal (= 3.2.1)
     - YandexMobileAds (= 5.2.1)
   - AppLovinSDK (12.1.0)
-  - Appodeal (3.2.1-beta.1):
+  - Appodeal (3.2.1):
     - Protobuf
-    - StackConsentManager (= 2.0.0)
+    - StackConsentManager (~> 2.0.1)
     - StackIAB (~> 2.3.0)
     - StackModules (~> 1.6.0)
     - StackProtobuf (~> 0.8.0)
@@ -236,20 +230,20 @@ PODS:
     - FBAEMKit (= 16.0.1)
     - FBSDKCoreKit_Basics (= 16.0.1)
   - FBSDKCoreKit_Basics (16.0.1)
-  - Firebase/Analytics (10.19.0):
+  - Firebase/Analytics (10.20.0):
     - Firebase/Core
-  - Firebase/Core (10.19.0):
+  - Firebase/Core (10.20.0):
     - Firebase/CoreOnly
-    - FirebaseAnalytics (~> 10.19.0)
-  - Firebase/CoreOnly (10.19.0):
-    - FirebaseCore (= 10.19.0)
-  - Firebase/RemoteConfig (10.19.0):
+    - FirebaseAnalytics (~> 10.20.0)
+  - Firebase/CoreOnly (10.20.0):
+    - FirebaseCore (= 10.20.0)
+  - Firebase/RemoteConfig (10.20.0):
     - Firebase/CoreOnly
-    - FirebaseRemoteConfig (~> 10.19.0)
-  - FirebaseABTesting (10.19.0):
+    - FirebaseRemoteConfig (~> 10.20.0)
+  - FirebaseABTesting (10.20.0):
     - FirebaseCore (~> 10.0)
-  - FirebaseAnalytics (10.19.0):
-    - FirebaseAnalytics/AdIdSupport (= 10.19.0)
+  - FirebaseAnalytics (10.20.0):
+    - FirebaseAnalytics/AdIdSupport (= 10.20.0)
     - FirebaseCore (~> 10.0)
     - FirebaseInstallations (~> 10.0)
     - GoogleUtilities/AppDelegateSwizzler (~> 7.11)
@@ -257,55 +251,55 @@ PODS:
     - GoogleUtilities/Network (~> 7.11)
     - "GoogleUtilities/NSData+zlib (~> 7.11)"
     - nanopb (< 2.30910.0, >= 2.30908.0)
-  - FirebaseAnalytics/AdIdSupport (10.19.0):
+  - FirebaseAnalytics/AdIdSupport (10.20.0):
     - FirebaseCore (~> 10.0)
     - FirebaseInstallations (~> 10.0)
-    - GoogleAppMeasurement (= 10.19.0)
+    - GoogleAppMeasurement (= 10.20.0)
     - GoogleUtilities/AppDelegateSwizzler (~> 7.11)
     - GoogleUtilities/MethodSwizzler (~> 7.11)
     - GoogleUtilities/Network (~> 7.11)
     - "GoogleUtilities/NSData+zlib (~> 7.11)"
     - nanopb (< 2.30910.0, >= 2.30908.0)
-  - FirebaseCore (10.19.0):
+  - FirebaseCore (10.20.0):
     - FirebaseCoreInternal (~> 10.0)
     - GoogleUtilities/Environment (~> 7.12)
     - GoogleUtilities/Logger (~> 7.12)
-  - FirebaseCoreInternal (10.19.0):
+  - FirebaseCoreInternal (10.20.0):
     - "GoogleUtilities/NSData+zlib (~> 7.8)"
-  - FirebaseInstallations (10.19.0):
+  - FirebaseInstallations (10.20.0):
     - FirebaseCore (~> 10.0)
     - GoogleUtilities/Environment (~> 7.8)
     - GoogleUtilities/UserDefaults (~> 7.8)
     - PromisesObjC (~> 2.1)
-  - FirebaseRemoteConfig (10.19.0):
+  - FirebaseRemoteConfig (10.20.0):
     - FirebaseABTesting (~> 10.0)
     - FirebaseCore (~> 10.0)
     - FirebaseInstallations (~> 10.0)
     - FirebaseSharedSwift (~> 10.0)
     - GoogleUtilities/Environment (~> 7.8)
     - "GoogleUtilities/NSData+zlib (~> 7.8)"
-  - FirebaseSharedSwift (10.19.0)
+  - FirebaseSharedSwift (10.20.0)
   - fmt (6.2.1)
   - Fyber_Marketplace_SDK (8.2.6)
   - glog (0.3.5)
   - Google-Mobile-Ads-SDK (10.14.0):
     - GoogleAppMeasurement (< 11.0, >= 7.0)
     - GoogleUserMessagingPlatform (>= 1.1)
-  - GoogleAppMeasurement (10.19.0):
-    - GoogleAppMeasurement/AdIdSupport (= 10.19.0)
+  - GoogleAppMeasurement (10.20.0):
+    - GoogleAppMeasurement/AdIdSupport (= 10.20.0)
     - GoogleUtilities/AppDelegateSwizzler (~> 7.11)
     - GoogleUtilities/MethodSwizzler (~> 7.11)
     - GoogleUtilities/Network (~> 7.11)
     - "GoogleUtilities/NSData+zlib (~> 7.11)"
     - nanopb (< 2.30910.0, >= 2.30908.0)
-  - GoogleAppMeasurement/AdIdSupport (10.19.0):
-    - GoogleAppMeasurement/WithoutAdIdSupport (= 10.19.0)
+  - GoogleAppMeasurement/AdIdSupport (10.20.0):
+    - GoogleAppMeasurement/WithoutAdIdSupport (= 10.20.0)
     - GoogleUtilities/AppDelegateSwizzler (~> 7.11)
     - GoogleUtilities/MethodSwizzler (~> 7.11)
     - GoogleUtilities/Network (~> 7.11)
     - "GoogleUtilities/NSData+zlib (~> 7.11)"
     - nanopb (< 2.30910.0, >= 2.30908.0)
-  - GoogleAppMeasurement/WithoutAdIdSupport (10.19.0):
+  - GoogleAppMeasurement/WithoutAdIdSupport (10.20.0):
     - GoogleUtilities/AppDelegateSwizzler (~> 7.11)
     - GoogleUtilities/MethodSwizzler (~> 7.11)
     - GoogleUtilities/Network (~> 7.11)
@@ -384,7 +378,7 @@ PODS:
     - MintegralAdSDK/NativeAd
   - myTargetSDK (5.20.1):
     - myTrackerSDK (~> 3.1.1)
-  - myTrackerSDK (3.1.3)
+  - myTrackerSDK (3.1.5)
   - nanopb (2.30909.1):
     - nanopb/decode (= 2.30909.1)
     - nanopb/encode (= 2.30909.1)
@@ -392,7 +386,7 @@ PODS:
   - nanopb/encode (2.30909.1)
   - OMSDK_Appodeal (1.4.2.0)
   - PromisesObjC (2.3.1)
-  - Protobuf (3.25.1)
+  - Protobuf (3.25.2)
   - RCT-Folly (2021.07.22.00):
     - boost
     - DoubleConversion
@@ -672,8 +666,8 @@ PODS:
     - React-jsi (= 0.70.3)
     - React-logger (= 0.70.3)
     - React-perflogger (= 0.70.3)
-  - RNAppodeal (3.2.2):
-    - Appodeal (= 3.2.1-beta.1)
+  - RNAppodeal (3.2.3):
+    - Appodeal (= 3.2.1)
     - React
   - RNScreens (3.29.0):
     - React-Core
@@ -738,7 +732,7 @@ PODS:
     - StackAnalytics/Base
     - StackAnalytics/Crashes
     - StackModules (~> 1.6.0)
-  - StackConsentManager (2.0.0):
+  - StackConsentManager (2.0.1):
     - GoogleUserMessagingPlatform (~> 2.1)
   - StackIAB (2.3.4):
     - StackIAB/StackIABAssets (= 2.3.4)
@@ -808,28 +802,28 @@ PODS:
   - Yoga (1.14.0)
 
 DEPENDENCIES:
-  - APDAdColonyAdapter (= 3.2.1.0-beta.1)
-  - APDAdjustAdapter (= 3.2.1.0-beta.1)
-  - APDAppLovinAdapter (= 3.2.1.0-beta.1)
-  - APDAppsFlyerAdapter (= 3.2.1.0-beta.1)
-  - APDBidMachineAdapter (= 3.2.1.0-beta.1)
-  - APDBidonAdapter (= 3.2.1.0-beta.1)
-  - APDBigoAdsAdapter (= 3.2.1.0-beta.1)
-  - APDDTExchangeAdapter (= 3.2.1.0-beta.1)
-  - APDFacebookAdapter (= 3.2.1.0-beta.1)
-  - APDFirebaseAdapter (= 3.2.1.0-beta.1)
-  - APDGoogleAdMobAdapter (= 3.2.1.0-beta.1)
-  - APDIABAdapter (= 3.2.1.0-beta.1)
-  - APDInMobiAdapter (= 3.2.1.0-beta.1)
-  - APDIronSourceAdapter (= 3.2.1.0-beta.1)
-  - APDMetaAudienceNetworkAdapter (= 3.2.1.0-beta.1)
-  - APDMintegralAdapter (= 3.2.1.0-beta.1)
-  - APDMyTargetAdapter (= 3.2.1.0-beta.1)
-  - APDStackAnalyticsAdapter (= 3.2.1.0-beta.1)
-  - APDStackCrashReporterAdapter (= 3.2.1.0-beta.1)
-  - APDUnityAdapter (= 3.2.1.0-beta.1)
-  - APDVungleAdapter (= 3.2.1.0-beta.1)
-  - APDYandexAdapter (= 3.2.1.0-beta.1)
+  - APDAdColonyAdapter (= 3.2.1.0)
+  - APDAdjustAdapter (= 3.2.1.0)
+  - APDAppLovinAdapter (= 3.2.1.0)
+  - APDAppsFlyerAdapter (= 3.2.1.0)
+  - APDBidMachineAdapter (= 3.2.1.0)
+  - APDBidonAdapter (= 3.2.1.0)
+  - APDBigoAdsAdapter (= 3.2.1.0)
+  - APDDTExchangeAdapter (= 3.2.1.0)
+  - APDFacebookAdapter (= 3.2.1.0)
+  - APDFirebaseAdapter (= 3.2.1.0)
+  - APDGoogleAdMobAdapter (= 3.2.1.0)
+  - APDIABAdapter (= 3.2.1.0)
+  - APDInMobiAdapter (= 3.2.1.0)
+  - APDIronSourceAdapter (= 3.2.1.0)
+  - APDMetaAudienceNetworkAdapter (= 3.2.1.0)
+  - APDMintegralAdapter (= 3.2.1.0)
+  - APDMyTargetAdapter (= 3.2.1.0)
+  - APDStackAnalyticsAdapter (= 3.2.1.0)
+  - APDStackCrashReporterAdapter (= 3.2.1.0)
+  - APDUnityAdapter (= 3.2.1.0)
+  - APDVungleAdapter (= 3.2.1.0)
+  - APDYandexAdapter (= 3.2.1.0)
   - BidMachineAdColonyAdapter (~> 2.4.0)
   - BidMachineAmazonAdapter (= 2.4.0)
   - BidMachineCriteoAdapter (~> 2.4.0)
@@ -1074,30 +1068,30 @@ SPEC CHECKSUMS:
   AdjustPurchase: a6688375a589f10a455adb9217c7de55eba93d63
   Ads-Global: 4a4434e2041e974a4f4e2d6aeb0bc003f2f05925
   AmazonPublisherServicesSDK: 42e44affd14820c7ca17e55934fe8e53f5fb9ca0
-  APDAdColonyAdapter: 5c4c8071626614e97580a299c8db51fe49c1d25a
-  APDAdjustAdapter: 53d0d28d0478b69bee9317cbc5c017b5db699e7b
-  APDAppLovinAdapter: 951c7da7a697f7f0ec9b3629192ab79e60380bfc
-  APDAppsFlyerAdapter: 48390a3095684b005f7da23f2c501abe1f833b74
-  APDBidMachineAdapter: 23a513c9206c2d20d5f08fca5c32a68ea2511f6e
-  APDBidonAdapter: 14c718df5138b2abaa0f99c08ba73c49c5f932a5
-  APDBigoAdsAdapter: 49ca15fcbce69547ca6436e981f9e33d853c9eee
-  APDDTExchangeAdapter: 1325d1b0d5b28b3586fd80facee173566b843acb
-  APDFacebookAdapter: dc76c5431111cc5204947a2a3eab641e6fe989e0
-  APDFirebaseAdapter: af736376192044512f7ca4c35f4a12cb2be09c39
-  APDGoogleAdMobAdapter: 251ed7e74cc81d9278070e3940cad15c10005465
-  APDIABAdapter: 26219ea44760fc1b6428bf33ff603d97e4353fb6
-  APDInMobiAdapter: db79c0ef60fac0c7269a2aeb1e4db420dba96e2b
-  APDIronSourceAdapter: b4d95472a681fc8bb36417ff14a62f6a587db6d6
-  APDMetaAudienceNetworkAdapter: ca19200b484163d30f69df9d9e1a3e8cdf34caf6
-  APDMintegralAdapter: 8fc89f44fd6e7a13ecea701c7f8eed7c7b273a31
-  APDMyTargetAdapter: 84f72e8d1c922f9492fb6d57d9c4f58c617ab77d
-  APDStackAnalyticsAdapter: f9e3991c5eeb8fbca1bbd42fee125360241e77c8
-  APDStackCrashReporterAdapter: 00708364462ba1197d7328d9cfac8fe438b9cd52
-  APDUnityAdapter: 793997379f8447fcca84023edf809c50fae38981
-  APDVungleAdapter: 024ad8b8ae008db2cad7e02f46bac7be417f99e9
-  APDYandexAdapter: 3f85ccca8539fe4c127e520eafc1bbb0c2c13085
+  APDAdColonyAdapter: d7df49c724ca95f42f3905ad3174387d8ec6c1aa
+  APDAdjustAdapter: 61c964798789cfbd58a5759afd6339963556be54
+  APDAppLovinAdapter: 0f662c2f24fe3000f524452998ab6ab0d8ff3627
+  APDAppsFlyerAdapter: c2e6f17d40319e5f8a3ff2794cf596aaae0dae03
+  APDBidMachineAdapter: 0ad62ad0fde0375f9f613ee4268c25342cd0936c
+  APDBidonAdapter: 75ff0185078dc83f333a293b55f4970153926c32
+  APDBigoAdsAdapter: 3841bf8730a3bff3b791e631c21e355130c35fce
+  APDDTExchangeAdapter: 1868d40c12c08d44c65ac6bf4266ab863b8a51a3
+  APDFacebookAdapter: e4a64a5160e059caca211876295bd332b2f8e057
+  APDFirebaseAdapter: 78f0a9e522bba8dbb4b94bc2f6eaec495aff30cb
+  APDGoogleAdMobAdapter: 04abd71cd6cc523a28329ba9f7b8adcb62c248d6
+  APDIABAdapter: b648e71b5f2e05759c5b616e0f5745f08f00fb93
+  APDInMobiAdapter: 3387ba9ea3e01c21744ece43a08eef0339800f5d
+  APDIronSourceAdapter: 5347c78fc506f5b80b6fa1f5a12b8352f92623f7
+  APDMetaAudienceNetworkAdapter: 1f94d6fb0acb5df56ffbe36fb8ef827a30fa6088
+  APDMintegralAdapter: 4a574a306b2488a4547688d3ff53e890df122af3
+  APDMyTargetAdapter: 01085dca38c90bdd480aee502063fbb46f65a90f
+  APDStackAnalyticsAdapter: 495cbe99d2f10d20976c911d2e1f0a578a750e42
+  APDStackCrashReporterAdapter: f4586f6c9fdf3f63077c983de17ca64f528f7647
+  APDUnityAdapter: b7b718b66df0b0492fabab096607137518e7f493
+  APDVungleAdapter: c90adc2a32b141d2f397e8680b5c3af7fadf3857
+  APDYandexAdapter: 862ad24e9c58f8e359bc451c79e753cc0a0a6530
   AppLovinSDK: 179d509c258e01a3a77eb8416f0ba843a12ed322
-  Appodeal: 41e752165a1bd83387b4215375f17b4ee2ccd59d
+  Appodeal: 832e9ef5374f3dc9c4236fc7db78acfe4b5f0ef2
   AppsFlyer-AdRevenue: a38170b0b59f74cd07c7a9b91ee026f147b5c968
   AppsFlyerFramework: fdc5c2fa3a3cfcd62eae58dfba4b8f59c6c77219
   BidMachine: f5969d3a6ca86154fe607c7f50c69ac3b0a05f34
@@ -1135,30 +1129,30 @@ SPEC CHECKSUMS:
   FBReactNativeSpec: 99a7ecb7e9665d96f2fea706b0844e2f3117f381
   FBSDKCoreKit: 2cb033464b2134af0138f87d20b859eb3f9be359
   FBSDKCoreKit_Basics: d37280da2e65872f0e931d15f45d97ea324fec37
-  Firebase: 63ce8ece0d43743dc28eacac0c6867a2d7fd5a9d
-  FirebaseABTesting: bfa3b384b68cee10a89183649c64cd7998a37a12
-  FirebaseAnalytics: 87513010b13b7c8610164d3602ea10571f76afc1
-  FirebaseCore: dc5c7badf99d47613c52b2e3a57a64cd187f8554
-  FirebaseCoreInternal: b444828ea7cfd594fca83046b95db98a2be4f290
-  FirebaseInstallations: 033d199474164db20c8350736842a94fe717b960
-  FirebaseRemoteConfig: a7fcc7a5941faa7e09248e91c8797340aa4c85f6
-  FirebaseSharedSwift: f34eeb7d3ea87a34497629b6ca41657beadef76a
+  Firebase: 10c8cb12fb7ad2ae0c09ffc86cd9c1ab392a0031
+  FirebaseABTesting: 1d5d49804bcfc5fa782bc2491a8c1364e2cf7241
+  FirebaseAnalytics: a2731bf3670747ce8f65368b118d18aa8e368246
+  FirebaseCore: 28045c1560a2600d284b9c45a904fe322dc890b6
+  FirebaseCoreInternal: efeeb171ac02d623bdaefe121539939821e10811
+  FirebaseInstallations: 558b1da7d65afeb996fd5c814332f013234ece4e
+  FirebaseRemoteConfig: b873a427a48159082361343a85649eed3f5377ea
+  FirebaseSharedSwift: 2fbf73618288b7a36b2014b957745dcdd781389e
   fmt: ff9d55029c625d3757ed641535fd4a75fedc7ce9
   Fyber_Marketplace_SDK: f41cd55ff0d5b257beccc70e5708acd350468b66
   glog: 04b94705f318337d7ead9e6d17c019bd9b1f6b1b
   Google-Mobile-Ads-SDK: 8f67a72f88d057335b1ac3f501e2b68ad054116e
-  GoogleAppMeasurement: 68afe759316673c6554dac35a0c7ae8f5d6cb4ed
+  GoogleAppMeasurement: bb3c564c3efb933136af0e94899e0a46167466a8
   GoogleUserMessagingPlatform: dce302b8f1b84d6e945812ee7a15c3f65a102cbf
   GoogleUtilities: 0759d1a57ebb953965c2dfe0ba4c82e95ccc2e34
   InMobiSDK: 7c62b28415c663b881fa7009d04e0a5484f67902
   IronSourceSDK: 276835c7199033724d947c511a372383ac2846de
   MintegralAdSDK: 8a50d604e6d6f7c2842a24645a7a260ec3805d15
   myTargetSDK: affba499915fed67642f39e3ecebe235441cf278
-  myTrackerSDK: 89275211ede8a16c1e946374bcfe68ae89e68a64
+  myTrackerSDK: 29a5ff3e80406914c4b89e34d7631b1a3f6df440
   nanopb: d4d75c12cd1316f4a64e3c6963f879ecd4b5e0d5
   OMSDK_Appodeal: f4e97878c54edd6be63259a4ba38a5491be6226a
   PromisesObjC: c50d2056b5253dadbd6c2bea79b0674bd5a52fa4
-  Protobuf: d94761c33f1239c0a43a0817ca1a5f7f7c900241
+  Protobuf: 34db13339da0d02d64fa8a2ac6a124cfcc603703
   RCT-Folly: 0080d0a6ebf2577475bda044aa59e2ca1f909cda
   RCTRequired: 5cf7e7d2f12699724b59f90350257a422eaa9492
   RCTTypeSafety: 3f3ead9673d1ab8bb1aea85b0894ab3220f8f06e
@@ -1187,12 +1181,12 @@ SPEC CHECKSUMS:
   React-RCTVibration: b9a58ffdd18446f43d493a4b0ecd603ee86be847
   React-runtimeexecutor: e9b1f9310158a1e265bcdfdfd8c62d6174b947a2
   ReactCommon: 01064177e66d652192c661de899b1076da962fd9
-  RNAppodeal: 24777e84b004f997f08dce817caeba0c5ff0eb74
+  RNAppodeal: 257062b0c445b41ec6a43504a3fe91aa42b3192d
   RNScreens: fa9b582d85ae5d62c91c66003b5278458fed7aaa
   RNVectorIcons: fcc2f6cb32f5735b586e66d14103a74ce6ad61f8
   smaato-ios-sdk: 4533e9c8c24ecefd0445a78ea89afba35412e1d1
   StackAnalytics: 9338d735b98bcede0a9d1f96a959c98c3fafd16d
-  StackConsentManager: 40bcaae6949bdfe8d972a2efdb2635f559a625e2
+  StackConsentManager: 3b68ea0aaeea01062efebb188785a6d274236d09
   StackIAB: d9451cfc4914cbf1f35cc8eba660d36fef925078
   StackModules: 380ada7dc4a46684ba20e2f0cb89874c9a614d60
   StackProtobuf: 6b78e9e5c5f7ead500a5d1527e569c4d49599a74
@@ -1203,6 +1197,6 @@ SPEC CHECKSUMS:
   YandexMobileMetrica: f5368ee93f286c793d73b58da00929babfc897c1
   Yoga: 2ed968a4f060a92834227c036279f2736de0fce3
 
-PODFILE CHECKSUM: 85970ffe548d4c4be3d1a540c769d618bcc80365
+PODFILE CHECKSUM: df6326c64673e9cc58c9307d692d7d6f2141d3e5
 
 COCOAPODS: 1.14.3
