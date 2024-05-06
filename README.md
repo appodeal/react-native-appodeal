@@ -175,7 +175,7 @@ Add dependencies into `build.gradle` (module: app)
 ``` groovy
 dependencies {
     ...
-    implementation 'com.appodeal.ads:sdk:3.2.1.+'
+    implementation 'com.appodeal.ads:sdk:3.3.0.+'
     ...
 }
 ```
@@ -410,16 +410,16 @@ Appodeal.addEventListener(
 
 where ad revenue is object that contains:
 
-|Property|Type|Desctiption|
-|---|---|---|
-|networkName|string|Name of Ad Network|
-|adUnitName|string|Name of Appodeal Ad Unit|
-|placement|string|Name of impression placement|
-|revenuePrecision|string|Revenue precision|
-|demandSource|string|Demand Source name. Bidder name in case of impression from real time bidding or name of ad network|
-|currency|string|Revenue currency. USD|
-|revenue|number|Revenue amount|
-|adType|AppodealAdType|Impression ad type|
+| Property         | Type           | Desctiption                                                                                        |
+|------------------|----------------|----------------------------------------------------------------------------------------------------|
+| networkName      | string         | Name of Ad Network                                                                                 |
+| adUnitName       | string         | Name of Appodeal Ad Unit                                                                           |
+| placement        | string         | Name of impression placement                                                                       |
+| revenuePrecision | string         | Revenue precision                                                                                  |
+| demandSource     | string         | Demand Source name. Bidder name in case of impression from real time bidding or name of ad network |
+| currency         | string         | Revenue currency. USD                                                                              |
+| revenue          | number         | Revenue amount                                                                                     |
+| adType           | AppodealAdType | Impression ad type                                                                                 |
 
 2. Banner
 
@@ -696,10 +696,10 @@ When banner is added on screen it starts to load ad automatically event if autoc
 
 Height property of banner styles should corresponds to *adSize* attribute. We recommend to use 
 
-| adSize | height |
-|---|---|
-| 'phone' | 50 |
-| 'tablet' | 90 |
+| adSize   | height |
+|----------|--------|
+| 'phone'  | 50     |
+| 'tablet' | 90     |
 
 ### Callbacks
 
