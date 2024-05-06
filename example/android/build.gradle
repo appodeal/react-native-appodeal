@@ -29,7 +29,7 @@ allprojects {
         // Android JSC is installed from npm
         maven { url("$rootDir/../node_modules/jsc-android/dist") }
         maven { url 'https://www.jitpack.io' }
-        maven { url "https://artifactory.appodeal.com/appodeal-beta-public" }
+        maven { url "https://artifactory.appodeal.com/appodeal" }
     }
 
     configurations.all {
