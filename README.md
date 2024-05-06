@@ -727,9 +727,9 @@ MREC view has explicit callbacks.
 
 ## Changelog
 
-3.3.0-beta
+3.3.0
 
-* Adds AppLovin MAX mediation adapter
+* Update Appodeal to 3.3.0 (stable)
 
 3.2.3
 
