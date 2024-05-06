@@ -54,32 +54,59 @@ target 'App' do
         :hermes_enabled => false
     )
 
-    pod 'APDAdColonyAdapter'
-    pod 'BDMAdColonyAdapter'
-    pod 'APDAdjustAdapter'
-    pod 'APDAppLovinAdapter'
-    pod 'APDAppsFlyerAdapter'
-    pod 'APDBidMachineAdapter'
-    pod 'BDMCriteoAdapter'
-    pod 'BDMPangleAdapter'
-    pod 'BDMAmazonAdapter'
-    pod 'BDMSmaatoAdapter'
-    pod 'BDMTapjoyAdapter'
-    pod 'APDFirebaseAdapter'
-    pod 'APDGoogleAdMobAdapter'
-    pod 'APDIABAdapter'
-    pod 'BDMIABAdapter'
-    pod 'APDIronSourceAdapter'
-    pod 'APDFacebookAdapter'
-    pod 'APDMetaAudienceNetworkAdapter'
-    pod 'BDMMetaAudienceAdapter'
-    pod 'APDMyTargetAdapter'
-    pod 'BDMMyTargetAdapter'
-    pod 'APDStackAnalyticsAdapter'
-    pod 'APDUnityAdapter'
-    pod 'APDVungleAdapter'
-    pod 'BDMVungleAdapter'
-    pod 'APDYandexAdapter'
+    pod 'Appodeal', '3.3.0'
+    pod 'APDAdjustAdapter', '3.3.0.0'
+    pod 'APDAmazonAdapter', '3.3.0.0'
+    pod 'APDAppLovinAdapter', '3.3.0.0'
+    pod 'APDAppLovinMAXAdapter', '3.3.0.0'
+    pod 'APDAppsFlyerAdapter', '3.3.0.0'
+    pod 'APDBidMachineAdapter', '3.3.0.0'
+    pod 'APDBidonAdapter', '3.3.0.0'
+    pod 'APDBigoAdsAdapter', '3.3.0.0'
+    pod 'APDDTExchangeAdapter', '3.3.0.0'
+    pod 'APDFacebookAdapter', '3.3.0.0'
+    pod 'APDFirebaseAdapter', '3.3.0.0'
+    pod 'APDGoogleAdMobAdapter', '3.3.0.0'
+    pod 'APDIABAdapter', '3.3.0.0'
+    pod 'APDInMobiAdapter', '3.3.0.0'
+    pod 'APDIronSourceAdapter', '3.3.0.0'
+    pod 'APDMetaAudienceNetworkAdapter', '3.3.0.0'
+    pod 'APDMintegralAdapter', '3.3.0.0'
+    pod 'APDMyTargetAdapter', '3.3.0.0'
+    pod 'APDPangleAdapter', '3.3.0.0'
+    pod 'APDSentryAdapter', '3.3.0.0'
+    pod 'APDSmaatoAdapter', '3.3.0.0'
+    pod 'APDUnityAdapter', '3.3.0.0'
+    pod 'APDVungleAdapter', '3.3.0.0'
+    pod 'APDYandexAdapter', '3.3.0.0'
+    pod 'AmazonPublisherServicesSDK', '4.9.2'
+    pod 'AppLovinMediationAmazonAdMarketplaceAdapter'
+    pod 'AppLovinMediationBidMachineAdapter'
+    pod 'AppLovinMediationFacebookAdapter'
+    pod 'AppLovinMediationFyberAdapter'
+    pod 'AppLovinMediationGoogleAdManagerAdapter'
+    pod 'AppLovinMediationGoogleAdapter'
+    pod 'AppLovinMediationIronSourceAdapter'
+    pod 'AppLovinMediationMintegralAdapter'
+    pod 'AppLovinMediationUnityAdsAdapter'
+    pod 'AppLovinMediationVungleAdapter', '7.3.0.0'
+    pod 'AppLovinMediationYandexAdapter', '5.2.1.0'
+    pod 'BidMachineAmazonAdapter', '2.6.0.1'
+    pod 'BidMachineMetaAudienceAdapter', '2.6.0.0'
+    pod 'BidMachinePangleAdapter', '2.6.0.0'
+    pod 'BidMachineVungleAdapter', '2.6.0.0'
+    pod 'BidonAdapterAmazon', '0.4.8.0'
+    pod 'BidonAdapterAppLovin', '0.4.8.0'
+    pod 'BidonAdapterBidMachine', '0.4.8.0'
+    pod 'BidonAdapterBigoAds', '0.4.8.0'
+    pod 'BidonAdapterDTExchange', '0.4.8.0'
+    pod 'BidonAdapterGoogleAdManager', '0.4.8.0'
+    pod 'BidonAdapterGoogleMobileAds', '0.4.8.0'
+    pod 'BidonAdapterInMobi', '0.4.8.0'
+    pod 'BidonAdapterMetaAudienceNetwork', '0.4.8.0'
+    pod 'BidonAdapterMintegral', '0.4.8.0'
+    pod 'BidonAdapterUnityAds', '0.4.8.0'
+    pod 'BidonAdapterVungle', '0.4.8.0'
 
     target 'AppTests' do
         inherit! :complete
@@ -148,7 +175,7 @@ Add dependencies into `build.gradle` (module: app)
 ``` groovy
 dependencies {
     ...
-    implementation 'com.appodeal.ads:sdk:3.2.1.+'
+    implementation 'com.appodeal.ads:sdk:3.3.0.+'
     ...
 }
 ```
@@ -383,16 +410,16 @@ Appodeal.addEventListener(
 
 where ad revenue is object that contains:
 
-|Property|Type|Desctiption|
-|---|---|---|
-|networkName|string|Name of Ad Network|
-|adUnitName|string|Name of Appodeal Ad Unit|
-|placement|string|Name of impression placement|
-|revenuePrecision|string|Revenue precision|
-|demandSource|string|Demand Source name. Bidder name in case of impression from real time bidding or name of ad network|
-|currency|string|Revenue currency. USD|
-|revenue|number|Revenue amount|
-|adType|AppodealAdType|Impression ad type|
+| Property         | Type           | Desctiption                                                                                        |
+|------------------|----------------|----------------------------------------------------------------------------------------------------|
+| networkName      | string         | Name of Ad Network                                                                                 |
+| adUnitName       | string         | Name of Appodeal Ad Unit                                                                           |
+| placement        | string         | Name of impression placement                                                                       |
+| revenuePrecision | string         | Revenue precision                                                                                  |
+| demandSource     | string         | Demand Source name. Bidder name in case of impression from real time bidding or name of ad network |
+| currency         | string         | Revenue currency. USD                                                                              |
+| revenue          | number         | Revenue amount                                                                                     |
+| adType           | AppodealAdType | Impression ad type                                                                                 |
 
 2. Banner
 
@@ -669,10 +696,10 @@ When banner is added on screen it starts to load ad automatically event if autoc
 
 Height property of banner styles should corresponds to *adSize* attribute. We recommend to use 
 
-| adSize | height |
-|---|---|
-| 'phone' | 50 |
-| 'tablet' | 90 |
+| adSize   | height |
+|----------|--------|
+| 'phone'  | 50     |
+| 'tablet' | 90     |
 
 ### Callbacks
 
@@ -726,6 +753,10 @@ MREC view has explicit callbacks.
 ```
 
 ## Changelog
+
+3.3.0
+
+* Update Appodeal to 3.3.0 (stable)
 
 3.2.3
 

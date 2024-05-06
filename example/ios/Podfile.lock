@@ -1,200 +1,249 @@
 PODS:
-  - AdColony (4.9.0)
-  - Adjust (4.37.0):
-    - Adjust/Core (= 4.37.0)
-  - Adjust/Core (4.37.0)
+  - Adjust (4.38.1):
+    - Adjust/Core (= 4.38.1)
+  - Adjust/Core (4.38.1)
   - AdjustPurchase (1.0.1)
-  - Ads-Global/BUAdSDK_Compatible (5.2.1.0):
+  - Ads-Global/BUAdSDK_Compatible (5.8.0.8):
     - Ads-Global/BURelyAdSDK
     - Ads-Global/Dep_Compatible
-  - Ads-Global/BURelyAdSDK (5.2.1.0)
-  - Ads-Global/Dep_Compatible (5.2.1.0):
-    - BURelyFoundation_Global/Pangle (~> 0.1.1.0)
-  - AmazonPublisherServicesSDK (4.7.6)
-  - APDAdColonyAdapter (3.2.1.0):
-    - AdColony (= 4.9.0)
-    - Appodeal (= 3.2.1)
-  - APDAdjustAdapter (3.2.1.0):
-    - Adjust (~> 4.37.0)
+  - Ads-Global/BURelyAdSDK (5.8.0.8)
+  - Ads-Global/Dep_Compatible (5.8.0.8):
+    - BURelyFoundation_Global/Pangle (~> 0.2.1.4)
+  - AmazonPublisherServicesSDK (4.9.2)
+  - APDAdjustAdapter (3.3.0.0):
+    - Adjust (~> 4.38.0)
     - AdjustPurchase (= 1.0.1)
-    - Appodeal (= 3.2.1)
-  - APDAppLovinAdapter (3.2.1.0):
-    - AppLovinSDK (~> 12.1.0)
-    - Appodeal (= 3.2.1)
-  - APDAppsFlyerAdapter (3.2.1.0):
-    - Appodeal (= 3.2.1)
-    - AppsFlyer-AdRevenue (~> 6.9.1)
-    - AppsFlyerFramework (~> 6.12.2)
-  - APDBidMachineAdapter (3.2.1.0):
-    - Appodeal (= 3.2.1)
-    - BidMachine (~> 2.4.0)
-  - APDBidonAdapter (3.2.1.0):
-    - Appodeal (= 3.2.1)
-    - Bidon (~> 0.4.7)
-  - APDBigoAdsAdapter (3.2.1.0):
-    - Appodeal (= 3.2.1)
-    - BigoADS (~> 4.1.1)
-  - APDDTExchangeAdapter (3.2.1.0):
-    - Appodeal (= 3.2.1)
-    - Fyber_Marketplace_SDK (~> 8.2.6)
-  - APDFacebookAdapter (3.2.1.0):
-    - Appodeal (= 3.2.1)
-    - FBSDKCoreKit (~> 16.0.1)
-  - APDFirebaseAdapter (3.2.1.0):
-    - Appodeal (= 3.2.1)
-    - Firebase/Analytics (~> 10.15)
-    - Firebase/Core (~> 10.15)
-    - Firebase/RemoteConfig (~> 10.15)
+    - Appodeal (= 3.3.0)
+  - APDAmazonAdapter (3.3.0.0):
+    - AmazonPublisherServicesSDK (~> 4.9.2)
+    - Appodeal (= 3.3.0)
+  - APDAppLovinAdapter (3.3.0.0):
+    - AppLovinSDK (~> 12.4.1)
+    - Appodeal (= 3.3.0)
+  - APDAppLovinMAXAdapter (3.3.0.0):
+    - AppLovinSDK (~> 12.4.1)
+    - Appodeal (= 3.3.0)
     - GoogleAppMeasurement
     - GoogleUserMessagingPlatform
     - GoogleUtilities
-  - APDGoogleAdMobAdapter (3.2.1.0):
-    - Appodeal (= 3.2.1)
+    - MintegralAdSDK (~> 7.6.1)
+    - MintegralAdSDK/BidSplashAd
+  - APDAppsFlyerAdapter (3.3.0.0):
+    - Appodeal (= 3.3.0)
+    - AppsFlyer-AdRevenue (~> 6.9.1)
+    - AppsFlyerFramework (~> 6.13.1)
+  - APDBidMachineAdapter (3.3.0.0):
+    - Appodeal (= 3.3.0)
+    - BidMachine (= 2.6.0)
+    - GoogleAppMeasurement
+    - GoogleUserMessagingPlatform
+    - GoogleUtilities
+    - MintegralAdSDK (~> 7.6.1)
+    - MintegralAdSDK/BidSplashAd
+  - APDBidonAdapter (3.3.0.0):
+    - Appodeal (= 3.3.0)
+    - Bidon (~> 0.4.8)
+    - GoogleAppMeasurement
+    - GoogleUserMessagingPlatform
+    - GoogleUtilities
+    - MintegralAdSDK (~> 7.6.1)
+    - MintegralAdSDK/BidSplashAd
+  - APDBigoAdsAdapter (3.3.0.0):
+    - Appodeal (= 3.3.0)
+    - BigoADS (~> 4.2.2)
+  - APDDTExchangeAdapter (3.3.0.0):
+    - Appodeal (= 3.3.0)
+    - Fyber_Marketplace_SDK (~> 8.2.7)
+  - APDFacebookAdapter (3.3.0.0):
+    - Appodeal (= 3.3.0)
+    - FBSDKCoreKit (~> 16.0.1)
+  - APDFirebaseAdapter (3.3.0.0):
+    - Appodeal (= 3.3.0)
+    - Firebase/Analytics (~> 10.22)
+    - Firebase/Core (~> 10.22)
+    - Firebase/RemoteConfig (~> 10.22)
+    - GoogleAppMeasurement
+    - GoogleUserMessagingPlatform
+    - GoogleUtilities
+  - APDGoogleAdMobAdapter (3.3.0.0):
+    - Appodeal (= 3.3.0)
     - Google-Mobile-Ads-SDK (= 10.14.0)
     - GoogleAppMeasurement
     - GoogleUserMessagingPlatform
     - GoogleUtilities
-  - APDIABAdapter (3.2.1.0):
-    - Appodeal (= 3.2.1)
-  - APDInMobiAdapter (3.2.1.0):
-    - Appodeal (= 3.2.1)
-    - InMobiSDK (~> 10.6.0)
-  - APDIronSourceAdapter (3.2.1.0):
-    - Appodeal (= 3.2.1)
-    - IronSourceSDK (= 7.6.0)
-  - APDMetaAudienceNetworkAdapter (3.2.1.0):
-    - Appodeal (= 3.2.1)
-    - FBAudienceNetwork (= 6.12.0)
-  - APDMintegralAdapter (3.2.1.0):
-    - Appodeal (= 3.2.1)
-    - MintegralAdSDK (~> 7.5.3)
-  - APDMyTargetAdapter (3.2.1.0):
-    - Appodeal (= 3.2.1)
+  - APDIABAdapter (3.3.0.0):
+    - Appodeal (= 3.3.0)
+  - APDInMobiAdapter (3.3.0.0):
+    - Appodeal (= 3.3.0)
+    - InMobiSDK (~> 10.7.1)
+  - APDIronSourceAdapter (3.3.0.0):
+    - Appodeal (= 3.3.0)
+    - IronSourceSDK (= 7.9.0)
+  - APDMetaAudienceNetworkAdapter (3.3.0.0):
+    - Appodeal (= 3.3.0)
+    - FBAudienceNetwork (= 6.15.0)
+  - APDMintegralAdapter (3.3.0.0):
+    - Appodeal (= 3.3.0)
+    - MintegralAdSDK (~> 7.6.1)
+    - MintegralAdSDK/BidSplashAd
+  - APDMyTargetAdapter (3.3.0.0):
+    - Appodeal (= 3.3.0)
     - myTargetSDK (~> 5.20.1)
-  - APDStackAnalyticsAdapter (3.2.1.0):
-    - Appodeal (= 3.2.1)
-    - StackAnalytics (~> 1.4.4)
-    - StackIAB (~> 2.3.0)
-    - StackModules (~> 1.6.0)
-  - APDStackCrashReporterAdapter (3.2.1.0):
-    - Appodeal (= 3.2.1)
-    - StackAnalytics (~> 1.4.4)
-    - StackIAB (~> 2.3.0)
-    - StackModules (~> 1.6.0)
-  - APDUnityAdapter (3.2.1.0):
-    - Appodeal (= 3.2.1)
-    - UnityAds (= 4.9.2)
-  - APDVungleAdapter (3.2.1.0):
-    - Appodeal (= 3.2.1)
-    - VungleAds (= 7.2.0)
-  - APDYandexAdapter (3.2.1.0):
-    - Appodeal (= 3.2.1)
+  - APDPangleAdapter (3.3.0.0):
+    - Ads-Global/BUAdSDK_Compatible (~> 5.8.0)
+    - Appodeal (= 3.3.0)
+  - APDSentryAdapter (3.3.0.0):
+    - Appodeal (= 3.3.0)
+    - Sentry (= 8.21.0)
+  - APDSmaatoAdapter (3.3.0.0):
+    - Appodeal (= 3.3.0)
+    - smaato-ios-sdk (~> 22.8.2)
+    - smaato-ios-sdk/Modules/UnifiedBidding (~> 22.8.2)
+  - APDUnityAdapter (3.3.0.0):
+    - Appodeal (= 3.3.0)
+    - UnityAds (= 4.10.0)
+  - APDVungleAdapter (3.3.0.0):
+    - Appodeal (= 3.3.0)
+    - VungleAds (= 7.3.0)
+  - APDYandexAdapter (3.3.0.0):
+    - Appodeal (= 3.3.0)
     - YandexMobileAds (= 5.2.1)
-  - AppLovinSDK (12.1.0)
-  - Appodeal (3.2.1):
+  - AppLovinMediationAmazonAdMarketplaceAdapter (4.9.2.0):
+    - AppLovinSDK
+  - AppLovinMediationBidMachineAdapter (2.6.0.0.0):
+    - AppLovinSDK
+    - BidMachine (= 2.6.0)
+  - AppLovinMediationFacebookAdapter (6.15.0.0):
+    - AppLovinSDK
+    - FBAudienceNetwork (= 6.15.0)
+  - AppLovinMediationFyberAdapter (8.2.8.0):
+    - AppLovinSDK
+    - Fyber_Marketplace_SDK (= 8.2.8)
+  - AppLovinMediationGoogleAdapter (10.14.0.1):
+    - AppLovinSDK
+    - Google-Mobile-Ads-SDK (= 10.14.0)
+  - AppLovinMediationGoogleAdManagerAdapter (10.14.0.0):
+    - AppLovinSDK
+    - Google-Mobile-Ads-SDK (= 10.14.0)
+  - AppLovinMediationIronSourceAdapter (7.9.0.0.0):
+    - AppLovinSDK
+    - IronSourceSDK (= 7.9.0.0)
+  - AppLovinMediationMintegralAdapter (7.6.3.0.0):
+    - AppLovinSDK
+    - MintegralAdSDK (= 7.6.3)
+    - MintegralAdSDK/BidSplashAd (= 7.6.3)
+  - AppLovinMediationUnityAdsAdapter (4.10.0.0):
+    - AppLovinSDK
+    - UnityAds (= 4.10.0)
+  - AppLovinMediationVungleAdapter (7.3.0.0):
+    - AppLovinSDK
+    - VungleAds (= 7.3.0)
+  - AppLovinMediationYandexAdapter (5.2.1.0):
+    - AppLovinSDK
+    - YandexMobileAds (= 5.2.1)
+  - AppLovinSDK (12.4.1)
+  - Appodeal (3.3.0):
     - Protobuf
-    - StackConsentManager (~> 2.0.1)
-    - StackIAB (~> 2.3.0)
-    - StackModules (~> 1.6.0)
-    - StackProtobuf (~> 0.8.0)
+    - StackConsentManager (~> 2.0.4)
+    - StackIAB (~> 2.6.0)
+    - StackModules (~> 1.7.0)
   - AppsFlyer-AdRevenue (6.9.1):
     - AppsFlyerFramework (~> 6)
-  - AppsFlyerFramework (6.12.3):
-    - AppsFlyerFramework/Main (= 6.12.3)
-  - AppsFlyerFramework/Main (6.12.3)
-  - BidMachine (2.4.0.0):
-    - BidMachine/Core (= 2.4.0.0)
-  - BidMachine/ApiCore (2.4.0.0)
-  - BidMachine/BiddingCore (2.4.0.0):
+  - AppsFlyerFramework (6.13.2):
+    - AppsFlyerFramework/Main (= 6.13.2)
+  - AppsFlyerFramework/Main (6.13.2)
+  - BidMachine (2.6.0):
+    - BidMachine/Core (= 2.6.0)
+  - BidMachine/ApiCore (2.6.0)
+  - BidMachine/BiddingCore (2.6.0):
     - BidMachine/ApiCore
-    - StackIAB (~> 2.3.0)
-    - StackModules (~> 1.6.0)
-  - BidMachine/Core (2.4.0.0):
+    - BidMachineRendering (~> 0.1.0)
+    - StackIAB (~> 2.6.0)
+    - StackModules (~> 1.7.0)
+  - BidMachine/Core (2.6.0):
     - BidMachine/ApiCore
     - BidMachine/BiddingCore
     - BidMachine/ModulesCore
-  - BidMachine/ModulesCore (2.4.0.0):
+  - BidMachine/ModulesCore (2.6.0):
     - BidMachine/ApiCore
-  - BidMachineAdColonyAdapter (2.4.0.0):
-    - AdColony (= 4.9.0)
-    - BidMachine (~> 2.4.0.0)
-  - BidMachineAmazonAdapter (2.4.0.0):
-    - AmazonPublisherServicesSDK (= 4.7.6)
-    - BidMachine (~> 2.4.0.0)
-  - BidMachineCriteoAdapter (2.4.0.0):
-    - BidMachine (~> 2.4.0.0)
-    - CriteoPublisherSdk (= 4.9.0)
-  - BidMachineMetaAudienceAdapter (2.4.0.1):
-    - BidMachine (~> 2.4.0.0)
-    - FBAudienceNetwork (= 6.12.0)
-  - BidMachineMintegralAdapter (2.4.0.1):
-    - BidMachine (~> 2.4.0.0)
-    - MintegralAdSDK (= 7.5.3)
-  - BidMachineMyTargetAdapter (2.4.0.2):
-    - BidMachine (~> 2.4.0.0)
-    - myTargetSDK (= 5.20.1)
-  - BidMachinePangleAdapter (2.4.0.0):
-    - Ads-Global/BUAdSDK_Compatible (= 5.2.1.0)
-    - BidMachine (~> 2.4.0.0)
-  - BidMachineSmaatoAdapter (2.4.0.0):
-    - BidMachine (~> 2.4.0.0)
-    - smaato-ios-sdk (= 22.0.2)
-    - smaato-ios-sdk/Modules/UnifiedBidding (= 22.0.2)
-  - BidMachineTapjoyAdapter (2.4.0.0):
-    - BidMachine (~> 2.4.0.0)
-    - TapjoySDK (= 12.11.1)
-  - BidMachineVungleAdapter (2.4.0.1):
-    - BidMachine (~> 2.4.0.0)
-    - VungleAds (= 7.2.0)
-  - Bidon (0.4.7)
-  - BidonAdapterAmazon (0.4.7.1):
-    - AmazonPublisherServicesSDK
-    - Bidon (= 0.4.7)
-  - BidonAdapterAppLovin (0.4.7.1):
+  - BidMachineAmazonAdapter (2.6.0.1):
+    - AmazonPublisherServicesSDK (= 4.9.2)
+    - BidMachine (~> 2.6.0.0)
+  - BidMachineMetaAudienceAdapter (2.6.0.0):
+    - BidMachine (~> 2.6.0.0)
+    - FBAudienceNetwork (= 6.15.0)
+  - BidMachinePangleAdapter (2.6.0.0):
+    - Ads-Global/BUAdSDK_Compatible (= 5.8.0.8)
+    - BidMachine (~> 2.6.0.0)
+  - BidMachineRendering (0.1.0):
+    - BidMachineRendering/RenderingKit (= 0.1.0)
+  - BidMachineRendering/RenderingKit (0.1.0):
+    - BidMachineRendering/StoreKit
+    - BidMachineRendering/UtilsKit
+    - BidMachineRendering/VideoKit
+    - BidMachineRendering/WebKit
+  - BidMachineRendering/StoreKit (0.1.0):
+    - BidMachineRendering/UtilsKit
+  - BidMachineRendering/UtilsKit (0.1.0):
+    - StackModules (~> 1.7.0)
+  - BidMachineRendering/VideoKit (0.1.0):
+    - BidMachineRendering/UtilsKit
+  - BidMachineRendering/WebKit (0.1.0):
+    - BidMachineRendering/UtilsKit
+  - BidMachineVungleAdapter (2.6.0.0):
+    - BidMachine (~> 2.6.0.0)
+    - VungleAds (= 7.3.0)
+  - Bidon (0.4.8)
+  - BidonAdapterAmazon (0.4.8.0):
+    - AmazonPublisherServicesSDK (~> 4.9.2)
+    - Bidon (= 0.4.8)
+  - BidonAdapterAppLovin (0.4.8.0):
     - AppLovinSDK
-    - Bidon (= 0.4.7)
-  - BidonAdapterBidMachine (0.4.7.2):
-    - BidMachine (~> 2.4.0)
-    - Bidon (= 0.4.7)
-  - BidonAdapterBigoAds (0.4.7.2):
-    - Bidon (= 0.4.7)
-    - BigoADS (~> 4.1.1)
-  - BidonAdapterDTExchange (0.4.7.2):
-    - Bidon (= 0.4.7)
-    - Fyber_Marketplace_SDK (~> 8.2.6)
-  - BidonAdapterGoogleAdManager (0.4.7.1):
-    - Bidon (= 0.4.7)
-    - Google-Mobile-Ads-SDK
-  - BidonAdapterGoogleMobileAds (0.4.7.1):
-    - Bidon (= 0.4.7)
-    - Google-Mobile-Ads-SDK
-  - BidonAdapterInMobi (0.4.7.1):
-    - Bidon (= 0.4.7)
-    - InMobiSDK (~> 10.6.0)
-  - BidonAdapterMetaAudienceNetwork (0.4.7.1):
-    - Bidon (= 0.4.7)
-    - FBAudienceNetwork (~> 6.12.0)
-  - BidonAdapterMintegral (0.4.7.2):
-    - Bidon (= 0.4.7)
-    - MintegralAdSDK (~> 7.5.3)
-  - BidonAdapterUnityAds (0.4.7.1):
-    - Bidon (= 0.4.7)
-    - UnityAds (~> 4.9.0)
-  - BidonAdapterVungle (0.4.7.2):
-    - Bidon (= 0.4.7)
-    - VungleAds (~> 7.2.0)
-  - BigoADS (4.1.1)
+    - Bidon (= 0.4.8)
+  - BidonAdapterBidMachine (0.4.8.0):
+    - BidMachine (~> 2.6.0)
+    - Bidon (= 0.4.8)
+  - BidonAdapterBigoAds (0.4.8.0):
+    - Bidon (= 0.4.8)
+    - BigoADS (~> 4.2.2)
+  - BidonAdapterDTExchange (0.4.8.0):
+    - Bidon (= 0.4.8)
+    - Fyber_Marketplace_SDK (~> 8.2.7)
+  - BidonAdapterGoogleAdManager (0.4.8.0):
+    - Bidon (= 0.4.8)
+    - Google-Mobile-Ads-SDK (~> 10.14.0)
+  - BidonAdapterGoogleMobileAds (0.4.8.0):
+    - Bidon (= 0.4.8)
+    - Google-Mobile-Ads-SDK (~> 10.14.0)
+  - BidonAdapterInMobi (0.4.8.0):
+    - Bidon (= 0.4.8)
+    - InMobiSDK (~> 10.7.1)
+  - BidonAdapterMetaAudienceNetwork (0.4.8.0):
+    - Bidon (= 0.4.8)
+    - FBAudienceNetwork (~> 6.15.0)
+  - BidonAdapterMintegral (0.4.8.0):
+    - Bidon (= 0.4.8)
+    - MintegralAdSDK (~> 7.6.1)
+  - BidonAdapterUnityAds (0.4.8.0):
+    - Bidon (= 0.4.8)
+    - UnityAds (~> 4.10.0)
+  - BidonAdapterVungle (0.4.8.0):
+    - Bidon (= 0.4.8)
+    - VungleAds (~> 7.3.0)
+  - BigoADS (4.2.3)
   - boost (1.76.0)
-  - BURelyFoundation_Global/AFNetworking (0.1.1.3)
-  - BURelyFoundation_Global/Foundation (0.1.1.3):
+  - BURelyFoundation_Global/AFNetworking (0.2.1.4)
+  - BURelyFoundation_Global/APM (0.2.1.4)
+  - BURelyFoundation_Global/Foundation (0.2.1.4):
     - BURelyFoundation_Global/NETWork
-  - BURelyFoundation_Global/Gecko (0.1.1.3):
+  - BURelyFoundation_Global/Gecko (0.2.1.4):
     - BURelyFoundation_Global/Foundation
-  - BURelyFoundation_Global/Header (0.1.1.3)
-  - BURelyFoundation_Global/NETWork (0.1.1.3):
+  - BURelyFoundation_Global/Header (0.2.1.4)
+  - BURelyFoundation_Global/NETWork (0.2.1.4):
     - BURelyFoundation_Global/AFNetworking
-  - BURelyFoundation_Global/Pangle (0.1.1.3):
+  - BURelyFoundation_Global/Pangle (0.2.1.4):
     - BURelyFoundation_Global/AFNetworking
+    - BURelyFoundation_Global/APM
     - BURelyFoundation_Global/Foundation
     - BURelyFoundation_Global/Gecko
     - BURelyFoundation_Global/Header
@@ -203,21 +252,18 @@ PODS:
     - BURelyFoundation_Global/YYModel
     - BURelyFoundation_Global/ZFPlayer
     - BURelyFoundation_Global/Zip
-  - BURelyFoundation_Global/SDWebImage (0.1.1.3):
+  - BURelyFoundation_Global/SDWebImage (0.2.1.4):
     - BURelyFoundation_Global/Foundation
-  - BURelyFoundation_Global/YYModel (0.1.1.3)
-  - BURelyFoundation_Global/ZFPlayer (0.1.1.3):
+  - BURelyFoundation_Global/YYModel (0.2.1.4)
+  - BURelyFoundation_Global/ZFPlayer (0.2.1.4):
     - BURelyFoundation_Global/Foundation
     - BURelyFoundation_Global/Zip
-  - BURelyFoundation_Global/Zip (0.1.1.3):
+  - BURelyFoundation_Global/Zip (0.2.1.4):
     - BURelyFoundation_Global/Foundation
-  - CriteoPublisherSdk (4.9.0):
-    - CriteoPublisherSdk/Sdk (= 4.9.0)
-  - CriteoPublisherSdk/Sdk (4.9.0)
   - DoubleConversion (1.1.6)
   - FBAEMKit (16.0.1):
     - FBSDKCoreKit_Basics (= 16.0.1)
-  - FBAudienceNetwork (6.12.0)
+  - FBAudienceNetwork (6.15.0)
   - FBLazyVector (0.70.3)
   - FBReactNativeSpec (0.70.3):
     - RCT-Folly (= 2021.07.22.00)
@@ -230,163 +276,181 @@ PODS:
     - FBAEMKit (= 16.0.1)
     - FBSDKCoreKit_Basics (= 16.0.1)
   - FBSDKCoreKit_Basics (16.0.1)
-  - Firebase/Analytics (10.20.0):
+  - Firebase/Analytics (10.24.0):
     - Firebase/Core
-  - Firebase/Core (10.20.0):
+  - Firebase/Core (10.24.0):
     - Firebase/CoreOnly
-    - FirebaseAnalytics (~> 10.20.0)
-  - Firebase/CoreOnly (10.20.0):
-    - FirebaseCore (= 10.20.0)
-  - Firebase/RemoteConfig (10.20.0):
+    - FirebaseAnalytics (~> 10.24.0)
+  - Firebase/CoreOnly (10.24.0):
+    - FirebaseCore (= 10.24.0)
+  - Firebase/RemoteConfig (10.24.0):
     - Firebase/CoreOnly
-    - FirebaseRemoteConfig (~> 10.20.0)
-  - FirebaseABTesting (10.20.0):
+    - FirebaseRemoteConfig (~> 10.24.0)
+  - FirebaseABTesting (10.24.0):
     - FirebaseCore (~> 10.0)
-  - FirebaseAnalytics (10.20.0):
-    - FirebaseAnalytics/AdIdSupport (= 10.20.0)
+  - FirebaseAnalytics (10.24.0):
+    - FirebaseAnalytics/AdIdSupport (= 10.24.0)
     - FirebaseCore (~> 10.0)
     - FirebaseInstallations (~> 10.0)
     - GoogleUtilities/AppDelegateSwizzler (~> 7.11)
     - GoogleUtilities/MethodSwizzler (~> 7.11)
     - GoogleUtilities/Network (~> 7.11)
     - "GoogleUtilities/NSData+zlib (~> 7.11)"
-    - nanopb (< 2.30910.0, >= 2.30908.0)
-  - FirebaseAnalytics/AdIdSupport (10.20.0):
+    - nanopb (< 2.30911.0, >= 2.30908.0)
+  - FirebaseAnalytics/AdIdSupport (10.24.0):
     - FirebaseCore (~> 10.0)
     - FirebaseInstallations (~> 10.0)
-    - GoogleAppMeasurement (= 10.20.0)
+    - GoogleAppMeasurement (= 10.24.0)
     - GoogleUtilities/AppDelegateSwizzler (~> 7.11)
     - GoogleUtilities/MethodSwizzler (~> 7.11)
     - GoogleUtilities/Network (~> 7.11)
     - "GoogleUtilities/NSData+zlib (~> 7.11)"
-    - nanopb (< 2.30910.0, >= 2.30908.0)
-  - FirebaseCore (10.20.0):
+    - nanopb (< 2.30911.0, >= 2.30908.0)
+  - FirebaseCore (10.24.0):
     - FirebaseCoreInternal (~> 10.0)
     - GoogleUtilities/Environment (~> 7.12)
     - GoogleUtilities/Logger (~> 7.12)
-  - FirebaseCoreInternal (10.20.0):
+  - FirebaseCoreInternal (10.24.0):
     - "GoogleUtilities/NSData+zlib (~> 7.8)"
-  - FirebaseInstallations (10.20.0):
+  - FirebaseInstallations (10.24.0):
     - FirebaseCore (~> 10.0)
     - GoogleUtilities/Environment (~> 7.8)
     - GoogleUtilities/UserDefaults (~> 7.8)
     - PromisesObjC (~> 2.1)
-  - FirebaseRemoteConfig (10.20.0):
+  - FirebaseRemoteConfig (10.24.0):
     - FirebaseABTesting (~> 10.0)
     - FirebaseCore (~> 10.0)
     - FirebaseInstallations (~> 10.0)
+    - FirebaseRemoteConfigInterop (~> 10.23)
     - FirebaseSharedSwift (~> 10.0)
     - GoogleUtilities/Environment (~> 7.8)
     - "GoogleUtilities/NSData+zlib (~> 7.8)"
-  - FirebaseSharedSwift (10.20.0)
+  - FirebaseRemoteConfigInterop (10.24.0)
+  - FirebaseSharedSwift (10.24.0)
   - fmt (6.2.1)
-  - Fyber_Marketplace_SDK (8.2.6)
+  - Fyber_Marketplace_SDK (8.2.8)
   - glog (0.3.5)
   - Google-Mobile-Ads-SDK (10.14.0):
     - GoogleAppMeasurement (< 11.0, >= 7.0)
     - GoogleUserMessagingPlatform (>= 1.1)
-  - GoogleAppMeasurement (10.20.0):
-    - GoogleAppMeasurement/AdIdSupport (= 10.20.0)
+  - GoogleAppMeasurement (10.24.0):
+    - GoogleAppMeasurement/AdIdSupport (= 10.24.0)
     - GoogleUtilities/AppDelegateSwizzler (~> 7.11)
     - GoogleUtilities/MethodSwizzler (~> 7.11)
     - GoogleUtilities/Network (~> 7.11)
     - "GoogleUtilities/NSData+zlib (~> 7.11)"
-    - nanopb (< 2.30910.0, >= 2.30908.0)
-  - GoogleAppMeasurement/AdIdSupport (10.20.0):
-    - GoogleAppMeasurement/WithoutAdIdSupport (= 10.20.0)
+    - nanopb (< 2.30911.0, >= 2.30908.0)
+  - GoogleAppMeasurement/AdIdSupport (10.24.0):
+    - GoogleAppMeasurement/WithoutAdIdSupport (= 10.24.0)
     - GoogleUtilities/AppDelegateSwizzler (~> 7.11)
     - GoogleUtilities/MethodSwizzler (~> 7.11)
     - GoogleUtilities/Network (~> 7.11)
     - "GoogleUtilities/NSData+zlib (~> 7.11)"
-    - nanopb (< 2.30910.0, >= 2.30908.0)
-  - GoogleAppMeasurement/WithoutAdIdSupport (10.20.0):
+    - nanopb (< 2.30911.0, >= 2.30908.0)
+  - GoogleAppMeasurement/WithoutAdIdSupport (10.24.0):
     - GoogleUtilities/AppDelegateSwizzler (~> 7.11)
     - GoogleUtilities/MethodSwizzler (~> 7.11)
     - GoogleUtilities/Network (~> 7.11)
     - "GoogleUtilities/NSData+zlib (~> 7.11)"
-    - nanopb (< 2.30910.0, >= 2.30908.0)
-  - GoogleUserMessagingPlatform (2.1.0)
-  - GoogleUtilities (7.12.0):
-    - GoogleUtilities/AppDelegateSwizzler (= 7.12.0)
-    - GoogleUtilities/Environment (= 7.12.0)
-    - GoogleUtilities/ISASwizzler (= 7.12.0)
-    - GoogleUtilities/Logger (= 7.12.0)
-    - GoogleUtilities/MethodSwizzler (= 7.12.0)
-    - GoogleUtilities/Network (= 7.12.0)
-    - "GoogleUtilities/NSData+zlib (= 7.12.0)"
-    - GoogleUtilities/Reachability (= 7.12.0)
-    - GoogleUtilities/SwizzlerTestHelpers (= 7.12.0)
-    - GoogleUtilities/UserDefaults (= 7.12.0)
-  - GoogleUtilities/AppDelegateSwizzler (7.12.0):
+    - nanopb (< 2.30911.0, >= 2.30908.0)
+  - GoogleUserMessagingPlatform (2.4.0)
+  - GoogleUtilities (7.13.0):
+    - GoogleUtilities/AppDelegateSwizzler (= 7.13.0)
+    - GoogleUtilities/Environment (= 7.13.0)
+    - GoogleUtilities/ISASwizzler (= 7.13.0)
+    - GoogleUtilities/Logger (= 7.13.0)
+    - GoogleUtilities/MethodSwizzler (= 7.13.0)
+    - GoogleUtilities/Network (= 7.13.0)
+    - "GoogleUtilities/NSData+zlib (= 7.13.0)"
+    - GoogleUtilities/Privacy (= 7.13.0)
+    - GoogleUtilities/Reachability (= 7.13.0)
+    - GoogleUtilities/SwizzlerTestHelpers (= 7.13.0)
+    - GoogleUtilities/UserDefaults (= 7.13.0)
+  - GoogleUtilities/AppDelegateSwizzler (7.13.0):
     - GoogleUtilities/Environment
     - GoogleUtilities/Logger
     - GoogleUtilities/Network
-  - GoogleUtilities/Environment (7.12.0):
+    - GoogleUtilities/Privacy
+  - GoogleUtilities/Environment (7.13.0):
+    - GoogleUtilities/Privacy
     - PromisesObjC (< 3.0, >= 1.2)
-  - GoogleUtilities/ISASwizzler (7.12.0)
-  - GoogleUtilities/Logger (7.12.0):
+  - GoogleUtilities/ISASwizzler (7.13.0):
+    - GoogleUtilities/Privacy
+  - GoogleUtilities/Logger (7.13.0):
     - GoogleUtilities/Environment
-  - GoogleUtilities/MethodSwizzler (7.12.0):
+    - GoogleUtilities/Privacy
+  - GoogleUtilities/MethodSwizzler (7.13.0):
     - GoogleUtilities/Logger
-  - GoogleUtilities/Network (7.12.0):
+    - GoogleUtilities/Privacy
+  - GoogleUtilities/Network (7.13.0):
     - GoogleUtilities/Logger
     - "GoogleUtilities/NSData+zlib"
+    - GoogleUtilities/Privacy
     - GoogleUtilities/Reachability
-  - "GoogleUtilities/NSData+zlib (7.12.0)"
-  - GoogleUtilities/Reachability (7.12.0):
+  - "GoogleUtilities/NSData+zlib (7.13.0)":
+    - GoogleUtilities/Privacy
+  - GoogleUtilities/Privacy (7.13.0)
+  - GoogleUtilities/Reachability (7.13.0):
     - GoogleUtilities/Logger
-  - GoogleUtilities/SwizzlerTestHelpers (7.12.0):
+    - GoogleUtilities/Privacy
+  - GoogleUtilities/SwizzlerTestHelpers (7.13.0):
     - GoogleUtilities/MethodSwizzler
-  - GoogleUtilities/UserDefaults (7.12.0):
+  - GoogleUtilities/UserDefaults (7.13.0):
     - GoogleUtilities/Logger
-  - InMobiSDK (10.6.0)
-  - IronSourceSDK (7.6.0.0)
-  - MintegralAdSDK (7.5.3):
-    - MintegralAdSDK/BannerAd (= 7.5.3)
-    - MintegralAdSDK/BidBannerAd (= 7.5.3)
-    - MintegralAdSDK/BidInterstitialVideoAd (= 7.5.3)
-    - MintegralAdSDK/BidNativeAd (= 7.5.3)
-    - MintegralAdSDK/BidNewInterstitialAd (= 7.5.3)
-    - MintegralAdSDK/BidRewardVideoAd (= 7.5.3)
-    - MintegralAdSDK/InterstitialVideoAd (= 7.5.3)
-    - MintegralAdSDK/NativeAd (= 7.5.3)
-    - MintegralAdSDK/NewInterstitialAd (= 7.5.3)
-    - MintegralAdSDK/RewardVideoAd (= 7.5.3)
-  - MintegralAdSDK/BannerAd (7.5.3):
+    - GoogleUtilities/Privacy
+  - InMobiSDK (10.7.2)
+  - IronSourceSDK (7.9.0.0)
+  - MintegralAdSDK (7.6.3):
+    - MintegralAdSDK/BannerAd (= 7.6.3)
+    - MintegralAdSDK/BidBannerAd (= 7.6.3)
+    - MintegralAdSDK/BidInterstitialVideoAd (= 7.6.3)
+    - MintegralAdSDK/BidNativeAd (= 7.6.3)
+    - MintegralAdSDK/BidNewInterstitialAd (= 7.6.3)
+    - MintegralAdSDK/BidRewardVideoAd (= 7.6.3)
+    - MintegralAdSDK/InterstitialVideoAd (= 7.6.3)
+    - MintegralAdSDK/NativeAd (= 7.6.3)
+    - MintegralAdSDK/NewInterstitialAd (= 7.6.3)
+    - MintegralAdSDK/RewardVideoAd (= 7.6.3)
+  - MintegralAdSDK/BannerAd (7.6.3):
     - MintegralAdSDK/NativeAd
-  - MintegralAdSDK/BidBannerAd (7.5.3):
+  - MintegralAdSDK/BidBannerAd (7.6.3):
     - MintegralAdSDK/BannerAd
     - MintegralAdSDK/BidNativeAd
-  - MintegralAdSDK/BidInterstitialVideoAd (7.5.3):
+  - MintegralAdSDK/BidInterstitialVideoAd (7.6.3):
     - MintegralAdSDK/BidNativeAd
     - MintegralAdSDK/InterstitialVideoAd
-  - MintegralAdSDK/BidNativeAd (7.5.3):
+  - MintegralAdSDK/BidNativeAd (7.6.3):
     - MintegralAdSDK/NativeAd
-  - MintegralAdSDK/BidNewInterstitialAd (7.5.3):
+  - MintegralAdSDK/BidNewInterstitialAd (7.6.3):
     - MintegralAdSDK/BidNativeAd
     - MintegralAdSDK/NewInterstitialAd
-  - MintegralAdSDK/BidRewardVideoAd (7.5.3):
+  - MintegralAdSDK/BidRewardVideoAd (7.6.3):
     - MintegralAdSDK/BidNativeAd
     - MintegralAdSDK/RewardVideoAd
-  - MintegralAdSDK/InterstitialVideoAd (7.5.3):
+  - MintegralAdSDK/BidSplashAd (7.6.3):
+    - MintegralAdSDK/BidNativeAd
+    - MintegralAdSDK/SplashAd
+  - MintegralAdSDK/InterstitialVideoAd (7.6.3):
     - MintegralAdSDK/NativeAd
-  - MintegralAdSDK/NativeAd (7.5.3)
-  - MintegralAdSDK/NewInterstitialAd (7.5.3):
+  - MintegralAdSDK/NativeAd (7.6.3)
+  - MintegralAdSDK/NewInterstitialAd (7.6.3):
     - MintegralAdSDK/InterstitialVideoAd
     - MintegralAdSDK/NativeAd
-  - MintegralAdSDK/RewardVideoAd (7.5.3):
+  - MintegralAdSDK/RewardVideoAd (7.6.3):
     - MintegralAdSDK/NativeAd
-  - myTargetSDK (5.20.1):
+  - MintegralAdSDK/SplashAd (7.6.3):
+    - MintegralAdSDK/NativeAd
+  - myTargetSDK (5.20.2):
     - myTrackerSDK (~> 3.1.1)
-  - myTrackerSDK (3.1.5)
-  - nanopb (2.30909.1):
-    - nanopb/decode (= 2.30909.1)
-    - nanopb/encode (= 2.30909.1)
-  - nanopb/decode (2.30909.1)
-  - nanopb/encode (2.30909.1)
-  - OMSDK_Appodeal (1.4.2.0)
-  - PromisesObjC (2.3.1)
-  - Protobuf (3.25.2)
+  - myTrackerSDK (3.1.8)
+  - nanopb (2.30910.0):
+    - nanopb/decode (= 2.30910.0)
+    - nanopb/encode (= 2.30910.0)
+  - nanopb/decode (2.30910.0)
+  - nanopb/encode (2.30910.0)
+  - OMSDK_Appodeal (1.4.12)
+  - PromisesObjC (2.4.0)
+  - Protobuf (3.26.1)
   - RCT-Folly (2021.07.22.00):
     - boost
     - DoubleConversion
@@ -666,127 +730,119 @@ PODS:
     - React-jsi (= 0.70.3)
     - React-logger (= 0.70.3)
     - React-perflogger (= 0.70.3)
-  - RNAppodeal (3.2.3):
-    - Appodeal (= 3.2.1)
+  - RNAppodeal (3.3.0):
+    - Appodeal (= 3.3.0)
     - React
   - RNScreens (3.29.0):
     - React-Core
     - React-RCTImage
   - RNVectorIcons (9.2.0):
     - React-Core
-  - smaato-ios-sdk (22.0.2):
-    - smaato-ios-sdk/Full (= 22.0.2)
-  - smaato-ios-sdk/Banner (22.0.2):
+  - Sentry (8.21.0):
+    - Sentry/Core (= 8.21.0)
+    - SentryPrivate (= 8.21.0)
+  - Sentry/Core (8.21.0):
+    - SentryPrivate (= 8.21.0)
+  - SentryPrivate (8.21.0)
+  - smaato-ios-sdk (22.8.3):
+    - smaato-ios-sdk/Full (= 22.8.3)
+  - smaato-ios-sdk/Banner (22.8.3):
     - smaato-ios-sdk/Modules/Banner
     - smaato-ios-sdk/Modules/Core
     - smaato-ios-sdk/Modules/RichMedia
-  - smaato-ios-sdk/Full (22.0.2):
+  - smaato-ios-sdk/Full (22.8.3):
     - smaato-ios-sdk/Banner
     - smaato-ios-sdk/Interstitial
     - smaato-ios-sdk/Native
     - smaato-ios-sdk/Outstream
     - smaato-ios-sdk/RewardedAds
-  - smaato-ios-sdk/Interstitial (22.0.2):
+  - smaato-ios-sdk/Interstitial (22.8.3):
     - smaato-ios-sdk/Modules/Interstitial
     - smaato-ios-sdk/Modules/RichMedia
     - smaato-ios-sdk/Modules/Video
-  - smaato-ios-sdk/Modules/Banner (22.0.2):
+  - smaato-ios-sdk/Modules/Banner (22.8.3):
     - smaato-ios-sdk/Modules/Core
-  - smaato-ios-sdk/Modules/Core (22.0.2)
-  - smaato-ios-sdk/Modules/Interstitial (22.0.2):
+  - smaato-ios-sdk/Modules/Core (22.8.3)
+  - smaato-ios-sdk/Modules/Interstitial (22.8.3):
     - smaato-ios-sdk/Modules/Core
-  - smaato-ios-sdk/Modules/Native (22.0.2):
+  - smaato-ios-sdk/Modules/Native (22.8.3):
     - smaato-ios-sdk/Modules/Core
-  - smaato-ios-sdk/Modules/OpenMeasurement (22.0.2):
+  - smaato-ios-sdk/Modules/OpenMeasurement (22.8.3):
     - smaato-ios-sdk/Modules/Core
-  - smaato-ios-sdk/Modules/Outstream (22.0.2):
+  - smaato-ios-sdk/Modules/Outstream (22.8.3):
     - smaato-ios-sdk/Modules/Banner
     - smaato-ios-sdk/Modules/Core
     - smaato-ios-sdk/Modules/RichMedia
-  - smaato-ios-sdk/Modules/RewardedAds (22.0.2):
+  - smaato-ios-sdk/Modules/RewardedAds (22.8.3):
     - smaato-ios-sdk/Modules/Core
-  - smaato-ios-sdk/Modules/RichMedia (22.0.2):
-    - smaato-ios-sdk/Modules/Core
-    - smaato-ios-sdk/Modules/OpenMeasurement
-  - smaato-ios-sdk/Modules/UnifiedBidding (22.0.2):
-    - smaato-ios-sdk/Modules/Core
-  - smaato-ios-sdk/Modules/Video (22.0.2):
+  - smaato-ios-sdk/Modules/RichMedia (22.8.3):
     - smaato-ios-sdk/Modules/Core
     - smaato-ios-sdk/Modules/OpenMeasurement
-  - smaato-ios-sdk/Native (22.0.2):
+  - smaato-ios-sdk/Modules/UnifiedBidding (22.8.3):
+    - smaato-ios-sdk/Modules/Core
+  - smaato-ios-sdk/Modules/Video (22.8.3):
+    - smaato-ios-sdk/Modules/Core
+    - smaato-ios-sdk/Modules/OpenMeasurement
+  - smaato-ios-sdk/Native (22.8.3):
     - smaato-ios-sdk/Modules/Core
     - smaato-ios-sdk/Modules/Native
-  - smaato-ios-sdk/Outstream (22.0.2):
+  - smaato-ios-sdk/Outstream (22.8.3):
     - smaato-ios-sdk/Modules/Outstream
-  - smaato-ios-sdk/RewardedAds (22.0.2):
+  - smaato-ios-sdk/RewardedAds (22.8.3):
     - smaato-ios-sdk/Modules/RewardedAds
     - smaato-ios-sdk/Modules/Video
-  - StackAnalytics (1.4.4):
-    - StackAnalytics/Full (= 1.4.4)
-    - StackModules (~> 1.6.0)
-  - StackAnalytics/Base (1.4.4):
-    - StackModules (~> 1.6.0)
-  - StackAnalytics/Crashes (1.4.4):
-    - StackModules (~> 1.6.0)
-  - StackAnalytics/Full (1.4.4):
-    - StackAnalytics/Base
-    - StackAnalytics/Crashes
-    - StackModules (~> 1.6.0)
-  - StackConsentManager (2.0.1):
+  - StackConsentManager (2.0.4):
     - GoogleUserMessagingPlatform (~> 2.1)
-  - StackIAB (2.3.4):
-    - StackIAB/StackIABAssets (= 2.3.4)
-    - StackIAB/StackMRAIDKit (= 2.3.4)
-    - StackIAB/StackNASTKit (= 2.3.4)
-    - StackIAB/StackOpenMeasure (= 2.3.4)
-    - StackIAB/StackRichMedia (= 2.3.4)
-    - StackIAB/StackVASTAssets (= 2.3.4)
-    - StackIAB/StackVASTKit (= 2.3.4)
-    - StackIAB/StackVideoPlayer (= 2.3.4)
-    - StackIAB/StackXML (= 2.3.4)
-    - StackModules (~> 1.6.0)
-  - StackIAB/StackIABAssets (2.3.4):
-    - StackModules (~> 1.6.0)
-  - StackIAB/StackMRAIDKit (2.3.4):
+  - StackIAB (2.6.0):
+    - StackIAB/StackIABAssets (= 2.6.0)
+    - StackIAB/StackMRAIDKit (= 2.6.0)
+    - StackIAB/StackNASTKit (= 2.6.0)
+    - StackIAB/StackOpenMeasure (= 2.6.0)
+    - StackIAB/StackRichMedia (= 2.6.0)
+    - StackIAB/StackVASTAssets (= 2.6.0)
+    - StackIAB/StackVASTKit (= 2.6.0)
+    - StackIAB/StackVideoPlayer (= 2.6.0)
+    - StackIAB/StackXML (= 2.6.0)
+    - StackModules (~> 1.7.0)
+  - StackIAB/StackIABAssets (2.6.0):
+    - StackModules (~> 1.7.0)
+  - StackIAB/StackMRAIDKit (2.6.0):
     - StackIAB/StackIABAssets
     - StackIAB/StackOpenMeasure
-    - StackModules (~> 1.6.0)
-  - StackIAB/StackNASTKit (2.3.4):
+    - StackModules (~> 1.7.0)
+  - StackIAB/StackNASTKit (2.6.0):
     - StackIAB/StackVASTKit
-    - StackModules (~> 1.6.0)
-  - StackIAB/StackOpenMeasure (2.3.4):
-    - OMSDK_Appodeal (~> 1.4.2.0)
-    - StackModules (~> 1.6.0)
-  - StackIAB/StackRichMedia (2.3.4):
+    - StackModules (~> 1.7.0)
+  - StackIAB/StackOpenMeasure (2.6.0):
+    - OMSDK_Appodeal (~> 1.4.12)
+    - StackModules (~> 1.7.0)
+  - StackIAB/StackRichMedia (2.6.0):
     - StackIAB/StackIABAssets
     - StackIAB/StackVASTAssets
     - StackIAB/StackVideoPlayer
-    - StackModules (~> 1.6.0)
-  - StackIAB/StackVASTAssets (2.3.4):
+    - StackModules (~> 1.7.0)
+  - StackIAB/StackVASTAssets (2.6.0):
     - StackIAB/StackIABAssets
     - StackIAB/StackXML
-    - StackModules (~> 1.6.0)
-  - StackIAB/StackVASTKit (2.3.4):
+    - StackModules (~> 1.7.0)
+  - StackIAB/StackVASTKit (2.6.0):
     - StackIAB/StackMRAIDKit
     - StackIAB/StackVASTAssets
     - StackIAB/StackVideoPlayer
-    - StackModules (~> 1.6.0)
-  - StackIAB/StackVideoPlayer (2.3.4):
-    - StackModules (~> 1.6.0)
-  - StackIAB/StackXML (2.3.4):
-    - StackModules (~> 1.6.0)
-  - StackModules (1.6.4):
-    - StackModules/StackProductPresentation (= 1.6.4)
-  - StackModules/StackFoundation (1.6.4)
-  - StackModules/StackProductPresentation (1.6.4):
+    - StackModules (~> 1.7.0)
+  - StackIAB/StackVideoPlayer (2.6.0):
+    - StackModules (~> 1.7.0)
+  - StackIAB/StackXML (2.6.0):
+    - StackModules (~> 1.7.0)
+  - StackModules (1.7.3):
+    - StackModules/StackProductPresentation (= 1.7.3)
+  - StackModules/StackFoundation (1.7.3)
+  - StackModules/StackProductPresentation (1.7.3):
     - StackModules/StackUIKit
-  - StackModules/StackUIKit (1.6.4):
+  - StackModules/StackUIKit (1.7.3):
     - StackModules/StackFoundation
-  - StackProtobuf (0.8.5):
-    - Protobuf (~> 3.13)
-  - TapjoySDK (12.11.1)
-  - UnityAds (4.9.2)
-  - VungleAds (7.2.0)
+  - UnityAds (4.10.0)
+  - VungleAds (7.3.0)
   - YandexMobileAds (5.2.1):
     - YandexMobileAds/Static (= 5.2.1)
   - YandexMobileAds/Static (5.2.1):
@@ -802,50 +858,59 @@ PODS:
   - Yoga (1.14.0)
 
 DEPENDENCIES:
-  - APDAdColonyAdapter (= 3.2.1.0)
-  - APDAdjustAdapter (= 3.2.1.0)
-  - APDAppLovinAdapter (= 3.2.1.0)
-  - APDAppsFlyerAdapter (= 3.2.1.0)
-  - APDBidMachineAdapter (= 3.2.1.0)
-  - APDBidonAdapter (= 3.2.1.0)
-  - APDBigoAdsAdapter (= 3.2.1.0)
-  - APDDTExchangeAdapter (= 3.2.1.0)
-  - APDFacebookAdapter (= 3.2.1.0)
-  - APDFirebaseAdapter (= 3.2.1.0)
-  - APDGoogleAdMobAdapter (= 3.2.1.0)
-  - APDIABAdapter (= 3.2.1.0)
-  - APDInMobiAdapter (= 3.2.1.0)
-  - APDIronSourceAdapter (= 3.2.1.0)
-  - APDMetaAudienceNetworkAdapter (= 3.2.1.0)
-  - APDMintegralAdapter (= 3.2.1.0)
-  - APDMyTargetAdapter (= 3.2.1.0)
-  - APDStackAnalyticsAdapter (= 3.2.1.0)
-  - APDStackCrashReporterAdapter (= 3.2.1.0)
-  - APDUnityAdapter (= 3.2.1.0)
-  - APDVungleAdapter (= 3.2.1.0)
-  - APDYandexAdapter (= 3.2.1.0)
-  - BidMachineAdColonyAdapter (~> 2.4.0)
-  - BidMachineAmazonAdapter (= 2.4.0)
-  - BidMachineCriteoAdapter (~> 2.4.0)
-  - BidMachineMetaAudienceAdapter (~> 2.4.0)
-  - BidMachineMintegralAdapter (= 2.4.0.1)
-  - BidMachineMyTargetAdapter (~> 2.4.0)
-  - BidMachinePangleAdapter (~> 2.4.0)
-  - BidMachineSmaatoAdapter (~> 2.4.0)
-  - BidMachineTapjoyAdapter (~> 2.4.0)
-  - BidMachineVungleAdapter (~> 2.4.0)
-  - BidonAdapterAmazon (~> 0.4.7)
-  - BidonAdapterAppLovin (~> 0.4.7)
-  - BidonAdapterBidMachine (~> 0.4.7.2)
-  - BidonAdapterBigoAds (~> 0.4.7)
-  - BidonAdapterDTExchange (~> 0.4.7)
-  - BidonAdapterGoogleAdManager (~> 0.4.7)
-  - BidonAdapterGoogleMobileAds (~> 0.4.7)
-  - BidonAdapterInMobi (~> 0.4.7)
-  - BidonAdapterMetaAudienceNetwork (~> 0.4.7)
-  - BidonAdapterMintegral (~> 0.4.7.2)
-  - BidonAdapterUnityAds (~> 0.4.7)
-  - BidonAdapterVungle (~> 0.4.7.2)
+  - AmazonPublisherServicesSDK (= 4.9.2)
+  - APDAdjustAdapter (= 3.3.0.0)
+  - APDAmazonAdapter (= 3.3.0.0)
+  - APDAppLovinAdapter (= 3.3.0.0)
+  - APDAppLovinMAXAdapter (= 3.3.0.0)
+  - APDAppsFlyerAdapter (= 3.3.0.0)
+  - APDBidMachineAdapter (= 3.3.0.0)
+  - APDBidonAdapter (= 3.3.0.0)
+  - APDBigoAdsAdapter (= 3.3.0.0)
+  - APDDTExchangeAdapter (= 3.3.0.0)
+  - APDFacebookAdapter (= 3.3.0.0)
+  - APDFirebaseAdapter (= 3.3.0.0)
+  - APDGoogleAdMobAdapter (= 3.3.0.0)
+  - APDIABAdapter (= 3.3.0.0)
+  - APDInMobiAdapter (= 3.3.0.0)
+  - APDIronSourceAdapter (= 3.3.0.0)
+  - APDMetaAudienceNetworkAdapter (= 3.3.0.0)
+  - APDMintegralAdapter (= 3.3.0.0)
+  - APDMyTargetAdapter (= 3.3.0.0)
+  - APDPangleAdapter (= 3.3.0.0)
+  - APDSentryAdapter (= 3.3.0.0)
+  - APDSmaatoAdapter (= 3.3.0.0)
+  - APDUnityAdapter (= 3.3.0.0)
+  - APDVungleAdapter (= 3.3.0.0)
+  - APDYandexAdapter (= 3.3.0.0)
+  - AppLovinMediationAmazonAdMarketplaceAdapter
+  - AppLovinMediationBidMachineAdapter
+  - AppLovinMediationFacebookAdapter
+  - AppLovinMediationFyberAdapter
+  - AppLovinMediationGoogleAdapter
+  - AppLovinMediationGoogleAdManagerAdapter
+  - AppLovinMediationIronSourceAdapter
+  - AppLovinMediationMintegralAdapter
+  - AppLovinMediationUnityAdsAdapter
+  - AppLovinMediationVungleAdapter (= 7.3.0.0)
+  - AppLovinMediationYandexAdapter (= 5.2.1.0)
+  - Appodeal (= 3.3.0)
+  - BidMachineAmazonAdapter (= 2.6.0.1)
+  - BidMachineMetaAudienceAdapter (= 2.6.0.0)
+  - BidMachinePangleAdapter (= 2.6.0.0)
+  - BidMachineVungleAdapter (= 2.6.0.0)
+  - BidonAdapterAmazon (= 0.4.8.0)
+  - BidonAdapterAppLovin (= 0.4.8.0)
+  - BidonAdapterBidMachine (= 0.4.8.0)
+  - BidonAdapterBigoAds (= 0.4.8.0)
+  - BidonAdapterDTExchange (= 0.4.8.0)
+  - BidonAdapterGoogleAdManager (= 0.4.8.0)
+  - BidonAdapterGoogleMobileAds (= 0.4.8.0)
+  - BidonAdapterInMobi (= 0.4.8.0)
+  - BidonAdapterMetaAudienceNetwork (= 0.4.8.0)
+  - BidonAdapterMintegral (= 0.4.8.0)
+  - BidonAdapterUnityAds (= 0.4.8.0)
+  - BidonAdapterVungle (= 0.4.8.0)
   - boost (from `../node_modules/react-native/third-party-podspecs/boost.podspec`)
   - DoubleConversion (from `../node_modules/react-native/third-party-podspecs/DoubleConversion.podspec`)
   - FBLazyVector (from `../node_modules/react-native/Libraries/FBLazyVector`)
@@ -888,9 +953,10 @@ DEPENDENCIES:
 SPEC REPOS:
   https://github.com/appodeal/CocoaPods.git:
     - AdjustPurchase
-    - APDAdColonyAdapter
     - APDAdjustAdapter
+    - APDAmazonAdapter
     - APDAppLovinAdapter
+    - APDAppLovinMAXAdapter
     - APDAppsFlyerAdapter
     - APDBidMachineAdapter
     - APDBidonAdapter
@@ -905,44 +971,48 @@ SPEC REPOS:
     - APDMetaAudienceNetworkAdapter
     - APDMintegralAdapter
     - APDMyTargetAdapter
-    - APDStackAnalyticsAdapter
-    - APDStackCrashReporterAdapter
+    - APDPangleAdapter
+    - APDSentryAdapter
+    - APDSmaatoAdapter
     - APDUnityAdapter
     - APDVungleAdapter
     - APDYandexAdapter
     - Appodeal
     - BidMachine
-    - BidMachineAdColonyAdapter
     - BidMachineAmazonAdapter
-    - BidMachineCriteoAdapter
     - BidMachineMetaAudienceAdapter
-    - BidMachineMintegralAdapter
     - BidMachinePangleAdapter
-    - BidMachineSmaatoAdapter
-    - BidMachineTapjoyAdapter
+    - BidMachineRendering
     - BidMachineVungleAdapter
+    - BidonAdapterDTExchange
     - OMSDK_Appodeal
-    - StackAnalytics
     - StackConsentManager
     - StackIAB
     - StackModules
-    - StackProtobuf
   trunk:
-    - AdColony
     - Adjust
     - Ads-Global
     - AmazonPublisherServicesSDK
+    - AppLovinMediationAmazonAdMarketplaceAdapter
+    - AppLovinMediationBidMachineAdapter
+    - AppLovinMediationFacebookAdapter
+    - AppLovinMediationFyberAdapter
+    - AppLovinMediationGoogleAdapter
+    - AppLovinMediationGoogleAdManagerAdapter
+    - AppLovinMediationIronSourceAdapter
+    - AppLovinMediationMintegralAdapter
+    - AppLovinMediationUnityAdsAdapter
+    - AppLovinMediationVungleAdapter
+    - AppLovinMediationYandexAdapter
     - AppLovinSDK
     - AppsFlyer-AdRevenue
     - AppsFlyerFramework
     - BidMachine
-    - BidMachineMyTargetAdapter
     - Bidon
     - BidonAdapterAmazon
     - BidonAdapterAppLovin
     - BidonAdapterBidMachine
     - BidonAdapterBigoAds
-    - BidonAdapterDTExchange
     - BidonAdapterGoogleAdManager
     - BidonAdapterGoogleMobileAds
     - BidonAdapterInMobi
@@ -952,7 +1022,6 @@ SPEC REPOS:
     - BidonAdapterVungle
     - BigoADS
     - BURelyFoundation_Global
-    - CriteoPublisherSdk
     - FBAEMKit
     - FBAudienceNetwork
     - FBSDKCoreKit
@@ -964,6 +1033,7 @@ SPEC REPOS:
     - FirebaseCoreInternal
     - FirebaseInstallations
     - FirebaseRemoteConfig
+    - FirebaseRemoteConfigInterop
     - FirebaseSharedSwift
     - fmt
     - Fyber_Marketplace_SDK
@@ -979,8 +1049,9 @@ SPEC REPOS:
     - nanopb
     - PromisesObjC
     - Protobuf
+    - Sentry
+    - SentryPrivate
     - smaato-ios-sdk
-    - TapjoySDK
     - UnityAds
     - VungleAds
     - YandexMobileAds
@@ -1063,96 +1134,103 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon/yoga"
 
 SPEC CHECKSUMS:
-  AdColony: af8b7414f317641e0e1e9d23a7b739879e40e4b9
-  Adjust: 86a6935688251ca6cea371f9b284578ccf3d981b
+  Adjust: e449a8b88cd2261d8f548df023823f7e861a059c
   AdjustPurchase: a6688375a589f10a455adb9217c7de55eba93d63
-  Ads-Global: 4a4434e2041e974a4f4e2d6aeb0bc003f2f05925
-  AmazonPublisherServicesSDK: 42e44affd14820c7ca17e55934fe8e53f5fb9ca0
-  APDAdColonyAdapter: d7df49c724ca95f42f3905ad3174387d8ec6c1aa
-  APDAdjustAdapter: 61c964798789cfbd58a5759afd6339963556be54
-  APDAppLovinAdapter: 0f662c2f24fe3000f524452998ab6ab0d8ff3627
-  APDAppsFlyerAdapter: c2e6f17d40319e5f8a3ff2794cf596aaae0dae03
-  APDBidMachineAdapter: 0ad62ad0fde0375f9f613ee4268c25342cd0936c
-  APDBidonAdapter: 75ff0185078dc83f333a293b55f4970153926c32
-  APDBigoAdsAdapter: 3841bf8730a3bff3b791e631c21e355130c35fce
-  APDDTExchangeAdapter: 1868d40c12c08d44c65ac6bf4266ab863b8a51a3
-  APDFacebookAdapter: e4a64a5160e059caca211876295bd332b2f8e057
-  APDFirebaseAdapter: 78f0a9e522bba8dbb4b94bc2f6eaec495aff30cb
-  APDGoogleAdMobAdapter: 04abd71cd6cc523a28329ba9f7b8adcb62c248d6
-  APDIABAdapter: b648e71b5f2e05759c5b616e0f5745f08f00fb93
-  APDInMobiAdapter: 3387ba9ea3e01c21744ece43a08eef0339800f5d
-  APDIronSourceAdapter: 5347c78fc506f5b80b6fa1f5a12b8352f92623f7
-  APDMetaAudienceNetworkAdapter: 1f94d6fb0acb5df56ffbe36fb8ef827a30fa6088
-  APDMintegralAdapter: 4a574a306b2488a4547688d3ff53e890df122af3
-  APDMyTargetAdapter: 01085dca38c90bdd480aee502063fbb46f65a90f
-  APDStackAnalyticsAdapter: 495cbe99d2f10d20976c911d2e1f0a578a750e42
-  APDStackCrashReporterAdapter: f4586f6c9fdf3f63077c983de17ca64f528f7647
-  APDUnityAdapter: b7b718b66df0b0492fabab096607137518e7f493
-  APDVungleAdapter: c90adc2a32b141d2f397e8680b5c3af7fadf3857
-  APDYandexAdapter: 862ad24e9c58f8e359bc451c79e753cc0a0a6530
-  AppLovinSDK: 179d509c258e01a3a77eb8416f0ba843a12ed322
-  Appodeal: 832e9ef5374f3dc9c4236fc7db78acfe4b5f0ef2
+  Ads-Global: b2f2943acdeedeae08aa9dce19706e1edbbd5442
+  AmazonPublisherServicesSDK: 3ccd81a70c200022af6b01838b3428bc064da035
+  APDAdjustAdapter: e8c83db3dd38ac4e98bdcdba4711cb146a7c393a
+  APDAmazonAdapter: bed6cb6137f8d7a99e9d63be9d8a6bd1c4c219e3
+  APDAppLovinAdapter: 14f0c15bf545234731c3c4a961ac612229340cbc
+  APDAppLovinMAXAdapter: dd9fdd158868764bf152e8375b56717d3e27c907
+  APDAppsFlyerAdapter: 07fcf8bff4ad8e3cac1fc079d4ecd60a940ac9a4
+  APDBidMachineAdapter: c3eeb49426c700df80cf24ad600683503cf4b696
+  APDBidonAdapter: 20ed5211ac9c21fb5cf2d9f17ca70dc5ee4c271a
+  APDBigoAdsAdapter: 0e2f501c46eac98346639d16c96dd1ff0f8d7335
+  APDDTExchangeAdapter: c9b0ffc755c1af1eca6f4ba1d82765f9b2d788b3
+  APDFacebookAdapter: 1159de73ca0a6b0c97889437b99052a2b524b24e
+  APDFirebaseAdapter: 7fdfa31fa4a184132b8b24785d66baff2289fa2a
+  APDGoogleAdMobAdapter: 1739a597bc259fbd6bad49ba5e537626c0e78ae9
+  APDIABAdapter: 5ac4c927aa37beb0ada88887afa445c8376ac529
+  APDInMobiAdapter: 9f73f3bf2d5490076c7015719cddca80b7e53b19
+  APDIronSourceAdapter: cec6d2949077f1790853f4162b7b5d4e1cb61953
+  APDMetaAudienceNetworkAdapter: 7daf7990c274b1116f43a744c49e6427377f2051
+  APDMintegralAdapter: fb40edae9022b3653e3135525f4c5a94dc521f78
+  APDMyTargetAdapter: 8004129b55d99022dca2e8d30b42adfeecc3d017
+  APDPangleAdapter: 194a7cca0a5e7263557a2b88681d8ca751cfe18c
+  APDSentryAdapter: f327290a9e2825e973461389cec50d79471d06a0
+  APDSmaatoAdapter: 092d7f80bcfa5366c2c4960b5f90688c38333def
+  APDUnityAdapter: 32fb1c8f99d94cd3d21fd2346633af1b26e3579f
+  APDVungleAdapter: 42d8435c42bf02a1d4c8645cefd04ca6cba49cac
+  APDYandexAdapter: 17400c77d6bb489c56646277d7ba758f08617d82
+  AppLovinMediationAmazonAdMarketplaceAdapter: 0bcedca9e32d474bfbef01c1deecc615c3162488
+  AppLovinMediationBidMachineAdapter: 811ac62fed639592865c35d4442e6f98d7de386f
+  AppLovinMediationFacebookAdapter: 30ddfcb09c1c9ff6778ba974f58e8f3204e6eebc
+  AppLovinMediationFyberAdapter: 068792cae6c9e088870dda003f3122f6018d4f22
+  AppLovinMediationGoogleAdapter: 415bacc5d03794737c23a03dd1677caf72a175d9
+  AppLovinMediationGoogleAdManagerAdapter: 5bb0d2e3e485a9af80b062f63fc5d394476c0bb8
+  AppLovinMediationIronSourceAdapter: d7b2190fecb58a9bef8b5ff083327b4516d3c39f
+  AppLovinMediationMintegralAdapter: 604ba97da0b444bab213b7c9100d6ec374dd9b57
+  AppLovinMediationUnityAdsAdapter: d6d5bf488adce05684bf00e0845af49a96a1aadd
+  AppLovinMediationVungleAdapter: d53b0198c78c72299b3d59040d28e9d82b9c79f6
+  AppLovinMediationYandexAdapter: 959c5e6d0df3b20d3cb7ecc2336a718ab51aa6be
+  AppLovinSDK: c57ad0d34625c971d2db127f8ef60570b28ff51a
+  Appodeal: 88cc3790f727b1bdc581e8217f3019d94c037fb7
   AppsFlyer-AdRevenue: a38170b0b59f74cd07c7a9b91ee026f147b5c968
-  AppsFlyerFramework: fdc5c2fa3a3cfcd62eae58dfba4b8f59c6c77219
-  BidMachine: f5969d3a6ca86154fe607c7f50c69ac3b0a05f34
-  BidMachineAdColonyAdapter: 417270a66e63511a06fef064e507b4988df88441
-  BidMachineAmazonAdapter: aed4ef61e8e780c25e00d17af2c27e39f23c6894
-  BidMachineCriteoAdapter: 43a2fca76e05ccdcc6afa0838177c874d39cc818
-  BidMachineMetaAudienceAdapter: b5aa268f49be02556c50bc1994f8a87317a94ae5
-  BidMachineMintegralAdapter: b997e37dedf47adab480ef10669851f59adbb4dd
-  BidMachineMyTargetAdapter: a712f9ae79a56d2e74f9f4023288434b2f88188f
-  BidMachinePangleAdapter: f19aad536afb3e08bf36bf87fe4ea366e5bef6fd
-  BidMachineSmaatoAdapter: ccc75b4ea6060acf002f3df7d06d1433e045dc82
-  BidMachineTapjoyAdapter: 21e9397e69eac61ea10a33ec162913788a22d108
-  BidMachineVungleAdapter: 0e8685b6e52520b8b9ff9e60175816539045a236
-  Bidon: 994a3e881b9ce1870dab4e0cf15edcaf558a8170
-  BidonAdapterAmazon: 196e8faea329e196c39832f3b3e8d96f8dc522a6
-  BidonAdapterAppLovin: 9dd5fde37b8fca18b47204e45c5952dd041e4055
-  BidonAdapterBidMachine: c6bf9c0c4508d6482db283f98b034b70d6adc5da
-  BidonAdapterBigoAds: 14d00d68b91ce182f8f0fec3721514e35ad461ad
-  BidonAdapterDTExchange: 3c5d70be2105700428c57675ea8710edd5c4798f
-  BidonAdapterGoogleAdManager: a74b61f6e0927439326a123e72fb3dd42f869983
-  BidonAdapterGoogleMobileAds: bd17a8dcc15e2ed323c2aac622d5b3ace592dfef
-  BidonAdapterInMobi: 978ab7466899a98d021f1c5248cc9e592522954a
-  BidonAdapterMetaAudienceNetwork: 339f4b568afa0085af21adacb24f0d8ead826cee
-  BidonAdapterMintegral: ebc30d3b2e0ea00337e3c58cd8788d0ed32e7124
-  BidonAdapterUnityAds: b20d9bf2f0604fda6f6de27cdcbcb1ddb67274f0
-  BidonAdapterVungle: 9efdac89e229a8ed7985faca4301654ff904166c
-  BigoADS: 3300b0210d49ad547f9211b8c0496374bdb287ce
+  AppsFlyerFramework: 39efd4d2523ca9e3234805aea0c6b3c3a4a387d1
+  BidMachine: 0b8db210548335b06633a9435d0d20166e9fa206
+  BidMachineAmazonAdapter: c00a220afe35bd0d45474205cee2ee31735d003a
+  BidMachineMetaAudienceAdapter: 42431d929af223384ccd3ec74a877364b0c8548b
+  BidMachinePangleAdapter: 1baece667ad444ba6b0c4c2aba823a8a73824bfe
+  BidMachineRendering: e8c4005b94b483315d9ded92d82ce571698b1374
+  BidMachineVungleAdapter: 0d5753175651fa5a3b74e99689eccaff4a1c6694
+  Bidon: 77951c45d07ffd35b1b9cf54a0baea4014f3ce68
+  BidonAdapterAmazon: 35b41afea0a78dfac6ab47046afa19da73fbe6b2
+  BidonAdapterAppLovin: 453dbfe10dfd3bff944b04a37061527ba5cfda95
+  BidonAdapterBidMachine: e36ed25bda19efbcaedb1fd8779958e33e27be24
+  BidonAdapterBigoAds: e81dbdd9ca2df465f069e00a9295509cdb9df161
+  BidonAdapterDTExchange: d63507d757324098b2b35cb206d3f254cac49800
+  BidonAdapterGoogleAdManager: 03404e3397a522339fec57f67652fc91870dbb4e
+  BidonAdapterGoogleMobileAds: 3953e278da618a8c3e80aeb084494af00460999a
+  BidonAdapterInMobi: bee8169bbc9afb892ee8a389ce45535c0f5ebf09
+  BidonAdapterMetaAudienceNetwork: 1d1d162ad89d1f767d8fbfc168999515d8b20d89
+  BidonAdapterMintegral: b4d77c2795f8ade6a7c6a395dcf0a0ba0c971da0
+  BidonAdapterUnityAds: cf7dac1f8f10fbc3d6d0b0e8a04a2ae5124ad16f
+  BidonAdapterVungle: 7884a1e80f3ac3ffb46c31892bdf97dbe8adc9da
+  BigoADS: dc47625e5eb8f83b651a75788973d04acd655d62
   boost: a7c83b31436843459a1961bfd74b96033dc77234
-  BURelyFoundation_Global: 1d1813784aecc249311d4df1b7e80e1dbd559dc3
-  CriteoPublisherSdk: 1cfd1c5275aa4418b26e917cb9858901e02ed686
+  BURelyFoundation_Global: 17ed9cd58d138feefd8c0711dd3294766adcb28e
   DoubleConversion: 5189b271737e1565bdce30deb4a08d647e3f5f54
   FBAEMKit: daac7466b918752f020345be5c7d9787f98cfc07
-  FBAudienceNetwork: e0fcc9091fced34910ed0b6da06f129db46ac9e6
+  FBAudienceNetwork: 6c560e4c68823ec5da1e84868544a8a246e0e201
   FBLazyVector: 3b313c3fb52b597f7a9b430798e6367d2b9f07e5
   FBReactNativeSpec: 99a7ecb7e9665d96f2fea706b0844e2f3117f381
   FBSDKCoreKit: 2cb033464b2134af0138f87d20b859eb3f9be359
   FBSDKCoreKit_Basics: d37280da2e65872f0e931d15f45d97ea324fec37
-  Firebase: 10c8cb12fb7ad2ae0c09ffc86cd9c1ab392a0031
-  FirebaseABTesting: 1d5d49804bcfc5fa782bc2491a8c1364e2cf7241
-  FirebaseAnalytics: a2731bf3670747ce8f65368b118d18aa8e368246
-  FirebaseCore: 28045c1560a2600d284b9c45a904fe322dc890b6
-  FirebaseCoreInternal: efeeb171ac02d623bdaefe121539939821e10811
-  FirebaseInstallations: 558b1da7d65afeb996fd5c814332f013234ece4e
-  FirebaseRemoteConfig: b873a427a48159082361343a85649eed3f5377ea
-  FirebaseSharedSwift: 2fbf73618288b7a36b2014b957745dcdd781389e
+  Firebase: 91fefd38712feb9186ea8996af6cbdef41473442
+  FirebaseABTesting: 4431c2c56ac6e56f463b9cab05cc111078639f99
+  FirebaseAnalytics: b5efc493eb0f40ec560b04a472e3e1a15d39ca13
+  FirebaseCore: 11dc8a16dfb7c5e3c3f45ba0e191a33ac4f50894
+  FirebaseCoreInternal: bcb5acffd4ea05e12a783ecf835f2210ce3dc6af
+  FirebaseInstallations: 8f581fca6478a50705d2bd2abd66d306e0f5736e
+  FirebaseRemoteConfig: 95dddc50496b37eef199dadce850d5652b534b43
+  FirebaseRemoteConfigInterop: 6c349a466490aeace3ce9c091c86be1730711634
+  FirebaseSharedSwift: 76e1529c32101d80e4f1ca2fba7c39d59f0a390a
   fmt: ff9d55029c625d3757ed641535fd4a75fedc7ce9
-  Fyber_Marketplace_SDK: f41cd55ff0d5b257beccc70e5708acd350468b66
+  Fyber_Marketplace_SDK: 50fb9e3077ddbd99e3da08dfcaab60df689ac106
   glog: 04b94705f318337d7ead9e6d17c019bd9b1f6b1b
   Google-Mobile-Ads-SDK: 8f67a72f88d057335b1ac3f501e2b68ad054116e
-  GoogleAppMeasurement: bb3c564c3efb933136af0e94899e0a46167466a8
-  GoogleUserMessagingPlatform: dce302b8f1b84d6e945812ee7a15c3f65a102cbf
-  GoogleUtilities: 0759d1a57ebb953965c2dfe0ba4c82e95ccc2e34
-  InMobiSDK: 7c62b28415c663b881fa7009d04e0a5484f67902
-  IronSourceSDK: 276835c7199033724d947c511a372383ac2846de
-  MintegralAdSDK: 8a50d604e6d6f7c2842a24645a7a260ec3805d15
-  myTargetSDK: affba499915fed67642f39e3ecebe235441cf278
-  myTrackerSDK: 29a5ff3e80406914c4b89e34d7631b1a3f6df440
-  nanopb: d4d75c12cd1316f4a64e3c6963f879ecd4b5e0d5
-  OMSDK_Appodeal: f4e97878c54edd6be63259a4ba38a5491be6226a
-  PromisesObjC: c50d2056b5253dadbd6c2bea79b0674bd5a52fa4
-  Protobuf: 34db13339da0d02d64fa8a2ac6a124cfcc603703
+  GoogleAppMeasurement: f3abf08495ef2cba7829f15318c373b8d9226491
+  GoogleUserMessagingPlatform: f131fa7978d2ba88d7426702b057c2cc318e6595
+  GoogleUtilities: d053d902a8edaa9904e1bd00c37535385b8ed152
+  InMobiSDK: 5882da6b575abf138a586f920bb4c7cafde7a529
+  IronSourceSDK: 3fb6845fabf7b6e84e73fff61fe7a4d75691e4ac
+  MintegralAdSDK: 5ff28af4529d8eedf9e2c4e84ddf70bebf48691c
+  myTargetSDK: e89c7750ae10be5fa9deb4c01fce50c8ec1e078d
+  myTrackerSDK: 91bd9556f25b34a39cd1bbf76af55fdabc01d3fa
+  nanopb: 438bc412db1928dac798aa6fd75726007be04262
+  OMSDK_Appodeal: 488b1094f7ba13129caaa1b7b6d6d08a794301af
+  PromisesObjC: f5707f49cb48b9636751c5b2e7d227e43fba9f47
+  Protobuf: a53f5173a603075b3522a5c50be63a67a5f3353a
   RCT-Folly: 0080d0a6ebf2577475bda044aa59e2ca1f909cda
   RCTRequired: 5cf7e7d2f12699724b59f90350257a422eaa9492
   RCTTypeSafety: 3f3ead9673d1ab8bb1aea85b0894ab3220f8f06e
@@ -1181,22 +1259,21 @@ SPEC CHECKSUMS:
   React-RCTVibration: b9a58ffdd18446f43d493a4b0ecd603ee86be847
   React-runtimeexecutor: e9b1f9310158a1e265bcdfdfd8c62d6174b947a2
   ReactCommon: 01064177e66d652192c661de899b1076da962fd9
-  RNAppodeal: 257062b0c445b41ec6a43504a3fe91aa42b3192d
+  RNAppodeal: 54e3bfd9722ce5fc524473d951e88d5d85336a2c
   RNScreens: fa9b582d85ae5d62c91c66003b5278458fed7aaa
   RNVectorIcons: fcc2f6cb32f5735b586e66d14103a74ce6ad61f8
-  smaato-ios-sdk: 4533e9c8c24ecefd0445a78ea89afba35412e1d1
-  StackAnalytics: 9338d735b98bcede0a9d1f96a959c98c3fafd16d
-  StackConsentManager: 3b68ea0aaeea01062efebb188785a6d274236d09
-  StackIAB: d9451cfc4914cbf1f35cc8eba660d36fef925078
-  StackModules: 380ada7dc4a46684ba20e2f0cb89874c9a614d60
-  StackProtobuf: 6b78e9e5c5f7ead500a5d1527e569c4d49599a74
-  TapjoySDK: 7edeac6d20f9d941fab1352c81ecd3e885c36167
-  UnityAds: 358547edbd4c923cd03462289b8813d0ef91999e
-  VungleAds: 85eb3468e8a6dfcf86f2b2e7891181df426c0433
+  Sentry: ebc12276bd17613a114ab359074096b6b3725203
+  SentryPrivate: d651efb234cf385ec9a1cdd3eff94b5e78a0e0fe
+  smaato-ios-sdk: 4cf299fa18eb1be1d47e3bdc917b62fd8c528864
+  StackConsentManager: 69cb8d62a818c32240209bf08309aad70db9d7fe
+  StackIAB: 3127eb14106c86f5eaeaf98d2fb3de71a1dff8d4
+  StackModules: d07cef20468293452184c2ee01f93e730e6ee5ad
+  UnityAds: 5601f6397b0e02ed3ed6ee92827f5177a523aab6
+  VungleAds: c7bf642b4a4581177b5c76042423a21d8c32ef1e
   YandexMobileAds: 3d7708df615f92815a3acedf9869da46d0b4d65e
   YandexMobileMetrica: f5368ee93f286c793d73b58da00929babfc897c1
   Yoga: 2ed968a4f060a92834227c036279f2736de0fce3
 
-PODFILE CHECKSUM: df6326c64673e9cc58c9307d692d7d6f2141d3e5
+PODFILE CHECKSUM: c6bc57204597c2915bcaf9bc04417e59bafd8d74
 
-COCOAPODS: 1.14.3
+COCOAPODS: 1.13.0
