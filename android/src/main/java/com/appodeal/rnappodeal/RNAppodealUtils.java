@@ -1,19 +1,14 @@
 package com.appodeal.rnappodeal;
 
 import com.appodeal.ads.Appodeal;
-import com.appodeal.ads.UserSettings;
 import com.appodeal.ads.inapp.InAppPurchase;
-import com.appodeal.ads.regulator.CCPAUserConsent;
-import com.appodeal.ads.regulator.GDPRUserConsent;
 import com.appodeal.ads.utils.Log;
-import com.appodeal.consent.Consent;
 import com.appodeal.consent.ConsentStatus;
 import com.facebook.react.bridge.ReadableMap;
 
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
-
 
 class RNAppodealUtils {
     static Log.LogLevel getLogLevelFromString(String logLevel) {
