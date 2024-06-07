@@ -27,7 +27,6 @@ ios/.xcode.env.local
 build/
 .idea
 .gradle
-gradlew
 local.properties
 *.iml
 .cxx/
@@ -37,6 +36,7 @@ local.properties
 node_modules/
 npm-debug.log
 yarn-error.log
+/yarn.lock
 
 # BUCK
 buck-out/
@@ -61,3 +61,4 @@ buck-out/
 
 # CocoaPods
 /ios/Pods/
+/ios/Podfile.lock
