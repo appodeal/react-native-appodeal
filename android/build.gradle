@@ -57,7 +57,7 @@ dependencies {
     implementation "com.android.installreferrer:installreferrer:${safeExtGet('installReferrerVersion', '2.1')}"
 
     // Appodeal
-    implementation 'com.appodeal.ads.sdk:core:3.3.0'
-    implementation 'com.appodeal.ads.sdk.networks:iab:3.3.0.0'
-    implementation 'com.appodeal.ads.sdk.services:sentry_analytics:3.3.0.0'
+    implementation 'com.appodeal.ads.sdk:core:3.3.1'
+    implementation 'com.appodeal.ads.sdk.networks:iab:3.3.1.0'
+    implementation 'com.appodeal.ads.sdk.services:sentry_analytics:3.3.1.0'
 }

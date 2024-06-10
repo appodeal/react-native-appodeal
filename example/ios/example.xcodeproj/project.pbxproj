@@ -372,8 +372,10 @@
 				"${PODS_CONFIGURATION_BUILD_DIR}/Bidon/BidonPrivacyInfo.bundle",
 				"${PODS_ROOT}/BigoADS/BigoADS/BigoADSRes.bundle",
 				"${PODS_CONFIGURATION_BUILD_DIR}/BigoADS/BigoADS.bundle",
+				"${PODS_CONFIGURATION_BUILD_DIR}/FBAudienceNetwork/FBAudienceNetwork.bundle",
 				"${PODS_CONFIGURATION_BUILD_DIR}/Fyber_Marketplace_SDK/Fyber_Marketplace_SDK.bundle",
 				"${PODS_CONFIGURATION_BUILD_DIR}/GoogleUserMessagingPlatform/UserMessagingPlatformResources.bundle",
+				"${PODS_CONFIGURATION_BUILD_DIR}/IronSourceSDK/IronSourcePrivacyInfo.bundle",
 				"${PODS_CONFIGURATION_BUILD_DIR}/MintegralAdSDK/MTGSDK.bundle",
 				"${PODS_CONFIGURATION_BUILD_DIR}/StackConsentManager/ConsentPrivacyInfo.bundle",
 				"${PODS_ROOT}/StackIAB/StackIABAssets.bundle",
@@ -390,7 +392,6 @@
 				"${PODS_CONFIGURATION_BUILD_DIR}/StackModules/StackUIKit.bundle",
 				"${PODS_CONFIGURATION_BUILD_DIR}/UnityAds/UnityAds.bundle",
 				"${PODS_ROOT}/YandexMobileAds/static/YandexMobileAds.xcframework/YandexMobileAdsBundle.bundle",
-				"${PODS_CONFIGURATION_BUILD_DIR}/smaato-ios-sdk/Resources.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
@@ -408,8 +409,10 @@
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/BidonPrivacyInfo.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/BigoADSRes.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/BigoADS.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/FBAudienceNetwork.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Fyber_Marketplace_SDK.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/UserMessagingPlatformResources.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/IronSourcePrivacyInfo.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MTGSDK.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/ConsentPrivacyInfo.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/StackIABAssets.bundle",
@@ -426,7 +429,6 @@
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/StackUIKit.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/UnityAds.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/YandexMobileAdsBundle.bundle",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Resources.bundle",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -484,15 +486,7 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-Example-ExampleTests/Pods-Example-ExampleTests-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/Adjust/Adjust.framework",
 				"${BUILT_PRODUCTS_DIR}/DoubleConversion/DoubleConversion.framework",
-				"${BUILT_PRODUCTS_DIR}/FirebaseABTesting/FirebaseABTesting.framework",
-				"${BUILT_PRODUCTS_DIR}/FirebaseCore/FirebaseCore.framework",
-				"${BUILT_PRODUCTS_DIR}/FirebaseCoreInternal/FirebaseCoreInternal.framework",
-				"${BUILT_PRODUCTS_DIR}/FirebaseInstallations/FirebaseInstallations.framework",
-				"${BUILT_PRODUCTS_DIR}/FirebaseRemoteConfig/FirebaseRemoteConfig.framework",
-				"${BUILT_PRODUCTS_DIR}/FirebaseRemoteConfigInterop/FirebaseRemoteConfigInterop.framework",
-				"${BUILT_PRODUCTS_DIR}/FirebaseSharedSwift/FirebaseSharedSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
 				"${BUILT_PRODUCTS_DIR}/PromisesObjC/FBLPromises.framework",
 				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
@@ -529,34 +523,12 @@
 				"${BUILT_PRODUCTS_DIR}/react-native-segmented-control/react_native_segmented_control.framework",
 				"${PODS_XCFRAMEWORKS_BUILD_DIR}/AmazonPublisherServicesSDK/DTBiOSSDK.framework/DTBiOSSDK",
 				"${PODS_XCFRAMEWORKS_BUILD_DIR}/AppLovinSDK/AppLovinSDK.framework/AppLovinSDK",
-				"${PODS_XCFRAMEWORKS_BUILD_DIR}/FBAEMKit/FBAEMKit.framework/FBAEMKit",
-				"${PODS_XCFRAMEWORKS_BUILD_DIR}/FBSDKCoreKit/FBSDKCoreKit.framework/FBSDKCoreKit",
-				"${PODS_XCFRAMEWORKS_BUILD_DIR}/FBSDKCoreKit_Basics/FBSDKCoreKit_Basics.framework/FBSDKCoreKit_Basics",
 				"${PODS_XCFRAMEWORKS_BUILD_DIR}/InMobiSDK/InMobiSDK.framework/InMobiSDK",
 				"${PODS_XCFRAMEWORKS_BUILD_DIR}/OMSDK_Appodeal/OMSDK_Appodeal.framework/OMSDK_Appodeal",
-				"${PODS_XCFRAMEWORKS_BUILD_DIR}/smaato-ios-sdk/Modules/Banner/SmaatoSDKBanner.framework/SmaatoSDKBanner",
-				"${PODS_XCFRAMEWORKS_BUILD_DIR}/smaato-ios-sdk/Modules/Core/SmaatoSDKCore.framework/SmaatoSDKCore",
-				"${PODS_XCFRAMEWORKS_BUILD_DIR}/smaato-ios-sdk/Modules/Interstitial/SmaatoSDKInterstitial.framework/SmaatoSDKInterstitial",
-				"${PODS_XCFRAMEWORKS_BUILD_DIR}/smaato-ios-sdk/Modules/Native/SmaatoSDKNative.framework/SmaatoSDKNative",
-				"${PODS_XCFRAMEWORKS_BUILD_DIR}/smaato-ios-sdk/Modules/OpenMeasurement/SmaatoSDKOpenMeasurement.framework/SmaatoSDKOpenMeasurement",
-				"${PODS_XCFRAMEWORKS_BUILD_DIR}/smaato-ios-sdk/Modules/OpenMeasurement/OMSDK_Smaato.framework/OMSDK_Smaato",
-				"${PODS_XCFRAMEWORKS_BUILD_DIR}/smaato-ios-sdk/Modules/Outstream/SmaatoSDKOutstream.framework/SmaatoSDKOutstream",
-				"${PODS_XCFRAMEWORKS_BUILD_DIR}/smaato-ios-sdk/Modules/RewardedAds/SmaatoSDKRewardedAds.framework/SmaatoSDKRewardedAds",
-				"${PODS_XCFRAMEWORKS_BUILD_DIR}/smaato-ios-sdk/Modules/RichMedia/SmaatoSDKRichMedia.framework/SmaatoSDKRichMedia",
-				"${PODS_XCFRAMEWORKS_BUILD_DIR}/smaato-ios-sdk/Modules/UnifiedBidding/SmaatoSDKUnifiedBidding.framework/SmaatoSDKUnifiedBidding",
-				"${PODS_XCFRAMEWORKS_BUILD_DIR}/smaato-ios-sdk/Modules/Video/SmaatoSDKVideo.framework/SmaatoSDKVideo",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Adjust.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DoubleConversion.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseABTesting.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseCore.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseCoreInternal.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseInstallations.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseRemoteConfig.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseRemoteConfigInterop.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseSharedSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBLPromises.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
@@ -593,22 +565,8 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/react_native_segmented_control.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DTBiOSSDK.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AppLovinSDK.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBAEMKit.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKCoreKit.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKCoreKit_Basics.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/InMobiSDK.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/OMSDK_Appodeal.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SmaatoSDKBanner.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SmaatoSDKCore.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SmaatoSDKInterstitial.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SmaatoSDKNative.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SmaatoSDKOpenMeasurement.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/OMSDK_Smaato.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SmaatoSDKOutstream.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SmaatoSDKRewardedAds.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SmaatoSDKRichMedia.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SmaatoSDKUnifiedBidding.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SmaatoSDKVideo.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -636,8 +594,10 @@
 				"${PODS_CONFIGURATION_BUILD_DIR}/Bidon/BidonPrivacyInfo.bundle",
 				"${PODS_ROOT}/BigoADS/BigoADS/BigoADSRes.bundle",
 				"${PODS_CONFIGURATION_BUILD_DIR}/BigoADS/BigoADS.bundle",
+				"${PODS_CONFIGURATION_BUILD_DIR}/FBAudienceNetwork/FBAudienceNetwork.bundle",
 				"${PODS_CONFIGURATION_BUILD_DIR}/Fyber_Marketplace_SDK/Fyber_Marketplace_SDK.bundle",
 				"${PODS_CONFIGURATION_BUILD_DIR}/GoogleUserMessagingPlatform/UserMessagingPlatformResources.bundle",
+				"${PODS_CONFIGURATION_BUILD_DIR}/IronSourceSDK/IronSourcePrivacyInfo.bundle",
 				"${PODS_CONFIGURATION_BUILD_DIR}/MintegralAdSDK/MTGSDK.bundle",
 				"${PODS_CONFIGURATION_BUILD_DIR}/StackConsentManager/ConsentPrivacyInfo.bundle",
 				"${PODS_ROOT}/StackIAB/StackIABAssets.bundle",
@@ -654,7 +614,6 @@
 				"${PODS_CONFIGURATION_BUILD_DIR}/StackModules/StackUIKit.bundle",
 				"${PODS_CONFIGURATION_BUILD_DIR}/UnityAds/UnityAds.bundle",
 				"${PODS_ROOT}/YandexMobileAds/static/YandexMobileAds.xcframework/YandexMobileAdsBundle.bundle",
-				"${PODS_CONFIGURATION_BUILD_DIR}/smaato-ios-sdk/Resources.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
@@ -672,8 +631,10 @@
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/BidonPrivacyInfo.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/BigoADSRes.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/BigoADS.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/FBAudienceNetwork.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Fyber_Marketplace_SDK.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/UserMessagingPlatformResources.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/IronSourcePrivacyInfo.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MTGSDK.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/ConsentPrivacyInfo.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/StackIABAssets.bundle",
@@ -690,7 +651,6 @@
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/StackUIKit.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/UnityAds.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/YandexMobileAdsBundle.bundle",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Resources.bundle",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -704,15 +664,7 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-Example/Pods-Example-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/Adjust/Adjust.framework",
 				"${BUILT_PRODUCTS_DIR}/DoubleConversion/DoubleConversion.framework",
-				"${BUILT_PRODUCTS_DIR}/FirebaseABTesting/FirebaseABTesting.framework",
-				"${BUILT_PRODUCTS_DIR}/FirebaseCore/FirebaseCore.framework",
-				"${BUILT_PRODUCTS_DIR}/FirebaseCoreInternal/FirebaseCoreInternal.framework",
-				"${BUILT_PRODUCTS_DIR}/FirebaseInstallations/FirebaseInstallations.framework",
-				"${BUILT_PRODUCTS_DIR}/FirebaseRemoteConfig/FirebaseRemoteConfig.framework",
-				"${BUILT_PRODUCTS_DIR}/FirebaseRemoteConfigInterop/FirebaseRemoteConfigInterop.framework",
-				"${BUILT_PRODUCTS_DIR}/FirebaseSharedSwift/FirebaseSharedSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
 				"${BUILT_PRODUCTS_DIR}/PromisesObjC/FBLPromises.framework",
 				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
@@ -749,34 +701,12 @@
 				"${BUILT_PRODUCTS_DIR}/react-native-segmented-control/react_native_segmented_control.framework",
 				"${PODS_XCFRAMEWORKS_BUILD_DIR}/AmazonPublisherServicesSDK/DTBiOSSDK.framework/DTBiOSSDK",
 				"${PODS_XCFRAMEWORKS_BUILD_DIR}/AppLovinSDK/AppLovinSDK.framework/AppLovinSDK",
-				"${PODS_XCFRAMEWORKS_BUILD_DIR}/FBAEMKit/FBAEMKit.framework/FBAEMKit",
-				"${PODS_XCFRAMEWORKS_BUILD_DIR}/FBSDKCoreKit/FBSDKCoreKit.framework/FBSDKCoreKit",
-				"${PODS_XCFRAMEWORKS_BUILD_DIR}/FBSDKCoreKit_Basics/FBSDKCoreKit_Basics.framework/FBSDKCoreKit_Basics",
 				"${PODS_XCFRAMEWORKS_BUILD_DIR}/InMobiSDK/InMobiSDK.framework/InMobiSDK",
 				"${PODS_XCFRAMEWORKS_BUILD_DIR}/OMSDK_Appodeal/OMSDK_Appodeal.framework/OMSDK_Appodeal",
-				"${PODS_XCFRAMEWORKS_BUILD_DIR}/smaato-ios-sdk/Modules/Banner/SmaatoSDKBanner.framework/SmaatoSDKBanner",
-				"${PODS_XCFRAMEWORKS_BUILD_DIR}/smaato-ios-sdk/Modules/Core/SmaatoSDKCore.framework/SmaatoSDKCore",
-				"${PODS_XCFRAMEWORKS_BUILD_DIR}/smaato-ios-sdk/Modules/Interstitial/SmaatoSDKInterstitial.framework/SmaatoSDKInterstitial",
-				"${PODS_XCFRAMEWORKS_BUILD_DIR}/smaato-ios-sdk/Modules/Native/SmaatoSDKNative.framework/SmaatoSDKNative",
-				"${PODS_XCFRAMEWORKS_BUILD_DIR}/smaato-ios-sdk/Modules/OpenMeasurement/SmaatoSDKOpenMeasurement.framework/SmaatoSDKOpenMeasurement",
-				"${PODS_XCFRAMEWORKS_BUILD_DIR}/smaato-ios-sdk/Modules/OpenMeasurement/OMSDK_Smaato.framework/OMSDK_Smaato",
-				"${PODS_XCFRAMEWORKS_BUILD_DIR}/smaato-ios-sdk/Modules/Outstream/SmaatoSDKOutstream.framework/SmaatoSDKOutstream",
-				"${PODS_XCFRAMEWORKS_BUILD_DIR}/smaato-ios-sdk/Modules/RewardedAds/SmaatoSDKRewardedAds.framework/SmaatoSDKRewardedAds",
-				"${PODS_XCFRAMEWORKS_BUILD_DIR}/smaato-ios-sdk/Modules/RichMedia/SmaatoSDKRichMedia.framework/SmaatoSDKRichMedia",
-				"${PODS_XCFRAMEWORKS_BUILD_DIR}/smaato-ios-sdk/Modules/UnifiedBidding/SmaatoSDKUnifiedBidding.framework/SmaatoSDKUnifiedBidding",
-				"${PODS_XCFRAMEWORKS_BUILD_DIR}/smaato-ios-sdk/Modules/Video/SmaatoSDKVideo.framework/SmaatoSDKVideo",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Adjust.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DoubleConversion.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseABTesting.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseCore.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseCoreInternal.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseInstallations.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseRemoteConfig.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseRemoteConfigInterop.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseSharedSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBLPromises.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
@@ -813,22 +743,8 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/react_native_segmented_control.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DTBiOSSDK.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AppLovinSDK.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBAEMKit.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKCoreKit.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKCoreKit_Basics.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/InMobiSDK.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/OMSDK_Appodeal.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SmaatoSDKBanner.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SmaatoSDKCore.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SmaatoSDKInterstitial.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SmaatoSDKNative.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SmaatoSDKOpenMeasurement.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/OMSDK_Smaato.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SmaatoSDKOutstream.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SmaatoSDKRewardedAds.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SmaatoSDKRichMedia.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SmaatoSDKUnifiedBidding.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SmaatoSDKVideo.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -981,7 +897,7 @@
 					"\"${PODS_XCFRAMEWORKS_BUILD_DIR}/APDYandexAdapter\"",
 					/usr/lib/swift,
 				);
-				MARKETING_VERSION = 3.2.0;
+				MARKETING_VERSION = 3.3.1;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -1030,7 +946,7 @@
 					"\"${PODS_XCFRAMEWORKS_BUILD_DIR}/APDYandexAdapter\"",
 					/usr/lib/swift,
 				);
-				MARKETING_VERSION = 3.2.0;
+				MARKETING_VERSION = 3.3.1;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",

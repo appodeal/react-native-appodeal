@@ -5,35 +5,31 @@ require_relative "../node_modules/react-native/scripts/react_native_pods"
 
 install! "cocoapods", :warn_for_multiple_pod_sources => false
 
-source "https://github.com/appodeal/CocoaPods.git"
-source "https://cdn.cocoapods.org/"
+source 'https://cdn.cocoapods.org/'
+source 'https://github.com/appodeal/CocoaPods.git'
+source 'https://github.com/bidon-io/CocoaPods_Specs.git'
 
 def appodeal
-  pod 'Appodeal', '3.3.0'
-  pod 'APDAdjustAdapter', '3.3.0.0'
-  pod 'APDAmazonAdapter', '3.3.0.0'
-  pod 'APDAppLovinAdapter', '3.3.0.0'
-  pod 'APDAppLovinMAXAdapter', '3.3.0.0'
-  pod 'APDAppsFlyerAdapter', '3.3.0.0'
-  pod 'APDBidMachineAdapter', '3.3.0.0'
-  pod 'APDBidonAdapter', '3.3.0.0'
-  pod 'APDBigoAdsAdapter', '3.3.0.0'
-  pod 'APDDTExchangeAdapter', '3.3.0.0'
-  pod 'APDFacebookAdapter', '3.3.0.0'
-  pod 'APDFirebaseAdapter', '3.3.0.0'
-  pod 'APDGoogleAdMobAdapter', '3.3.0.0'
-  pod 'APDIABAdapter', '3.3.0.0'
-  pod 'APDInMobiAdapter', '3.3.0.0'
-  pod 'APDIronSourceAdapter', '3.3.0.0'
-  pod 'APDMetaAudienceNetworkAdapter', '3.3.0.0'
-  pod 'APDMintegralAdapter', '3.3.0.0'
-  pod 'APDMyTargetAdapter', '3.3.0.0'
-  pod 'APDPangleAdapter', '3.3.0.0'
-  pod 'APDSentryAdapter', '3.3.0.0'
-  pod 'APDSmaatoAdapter', '3.3.0.0'
-  pod 'APDUnityAdapter', '3.3.0.0'
-  pod 'APDVungleAdapter', '3.3.0.0'
-  pod 'APDYandexAdapter', '3.3.0.0'
+  pod 'Appodeal', '3.3.1'
+  pod 'APDAmazonAdapter', '3.3.1.0'
+  pod 'APDAppLovinAdapter', '3.3.1.0'
+  pod 'APDAppLovinMAXAdapter', '3.3.1.0'
+  pod 'APDBidMachineAdapter', '3.3.1.0'
+  pod 'APDBidonAdapter', '3.3.1.0'
+  pod 'APDBigoAdsAdapter', '3.3.1.0'
+  pod 'APDDTExchangeAdapter', '3.3.1.0'
+  pod 'APDGoogleAdMobAdapter', '3.3.1.0'
+  pod 'APDIABAdapter', '3.3.1.0'
+  pod 'APDInMobiAdapter', '3.3.1.0'
+  pod 'APDIronSourceAdapter', '3.3.1.0'
+  pod 'APDMetaAudienceNetworkAdapter', '3.3.1.0'
+  pod 'APDMintegralAdapter', '3.3.1.0'
+  pod 'APDMyTargetAdapter', '3.3.1.0'
+  pod 'APDPangleAdapter', '3.3.1.0'
+  pod 'APDSentryAdapter', '3.3.1.0'
+  pod 'APDUnityAdapter', '3.3.1.0'
+  pod 'APDVungleAdapter', '3.3.1.0'
+  pod 'APDYandexAdapter', '3.3.1.0'
   pod 'AmazonPublisherServicesSDK', '4.9.2'
   pod 'AppLovinMediationAmazonAdMarketplaceAdapter'
   pod 'AppLovinMediationBidMachineAdapter'
@@ -41,13 +37,17 @@ def appodeal
   pod 'AppLovinMediationFyberAdapter'
   pod 'AppLovinMediationGoogleAdManagerAdapter'
   pod 'AppLovinMediationGoogleAdapter'
+  pod 'AppLovinMediationInMobiAdapter'
   pod 'AppLovinMediationIronSourceAdapter'
-  pod 'AppLovinMediationMintegralAdapter'
+  pod 'AppLovinMediationMintegralAdapter', '7.6.1.0.0'
+  pod 'AppLovinMediationMyTargetAdapter', '5.20.1.1'
   pod 'AppLovinMediationUnityAdsAdapter'
   pod 'AppLovinMediationVungleAdapter', '7.3.0.0'
   pod 'AppLovinMediationYandexAdapter', '5.2.1.0'
   pod 'BidMachineAmazonAdapter', '2.6.0.1'
   pod 'BidMachineMetaAudienceAdapter', '2.6.0.0'
+  pod 'BidMachineMintegralAdapter', '2.6.0.0'
+  pod 'BidMachineMyTargetAdapter', '2.6.0.0'
   pod 'BidMachinePangleAdapter', '2.6.0.0'
   pod 'BidMachineVungleAdapter', '2.6.0.0'
   pod 'BidonAdapterAmazon', '0.4.8.0'
@@ -62,6 +62,7 @@ def appodeal
   pod 'BidonAdapterMintegral', '0.4.8.0'
   pod 'BidonAdapterUnityAds', '0.4.8.0'
   pod 'BidonAdapterVungle', '0.4.8.0'
+  pod 'myTrackerSDK', '3.1.7'
 end
 
 target "Example" do
@@ -84,6 +85,27 @@ target "Example" do
   use_frameworks!
 end
 
+def __apply_Xcode_15_post_install_workaround(installer)
+  xcode_version_output = `xcodebuild -version`
+  xcode_version_match = xcode_version_output.match(/Xcode (\d+(\.\d+)?)/)
+
+  if xcode_version_match
+    xcode_version = Gem::Version.new(xcode_version_match[1])
+    if xcode_version >= Gem::Version.new('15.0')
+      installer.pods_project.targets.each do |target|
+        target.build_configurations.each do |config|
+          config.build_settings['GCC_PREPROCESSOR_DEFINITIONS'] ||= ['$(inherited)', '_LIBCPP_ENABLE_CXX17_REMOVED_UNARY_BINARY_FUNCTION']
+
+          # XCode 15 patch
+          xcconfig_path = config.base_configuration_reference.real_path
+          xcconfig = File.read(xcconfig_path)
+          xcconfig_mod = xcconfig.gsub(/DT_TOOLCHAIN_DIR/, "TOOLCHAIN_DIR")
+        end
+      end
+    end
+  end
+end
+
 post_install do |installer|
   # Apply react-native patches
   react_native_post_install(
@@ -94,13 +116,10 @@ post_install do |installer|
   installer.pods_project.targets.each do |target|
     target.build_configurations.each do |config|
       config.build_settings["IPHONEOS_DEPLOYMENT_TARGET"] = "12.4"
-
-      # XCode 15 patch
-      xcconfig_path = config.base_configuration_reference.real_path
-      xcconfig = File.read(xcconfig_path)
-      xcconfig_mod = xcconfig.gsub(/DT_TOOLCHAIN_DIR/, "TOOLCHAIN_DIR")
     end
   end
-  # Apply M1 patch
+  # Apply XCode 12.5 M1 patch
   __apply_Xcode_12_5_M1_post_install_workaround(installer)
+  # Apply Xcode 15 patch
+  __apply_Xcode_15_post_install_workaround(installer)
 end
