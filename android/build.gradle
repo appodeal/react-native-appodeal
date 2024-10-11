@@ -12,19 +12,23 @@ buildscript {
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:4.0.0'
+        classpath 'com.android.tools.build:gradle:7.4.2'
     }
 }
 
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion safeExtGet('compileSdkVersion', 28)
-    buildToolsVersion safeExtGet('buildToolsVersion', '29.0.2')
+    // Conditional for compatibility with AGP <4.2.
+    if (project.android.hasProperty("namespace")) {
+        namespace 'com.appodeal.rnappodeal'
+    }
+
+    compileSdkVersion safeExtGet('compileSdkVersion', 34)
 
     defaultConfig {
-        minSdkVersion safeExtGet('minSdkVersion', 16)
-        targetSdkVersion safeExtGet('targetSdkVersion', 28)
+        minSdkVersion safeExtGet('minSdkVersion', 21)
+        targetSdkVersion safeExtGet('targetSdkVersion', 34)
         versionCode 1
         versionName "1.0"
         ndk {
@@ -49,6 +53,7 @@ repositories {
     mavenCentral()
     maven { url "https://maven.google.com" }
     maven { url "https://artifactory.appodeal.com/appodeal" }
+    maven { url "https://artifactory.appodeal.com/appodeal-beta-public" }
 }
 
 
@@ -56,8 +61,7 @@ dependencies {
     implementation "com.facebook.react:react-native:${safeExtGet('reactNativeVersion', '+')}"
     implementation "com.android.installreferrer:installreferrer:${safeExtGet('installReferrerVersion', '2.1')}"
 
-    // Appodeal
-    implementation 'com.appodeal.ads.sdk:core:3.3.2'
-    implementation 'com.appodeal.ads.sdk.networks:iab:3.3.2.0'
-    implementation 'com.appodeal.ads.sdk.services:sentry_analytics:3.3.2.0'
+    // Appodeal 3.4.0-beta.1
+    implementation 'com.appodeal.ads.sdk:core:3.4.0-beta.1'
+    implementation 'com.appodeal.ads.sdk.networks:iab:3.4.0.0-beta.1'
 }

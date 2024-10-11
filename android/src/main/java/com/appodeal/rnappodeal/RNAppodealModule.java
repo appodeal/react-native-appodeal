@@ -1,12 +1,16 @@
 package com.appodeal.rnappodeal;
 
+import android.content.Context;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.appodeal.ads.Appodeal;
+import com.appodeal.ads.BannerCallbacks;
+import com.appodeal.ads.InterstitialCallbacks;
+import com.appodeal.ads.RewardedVideoCallbacks;
 import com.appodeal.ads.inapp.InAppPurchase;
 import com.appodeal.ads.inapp.InAppPurchaseValidateCallback;
-import com.appodeal.ads.initializing.ApdInitializationCallback;
-import com.appodeal.ads.initializing.ApdInitializationError;
 import com.appodeal.ads.revenue.AdRevenueCallbacks;
 import com.appodeal.ads.revenue.RevenueInfo;
 import com.appodeal.ads.service.ServiceError;
@@ -18,23 +22,17 @@ import com.appodeal.consent.ConsentUpdateRequestParameters;
 import com.appodeal.consent.OnConsentFormDismissedListener;
 import com.appodeal.consent.OnConsentFormLoadFailureListener;
 import com.appodeal.consent.OnConsentFormLoadSuccessListener;
+import com.facebook.react.bridge.Arguments;
+import com.facebook.react.bridge.Callback;
 import com.facebook.react.bridge.LifecycleEventListener;
 import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
-import com.facebook.react.bridge.Callback;
 import com.facebook.react.bridge.ReadableMap;
 import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.modules.core.DeviceEventManagerModule.RCTDeviceEventEmitter;
-import com.facebook.react.bridge.Arguments;
 
-import com.appodeal.ads.Appodeal;
-import com.appodeal.ads.BannerCallbacks;
-import com.appodeal.ads.InterstitialCallbacks;
-import com.appodeal.ads.RewardedVideoCallbacks;
-
-import org.json.JSONObject;
 import java.util.List;
 
 
@@ -56,7 +54,7 @@ public class RNAppodealModule extends ReactContextBaseJavaModule implements Inte
     }
 
     private String getPluginVersion() {
-        return "3.3.2";
+        return "3.4.0-beta.1";
     }
 
     private void sendEventToJS(String eventName, WritableMap params) {
@@ -65,6 +63,7 @@ public class RNAppodealModule extends ReactContextBaseJavaModule implements Inte
         }
     }
 
+    @NonNull
     @Override
     public String getName() {
         return "RNAppodeal";
@@ -72,7 +71,11 @@ public class RNAppodealModule extends ReactContextBaseJavaModule implements Inte
 
     @ReactMethod
     public void initializeWithAppKey(String appKey, int adTypes) {
-        Appodeal.initialize(getCurrentActivity(),
+        Context context = getCurrentActivity();
+        if (context == null) {
+            context = getReactApplicationContext();
+        }
+        Appodeal.initialize(context,
                 appKey,
                 RNAppodealUtils.getAdTypesFormRNTypes(adTypes),
                 list -> sendEventToJS("onAppodealInitialized", null)
@@ -86,7 +89,6 @@ public class RNAppodealModule extends ReactContextBaseJavaModule implements Inte
 
     @ReactMethod
     public void show(int adTypes, String placement) {
-        boolean result;
         if (placement == null) {
             Appodeal.show(getCurrentActivity(), RNAppodealUtils.getAdTypesFormRNTypes(adTypes));
         } else {
@@ -208,7 +210,7 @@ public class RNAppodealModule extends ReactContextBaseJavaModule implements Inte
     }
 
     @ReactMethod
-    public void  revokeConsent() {
+    public void revokeConsent() {
         ConsentManager.revoke(getCurrentActivity());
     }
 
@@ -365,7 +367,7 @@ public class RNAppodealModule extends ReactContextBaseJavaModule implements Inte
                 result.putString("signature", inAppPurchase.getSignature());
                 result.putString("purchaseData", inAppPurchase.getPurchaseData());
                 result.putString("purchaseToken", inAppPurchase.getPurchaseToken());
-                result.putInt("timestamp", (int)inAppPurchase.getPurchaseTimestamp());
+                result.putInt("timestamp", (int) inAppPurchase.getPurchaseTimestamp());
                 result.putString("developerPayload", inAppPurchase.getDeveloperPayload());
                 result.putString("orderId", inAppPurchase.getOrderId());
                 result.putString("sku", inAppPurchase.getSku());
@@ -520,7 +522,9 @@ public class RNAppodealModule extends ReactContextBaseJavaModule implements Inte
     }
 
     @Override
-    public void onRewardedVideoClicked() { sendEventToJS("onRewardedVideoClicked", null); }
+    public void onRewardedVideoClicked() {
+        sendEventToJS("onRewardedVideoClicked", null);
+    }
 
     @Override
     public void onHostDestroy() {
@@ -529,8 +533,10 @@ public class RNAppodealModule extends ReactContextBaseJavaModule implements Inte
     }
 
     @Override
-    public void onHostPause() { }
+    public void onHostPause() {
+    }
 
     @Override
-    public void onHostResume() { }
+    public void onHostResume() {
+    }
 }
