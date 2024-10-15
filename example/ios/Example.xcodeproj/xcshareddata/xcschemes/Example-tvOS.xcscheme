@@ -17,7 +17,7 @@
                BlueprintIdentifier = "2D02E47A1E0B4A5D006451C7"
                BuildableName = "Example-tvOS.app"
                BlueprintName = "Example-tvOS"
-               ReferencedContainer = "container:Example.xcodeproj">
+               ReferencedContainer = "container:example.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -35,7 +35,7 @@
                BlueprintIdentifier = "2D02E48F1E0B4A5D006451C7"
                BuildableName = "Example-tvOSTests.xctest"
                BlueprintName = "Example-tvOSTests"
-               ReferencedContainer = "container:Example.xcodeproj">
+               ReferencedContainer = "container:example.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -57,7 +57,7 @@
             BlueprintIdentifier = "2D02E47A1E0B4A5D006451C7"
             BuildableName = "Example-tvOS.app"
             BlueprintName = "Example-tvOS"
-            ReferencedContainer = "container:Example.xcodeproj">
+            ReferencedContainer = "container:example.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -74,7 +74,7 @@
             BlueprintIdentifier = "2D02E47A1E0B4A5D006451C7"
             BuildableName = "Example-tvOS.app"
             BlueprintName = "Example-tvOS"
-            ReferencedContainer = "container:Example.xcodeproj">
+            ReferencedContainer = "container:example.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
