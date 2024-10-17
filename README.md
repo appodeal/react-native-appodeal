@@ -54,64 +54,60 @@ target 'App' do
         :hermes_enabled => false
     )
 
-    pod 'Appodeal', '3.3.2'
-    pod 'APDAdjustAdapter', '3.3.2.0'
-    pod 'APDAmazonAdapter', '3.3.2.0'
-    pod 'APDAppLovinAdapter', '3.3.2.0'
-    pod 'APDAppLovinMAXAdapter', '3.3.2.0'
-    pod 'APDAppsFlyerAdapter', '3.3.2.0'
-    pod 'APDBidMachineAdapter', '3.3.2.0'
-    pod 'APDBidonAdapter', '3.3.2.0'
-    pod 'APDBigoAdsAdapter', '3.3.2.0'
-    pod 'APDDTExchangeAdapter', '3.3.2.0'
-    pod 'APDFacebookAdapter', '3.3.2.0'
-    pod 'APDFirebaseAdapter', '3.3.2.0'
-    pod 'APDGoogleAdMobAdapter', '3.3.2.0'
-    pod 'APDIABAdapter', '3.3.2.0'
-    pod 'APDInMobiAdapter', '3.3.2.0'
-    pod 'APDIronSourceAdapter', '3.3.2.0'
-    pod 'APDMetaAudienceNetworkAdapter', '3.3.2.0'
-    pod 'APDMintegralAdapter', '3.3.2.0'
-    pod 'APDMyTargetAdapter', '3.3.2.0'
-    pod 'APDPangleAdapter', '3.3.2.0'
-    pod 'APDSentryAdapter', '3.3.2.0'
-    pod 'APDUnityAdapter', '3.3.2.0'
-    pod 'APDVungleAdapter', '3.3.2.0'
-    pod 'APDYandexAdapter', '3.3.2.0'
-    pod 'AmazonPublisherServicesSDK', '4.9.2'
-    pod 'AppLovinMediationAmazonAdMarketplaceAdapter', '4.9.2.0'
-    pod 'AppLovinMediationBidMachineAdapter', '2.6.0.0'
-    pod 'AppLovinMediationFacebookAdapter', '6.15.0.0'
-    pod 'AppLovinMediationFyberAdapter', '8.3.1.0'
-    pod 'AppLovinMediationGoogleAdManagerAdapter', '11.5.0.0'
-    pod 'AppLovinMediationGoogleAdapter', '11.5.0.0'
-    pod 'AppLovinMediationInMobiAdapter', '10.7.2.0'
-    pod 'AppLovinMediationIronSourceAdapter', '8.1.0.0.1'
-    pod 'AppLovinMediationMintegralAdapter', '7.6.1.0.0'
-    pod 'AppLovinMediationMyTargetAdapter', '5.20.1.1'
-    pod 'AppLovinMediationUnityAdsAdapter', '4.11.3.2'
-    pod 'AppLovinMediationVungleAdapter', '7.3.0.0'
-    pod 'AppLovinMediationYandexAdapter', '5.2.1.0'
-    pod 'BidMachineAmazonAdapter', '2.6.0.1'
-    pod 'BidMachineMetaAudienceAdapter', '2.6.0.0'
-    pod 'BidMachineMintegralAdapter', '2.6.0.0'
-    pod 'BidMachineMyTargetAdapter', '2.6.0.0'
-    pod 'BidMachinePangleAdapter', '2.6.0.0'
-    pod 'BidMachineVungleAdapter', '2.6.0.0'
-    pod 'BidonAdapterAmazon', '0.6.0.0'
-    pod 'BidonAdapterAppLovin', '0.6.0.0'
-    pod 'BidonAdapterBidMachine', '0.6.0.0'
-    pod 'BidonAdapterBigoAds', '0.6.0.0'
-    pod 'BidonAdapterDTExchange', '0.6.0.0'
-    pod 'BidonAdapterGoogleAdManager', '0.6.0.0'
-    pod 'BidonAdapterGoogleMobileAds', '0.6.0.0'
-    pod 'BidonAdapterInMobi', '0.6.0.0'
-    pod 'BidonAdapterMetaAudienceNetwork', '0.6.0.0'
-    pod 'BidonAdapterMintegral', '0.6.0.0'
-    pod 'BidonAdapterUnityAds', '0.6.0.0'
-    pod 'BidonAdapterVungle', '0.6.0.0'
-    pod 'bigo-ads-max-adapter', '4.3.0.0'
-    pod 'myTrackerSDK', '3.1.7'
+    pod 'Appodeal', '3.4.0-beta.2'
+    pod 'APDAmazonAdapter', '3.4.0.0-beta.2'
+    pod 'APDAppLovinAdapter', '3.4.0.0-beta.2'
+    pod 'APDAppLovinMAXAdapter', '3.4.0.0-beta.2'
+    pod 'APDBidMachineAdapter', '3.4.0.0-beta.2'
+    pod 'APDBidonAdapter', '3.4.0.0-beta.2'
+    pod 'APDBigoAdsAdapter', '3.4.0.0-beta.2'
+    pod 'APDDTExchangeAdapter', '3.4.0.0-beta.2'
+    pod 'APDGoogleAdMobAdapter', '3.4.0.0-beta.2'
+    pod 'APDIABAdapter', '3.4.0.0-beta.2'
+    pod 'APDInMobiAdapter', '3.4.0.0-beta.2'
+    pod 'APDIronSourceAdapter', '3.4.0.0-beta.2'
+    pod 'APDMetaAudienceNetworkAdapter', '3.4.0.0-beta.2'
+    pod 'APDMintegralAdapter', '3.4.0.0-beta.2'
+    pod 'APDMyTargetAdapter', '3.4.0.0-beta.2'
+    pod 'APDPangleAdapter', '3.4.0.0-beta.2'
+    pod 'APDUnityAdapter', '3.4.0.0-beta.2'
+    pod 'APDVungleAdapter', '3.4.0.0-beta.2'
+    pod 'APDYandexAdapter', '3.4.0.0-beta.2'
+    pod 'AmazonPublisherServicesSDK', '4.9.7'
+    pod 'AppLovinMediationAmazonAdMarketplaceAdapter'
+    pod 'AppLovinMediationBidMachineAdapter'
+    pod 'AppLovinMediationFacebookAdapter'
+    pod 'AppLovinMediationFyberAdapter'
+    pod 'AppLovinMediationGoogleAdManagerAdapter'
+    pod 'AppLovinMediationGoogleAdapter'
+    pod 'AppLovinMediationInMobiAdapter'
+    pod 'AppLovinMediationIronSourceAdapter'
+    pod 'AppLovinMediationMintegralAdapter'
+    pod 'AppLovinMediationMyTargetAdapter'
+    pod 'AppLovinMediationUnityAdsAdapter'
+    pod 'AppLovinMediationVungleAdapter'
+    pod 'AppLovinMediationYandexAdapter'
+    pod 'BidMachineAmazonAdapter'
+    pod 'BidMachineMetaAudienceAdapter', '3.0.1.0'
+    pod 'BidMachineMintegralAdapter', '3.0.1.0'
+    pod 'BidMachineMyTargetAdapter', '3.0.1.1'
+    pod 'BidMachinePangleAdapter', '3.0.1.0'
+    pod 'BidMachineVungleAdapter', '3.0.1.0'
+    pod 'BidonAdapterAppLovin', '0.7.0.0-beta.1'
+    pod 'BidonAdapterBidMachine', '0.7.0.0-beta.1'
+    pod 'BidonAdapterBigoAds', '0.7.0.0-beta.1'
+    pod 'BidonAdapterChartboost', '0.7.0.0-beta.1'
+    pod 'BidonAdapterDTExchange', '0.7.0.0-beta.1'
+    pod 'BidonAdapterGoogleAdManager', '0.7.0.0-beta.1'
+    pod 'BidonAdapterGoogleMobileAds', '0.7.0.0-beta.1'
+    pod 'BidonAdapterInMobi', '0.7.0.0-beta.1'
+    pod 'BidonAdapterIronSource', '0.7.0.0-beta.1'
+    pod 'BidonAdapterMetaAudienceNetwork', '0.7.0.0-beta.1'
+    pod 'BidonAdapterMintegral', '0.7.0.0-beta.1'
+    pod 'BidonAdapterMyTarget', '0.7.0.0-beta.1'
+    pod 'BidonAdapterUnityAds', '0.7.0.0-beta.1'
+    pod 'BidonAdapterVungle', '0.7.0.0-beta.1'
+    pod 'BidonAdapterYandex', '0.7.0.0-beta.1'
 
     target 'AppTests' do
         inherit! :complete
@@ -180,7 +176,7 @@ Add dependencies into `build.gradle` (module: app)
 ``` groovy
 dependencies {
     ...
-    implementation 'com.appodeal.ads:sdk:3.3.2.+'
+    implementation 'com.appodeal.ads:sdk:3.4.0.0-beta.1'
     ...
 }
 ```
@@ -201,32 +197,14 @@ allprojects {
 
 > Note. You can change following implementation to use custom mediation setup. See [Docs](https://docs.appodeal.com/android/get-started)
 
-2. Enable `multidex` 
-
-In `build.gradle` (module: app)
-
-``` groovy
-defaultConfig {
-    ...
-    multiDexEnabled true
-    ...
-}
-...
-dependencies {
-    ...
-    implementation 'com.android.support:multidex:1.0.3'
-    ...
-}
-```
-
-3. Set all required permissions in *AndroidManifest.xml*. See [Docs](https://docs.appodeal.com/android/get-started)
+2. Set all required permissions in *AndroidManifest.xml*. See [Docs](https://docs.appodeal.com/android/get-started)
 
 ``` xml
 <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 <uses-permission android:name="android.permission.INTERNET" />
 ```
 
-4. Network security configuration
+3. Network security configuration
 
 Add the Network Security Configuration file to your AndroidManifest.xml:
 
@@ -257,7 +235,7 @@ In your *network_security_config.xml* file, add base-config that sets `cleartext
 </network-security-config>
 ```
 
-5. Admob Configuration (if you use Admob adapter)
+4. Admob Configuration (if you use Admob adapter)
 
 ``` xml
 <manifest>
@@ -271,7 +249,7 @@ In your *network_security_config.xml* file, add base-config that sets `cleartext
 
 For more information about Admob sync check out our [FAQ](https://faq.appodeal.com/en/articles/4185565-how-do-i-link-my-admob-account).
 
-6. Meta configuration (if you use Meta Analytics adapter)
+5. Meta configuration (if you use Meta Analytics adapter)
 
 ``` xml
 <manifest>
@@ -286,7 +264,7 @@ For more information about Admob sync check out our [FAQ](https://faq.appodeal.c
 </manifest>
 ```
 
-7. Add `google-services.json` according to [doc](https://firebase.google.com/docs/android/setup#add-config-file) (if you use Firebase  adapter)
+6. Add `google-services.json` according to [doc](https://firebase.google.com/docs/android/setup#add-config-file) (if you use Firebase  adapter)
 
 ## Usage
 
@@ -759,6 +737,11 @@ MREC view has explicit callbacks.
 ```
 
 ## Changelog
+
+3.4.0-beta.1
+
+* Update Appodeal iOS SDK to 3.4.0-beta.2 (beta)
+* Update Appodeal Android SDK to 3.4.0-beta.1 (beta)
 
 3.3.2
 
