@@ -7,13 +7,12 @@
     "url": "git+https://github.com/appodeal/react-native-appodeal.git"
   },
   "homepage": "https://appodeal.com",
-  "main": "src/index",
+  "main": "src/index.ts",
   "directories": {
     "example": "example"
   },
   "scripts": {
     "tsc": "tsc --project .",
-    "lint": "tslint --project .",
     "prepare": "npm run tsc"
   },
   "author": "Appodeal <https://appodeal.com>",
