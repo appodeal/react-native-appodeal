@@ -1,0 +1,55 @@
+name: Test React Native Compatibility
+
+on: [ push, pull_request ]
+
+jobs:
+  test-android:
+    strategy:
+      matrix:
+        react-native: [ 0.67.0, 0.69.0, 0.71.0 ]
+        node-version: [ 16.x ]
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Install dependencies
+        run: |
+          cd example
+          npm install --legacy-peer-deps
+          npm install react-native@${{ matrix.react-native }} --legacy-peer-deps
+
+      - name: Build Android in Example
+        run: |
+          cd example/android
+          ./gradlew assembleDebug
+
+#  test-ios:
+#    strategy:
+#      matrix:
+#        react-native: [ 0.67.0, 0.69.0, 0.71.0 ]
+#        node-version: [ 16.x ]
+#    runs-on: macos-latest  # Запуск на macOS
+#
+#    steps:
+#      - uses: actions/checkout@v3
+#      - name: Setup Node.js
+#        uses: actions/setup-node@v3
+#        with:
+#          node-version: ${{ matrix.node-version }}
+#
+#      - name: Install dependencies
+#        run: |
+#          cd example
+#          npm install --legacy-peer-deps
+#          npm install react-native@${{ matrix.react-native }} --legacy-peer-deps
+#
+#      - name: Build iOS in Example
+#        run: |
+#          cd example/ios
+#          pod install
+#          xcodebuild -workspace example.xcworkspace -scheme example -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 11' build
