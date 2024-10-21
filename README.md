@@ -176,7 +176,7 @@ Add dependencies into `build.gradle` (module: app)
 ``` groovy
 dependencies {
     ...
-    implementation 'com.appodeal.ads:sdk:3.4.0.0-beta.1'
+    implementation 'com.appodeal.ads:sdk:3.3.3.0'
     ...
 }
 ```
@@ -189,7 +189,6 @@ allprojects {
         ...
         jcenter()
         maven { url "https://artifactory.appodeal.com/appodeal" }
-        maven { url "https://artifactory.appodeal.com/appodeal-beta-public" }
         ...
     }
 }
@@ -742,6 +741,11 @@ MREC view has explicit callbacks.
 
 * Update Appodeal iOS SDK to 3.4.0-beta.2 (beta)
 * Update Appodeal Android SDK to 3.4.0-beta.1 (beta)
+
+3.3.3
+
+* Update Appodeal Android SDK to 3.3.3 (stable)
+* Support Xcode 16 and iOS 18.0
 
 3.3.2
 

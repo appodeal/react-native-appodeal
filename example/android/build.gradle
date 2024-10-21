@@ -30,7 +30,6 @@ allprojects {
         maven { url 'https://www.jitpack.io' }
         // Appodeal SDK
         maven { url "https://artifactory.appodeal.com/appodeal" }
-        maven { url "https://artifactory.appodeal.com/appodeal-beta-public" }
     }
 
     configurations.configureEach {
