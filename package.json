@@ -1,19 +1,18 @@
 {
   "name": "react-native-appodeal",
-  "version": "3.3.2",
+  "version": "3.3.3",
   "description": "React Native Module created to support Appodeal SDK for iOS and Android platforms",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/appodeal/react-native-appodeal.git"
   },
   "homepage": "https://appodeal.com",
-  "main": "src/index",
+  "main": "src/index.ts",
   "directories": {
     "example": "example"
   },
   "scripts": {
     "tsc": "tsc --project .",
-    "lint": "tslint --project .",
     "prepare": "npm run tsc"
   },
   "author": "Appodeal <https://appodeal.com>",
@@ -23,9 +22,9 @@
     "react-native": "*"
   },
   "devDependencies": {
-    "@types/react": "^18.3.3",
-    "@types/react-native": "^0.62.0",
-    "tslib": "^1.9.3",
+    "@types/react": "^18.0.21",
+    "@types/react-native": "^0.70.6",
+    "tslib": "^2.7.0",
     "typescript": "^5.5.4"
   },
   "keywords": [
