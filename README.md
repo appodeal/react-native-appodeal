@@ -745,6 +745,12 @@ MREC view has explicit callbacks.
 * Updated Appodeal Android SDK to v3.4.1
 * Updated Appodeal iOS SDK to v3.4.1
 
+3.4.0-beta.1
+
+* Update Appodeal iOS SDK to 3.4.0-beta.2 (beta)
+* Update Appodeal Android SDK to 3.4.0-beta.1 (beta)
+
+
 3.3.3
 
 * Update Appodeal Android SDK to 3.3.3 (stable)
