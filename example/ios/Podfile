@@ -4,10 +4,9 @@ require_relative '../node_modules/@react-native-community/cli-platform-ios/nativ
 platform :ios, '13.0'
 install! 'cocoapods', :deterministic_uuids => false
 
-source 'https://cdn.cocoapods.org/'
+source 'https://cdn.cocoapods.org'
 source 'https://github.com/appodeal/CocoaPods.git'
 source 'https://github.com/bidon-io/CocoaPods_Specs.git'
-
 
 def appodeal
     pod 'Appodeal', '3.4.1'

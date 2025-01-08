@@ -130,49 +130,53 @@ You can change following implementation to use custom mediation setup. See [docs
 > Note. Appodeal requires to use `use_frameworks!` . You need to remove Flipper dependency from Podfile and AppDelegate
 
 3. Run `pod install` 
-4. Open `.xcworkspace` 
-5. Configfure `info.plist` . Press Add+ at the end of the name *App Transport Security Settings* key and choose *Allow Arbitrary Loads*. Set its type to *Boolean* and its value to *Yes*. 
+4. Open `.xcworkspace`
+5. Configfure `info.plist`.
 
-``` xml
-<key>NSAppTransportSecurity</key>
-<dict>
-  <key>NSAllowsArbitraryLoads</key>
-  <true/>
-</dict>
-```
+- Add *SKAdNetworkIds* according to [doc](https://docs.appodeal.com/ios/get-started#add-skadnetworkids)
 
-Add *GADApplicationIdentifier* key (if you use Admob adapter).
-
-``` xml
-<key>GADApplicationIdentifier</key>
-<string>YOUR_ADMOB_APP_ID</string>
-```
-
-For more information about Admob sync check out our [FAQ](https://faq.appodeal.com/articles/4185565-how-do-i-link-my-admob-account).
-
-Add `FacebookAppID`, `FacebookClientToken` and other parameters according to [doc](https://developers.facebook.com/docs/ios/getting-started/#configure-your-project) (if you use Meta Analytics adapter)
-
-``` xml
-<key>CFBundleURLTypes</key>
-<array>
+- Configure *App Transport Security Settings*
+  ``` xml
+  <key>NSAppTransportSecurity</key>
   <dict>
-  <key>CFBundleURLSchemes</key>
-  <array>
-    <string>fbAPP-ID</string>
-  </array>
+    <key>NSAllowsArbitraryLoads</key>
+    <true/>
   </dict>
-</array>
-<key>FacebookAppID</key>
-<string>APP-ID</string>
-<key>FacebookClientToken</key>
-<string>CLIENT-TOKEN</string>
-<key>FacebookDisplayName</key>
-<string>APP-NAME</string>
-```
+  ```
 
-Add `GoogleService-Info.plist` according to [doc](https://firebase.google.com/docs/ios/setup#add-config-file) (if you use Firebase  adapter)
+- Add *GADApplicationIdentifier* key (if you use Admob adapter).
 
-1. Run your project ( `Cmd+R` )
+  ``` xml
+  <key>GADApplicationIdentifier</key>
+  <string>YOUR_ADMOB_APP_ID</string>
+  ```
+
+  For more information about Admob sync check out
+  our [FAQ](https://faq.appodeal.com/articles/4185565-how-do-i-link-my-admob-account).
+
+- Add `FacebookAppID`, `FacebookClientToken` and other parameters according to [doc](https://developers.facebook.com/docs/ios/getting-started/#configure-your-project) (if you use Meta Analytics adapter)
+
+  ``` xml
+  <key>CFBundleURLTypes</key>
+  <array>
+    <dict>
+    <key>CFBundleURLSchemes</key>
+    <array>
+      <string>fbAPP-ID</string>
+    </array>
+    </dict>
+  </array>
+  <key>FacebookAppID</key>
+  <string>APP-ID</string>
+  <key>FacebookClientToken</key>
+  <string>CLIENT-TOKEN</string>
+  <key>FacebookDisplayName</key>
+  <string>APP-NAME</string>
+  ```
+
+- Add `GoogleService-Info.plist` according to [doc](https://firebase.google.com/docs/ios/setup#add-config-file) (if you use Firebase  adapter)
+
+6. Run your project ( `Cmd+R` )
 
 #### Android
 
@@ -203,41 +207,7 @@ allprojects {
 
 > Note. You can change following implementation to use custom mediation setup. See [Docs](https://docs.appodeal.com/android/get-started)
 
-2. Set all required permissions in *AndroidManifest.xml*. See [Docs](https://docs.appodeal.com/android/get-started)
-
-``` xml
-<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-<uses-permission android:name="android.permission.INTERNET" />
-```
-
-3. Network security configuration
-
-Add the Network Security Configuration file to your AndroidManifest.xml:
-
-``` xml
-<?xml version="1.0" encoding="utf-8"?>
-<manifest>
-    <application 
-		...
-        android:networkSecurityConfig="@xml/network_security_config">
-    </application>
-</manifest>
-```
-
-In your *network_security_config.xml* file, add base-config that sets `cleartextTrafficPermitted` to `true` :
-
-``` xml
-<?xml version="1.0" encoding="utf-8"?>
-<network-security-config>
-    <base-config cleartextTrafficPermitted="true">
-        <trust-anchors>
-            <certificates src="system" />
-        </trust-anchors>
-    </base-config>
-</network-security-config>
-```
-
-4. Admob Configuration (if you use Admob adapter)
+2. Admob Configuration (if you use Admob adapter)
 
 ``` xml
 <manifest>
@@ -251,7 +221,7 @@ In your *network_security_config.xml* file, add base-config that sets `cleartext
 
 For more information about Admob sync check out our [FAQ](https://faq.appodeal.com/en/articles/4185565-how-do-i-link-my-admob-account).
 
-5. Meta configuration (if you use Meta Analytics adapter)
+3. Meta configuration (if you use Meta Analytics adapter)
 
 ``` xml
 <manifest>
@@ -266,7 +236,8 @@ For more information about Admob sync check out our [FAQ](https://faq.appodeal.c
 </manifest>
 ```
 
-6. Add `google-services.json` according to [doc](https://firebase.google.com/docs/android/setup#add-config-file) (if you use Firebase  adapter)
+4. Add `google-services.json` according to [doc](https://firebase.google.com/docs/android/setup#add-config-file) (if you use Firebase  adapter)
+5. Run your project ( `Cmd+R` )
 
 ## Usage
 
