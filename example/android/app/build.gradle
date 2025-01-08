@@ -185,8 +185,8 @@ android {
 }
 
 dependencies {
-    // Appodeal 3.3.3
-    implementation 'com.appodeal.ads:sdk:3.3.3.0'
+    // Appodeal 3.4.1
+    implementation 'com.appodeal.ads:sdk:3.4.1.0'
 
     //noinspection GradleDynamicVersion
     implementation "com.facebook.react:react-native:+"  // From node_modules
