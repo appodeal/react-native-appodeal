@@ -54,61 +54,67 @@ target 'App' do
         :hermes_enabled => false
     )
 
-    pod 'Appodeal', '3.3.3'
-    pod 'APDAdjustAdapter', '3.3.3.0'
-    pod 'APDAmazonAdapter', '3.3.3.0'
-    pod 'APDAppLovinAdapter', '3.3.3.0'
-    pod 'APDAppLovinMAXAdapter', '3.3.3.0'
-    pod 'APDAppsFlyerAdapter', '3.3.3.0'
-    pod 'APDBidMachineAdapter', '3.3.3.0'
-    pod 'APDBidonAdapter', '3.3.3.0'
-    pod 'APDBigoAdsAdapter', '3.3.3.0'
-    pod 'APDDTExchangeAdapter', '3.3.3.0'
-    pod 'APDFacebookAdapter', '3.3.3.0'
-    pod 'APDFirebaseAdapter', '3.3.3.0'
-    pod 'APDGoogleAdMobAdapter', '3.3.3.0'
-    pod 'APDIABAdapter', '3.3.3.0'
-    pod 'APDInMobiAdapter', '3.3.3.0'
-    pod 'APDIronSourceAdapter', '3.3.3.0'
-    pod 'APDMetaAudienceNetworkAdapter', '3.3.3.0'
-    pod 'APDMintegralAdapter', '3.3.3.0'
-    pod 'APDMyTargetAdapter', '3.3.3.0'
-    pod 'APDPangleAdapter', '3.3.3.0'
-    pod 'APDSentryAdapter', '3.3.3.0'
-    pod 'APDUnityAdapter', '3.3.3.0'
-    pod 'APDVungleAdapter', '3.3.3.0'
-    pod 'APDYandexAdapter', '3.3.3.0'
-    pod 'AmazonPublisherServicesSDK', '4.9.7'
-    pod 'AppLovinMediationAmazonAdMarketplaceAdapter', '4.9.7.0'
-    pod 'AppLovinMediationBidMachineAdapter', '3.0.1.0.0'
+    pod 'Appodeal', '3.4.1'
+    pod 'APDAdjustAdapter', '3.4.1.0'
+    pod 'APDAmazonAdapter', '3.4.1.0'
+    pod 'APDAppLovinAdapter', '3.4.1.0'
+    pod 'APDAppLovinMAXAdapter', '3.4.1.0'
+    pod 'APDAppsFlyerAdapter', '3.4.1.0'
+    pod 'APDBidMachineAdapter', '3.4.1.1'
+    pod 'APDBidonAdapter', '3.4.1.0'
+    pod 'APDBigoAdsAdapter', '3.4.1.0'
+    pod 'APDDTExchangeAdapter', '3.4.1.1'
+    pod 'APDFacebookAdapter', '3.4.1.0'
+    pod 'APDFirebaseAdapter', '3.4.1.0'
+    pod 'APDGoogleAdMobAdapter', '3.4.1.0'
+    pod 'APDIABAdapter', '3.4.1.0'
+    pod 'APDInMobiAdapter', '3.4.1.0'
+    pod 'APDIronSourceAdapter', '3.4.1.0'
+    pod 'APDMetaAudienceNetworkAdapter', '3.4.1.0'
+    pod 'APDMintegralAdapter', '3.4.1.0'
+    pod 'APDMyTargetAdapter', '3.4.1.0'
+    pod 'APDPangleAdapter', '3.4.1.0'
+    pod 'APDSentryAdapter', '3.4.1.0'
+    pod 'APDSmaatoAdapter', '3.4.1.0'
+    pod 'APDUnityAdapter', '3.4.1.0'
+    pod 'APDVungleAdapter', '3.4.1.0'
+    pod 'APDYandexAdapter', '3.4.1.0'
+    pod 'AmazonPublisherServicesSDK', '4.10.1.0'
+    pod 'AppLovinMediationAmazonAdMarketplaceAdapter', '4.10.1.0'
+    pod 'AppLovinMediationBidMachineAdapter', '3.1.2.0.0'
     pod 'AppLovinMediationFacebookAdapter', '6.15.2.1'
-    pod 'AppLovinMediationFyberAdapter', '8.3.2.1'
-    pod 'AppLovinMediationGoogleAdManagerAdapter', '11.9.0.1'
-    pod 'AppLovinMediationGoogleAdapter', '11.9.0.1'
-    pod 'AppLovinMediationInMobiAdapter', '10.7.5.1'
-    pod 'AppLovinMediationIronSourceAdapter', '8.3.0.0.2'
-    pod 'AppLovinMediationMintegralAdapter', '7.7.2.0.1'
-    pod 'AppLovinMediationMyTargetAdapter', '5.21.8.0'
-    pod 'AppLovinMediationUnityAdsAdapter', '4.12.2.1'
+    pod 'AppLovinMediationFyberAdapter', '8.3.4.0'
+    pod 'AppLovinMediationGoogleAdManagerAdapter', '11.12.0.0'
+    pod 'AppLovinMediationGoogleAdapter', '11.12.0.0'
+    pod 'AppLovinMediationInMobiAdapter', '10.8.0.0'
+    pod 'AppLovinMediationIronSourceAdapter', '8.5.0.0.0'
+    pod 'AppLovinMediationMintegralAdapter', '7.7.3.0.0'
+    pod 'AppLovinMediationMyTargetAdapter', '5.21.9.1'
+    pod 'AppLovinMediationUnityAdsAdapter', '4.12.5.0'
     pod 'AppLovinMediationVungleAdapter', '7.4.1.1'
     pod 'AppLovinMediationYandexAdapter', '5.2.1.0'
-    pod 'BidMachineAmazonAdapter', '3.0.1.0'
-    pod 'BidMachineMetaAudienceAdapter', '3.0.1.0'
-    pod 'BidMachineMintegralAdapter', '3.0.1.0'
-    pod 'BidMachineMyTargetAdapter', '3.0.1.1'
-    pod 'BidMachinePangleAdapter', '3.0.1.0'
-    pod 'BidMachineVungleAdapter', '3.0.1.0'
-    pod 'BidonAdapterAppLovin', '0.6.1.0'
-    pod 'BidonAdapterBidMachine', '0.6.1.0'
-    pod 'BidonAdapterBigoAds', '0.6.1.0'
-    pod 'BidonAdapterDTExchange', '0.6.1.0'
-    pod 'BidonAdapterGoogleAdManager', '0.6.1.0'
-    pod 'BidonAdapterGoogleMobileAds', '0.6.1.0'
-    pod 'BidonAdapterInMobi', '0.6.1.0'
-    pod 'BidonAdapterMetaAudienceNetwork', '0.6.1.0'
-    pod 'BidonAdapterMintegral', '0.6.1.0'
-    pod 'BidonAdapterUnityAds', '0.6.1.0'
-    pod 'BidonAdapterVungle', '0.6.1.0'
+    pod 'BidMachineAmazonAdapter', '3.1.0.0'
+    pod 'BidMachineMetaAudienceAdapter', '3.1.0.2'
+    pod 'BidMachineMintegralAdapter', '3.1.0.0'
+    pod 'BidMachineMyTargetAdapter', '3.1.0.0'
+    pod 'BidMachinePangleAdapter', '3.1.0.0'
+    pod 'BidMachineVungleAdapter', '3.1.0.0'
+    pod 'BidonAdapterAppLovin', '0.7.1.0'
+    pod 'BidonAdapterBidMachine', '0.7.1.1'
+    pod 'BidonAdapterBigoAds', '0.7.1.0'
+    pod 'BidonAdapterChartboost', '0.7.1.0'
+    pod 'BidonAdapterDTExchange', '0.7.1.1'
+    pod 'BidonAdapterGoogleAdManager', '0.7.1.0'
+    pod 'BidonAdapterGoogleMobileAds', '0.7.1.0'
+    pod 'BidonAdapterInMobi', '0.7.1.0'
+    pod 'BidonAdapterIronSource', '0.7.1.0'
+    pod 'BidonAdapterMetaAudienceNetwork', '0.7.1.0'
+    pod 'BidonAdapterMintegral', '0.7.1.0'
+    pod 'BidonAdapterMyTarget', '0.7.1.0'
+    pod 'BidonAdapterUnityAds', '0.7.1.0'
+    pod 'BidonAdapterVungle', '0.7.1.0'
+    pod 'BidonAdapterYandex', '0.7.1.0'
+    pod 'bigo-ads-max-adapter', '4.5.1.1'
 
     target 'AppTests' do
         inherit! :complete
@@ -124,49 +130,53 @@ You can change following implementation to use custom mediation setup. See [docs
 > Note. Appodeal requires to use `use_frameworks!` . You need to remove Flipper dependency from Podfile and AppDelegate
 
 3. Run `pod install` 
-4. Open `.xcworkspace` 
-5. Configfure `info.plist` . Press Add+ at the end of the name *App Transport Security Settings* key and choose *Allow Arbitrary Loads*. Set its type to *Boolean* and its value to *Yes*. 
+4. Open `.xcworkspace`
+5. Configfure `info.plist`.
 
-``` xml
-<key>NSAppTransportSecurity</key>
-<dict>
-  <key>NSAllowsArbitraryLoads</key>
-  <true/>
-</dict>
-```
+- Add *SKAdNetworkIds* according to [doc](https://docs.appodeal.com/ios/get-started#add-skadnetworkids)
 
-Add *GADApplicationIdentifier* key (if you use Admob adapter).
-
-``` xml
-<key>GADApplicationIdentifier</key>
-<string>YOUR_ADMOB_APP_ID</string>
-```
-
-For more information about Admob sync check out our [FAQ](https://faq.appodeal.com/articles/4185565-how-do-i-link-my-admob-account).
-
-Add `FacebookAppID`, `FacebookClientToken` and other parameters according to [doc](https://developers.facebook.com/docs/ios/getting-started/#configure-your-project) (if you use Meta Analytics adapter)
-
-``` xml
-<key>CFBundleURLTypes</key>
-<array>
+- Configure *App Transport Security Settings*
+  ``` xml
+  <key>NSAppTransportSecurity</key>
   <dict>
-  <key>CFBundleURLSchemes</key>
-  <array>
-    <string>fbAPP-ID</string>
-  </array>
+    <key>NSAllowsArbitraryLoads</key>
+    <true/>
   </dict>
-</array>
-<key>FacebookAppID</key>
-<string>APP-ID</string>
-<key>FacebookClientToken</key>
-<string>CLIENT-TOKEN</string>
-<key>FacebookDisplayName</key>
-<string>APP-NAME</string>
-```
+  ```
 
-Add `GoogleService-Info.plist` according to [doc](https://firebase.google.com/docs/ios/setup#add-config-file) (if you use Firebase  adapter)
+- Add *GADApplicationIdentifier* key (if you use Admob adapter).
 
-1. Run your project ( `Cmd+R` )
+  ``` xml
+  <key>GADApplicationIdentifier</key>
+  <string>YOUR_ADMOB_APP_ID</string>
+  ```
+
+  For more information about Admob sync check out
+  our [FAQ](https://faq.appodeal.com/articles/4185565-how-do-i-link-my-admob-account).
+
+- Add `FacebookAppID`, `FacebookClientToken` and other parameters according to [doc](https://developers.facebook.com/docs/ios/getting-started/#configure-your-project) (if you use Meta Analytics adapter)
+
+  ``` xml
+  <key>CFBundleURLTypes</key>
+  <array>
+    <dict>
+    <key>CFBundleURLSchemes</key>
+    <array>
+      <string>fbAPP-ID</string>
+    </array>
+    </dict>
+  </array>
+  <key>FacebookAppID</key>
+  <string>APP-ID</string>
+  <key>FacebookClientToken</key>
+  <string>CLIENT-TOKEN</string>
+  <key>FacebookDisplayName</key>
+  <string>APP-NAME</string>
+  ```
+
+- Add `GoogleService-Info.plist` according to [doc](https://firebase.google.com/docs/ios/setup#add-config-file) (if you use Firebase  adapter)
+
+6. Run your project ( `Cmd+R` )
 
 #### Android
 
@@ -177,7 +187,7 @@ Add dependencies into `build.gradle` (module: app)
 ``` groovy
 dependencies {
     ...
-    implementation 'com.appodeal.ads:sdk:3.3.3.0'
+    implementation 'com.appodeal.ads:sdk:3.4.1.0'
     ...
 }
 ```
@@ -197,45 +207,7 @@ allprojects {
 
 > Note. You can change following implementation to use custom mediation setup. See [Docs](https://docs.appodeal.com/android/get-started)
 
-2. Set all required permissions in *AndroidManifest.xml*. See [Docs](https://docs.appodeal.com/android/get-started)
-
-``` xml
-<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-<uses-permission android:name="android.permission.INTERNET" />
-```
-
-3. Network security configuration
-
-Add the Network Security Configuration file to your AndroidManifest.xml:
-
-``` xml
-<?xml version="1.0" encoding="utf-8"?>
-<manifest>
-    <application 
-		...
-        android:networkSecurityConfig="@xml/network_security_config">
-    </application>
-</manifest>
-```
-
-In your *network_security_config.xml* file, add base-config that sets `cleartextTrafficPermitted` to `true` :
-
-``` xml
-<?xml version="1.0" encoding="utf-8"?>
-<network-security-config>
-    <base-config cleartextTrafficPermitted="true">
-        <trust-anchors>
-            <certificates src="system" />
-            <certificates src="user" />
-        </trust-anchors>
-    </base-config>
-    <domain-config cleartextTrafficPermitted="true">
-        <domain includeSubdomains="true">127.0.0.1</domain>
-    </domain-config>
-</network-security-config>
-```
-
-4. Admob Configuration (if you use Admob adapter)
+2. Admob Configuration (if you use Admob adapter)
 
 ``` xml
 <manifest>
@@ -249,7 +221,7 @@ In your *network_security_config.xml* file, add base-config that sets `cleartext
 
 For more information about Admob sync check out our [FAQ](https://faq.appodeal.com/en/articles/4185565-how-do-i-link-my-admob-account).
 
-5. Meta configuration (if you use Meta Analytics adapter)
+3. Meta configuration (if you use Meta Analytics adapter)
 
 ``` xml
 <manifest>
@@ -264,7 +236,8 @@ For more information about Admob sync check out our [FAQ](https://faq.appodeal.c
 </manifest>
 ```
 
-6. Add `google-services.json` according to [doc](https://firebase.google.com/docs/android/setup#add-config-file) (if you use Firebase  adapter)
+4. Add `google-services.json` according to [doc](https://firebase.google.com/docs/android/setup#add-config-file) (if you use Firebase  adapter)
+5. Run your project ( `Cmd+R` )
 
 ## Usage
 
@@ -737,6 +710,17 @@ MREC view has explicit callbacks.
 ```
 
 ## Changelog
+
+3.4.1
+
+* Updated Appodeal Android SDK to v3.4.1
+* Updated Appodeal iOS SDK to v3.4.1
+
+3.4.0-beta.1
+
+* Update Appodeal iOS SDK to 3.4.0-beta.2 (beta)
+* Update Appodeal Android SDK to 3.4.0-beta.1 (beta)
+
 
 3.3.3
 
