@@ -231,6 +231,18 @@ export interface Appodeal {
    * @param parameters Optional additional parameters
    */
   trackEvent(name: string, parameters?: Map): void;
+
+  /**
+   * Set self-hosted Bidon environment endpoint
+   * @param endpoint Bidon environment endpoint
+   */
+  setBidonEndpoint(endpoint: string): void;
+
+  /**
+   * Get self-hosted Bidon environment endpoint
+   * @returns A promise resolving to the Bidon environment endpoint
+   */
+  getBidonEndpoint(): Promise<string>;
 }
 
 const appodeal: Appodeal = {
@@ -416,6 +428,14 @@ const appodeal: Appodeal = {
 
   trackEvent: (name: string, parameters?: Map) => {
     RNAppodeal.trackEvent(name, parameters || null);
+  },
+
+  setBidonEndpoint: (endpoint: string): void => {
+    RNAppodeal.setBidonEndpoint(endpoint);
+  },
+
+  getBidonEndpoint: (): Promise<string> => {
+    return RNAppodeal.getBidonEndpoint();
   },
 };
 
