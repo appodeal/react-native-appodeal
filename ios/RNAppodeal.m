@@ -522,4 +522,23 @@ RCT_EXPORT_METHOD(trackEvent:(nonnull NSString *)event
 
 RCT_EXPORT_METHOD(setSharedAdsInstanceAcrossActivities:(BOOL)flag) {}
 
+#pragma mark - Bidon self-hosted
+
+RCT_EXPORT_METHOD(setBidonEndpoint:(NSString *)endpoint) {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [Appodeal setBidonEndpoint:endpoint];
+    });
+}
+
+RCT_EXPORT_BLOCKING_SYNCHRONOUS_METHOD(getBidonEndpoint) {
+    __block NSString *endpoint;
+    dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
+    dispatch_async(dispatch_get_main_queue(), ^{
+        endpoint = [Appodeal getBidonEndpoint];
+        dispatch_semaphore_signal(semaphore);
+    });
+    dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
+    return endpoint;
+}
+
 @end

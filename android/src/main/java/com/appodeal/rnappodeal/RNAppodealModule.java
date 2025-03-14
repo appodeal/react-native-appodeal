@@ -54,7 +54,7 @@ public class RNAppodealModule extends ReactContextBaseJavaModule implements Inte
     }
 
     private String getPluginVersion() {
-        return "3.4.1";
+        return "3.5.0";
     }
 
     private void sendEventToJS(String eventName, WritableMap params) {
@@ -538,5 +538,15 @@ public class RNAppodealModule extends ReactContextBaseJavaModule implements Inte
 
     @Override
     public void onHostResume() {
+    }
+
+    @ReactMethod
+    public void setBidonEndpoint(String endpoint) {
+        Appodeal.setBidonEndpoint(endpoint);
+    }
+
+    @ReactMethod(isBlockingSynchronousMethod = true)
+    public String getBidonEndpoint() {
+        return Appodeal.getBidonEndpoint();
     }
 }

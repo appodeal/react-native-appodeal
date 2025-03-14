@@ -60,7 +60,7 @@ dependencies {
     implementation "com.facebook.react:react-native:${safeExtGet('reactNativeVersion', '+')}"
     implementation "com.android.installreferrer:installreferrer:${safeExtGet('installReferrerVersion', '2.1')}"
 
-    // Appodeal 3.4.1
-    implementation 'com.appodeal.ads.sdk:core:3.4.1'
-    implementation 'com.appodeal.ads.sdk.networks:iab:3.4.1.0'
+    // Appodeal 3.5.0
+    implementation 'com.appodeal.ads.sdk:core:3.5.0'
+    implementation 'com.appodeal.ads.sdk.networks:iab:3.5.0.0'
 }
