@@ -240,9 +240,9 @@ export interface Appodeal {
 
   /**
    * Get self-hosted Bidon environment endpoint
-   * @returns A promise resolving to the Bidon environment endpoint
+   * @returns Bidon environment endpoint
    */
-  getBidonEndpoint(): Promise<string>;
+  getBidonEndpoint(): string | null;
 }
 
 const appodeal: Appodeal = {
@@ -434,7 +434,7 @@ const appodeal: Appodeal = {
     RNAppodeal.setBidonEndpoint(endpoint);
   },
 
-  getBidonEndpoint: (): Promise<string> => {
+  getBidonEndpoint: (): string | null => {
     return RNAppodeal.getBidonEndpoint();
   },
 };

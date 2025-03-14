@@ -545,9 +545,8 @@ public class RNAppodealModule extends ReactContextBaseJavaModule implements Inte
         Appodeal.setBidonEndpoint(endpoint);
     }
 
-    @ReactMethod
-    public void getBidonEndpoint(Promise promise) {
-        String endpoint = Appodeal.getBidonEndpoint();
-        promise.resolve(endpoint);
+    @ReactMethod(isBlockingSynchronousMethod = true)
+    public String getBidonEndpoint() {
+        return Appodeal.getBidonEndpoint();
     }
 }
