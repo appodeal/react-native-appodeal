@@ -1,25 +1,29 @@
 {
   "compilerOptions": {
-    "jsx": "react",
-    "target": "es2015",
-    "lib": [ "es2017" ],
-    "skipLibCheck": true,
-    "importHelpers": true,
-    "module": "es2015",
-    "moduleResolution": "node",
+    "rootDir": ".",
+    "paths": {
+      "react-native-appodeal": ["./src/index"]
+    },
+    "allowUnreachableCode": false,
+    "allowUnusedLabels": false,
     "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true,
-    "declaration": true,
-    "declarationDir": "dist/types",
-    "outDir": "dist/lib",
-    "typeRoots": ["node_modules/@types"]
-  },
-  "include": ["src"],
-  "exclude": [
-    "node_modules",
-    "dist",
-    "ios",
-    "android",
-    "example"
-  ]
+    "forceConsistentCasingInFileNames": true,
+    "jsx": "react-jsx",
+    "lib": ["ESNext"],
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "noEmit": true,
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitReturns": true,
+    "noImplicitUseStrict": false,
+    "noStrictGenericChecks": false,
+    "noUncheckedIndexedAccess": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "resolveJsonModule": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "target": "ESNext",
+    "verbatimModuleSyntax": true
+  }
 }

@@ -1,51 +1,26 @@
-import React from 'react';
-import { requireNativeComponent, StyleProp, ViewStyle } from 'react-native';
+/**
+ * Appodeal MREC Ad Component
+ *
+ * A React Native component for displaying MREC (Medium Rectangle) ads using the Appodeal SDK.
+ * MREC ads are typically 300x250 pixels and provide more engaging ad experiences.
+ * These ads are larger than banners and offer better user engagement.
+ */
+import AppodealMrecView, {
+  type NativeProps,
+} from './specs/AppodealMrecViewNativeComponent';
 
-
-interface AppodealMrecProps {
-	placement?: string,
-	onAdLoaded?: Function,
-	onAdFailedToLoad?: Function,
-	onAdClicked?: Function,
-	onAdExpired?: Function,
-	style?: StyleProp<ViewStyle>
-}
-
-
-interface NativeAppodealMrecProps {
-	placement?: string,
-	onAdLoaded?: Function,
-	onAdFailedToLoad?: Function,
-	onAdClicked?: Function,
-	onAdExpired?: Function,
-	style?: StyleProp<ViewStyle>,
-}
-
-
-const RNAppodealMrecView = requireNativeComponent<NativeAppodealMrecProps>('RNAppodealMrecView');
-
-const AppodealMrec = (props: AppodealMrecProps) => {
-	const { 
-		placement, 
-		onAdLoaded, 
-		onAdFailedToLoad, 
-		onAdClicked, 
-		onAdExpired, 
-		style, 
-		...restProps 
-	} = props
-
-	return (
-		<RNAppodealMrecView 
-			onAdLoaded={onAdLoaded}
-			onAdFailedToLoad={onAdFailedToLoad}
-			onAdClicked={onAdClicked}
-			onAdExpired={onAdExpired}
-			placement={placement}
-			style={[style, {height: 250}]}
-			{...restProps}
-			/>
-		);
-}
+/**
+ * Appodeal MREC Ad Component
+ *
+ * Renders a MREC (Medium Rectangle) ad with fixed 300x250 dimensions.
+ * MREC ads provide more space for creative content and better user engagement
+ * compared to standard banner ads.
+ *
+ * @param props - Component props including placement, style, and event handlers
+ * @returns React component for MREC ads
+ */
+const AppodealMrec = ({ style, ...rest }: NativeProps) => {
+  return <AppodealMrecView style={[style, { height: 250 }]} {...rest} />;
+};
 
 export default AppodealMrec;

@@ -1,87 +1,107 @@
-/* eslint-disable no-bitwise */
-import React, {useEffect} from 'react';
-import {styles} from '../styles';
-import {initialize, isInitialized, SDKState} from '../advertising';
-import {ShowSection} from '../components/sections/ShowSection';
-import {BannerSegmentedControl} from '../components/controls/BannerSegmentedControl';
-import {AutocacheControl} from '../components/controls/AutocacheControl';
-import {InitialisationSection} from '../components/sections/InitialisationSection';
-import {ScrollView, SafeAreaView, Switch} from 'react-native';
-import {Row} from '../components';
 import {
+  Platform,
+  ScrollView,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
+import Appodeal, {
   AppodealAdType,
-  Appodeal,
-  AppodealSdkEvent,
+  AppodealLogLevel,
+  AppodealSdkEvents,
 } from 'react-native-appodeal';
-import {BannerShowStyle} from '../advertising';
+import type { BaseScreenProps } from '../App';
+import { commonStyles as styles } from '../styles/common';
 
-export const HomeScreen = () => {
-  const [state, setState] = React.useState(
-    isInitialized() ? SDKState.INITIALIZED : SDKState.PENDING,
-  );
+const exampleAppodealKey =
+  Platform.OS === 'android'
+    ? 'd908f77a97ae0993514bc8edba7e776a36593c77e5f44994'
+    : 'dee74c5129f53fc629a44a690a02296694e3eef99f2d3a5f';
 
-  const [autocache, setAutocache] = React.useState(
-    AppodealAdType.INTERSTITIAL | AppodealAdType.BANNER,
-  );
+interface HomeScreenProps extends BaseScreenProps {}
 
-  const [testMode, setTestMode] = React.useState(true);
+export default function HomeScreen({ navigation }: HomeScreenProps) {
+  const initializeAppodeal = () => {
+    Appodeal.setTesting(true);
+    Appodeal.setLogLevel(AppodealLogLevel.DEBUG);
 
-  const [bannerShowStyle, setBannerShowStyle] = React.useState(
-    BannerShowStyle.BOTTOM,
-  );
+    Appodeal.setAutoCache(AppodealAdType.INTERSTITIAL, false);
+    Appodeal.setAutoCache(AppodealAdType.REWARDED_VIDEO, false);
 
-  const initSDK = () => {
-    if (state === SDKState.INITIALIZING) {
-      return;
-    }
+    Appodeal.addEventListener(AppodealSdkEvents.INITIALIZED, () => {
+      console.log('Appodeal initialized');
+    });
 
-    if (state !== SDKState.INITIALIZED) {
-      setState(SDKState.INITIALIZING);
-      Appodeal.addEventListener(AppodealSdkEvent.INITIALIZED, () => {
-        setState(SDKState.INITIALIZED);
-      });
-    }
-
-    initialize(testMode);
+    Appodeal.initialize(
+      exampleAppodealKey,
+      AppodealAdType.INTERSTITIAL |
+        AppodealAdType.REWARDED_VIDEO |
+        AppodealAdType.BANNER |
+        AppodealAdType.BANNER_TOP |
+        AppodealAdType.MREC
+    );
   };
 
-  useEffect(() => {
-    const types = [
-      AppodealAdType.INTERSTITIAL,
-      AppodealAdType.REWARDED_VIDEO,
-      AppodealAdType.BANNER,
-    ];
-    types.forEach((adType) =>
-      Appodeal.setAutoCache(adType, (autocache & adType) > 0),
-    );
-  }, [autocache]);
-
-  const testModeSwitch = () => (
-    <Switch value={testMode} onValueChange={setTestMode} />
-  );
-
   return (
-    <>
-      <SafeAreaView style={styles.container}>
-        <ScrollView style={styles.scrollView}>
-          <InitialisationSection state={state} onInitialize={initSDK} />
-          <Row title="Test mode" accessory={testModeSwitch} />
-          <AutocacheControl
-            mask={autocache}
-            onUpdate={(value) => setAutocache(value)}
-          />
-          <BannerSegmentedControl
-            visible={state !== SDKState.INITIALIZED}
-            showStyle={bannerShowStyle}
-            onChange={setBannerShowStyle}
-          />
-          <ShowSection
-            visible={state === SDKState.INITIALIZED}
-            autocache={autocache}
-            bannerShowStyle={bannerShowStyle}
-          />
-        </ScrollView>
-      </SafeAreaView>
-    </>
+    <ScrollView style={styles.container}>
+      <View style={styles.content}>
+        <Text style={styles.pluginVersion}>
+          Plugin version: {Appodeal.getVersion()}
+        </Text>
+        <Text style={styles.sdkVersion}>
+          SDK version: {Appodeal.getPlatformSdkVersion()}{' '}
+        </Text>
+
+        <TouchableOpacity style={styles.button} onPress={initializeAppodeal}>
+          <Text style={styles.buttonText}>Initialize Appodeal</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => navigation.navigate('Interstitial')}
+        >
+          <Text style={styles.buttonText}>Interstitial Ads</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => navigation.navigate('RewardedVideo')}
+        >
+          <Text style={styles.buttonText}>Rewarded Video Ads</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => navigation.navigate('Banner')}
+        >
+          <Text style={styles.buttonText}>Banner Ads</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => navigation.navigate('BannerView')}
+        >
+          <Text style={styles.buttonText}>Banner View</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => navigation.navigate('MrecView')}
+        >
+          <Text style={styles.buttonText}>MREC View</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() =>
+            navigation.navigate('ConsentManager', {
+              appKey: exampleAppodealKey,
+            })
+          }
+        >
+          <Text style={styles.buttonText}>Consent Manager</Text>
+        </TouchableOpacity>
+      </View>
+    </ScrollView>
   );
-};
+}
