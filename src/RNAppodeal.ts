@@ -1,54 +1,49 @@
-"use strict";
+/**
+ * Appodeal SDK for React Native
+ *
+ * This module provides a complete interface to the Appodeal SDK for React Native applications.
+ * It includes functionality for:
+ * - Ad management (banner, interstitial, rewarded video, MREC)
+ * - Analytics and revenue tracking
+ * - In-app purchase validation
+ * - Consent management (GDPR compliance)
+ * - Event handling and callbacks
+ *
+ * The module uses React Native TurboModules for optimal performance and type safety.
+ */
 
-import { NativeModules, NativeEventEmitter, Platform } from "react-native";
-import {
-  AppodealLogLevel,
+// Appodeal types and interfaces
+import { AppodealAdType, AppodealLogLevel } from './types';
+import type {
+  AppodealAndroidPurchase,
   AppodealConsentStatus,
   AppodealIOSPurchase,
-  AppodealAndroidPurchase,
   AppodealReward,
-} from "./RNAppodealTypes";
+  Map,
+} from './types';
 
-const RNAppodeal = NativeModules.RNAppodeal;
+// Native module and validation types
+import NativeAppodeal from './specs/NativeAppodealModule';
+import type { AppodealPurchaseValidationResult } from './types/AppodealPurchaseValidationResult';
 
-type Map = { [key: string]: any };
+// Event manager
+import AppodealEventManagerInstance from './RNAppodealEventManager';
+
+// Type definitions
 type EventHandler = (params?: any) => void;
 type Event = string;
-type AdType = number;
-
-const dummyHandler = () => {};
-const emitter = new NativeEventEmitter(RNAppodeal);
-const subscriptions = new Map<EventHandler, any>();
-
-const _addEventListener = (event: Event, handler: EventHandler) => {
-  let listener = emitter.addListener(event, handler);
-  subscriptions.set(handler, listener);
-  return { remove: () => _removeEventListener(event, handler) };
-};
-
-const _removeEventListener = (event: Event, handler: EventHandler) => {
-  const listener = subscriptions.get(handler);
-  listener.remove();
-  subscriptions.delete(handler);
-};
-
-const _removeAllListeners = () => {
-  subscriptions.forEach((listener, key, map) => {
-    listener.remove();
-    map.delete(key);
-  });
-};
 
 /**
- * Appodeal SDK interface
+ * Appodeal SDK interface using Turbo modules
  */
 export interface Appodeal {
   /**
    * Adds event listeners to Appodeal SDK
    * @param event Event name
    * @param handler Event listener callback handler
+   * @returns Subscription object with remove method
    */
-  addEventListener(event: Event, handler: EventHandler): void;
+  addEventListener(event: Event, handler: EventHandler): { remove: () => void };
   /**
    * Removes listener for specific event
    * @param event Event name
@@ -64,50 +59,50 @@ export interface Appodeal {
    * @param appKey Application app key
    * @param adTypes Ad types mask
    */
-  initialize(appKey: string, adTypes: AdType): void;
+  initialize(appKey: string, adTypes: AppodealAdType): void;
   /**
    * Check that Appodeal SDK has been initialized for a given ad type mask
    * @param adTypes Ad type mask
    */
-  isInitialized(adTypes: AdType): boolean;
+  isInitialized(adTypes: AppodealAdType): boolean;
   /**
    * Shows an ad if it has been loaded
    * @param adTypes Ad type to be shown
    * @param placement Optional placement name
    */
-  show(adTypes: AdType, placement?: string): void;
+  show(adTypes: AppodealAdType, placement?: string): void;
   /**
    * Check if an ad is loaded
    * @param adTypes Ad types
    */
-  isLoaded(adTypes: AdType): boolean;
+  isLoaded(adTypes: AppodealAdType): boolean;
   /**
    * Check if an ad can be shown for placement
    * @param adTypes Ad types
    * @param placement Optional placement name
    */
-  canShow(adTypes: AdType, placement?: string): boolean;
+  canShow(adTypes: AppodealAdType, placement?: string): boolean;
   /**
    * Hides presented ad
    * @param adTypes Ad type mask
    */
-  hide(adTypes: AdType): void;
+  hide(adTypes: AppodealAdType): void;
   /**
    * Starting cache of an ad for specific ad type
    * @param adTypes Ad types mask
    */
-  cache(adTypes: AdType): void;
+  cache(adTypes: AppodealAdType): void;
   /**
    * Enables or disables autocache for specific ad type
-   * @param adTypes Ad types masl
+   * @param adTypes Ad types mask
    * @param value Boolean flag indicating whether the autocache should be enabled or not
    */
-  setAutoCache(adTypes: AdType, value: boolean): void;
+  setAutoCache(adTypes: AppodealAdType, value: boolean): void;
   /**
    * Check that loaded ad is precache or not
    * @param adTypes Ad type
    */
-  isPrecache(adTypes: AdType): boolean;
+  isPrecache(adTypes: AppodealAdType): boolean;
   /**
    * Force SDK use 728x90 or 320x50 banner size for top and bottom banner presentation size
    * @param value Boolean flag indicating tablet or phone banner size
@@ -164,17 +159,21 @@ export interface Appodeal {
    * @param adTypes Ad type
    * @param value Boolean flag indicating precache callbacks activity
    */
-  setTriggerPrecacheCallbacks(adTypes: AdType, value: boolean): void;
+  setTriggerPrecacheCallbacks(adTypes: AppodealAdType, value: boolean): void;
   /**
    * Disables ad network for specific ad types
    * @param network Network status
-   * @param adTypes Ad type mask
+   * @param adTypes Ad type mask (defaults to ALL if not specified)
    */
-  disableNetwork(network: string, adTypes: AdType): void;
+  disableNetwork(network: string, adTypes?: AppodealAdType): void;
   /**
-   * Get Appodeal SDK version
+   * Get Appodeal SDK Plugin version
    */
   getVersion(): string;
+  /**
+   * Get Appodeal SDK Native Platform version
+   */
+  getPlatformSdkVersion(): string;
   /**
    * Set user identifier
    * @param id App specific user id
@@ -182,35 +181,28 @@ export interface Appodeal {
   setUserId(id: string): void;
   /**
    * Set extras value in Appodeal SDK
-   * @param value Nullable extras value
    * @param key Nonnull extras key
+   * @param value Nullable extras value
    */
-  setExtrasValue(value: any | null, key: string): void;
-  /**
-   * Get Appodeal SDK extras
-   */
-  getExtras(): Map;
+  setExtrasValue(key: string, value: any | null): void;
+
   /**
    * Set custom state value in Appodeal SDK
-   * @param value Nullable custom state value
    * @param key Nonnull custom state key
+   * @param value Nullable custom state value
    */
-  setCustomStateValue(value: any | null, key: string): void;
-  /**
-   * Get Appodeal SDK custom state
-   */
-  getCustomState(): Map;
+  setCustomStateValue(key: string, value: any | null): void;
+
   /**
    * Returns reward parameters for given placement
    * @param placement Placement name
    */
-  getRewardParameters(placement: string): AppodealReward;
+  getRewardParameters(placement?: string): AppodealReward;
   /**
    * Returns predicted eCPM of loaded ad for ad type
    * @param adType Ad type
-   * @param callback Callback returning predicted eCPM
    */
-  predictedEcpm(adType: AdType): number;
+  predictedEcpm(adType: AppodealAdType): number;
   /**
    * Track in app purchase
    * @param amount Purchase amount
@@ -220,15 +212,15 @@ export interface Appodeal {
   /**
    * Validate and track in app purchase
    * @param purchase Purchased product info
+   * @returns Promise with validation result
    */
   validateAndTrackInAppPurchase(
-    purchase: AppodealAndroidPurchase | AppodealIOSPurchase,
-    callback?: EventHandler
-  ): void;
+    purchase: AppodealAndroidPurchase | AppodealIOSPurchase
+  ): Promise<AppodealPurchaseValidationResult>;
   /**
    * Track in app event
-   * @param name  Event name
-   * @param parameters Optional additional parameters
+   * @param name Event name
+   * @param parameters Optional event parameters
    */
   trackEvent(name: string, parameters?: Map): void;
 
@@ -245,197 +237,208 @@ export interface Appodeal {
   getBidonEndpoint(): string | null;
 }
 
+/**
+ * Plugin version constant
+ */
+const PLUGIN_VERSION = '3.8.1';
+
+/**
+ * Appodeal SDK implementation
+ *
+ * This object implements all the methods defined in the Appodeal interface.
+ * Each method delegates to the corresponding native module method with proper
+ * parameter handling and type conversion.
+ */
 const appodeal: Appodeal = {
-  addEventListener: (event: Event, handler: EventHandler): void => {
-    _addEventListener(event, handler);
+  addEventListener: (
+    event: Event,
+    handler: EventHandler
+  ): { remove: () => void } => {
+    return AppodealEventManagerInstance.addEventListener(event, handler);
   },
 
   removeEventListener: (event: Event, handler: EventHandler): void => {
-    _removeEventListener(event, handler);
+    AppodealEventManagerInstance.removeEventListener(event, handler);
   },
 
   removeAllListeners: (): void => {
-    _removeAllListeners();
+    AppodealEventManagerInstance.removeAllListeners();
   },
 
-  initialize: (appKey: string, adTypes: AdType): void => {
-    RNAppodeal.initializeWithAppKey(appKey, adTypes);
+  initialize: (appKey: string, adTypes: AppodealAdType): void => {
+    NativeAppodeal.initialize(appKey, adTypes, PLUGIN_VERSION);
   },
 
-  isInitialized: (adTypes: AdType): boolean => {
-    return RNAppodeal.isInitialized(adTypes);
+  isInitialized: (adTypes: AppodealAdType): boolean => {
+    return NativeAppodeal.isInitialized(adTypes);
   },
 
-  show: (adTypes: AdType, placement?: string): void => {
-    RNAppodeal.show(adTypes, placement || null);
+  show: (adTypes: AppodealAdType, placement?: string): void => {
+    NativeAppodeal.show(adTypes, placement || 'default');
   },
 
-  isLoaded: (adTypes: AdType): boolean => {
-    return RNAppodeal.isLoaded(adTypes);
+  isLoaded: (adTypes: AppodealAdType): boolean => {
+    return NativeAppodeal.isLoaded(adTypes);
   },
 
-  canShow: (adTypes: AdType, placement?: string): boolean => {
-    return RNAppodeal.canShow(adTypes, placement || null);
+  canShow: (adTypes: AppodealAdType, placement?: string): boolean => {
+    return NativeAppodeal.canShow(adTypes, placement || 'default');
   },
 
-  hide: (adTypes: AdType): void => {
-    RNAppodeal.hide(adTypes);
+  hide: (adTypes: AppodealAdType): void => {
+    NativeAppodeal.hide(adTypes);
   },
 
-  cache: (adTypes: AdType): void => {
-    RNAppodeal.cache(adTypes);
+  cache: (adTypes: AppodealAdType): void => {
+    NativeAppodeal.cache(adTypes);
   },
 
-  setAutoCache: (adTypes: AdType, value: boolean): void => {
-    RNAppodeal.setAutoCache(adTypes, value);
+  setAutoCache: (adTypes: AppodealAdType, value: boolean): void => {
+    NativeAppodeal.setAutoCache(adTypes, value);
   },
 
-  isPrecache: (adTypes: AdType): boolean => {
-    return RNAppodeal.isPrecache(adTypes);
+  isPrecache: (adTypes: AppodealAdType): boolean => {
+    return NativeAppodeal.isPrecache(adTypes);
   },
 
   setTabletBanners: (value: boolean): void => {
-    RNAppodeal.setTabletBanners(value);
+    NativeAppodeal.setTabletBanners(value);
   },
 
   setSmartBanners: (value: boolean): void => {
-    RNAppodeal.setSmartBanners(value);
+    NativeAppodeal.setSmartBanners(value);
   },
 
   setBannerAnimation: (value: boolean): void => {
-    RNAppodeal.setBannerAnimation(value);
+    NativeAppodeal.setBannerAnimation(value);
   },
 
   consentStatus: (): AppodealConsentStatus => {
-    return RNAppodeal.consentStatus();
+    return NativeAppodeal.consentStatus();
   },
 
   revokeConsent: (): void => {
-    RNAppodeal.revokeConsent();
+    NativeAppodeal.revokeConsent();
   },
 
   requestConsentInfoUpdate: (
     appKey: string
   ): Promise<AppodealConsentStatus> => {
-    return RNAppodeal.requestConsentInfoUpdateWithAppKey(appKey).then(
+    return NativeAppodeal.requestConsentInfoUpdateWithAppKey(appKey).then(
       (parameters) => parameters.status
     );
   },
 
   showConsentFormIfNeeded: (): Promise<AppodealConsentStatus> => {
-    return RNAppodeal.showConsentFormIfNeeded().then(
+    return NativeAppodeal.showConsentFormIfNeeded().then(
       (parameters) => parameters.status
     );
   },
 
-  showConsentForm: () => {
-    return RNAppodeal.showConsentForm().then(
+  showConsentForm: (): Promise<AppodealConsentStatus> => {
+    return NativeAppodeal.showConsentForm().then(
       (parameters) => parameters.status
     );
   },
 
   setChildDirectedTreatment: (value: boolean): void => {
-    RNAppodeal.setChildDirectedTreatment(value);
+    NativeAppodeal.setChildDirectedTreatment(value);
   },
 
   setTesting: (value: boolean): void => {
-    RNAppodeal.setTesting(value);
+    NativeAppodeal.setTesting(value);
   },
 
   setLogLevel: (value: AppodealLogLevel): void => {
-    RNAppodeal.setLogLevel(value);
+    NativeAppodeal.setLogLevel(value);
   },
 
-  setTriggerPrecacheCallbacks: (adTypes: AdType, value: boolean): void => {
-    RNAppodeal.setTriggerPrecacheCallbacks(adTypes, value);
+  setTriggerPrecacheCallbacks: (
+    adTypes: AppodealAdType,
+    value: boolean
+  ): void => {
+    NativeAppodeal.setTriggerPrecacheCallbacks(adTypes, value);
   },
 
-  disableNetwork: (network: string, adTypes: AdType): void => {
-    RNAppodeal.disableNetwork(network, adTypes);
+  disableNetwork: (
+    network: string,
+    adTypes: AppodealAdType = AppodealAdType.ALL
+  ): void => {
+    NativeAppodeal.disableNetwork(network, adTypes);
   },
 
   getVersion: (): string => {
-    return RNAppodeal.getVersion();
+    return PLUGIN_VERSION;
+  },
+
+  getPlatformSdkVersion: (): string => {
+    return NativeAppodeal.getPlatformSdkVersion();
   },
 
   setUserId: (id: string): void => {
-    RNAppodeal.setUserId(id);
+    NativeAppodeal.setUserId(id);
   },
 
-  setExtrasValue: (value: any | null, key: string): void => {
-    if (Platform.OS == "ios") {
-      RNAppodeal.setExtrasValue(value, key);
-    } else if (typeof value === "string") {
-      RNAppodeal.setExtrasStringValue(value, key);
-    } else if (typeof value === "number" && Number.isInteger(value)) {
-      RNAppodeal.setExtrasIntegerValue(value, key);
-    } else if (typeof value === "number") {
-      RNAppodeal.setExtrasDoubleValue(value, key);
-    } else if (typeof value === "boolean") {
-      RNAppodeal.setExtrasBooleanValue(value, key);
-    } else if (typeof value === "object") {
-      RNAppodeal.setExtrasMapValue(value, key);
+  setExtrasValue: (key: string, value: any | null): void => {
+    if (typeof value === 'string') {
+      NativeAppodeal.setExtrasStringValue(key, value);
+    } else if (typeof value === 'number' && Number.isInteger(value)) {
+      NativeAppodeal.setExtrasIntegerValue(key, value);
+    } else if (typeof value === 'number') {
+      NativeAppodeal.setExtrasDoubleValue(key, value);
+    } else if (typeof value === 'boolean') {
+      NativeAppodeal.setExtrasBooleanValue(key, value);
+    } else if (typeof value === 'object') {
+      NativeAppodeal.setExtrasMapValue(key, value);
     } else if (value === null) {
-      RNAppodeal.removeExtrasValue(key);
+      NativeAppodeal.removeExtrasValue(key);
     }
   },
 
-  getExtras: (): Map => {
-    return RNAppodeal.getExtras();
-  },
-
-  setCustomStateValue: (value: any | null, key: string): void => {
-    if (Platform.OS == "ios") {
-      RNAppodeal.setCustomStateValue(value, key);
-    } else if (typeof value === "string") {
-      RNAppodeal.setCustomStateStringValue(value, key);
-    } else if (typeof value === "number" && Number.isInteger(value)) {
-      RNAppodeal.setCustomStateIntegerValue(value, key);
-    } else if (typeof value === "number") {
-      RNAppodeal.setCustomStateDoubleValue(value, key);
-    } else if (typeof value === "boolean") {
-      RNAppodeal.setCustomStateBooleanValue(value, key);
+  setCustomStateValue: (key: string, value: any | null): void => {
+    if (typeof value === 'string') {
+      NativeAppodeal.setCustomStateStringValue(key, value);
+    } else if (typeof value === 'number' && Number.isInteger(value)) {
+      NativeAppodeal.setCustomStateIntegerValue(key, value);
+    } else if (typeof value === 'number') {
+      NativeAppodeal.setCustomStateDoubleValue(key, value);
+    } else if (typeof value === 'boolean') {
+      NativeAppodeal.setCustomStateBooleanValue(key, value);
+    } else if (typeof value === 'object') {
+      NativeAppodeal.setCustomStateMapValue(key, value);
     } else if (value === null) {
-      RNAppodeal.removeCustomStateValue(key);
+      NativeAppodeal.removeCustomStateValue(key);
     }
   },
 
-  getCustomState: (): Map => {
-    return RNAppodeal.getCustomState();
+  getRewardParameters: (placement?: string): AppodealReward => {
+    return NativeAppodeal.getRewardParameters(placement || 'default');
   },
 
-  getRewardParameters: (placement: string): AppodealReward => {
-    return RNAppodeal.getRewardParameters(placement);
-  },
-
-  predictedEcpm: (adType: AdType): number => {
-    return RNAppodeal.predictedEcpm(adType);
+  predictedEcpm: (adType: AppodealAdType): number => {
+    return NativeAppodeal.predictedEcpm(adType);
   },
 
   trackInAppPurchase: (amount: number, currency: string) => {
-    RNAppodeal.trackInAppPurchase(amount, currency);
+    NativeAppodeal.trackInAppPurchase(amount, currency);
   },
 
   validateAndTrackInAppPurchase: (
-    purchase: AppodealIOSPurchase | AppodealAndroidPurchase,
-    callback?: EventHandler
-  ) => {
-    RNAppodeal.validateAndTrackInAppPurchase(
-      purchase,
-      callback || dummyHandler
-    );
+    purchase: AppodealIOSPurchase | AppodealAndroidPurchase
+  ): Promise<AppodealPurchaseValidationResult> => {
+    return NativeAppodeal.validateAndTrackInAppPurchase(purchase);
   },
 
-  trackEvent: (name: string, parameters?: Map) => {
-    RNAppodeal.trackEvent(name, parameters || null);
+  trackEvent: (name: string, parameters: Map = {}) => {
+    NativeAppodeal.trackEvent(name, parameters);
   },
 
   setBidonEndpoint: (endpoint: string): void => {
-    RNAppodeal.setBidonEndpoint(endpoint);
+    NativeAppodeal.setBidonEndpoint(endpoint);
   },
 
   getBidonEndpoint: (): string | null => {
-    return RNAppodeal.getBidonEndpoint();
+    return NativeAppodeal.getBidonEndpoint();
   },
 };
 

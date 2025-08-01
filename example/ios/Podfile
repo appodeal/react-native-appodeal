@@ -1,156 +1,129 @@
-require_relative '../node_modules/react-native/scripts/react_native_pods'
-require_relative '../node_modules/@react-native-community/cli-platform-ios/native_modules'
+ENV['RCT_NEW_ARCH_ENABLED'] = '1'
 
-platform :ios, '13.0'
-install! 'cocoapods', :deterministic_uuids => false
+# Resolve react_native_pods.rb with node to allow for hoisting
+require Pod::Executable.execute_command('node', ['-p',
+  'require.resolve(
+    "react-native/scripts/react_native_pods.rb",
+    {paths: [process.argv[1]]},
+  )', __dir__]).strip
+
+platform :ios, min_ios_version_supported
+prepare_react_native_project!
+
+linkage = ENV['USE_FRAMEWORKS']
+if linkage != nil
+  Pod::UI.puts "Configuring Pod with #{linkage}ally linked Frameworks".green
+  use_frameworks! :linkage => linkage.to_sym
+end
 
 source 'https://cdn.cocoapods.org'
 source 'https://github.com/appodeal/CocoaPods.git'
 source 'https://github.com/bidon-io/CocoaPods_Specs.git'
 
+# Appodeal SDK 3.8.1.0 Example w/o services
 def appodeal
-    pod 'Appodeal', '3.5.0'
-    pod 'APDAdjustAdapter', '3.5.0.0'
-    pod 'APDAmazonAdapter', '3.5.0.0'
-    pod 'APDAppLovinAdapter', '3.5.0.0'
-    pod 'APDAppLovinMAXAdapter', '3.5.0.0'
-    pod 'APDAppsFlyerAdapter', '3.5.0.0'
-    pod 'APDBidMachineAdapter', '3.5.0.0'
-    pod 'APDBidonAdapter', '3.5.0.0'
-    pod 'APDBigoAdsAdapter', '3.5.0.0'
-    pod 'APDDTExchangeAdapter', '3.5.0.0'
-    pod 'APDFacebookAdapter', '3.5.0.0'
-    pod 'APDFirebaseAdapter', '3.5.0.0'
-    pod 'APDGoogleAdMobAdapter', '3.5.0.0'
-    pod 'APDIABAdapter', '3.5.0.0'
-    pod 'APDInMobiAdapter', '3.5.0.0'
-    pod 'APDIronSourceAdapter', '3.5.0.0'
-    pod 'APDLevelPlayAdapter', '3.5.0.0'
-    pod 'APDMetaAudienceNetworkAdapter', '3.5.0.0'
-    pod 'APDMintegralAdapter', '3.5.0.0'
-    pod 'APDMyTargetAdapter', '3.5.0.0'
-    pod 'APDPangleAdapter', '3.5.0.0'
-    pod 'APDSentryAdapter', '3.5.0.0'
-    pod 'APDSmaatoAdapter', '3.5.0.0'
-    pod 'APDUnityAdapter', '3.5.0.0'
-    pod 'APDVungleAdapter', '3.5.0.0'
-    pod 'APDYandexAdapter', '3.5.0.0'
-    pod 'AppLovinMediationAmazonAdMarketplaceAdapter', '5.0.1.0'
-    pod 'AppLovinMediationBidMachineAdapter', '3.2.0.0.0'
-    pod 'AppLovinMediationBigoAdsAdapter', '4.6.0.0'
-    pod 'AppLovinMediationByteDanceAdapter', '6.4.1.2.0'
-    pod 'AppLovinMediationChartboostAdapter', '9.8.0.0'
-    pod 'AppLovinMediationFacebookAdapter', '6.16.0.0'
-    pod 'AppLovinMediationFyberAdapter', '8.3.5.0'
-    pod 'AppLovinMediationGoogleAdManagerAdapter', '11.13.0.0'
-    pod 'AppLovinMediationGoogleAdapter', '11.13.0.0'
-    pod 'AppLovinMediationInMobiAdapter', '10.8.0.0'
-    pod 'AppLovinMediationIronSourceAdapter', '8.7.0.0.0'
-    pod 'AppLovinMediationMintegralAdapter', '7.7.6.0.0'
-    pod 'AppLovinMediationMobileFuseAdapter', '1.8.2.0'
-    pod 'AppLovinMediationMolocoAdapter', '3.6.0.0'
-    pod 'AppLovinMediationMyTargetAdapter', '5.25.1.0'
-    pod 'AppLovinMediationOguryPresageAdapter', '5.0.2.0'
-    pod 'AppLovinMediationSmaatoAdapter', '22.9.2.0'
-    pod 'AppLovinMediationUnityAdsAdapter', '4.13.1.0'
-    pod 'AppLovinMediationVerveAdapter', '3.1.4.0'
-    pod 'AppLovinMediationVungleAdapter', '7.4.4.0'
-    pod 'AppLovinMediationYandexAdapter', '5.2.1.0'
-    pod 'BidMachineAmazonAdapter', '3.2.0.0'
-    pod 'BidMachineMetaAudienceAdapter', '3.2.0.0'
-    pod 'BidMachineMintegralAdapter', '3.2.0.0'
-    pod 'BidMachineMyTargetAdapter', '3.2.0.0'
-    pod 'BidMachinePangleAdapter', '3.2.0.0'
-    pod 'BidMachineVungleAdapter', '3.2.0.0'
-    pod 'BidonAdapterAmazon', '0.7.12.0'
-    pod 'BidonAdapterAppLovin', '0.7.12.0'
-    pod 'BidonAdapterBidMachine', '0.7.12.0'
-    pod 'BidonAdapterBigoAds', '0.7.12.0'
-    pod 'BidonAdapterChartboost', '0.7.12.0'
-    pod 'BidonAdapterDTExchange', '0.7.12.0'
-    pod 'BidonAdapterInMobi', '0.7.12.0'
-    pod 'BidonAdapterIronSource', '0.7.12.0'
-    pod 'BidonAdapterMetaAudienceNetwork', '0.7.12.0'
-    pod 'BidonAdapterMintegral', '0.7.12.0'
-    pod 'BidonAdapterMobileFuse', '0.7.12.0'
-    pod 'BidonAdapterMyTarget', '0.7.12.0'
-    pod 'BidonAdapterUnityAds', '0.7.12.0'
-    pod 'BidonAdapterVungle', '0.7.12.0'
-    pod 'BidonAdapterYandex', '0.7.12.0'
-    pod 'IronSourceAPSAdapter', '4.3.18.0'
-    pod 'IronSourceAdMobAdapter', '4.3.60.0'
-    pod 'IronSourceAppLovinAdapter', '4.3.52.0'
-    pod 'IronSourceBidMachineAdapter', '4.3.14.0'
-    pod 'IronSourceBigoAdapter', '4.3.4.0'
-    pod 'IronSourceFacebookAdapter', '4.3.47.0'
-    pod 'IronSourceFyberAdapter', '4.3.41.0'
-    pod 'IronSourceInMobiAdapter', '4.3.26.0'
-    pod 'IronSourceMintegralAdapter', '4.3.32.0'
-    pod 'IronSourceMobileFuseAdapter', '4.3.5.0'
-    pod 'IronSourceMolocoAdapter', '4.3.10.0'
-    pod 'IronSourceMyTargetAdapter', '4.1.27.0'
-    pod 'IronSourceOguryAdapter', '4.3.3.0'
-    pod 'IronSourcePangleAdapter', '4.3.39.0'
-    pod 'IronSourceSmaatoAdapter', '4.3.16.0'
-    pod 'IronSourceUnityAdsAdapter', '4.3.47.0'
-    pod 'IronSourceVerveAdapter', '4.3.4.0'
-    pod 'IronSourceVungleAdapter', '4.3.42.0'
+   pod 'Appodeal', '3.8.1'
+   pod 'APDAmazonAdapter', '3.8.1.0'
+   pod 'APDAppLovinAdapter', '3.8.1.0'
+   pod 'APDAppLovinMAXAdapter', '3.8.1.0'
+   pod 'APDBidMachineAdapter', '3.8.1.0'
+   pod 'APDBidonAdapter', '3.8.1.0'
+   pod 'APDBigoAdsAdapter', '3.8.1.0'
+   pod 'APDDTExchangeAdapter', '3.8.1.0'
+   pod 'APDGoogleAdMobAdapter', '3.8.1.0'
+   pod 'APDIABAdapter', '3.8.1.0'
+   pod 'APDInMobiAdapter', '3.8.1.0'
+   pod 'APDIronSourceAdapter', '3.8.1.0'
+   pod 'APDLevelPlayAdapter', '3.8.1.0'
+   pod 'APDMetaAudienceNetworkAdapter', '3.8.1.0'
+   pod 'APDMintegralAdapter', '3.8.1.0'
+   pod 'APDMyTargetAdapter', '3.8.1.0'
+   pod 'APDPangleAdapter', '3.8.1.0'
+   pod 'APDSmaatoAdapter', '3.8.1.0'
+   pod 'APDUnityAdapter', '3.8.1.0'
+   pod 'APDVungleAdapter', '3.8.1.0'
+   pod 'APDYandexAdapter', '3.8.1.0'
+   pod 'AppLovinMediationAmazonAdMarketplaceAdapter', '5.2.0.0'
+   pod 'AppLovinMediationBidMachineAdapter', '3.3.0.0.2'
+   pod 'AppLovinMediationBidonAdapter', '0.9.0.0'
+   pod 'AppLovinMediationBigoAdsAdapter', '4.7.0.2'
+   pod 'AppLovinMediationByteDanceAdapter', '7.1.1.1.0'
+   pod 'AppLovinMediationFacebookAdapter', '6.17.1.0'
+   pod 'AppLovinMediationFyberAdapter', '8.3.7.0'
+   pod 'AppLovinMediationGoogleAdManagerAdapter', '12.4.0.1'
+   pod 'AppLovinMediationGoogleAdapter', '12.4.0.1'
+   pod 'AppLovinMediationInMobiAdapter', '10.8.3.1'
+   pod 'AppLovinMediationIronSourceAdapter', '8.10.0.0.0'
+   pod 'AppLovinMediationMintegralAdapter', '7.7.7.0.0'
+   pod 'AppLovinMediationMobileFuseAdapter', '1.9.0.0'
+   pod 'AppLovinMediationMolocoAdapter', '3.9.1.1'
+   pod 'AppLovinMediationMyTargetAdapter', '5.32.1.0'
+   pod 'AppLovinMediationOguryPresageAdapter', '5.0.2.0'
+   pod 'AppLovinMediationPubMaticAdapter', '4.7.0.2'
+   pod 'AppLovinMediationSmaatoAdapter', '22.9.3.1'
+   pod 'AppLovinMediationUnityAdsAdapter', '4.14.2.0'
+   pod 'AppLovinMediationVerveAdapter', '3.2.0.0'
+   pod 'AppLovinMediationVungleAdapter', '7.5.1.4'
+   pod 'AppLovinMediationYandexAdapter', '5.2.1.0'
+   pod 'BidMachineAmazonAdapter', '3.3.0.0'
+   pod 'BidMachineMetaAudienceAdapter', '3.3.0.0'
+   pod 'BidMachineMintegralAdapter', '3.3.0.0'
+   pod 'BidMachineMyTargetAdapter', '3.3.0.1'
+   pod 'BidMachinePangleAdapter', '3.3.0.0'
+   pod 'BidMachineVungleAdapter', '3.3.0.3'
+   pod 'BidonAdapterAmazon', '0.9.0.0'
+   pod 'BidonAdapterBidMachine', '0.9.0.0'
+   pod 'BidonAdapterBigoAds', '0.9.0.0'
+   pod 'BidonAdapterDTExchange', '0.9.0.0'
+   pod 'BidonAdapterInMobi', '0.9.0.0'
+   pod 'BidonAdapterIronSource', '0.9.0.0'
+   pod 'BidonAdapterMetaAudienceNetwork', '0.9.0.0'
+   pod 'BidonAdapterMintegral', '0.9.0.0'
+   pod 'BidonAdapterMobileFuse', '0.9.0.0'
+   pod 'BidonAdapterMyTarget', '0.9.0.0'
+   pod 'BidonAdapterUnityAds', '0.9.0.0'
+   pod 'BidonAdapterVungle', '0.9.0.0'
+   pod 'BidonAdapterYandex', '0.9.0.0'
+   pod 'ISBidonCustomAdapter', '0.9.0.0'
+   pod 'IronSourceAPSAdapter', '4.3.20.1'
+   pod 'IronSourceAdMobAdapter', '4.3.65.0'
+   pod 'IronSourceAppLovinAdapter', '4.3.54.0'
+   pod 'IronSourceBidMachineAdapter', '4.3.17.1'
+   pod 'IronSourceBigoAdapter', '4.3.5.0'
+   pod 'IronSourceFacebookAdapter', '4.3.49.0'
+   pod 'IronSourceFyberAdapter', '4.3.43.1'
+   pod 'IronSourceInMobiAdapter', '4.3.29.1'
+   pod 'IronSourceMintegralAdapter', '4.3.34.0'
+   pod 'IronSourceMobileFuseAdapter', '4.3.6.0'
+   pod 'IronSourceMolocoAdapter', '4.3.19.0'
+   pod 'IronSourceMyTargetAdapter', '4.3.5.0'
+   pod 'IronSourceOguryAdapter', '4.3.3.1'
+   pod 'IronSourcePangleAdapter', '4.3.44.0'
+   pod 'IronSourceSmaatoAdapter', '4.3.17.1'
+   pod 'IronSourceUnityAdsAdapter', '4.3.51.0'
+   pod 'IronSourceVerveAdapter', '4.3.5.0'
+   pod 'IronSourceVungleAdapter', '4.3.45.1'
 end
 
-target "Example" do
+target 'AppodealExample' do
   config = use_native_modules!
-
-  use_react_native!(
-    :path => config[:reactNativePath],
-    :hermes_enabled => false,
-    :fabric_enabled => false,
-    :app_path => "#{Pod::Config.instance.installation_root}/..",
-  )
 
   appodeal
 
-  target "ExampleTests" do
-    inherit! :complete
-  end
-
-  use_frameworks! :linkage => :static
-end
-
-def __apply_Xcode_15_post_install_workaround(installer)
-  xcode_version_output = `xcodebuild -version`
-  xcode_version_match = xcode_version_output.match(/Xcode (\d+(\.\d+)?)/)
-
-  if xcode_version_match
-    xcode_version = Gem::Version.new(xcode_version_match[1])
-    if xcode_version >= Gem::Version.new('15.0')
-      installer.pods_project.targets.each do |target|
-        target.build_configurations.each do |config|
-          config.build_settings['GCC_PREPROCESSOR_DEFINITIONS'] ||= ['$(inherited)', '_LIBCPP_ENABLE_CXX17_REMOVED_UNARY_BINARY_FUNCTION']
-
-          # Xcode 15 patch
-          xcconfig_path = config.base_configuration_reference.real_path
-          xcconfig = File.read(xcconfig_path)
-          xcconfig_mod = xcconfig.gsub(/DT_TOOLCHAIN_DIR/, "TOOLCHAIN_DIR")
-        end
-      end
-    end
-  end
-end
-
-post_install do |installer|
-  # Apply react-native patches
-  react_native_post_install(
-    installer,
-    :mac_catalyst_enabled => false,
+  use_react_native!(
+    :path => config[:reactNativePath],
+    # An absolute path to your application root.
+    :app_path => "#{Pod::Config.instance.installation_root}/..",
+    :hermes_enabled => true
   )
-  # Switch deployment targets to 13.0
-  installer.pods_project.targets.each do |target|
-    target.build_configurations.each do |config|
-      config.build_settings["IPHONEOS_DEPLOYMENT_TARGET"] = "13.0"
-    end
+
+  post_install do |installer|
+    # https://github.com/facebook/react-native/blob/main/packages/react-native/scripts/react_native_pods.rb#L197-L202
+    react_native_post_install(
+      installer,
+      config[:reactNativePath],
+      :mac_catalyst_enabled => false,
+      :ccache_enabled => false
+    )
   end
-  # Apply XCode 12.5 M1 patch
-  __apply_Xcode_12_5_M1_post_install_workaround(installer)
-  # Apply Xcode 15 patch
-  __apply_Xcode_15_post_install_workaround(installer)
 end
