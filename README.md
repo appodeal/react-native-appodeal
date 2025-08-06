@@ -41,12 +41,14 @@ Official Appodeal React Native Plugin for your React Native application.
 > Please read our [Migration Guide](MIGRATION_GUIDE.md) carefully before updating.
 
 **Key Changes in 3.8.1:**
-- Updated to Appodeal SDK 3.8.1
-- Migrated to React Native Turbo Modules
-- New Architecture support (Fabric + TurboModules)
-- Updated TypeScript definitions
-- New event system with better type safety
-- Breaking changes in API methods and event names
+- Updated to Appodeal SDK 3.8.1  
+- Migrated to React Native Turbo Modules  
+- New Architecture support (Fabric + TurboModules)  
+- Updated TypeScript definitions  
+- New event system with better type safety  
+- 💥 **Breaking changes in API methods and event names**
+- 🛠️ **Updated Kotlin to version 2.1.0** — this may be a ⚠️ *breaking change* for projects still using Kotlin < 2.0.0
+
 
 ## Table of Contents
 
@@ -271,6 +273,7 @@ To improve ad performance the following entries should be added:
 
 > [!IMPORTANT]
 > - Android API level 23 (Android OS 6.0) or higher.
+> - Kotlin 2.1.0
 
 1. Add Appodeal adapters.
 
