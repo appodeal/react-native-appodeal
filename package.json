@@ -37,6 +37,7 @@
     "typecheck": "tsc",
     "lint": "eslint \"**/*.{js,ts,tsx}\"",
     "clean": "del-cli android/build example/android/build example/android/app/build example/ios/build lib",
+    "update-readme-deps": "node scripts/update-readme-deps.mjs",
     "prepare": "bob build",
     "release": "release-it --only-version"
   },

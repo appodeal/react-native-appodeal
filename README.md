@@ -90,31 +90,30 @@ yarn add react-native-appodeal
 1. Go to `ios/` folder and open *Podfile*
 2. Add Appodeal adapters. Add pods into `./ios/Podfile`:
 
+<!-- appodeal-deps:ios:start -->
 ```ruby
-source 'https://cdn.cocoapods.org'
+platform :ios, '15.0'
+
 source 'https://github.com/appodeal/CocoaPods.git'
 source 'https://github.com/bidon-io/CocoaPods-Specs.git'
-
-platform :ios, '13.0'
+source 'https://cdn.cocoapods.org'
 
 use_frameworks!
 
 def appodeal
-   pod 'Appodeal', '4.1.0'
-   # Add adapter pods here.
-   # Use the Appodeal Dependencies Wizard to generate an up-to-date list:
-   # https://docs.appodeal.com/ios/advanced/configure-mediated-networks
+    pod 'Appodeal', '4.1.0'
 end
 
-target 'YourAppName' do
-  use_frameworks!
-  use_modular_headers!
-  appodeal
+target 'Sample' do
+    project 'Sample/Sample.xcodeproj'
+    appodeal
+    use_modular_headers!
 
-  config = use_native_modules!
-  use_react_native!(:path => config[:reactNativePath])
+    config = use_native_modules!
+    use_react_native!(:path => config[:reactNativePath])
 end
 ```
+<!-- appodeal-deps:ios:end -->
 
 > [!TIP]
 > Use the [Appodeal Dependencies Wizard](https://docs.appodeal.com/ios/advanced/configure-mediated-networks) to configure mediated networks and generate an always up-to-date dependency list for your Podfile.
@@ -195,16 +194,17 @@ To improve ad performance the following entries should be added:
 
 Add dependencies into `android/app/build.gradle`
 
-``` groovy
+<!-- appodeal-deps:android:start -->
+``` kotlin
+repositories {
+    maven { url = uri("https://artifactory.appodeal.com/appodeal") }
+}
+/* build.gradle.kts */
 dependencies {
-    // ... other project dependencies
-    // Appodeal SDK 4.1.0
     implementation("com.appodeal.ads.sdk:core:4.1.0")
-    // Add adapter dependencies here.
-    // Use the Appodeal Dependencies Wizard to generate an up-to-date list:
-    // https://docs.appodeal.com/android/advanced/configure-mediated-networks
 }
 ```
+<!-- appodeal-deps:android:end -->
 
 Add repository into `android/build.gradle`
 
