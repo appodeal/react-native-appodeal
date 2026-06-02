@@ -1,0 +1,54 @@
+name: Update README dependencies
+
+# Keeps the Appodeal dependency lists in README.md in sync with the live
+# Dependencies Wizard API (URL from the APPODEAL_API_URL repository variable).
+# The SDK version comes from package.json, so a version bump (push) refreshes the
+# lists; the daily schedule catches adapter-version changes published between releases.
+
+on:
+  workflow_dispatch: {}
+  push:
+    branches: [master]
+    paths:
+      - 'package.json'
+      - 'scripts/update-readme-deps.mjs'
+  schedule:
+    # Daily at 06:00 UTC.
+    - cron: '0 6 * * *'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: update-readme-deps
+  cancel-in-progress: true
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Regenerate README dependency lists
+        # URL comes only from the APPODEAL_API_URL repository variable
+        # (Settings → Secrets and variables → Actions → Variables). No hardcoded fallback —
+        # if the variable is unset the script fails loudly.
+        env:
+          APPODEAL_API_URL: ${{ vars.APPODEAL_API_URL }}
+        run: node scripts/update-readme-deps.mjs
+
+      - name: Commit changes if any
+        run: |
+          if git diff --quiet -- README.md; then
+            echo "README dependencies already up to date."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add README.md
+          git commit -m "chore: sync README dependency lists from Wizard API"
+          git push
