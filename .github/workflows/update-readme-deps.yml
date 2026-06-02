@@ -18,6 +18,7 @@ on:
 
 permissions:
   contents: write
+  pull-requests: write
 
 concurrency:
   group: update-readme-deps
@@ -41,14 +42,24 @@ jobs:
           APPODEAL_API_URL: ${{ vars.APPODEAL_API_URL }}
         run: node scripts/update-readme-deps.mjs
 
-      - name: Commit changes if any
+      - name: Open and merge PR if README changed
+        # master is protected (changes must go through a PR), so the bot cannot push
+        # directly. It pushes a branch, opens a PR, and merges it — no manual step.
+        env:
+          GH_TOKEN: ${{ github.token }}
         run: |
           if git diff --quiet -- README.md; then
             echo "README dependencies already up to date."
             exit 0
           fi
+          BRANCH="chore/update-readme-deps-${{ github.run_id }}"
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git switch -c "$BRANCH"
           git add README.md
           git commit -m "chore: sync README dependency lists from Wizard API"
-          git push
+          git push origin "$BRANCH"
+          gh pr create --base master --head "$BRANCH" \
+            --title "chore: sync README dependency lists from Wizard API" \
+            --body "Automated update from the Appodeal Dependencies Wizard API."
+          gh pr merge "$BRANCH" --squash --delete-branch
