@@ -83,8 +83,8 @@ function fenced(lang, body) {
 /**
  * Keep only the `dependencies { ... }` block from the Android response. The Wizard
  * prepends a `repositories { ... }` block (already documented separately in the README's
- * "Add repository into android/build.gradle" section) and a `/* build.gradle.kts *​/`
- * label, which would otherwise duplicate the repository setup and mislead readers.
+ * "Add repository into android/build.gradle" section) and a build.gradle.kts label
+ * comment, which would otherwise duplicate the repository setup and mislead readers.
  */
 function androidDependenciesOnly(text) {
   const idx = text.search(/^dependencies\s*\{/m);
