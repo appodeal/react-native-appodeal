@@ -42,14 +42,16 @@ jobs:
           APPODEAL_API_URL: ${{ vars.APPODEAL_API_URL }}
         run: node scripts/update-readme-deps.mjs
 
-      - name: Open and merge PR if README changed
-        # master is protected (changes must go through a PR), so the bot cannot push
-        # directly. It pushes a branch, opens a PR, and merges it — no manual step.
+      - name: Create PR if README changed
+        # master is protected (changes must go through a PR), so the bot opens a PR as
+        # github-actions[bot]. A different identity (the App below) approves and merges it.
+        id: pr
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
           if git diff --quiet -- README.md; then
             echo "README dependencies already up to date."
+            echo "created=false" >> "$GITHUB_OUTPUT"
             exit 0
           fi
           BRANCH="chore/update-readme-deps-${{ github.run_id }}"
@@ -62,4 +64,23 @@ jobs:
           gh pr create --base master --head "$BRANCH" \
             --title "chore: sync README dependency lists from Wizard API" \
             --body "Automated update from the Appodeal Dependencies Wizard API."
-          gh pr merge "$BRANCH" --squash --delete-branch
+          echo "branch=$BRANCH" >> "$GITHUB_OUTPUT"
+          echo "created=true" >> "$GITHUB_OUTPUT"
+
+      - name: Generate App token for approval
+        # A second identity is required: github-actions[bot] (the PR author) cannot approve
+        # its own PR. The GitHub App acts as the reviewer whose approval branch protection counts.
+        if: steps.pr.outputs.created == 'true'
+        id: app-token
+        uses: actions/create-github-app-token@v1
+        with:
+          app-id: ${{ secrets.APP_ID }}
+          private-key: ${{ secrets.APP_PRIVATE_KEY }}
+
+      - name: Approve and merge PR
+        if: steps.pr.outputs.created == 'true'
+        env:
+          GH_TOKEN: ${{ steps.app-token.outputs.token }}
+        run: |
+          gh pr review "${{ steps.pr.outputs.branch }}" --approve
+          gh pr merge "${{ steps.pr.outputs.branch }}" --squash --delete-branch
