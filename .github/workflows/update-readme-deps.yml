@@ -54,7 +54,7 @@ jobs:
             echo "created=false" >> "$GITHUB_OUTPUT"
             exit 0
           fi
-          BRANCH="chore/update-readme-deps-${{ github.run_id }}"
+          BRANCH="chore/update-readme-deps-${{ github.run_id }}-${{ github.run_attempt }}"
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git switch -c "$BRANCH"
