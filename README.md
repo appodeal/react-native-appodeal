@@ -281,10 +281,6 @@ Add dependencies into `android/app/build.gradle`
 
 <!-- appodeal-deps:android:start -->
 ``` kotlin
-repositories {
-    maven { url = uri("https://artifactory.appodeal.com/appodeal") }
-}
-/* build.gradle.kts */
 dependencies {
     implementation("com.appodeal.ads.sdk:core:4.1.0")
     // Bidon
