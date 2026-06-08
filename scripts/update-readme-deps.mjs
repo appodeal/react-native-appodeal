@@ -81,6 +81,20 @@ function fenced(lang, body) {
 }
 
 /**
+ * Keep only the `dependencies { ... }` block from the Android response. The Wizard
+ * prepends a `repositories { ... }` block (already documented separately in the README's
+ * "Add repository into android/build.gradle" section) and a `/* build.gradle.kts *​/`
+ * label, which would otherwise duplicate the repository setup and mislead readers.
+ */
+function androidDependenciesOnly(text) {
+  const idx = text.search(/^dependencies\s*\{/m);
+  if (idx === -1) {
+    throw new Error('Could not find `dependencies {` in the Android API response');
+  }
+  return text.slice(idx);
+}
+
+/**
  * Inject the React Native linking lines into the iOS Podfile target. The Wizard renders
  * a plain native target (`target 'Sample' do ... end`); RN apps additionally need the
  * autolinking calls, otherwise the copied Podfile won't build. Everything else from the
@@ -128,7 +142,7 @@ async function main() {
 
   // android uses kts (`kt`) verbatim; ios ignores the language, returns Ruby, and gets
   // the React Native linking injected into its target.
-  const android = await fetchDependencyBlock('android', version, 'kt');
+  const android = androidDependenciesOnly(await fetchDependencyBlock('android', version, 'kt'));
   const ios = addReactNativeLinking(await fetchDependencyBlock('ios', version));
 
   let readme = await readFile(README, 'utf8');
