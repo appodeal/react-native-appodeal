@@ -162,7 +162,7 @@ def appodeal
     pod 'BidonAdapterUnityAds', '4.16.3.0'
     pod 'BidonAdapterVungle', '7.6.2.0'
     pod 'BidonAdapterYandex', '7.17.0.0'
-    pod 'BidonAdapterZmaticoo', '1.5.6.0'
+    pod 'BidonAdapterZmaticoo', '2.2.0.0'
     # Appodeal
     pod 'AppodealAdjustAdapter', '5.4.6.1'
     pod 'AppodealAmazonAdapter', '5.3.2.0'
@@ -302,7 +302,7 @@ dependencies {
     implementation("org.bidon:vkads-adapter:5.47.1.0")
     implementation("org.bidon:vungle-adapter:7.6.1.0")
     implementation("org.bidon:yandex-adapter:7.17.0.0")
-    implementation("org.bidon:zmaticoo-adapter:2.0.5.1.0")
+    implementation("org.bidon:zmaticoo-adapter:2.0.6.0.0")
     // AppLovin MAX
     implementation("com.applovin.mediation:amazon-tam-adapter:11.3.0.0")
     implementation("com.applovin.mediation:bidmachine-adapter:3.7.1.0")
