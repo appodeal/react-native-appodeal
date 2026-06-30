@@ -17,6 +17,7 @@ import { AppodealAdType, AppodealLogLevel } from './types';
 import type {
   AppodealAndroidPurchase,
   AppodealConsentStatus,
+  AppodealPrivacyOptionsStatus,
   AppodealIOSPurchase,
   AppodealReward,
   Map,
@@ -145,6 +146,18 @@ export interface Appodeal {
    */
   showConsentForm(): Promise<AppodealConsentStatus>;
   /**
+   * Returns whether a Privacy Entry Point button must be surfaced in the app UI
+   * (US State Regulations opt-out / EEA re-consent). Meaningful only after
+   * `requestConsentInfoUpdate` completes. Available since Appodeal SDK 4.2.0.
+   */
+  privacyOptionsRequirementStatus(): AppodealPrivacyOptionsStatus;
+  /**
+   * Shows the Privacy Options form (US opt-out form, or the GDPR re-consent form
+   * in the EEA). Must be triggered by an explicit user interaction, not at SDK
+   * initialization. Available since Appodeal SDK 4.2.0.
+   */
+  showPrivacyOptionsForm(): Promise<void>;
+  /**
    * Enables or disables test mode
    * @param value Boolean flag indicating test mode
    */
@@ -240,7 +253,7 @@ export interface Appodeal {
 /**
  * Plugin version constant
  */
-const PLUGIN_VERSION = '4.1.0';
+const PLUGIN_VERSION = '4.2.0';
 
 /**
  * Appodeal SDK implementation
@@ -339,6 +352,14 @@ const appodeal: Appodeal = {
     return NativeAppodeal.showConsentForm().then(
       (parameters) => parameters.status
     );
+  },
+
+  privacyOptionsRequirementStatus: (): AppodealPrivacyOptionsStatus => {
+    return NativeAppodeal.privacyOptionsRequirementStatus();
+  },
+
+  showPrivacyOptionsForm: (): Promise<void> => {
+    return NativeAppodeal.showPrivacyOptionsForm();
   },
 
   setChildDirectedTreatment: (value: boolean): void => {

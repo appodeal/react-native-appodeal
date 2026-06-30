@@ -11,7 +11,10 @@ export { AppodealAdType } from './AppodealAdTypes';
 export type { AppodealAdRevenue } from './AppodealAdTypes';
 
 // Consent-related types
-export { AppodealConsentStatus } from './AppodealConsentTypes';
+export {
+  AppodealConsentStatus,
+  AppodealPrivacyOptionsStatus,
+} from './AppodealConsentTypes';
 
 // Purchase-related types
 export {

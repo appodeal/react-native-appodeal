@@ -17,8 +17,8 @@ Pod::Spec.new do |s|
   s.private_header_files = "ios/*.h"
 
   # Appodeal dependencies
-  s.dependency "Appodeal", "4.1.0"
-  s.dependency "AppodealIABAdapter", "3.4.7.0"
+  s.dependency "Appodeal", "4.2.0"
+  s.dependency "AppodealIABAdapter", "3.5.0.0"
 
   # Use install_modules_dependencies helper to install the dependencies if React Native version >=0.71.0.
   # See https://github.com/facebook/react-native/blob/febf6b7f33fdb4904669f99d795eba4c0f95d7bf/scripts/cocoapods/new_architecture.rb#L79.

@@ -18,6 +18,7 @@ export {
   AppodealAdType,
   AppodealLogLevel,
   AppodealConsentStatus,
+  AppodealPrivacyOptionsStatus,
   AppodealIOSPurchaseType,
   AppodealAndroidPurchaseType,
 } from './types';

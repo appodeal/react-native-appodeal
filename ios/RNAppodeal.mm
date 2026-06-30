@@ -344,6 +344,22 @@ RCT_EXPORT_METHOD(showConsentForm:(RCTPromiseResolveBlock)resolve
     }];
 }
 
+RCT_EXPORT_BLOCKING_SYNCHRONOUS_METHOD(privacyOptionsRequirementStatus) {
+    return RNAppodealPrivacyOptionsStatusFrom(APDConsentManager.shared.privacyOptionsRequirementStatus);
+}
+
+RCT_EXPORT_METHOD(showPrivacyOptionsForm:(RCTPromiseResolveBlock)resolve
+                  reject:(RCTPromiseRejectBlock)reject) {
+    [APDConsentManager.shared showPrivacyOptionsFormWithRootViewController:RCTPresentedViewController()
+                                                              completion:^(NSError *error) {
+        if (error != nil) {
+            reject(@"APD_SHOW_PRIVACY_OPTIONS_FORM_ERROR", error.localizedDescription, error);
+        } else {
+            resolve(nil);
+        }
+    }];
+}
+
 #pragma mark - Self-Hosted Bidon Configuration
 
 RCT_EXPORT_METHOD(setBidonEndpoint:(NSString *)endpoint) {
@@ -669,6 +685,22 @@ RCT_EXPORT_METHOD(setSharedAdsInstanceAcrossActivities:(BOOL)flag) {}
                     resolve(parameters);
                 }
             }];
+        }
+    }];
+}
+
+- (NSNumber *)privacyOptionsRequirementStatus {
+    return RNAppodealPrivacyOptionsStatusFrom(APDConsentManager.shared.privacyOptionsRequirementStatus);
+}
+
+- (void)showPrivacyOptionsForm:(RCTPromiseResolveBlock)resolve
+                        reject:(RCTPromiseRejectBlock)reject {
+    [APDConsentManager.shared showPrivacyOptionsFormWithRootViewController:RCTPresentedViewController()
+                                                              completion:^(NSError *error) {
+        if (error != nil) {
+            reject(@"APD_SHOW_PRIVACY_OPTIONS_FORM_ERROR", error.localizedDescription, error);
+        } else {
+            resolve(nil);
         }
     }];
 }

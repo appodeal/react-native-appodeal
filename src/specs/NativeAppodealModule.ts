@@ -32,6 +32,8 @@ export interface Spec extends TurboModule {
   ): Promise<{ status: number }>;
   showConsentFormIfNeeded(): Promise<{ status: number }>;
   showConsentForm(): Promise<{ status: number }>;
+  privacyOptionsRequirementStatus(): number;
+  showPrivacyOptionsForm(): Promise<void>;
 
   // Configuration
   setChildDirectedTreatment(value: boolean): void;

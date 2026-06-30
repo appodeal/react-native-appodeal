@@ -136,6 +136,18 @@ NSString *NSStringFromAppodealBannerViewSize(CGSize size);
  */
 NSNumber *RNAppodealConsentStatusFrom(APDConsentStatus status);
 
+/**
+ * Converts Appodeal privacy options requirement status to NSNumber.
+ *
+ * The native `APDPrivacyOptionsStatus` ordinals (Required=0, NotRequired=1,
+ * Unknown=2) differ from the JS `AppodealPrivacyOptionsStatus` enum
+ * (UNKNOWN=0, REQUIRED=1, NOT_REQUIRED=2), so the value is explicitly remapped
+ * rather than passed through.
+ * @param status The Appodeal privacy options requirement status
+ * @return NSNumber matching the JS `AppodealPrivacyOptionsStatus` enum
+ */
+NSNumber *RNAppodealPrivacyOptionsStatusFrom(APDPrivacyOptionsStatus status);
+
 #ifdef __cplusplus
 }
 #endif

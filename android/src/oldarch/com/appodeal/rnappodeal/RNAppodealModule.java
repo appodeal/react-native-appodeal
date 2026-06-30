@@ -109,6 +109,16 @@ public class RNAppodealModule extends ReactContextBaseJavaModule {
         moduleImplementation.revokeConsent();
     }
 
+    @ReactMethod(isBlockingSynchronousMethod = true)
+    public int privacyOptionsRequirementStatus() {
+        return (int) moduleImplementation.privacyOptionsRequirementStatus();
+    }
+
+    @ReactMethod
+    public void showPrivacyOptionsForm(final Promise promise) {
+        moduleImplementation.showPrivacyOptionsForm(promise);
+    }
+
     @ReactMethod
     public void setChildDirectedTreatment(boolean flag) {
         moduleImplementation.setChildDirectedTreatment(flag);
