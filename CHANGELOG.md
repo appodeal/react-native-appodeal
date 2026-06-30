@@ -13,6 +13,14 @@
   explicit user action. New `AppodealPrivacyOptionsStatus` enum
   (`UNKNOWN` / `REQUIRED` / `NOT_REQUIRED`). See [GDPR and CCPA](https://docs.appodeal.com/android/data-protection/gdpr-and-ccpa).
 
+### Fixes
+
+- **iOS MREC `isLoaded` / `canShow`**: `Appodeal.isLoaded(MREC)` and
+  `Appodeal.canShow(MREC)` now return correct values on iOS. MREC exists only as a
+  standalone view and is not represented in the central SDK manager, so these
+  previously always returned `false`; they now query the plugin's own MREC view
+  instance. Other ad types and Android are unaffected.
+
 ### Updated SDKs
 
 - Updated Appodeal iOS SDK to [4.2.0](https://docs.appodeal.com/ios/changelog)

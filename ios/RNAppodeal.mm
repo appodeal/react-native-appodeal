@@ -1,6 +1,7 @@
 #import "RNAppodeal.h"
 #import "RNADefines.h"
 #import "RNAEventDispatcher.h"
+#import "RNAppodealBannerView.h"
 #import <React/RCTUtils.h>
 #import <StackConsentManager/StackConsentManager-Swift.h>
 
@@ -81,6 +82,10 @@ RCT_EXPORT_METHOD(show:(double)showType
 }
 
 RCT_EXPORT_BLOCKING_SYNCHRONOUS_METHOD(isLoaded:(double)showType) {
+    // MREC is not represented in the central SDK manager on iOS; query the view. See APDM-2627.
+    if ((NSInteger)showType == RNAAdTypeMREC) {
+        return @([RNAppodealMrecView isActiveMrecReady]);
+    }
     BOOL isLoaded = [Appodeal isReadyForShowWithStyle:AppodealShowStyleFromRNAAdType(showType)];
     return @(isLoaded);
 }
@@ -105,6 +110,10 @@ RCT_EXPORT_BLOCKING_SYNCHRONOUS_METHOD(isPrecache:(double)adType) {
 
 RCT_EXPORT_BLOCKING_SYNCHRONOUS_METHOD(canShow:(double)showType
                                        placement:(NSString *)placement) {
+    // MREC is not represented in the central SDK manager on iOS; query the view. See APDM-2627.
+    if ((NSInteger)showType == RNAAdTypeMREC) {
+        return @([RNAppodealMrecView canShowActiveMrecForPlacement:placement]);
+    }
     BOOL canShow = [Appodeal canShow:AppodealAdTypeFromRNAAdType(showType)
                         forPlacement:placement];
     return @(canShow);
@@ -427,12 +436,20 @@ RCT_EXPORT_METHOD(setSharedAdsInstanceAcrossActivities:(BOOL)flag) {}
 }
 
 - (NSNumber *)isLoaded:(double)showType {
+    // MREC is not represented in the central SDK manager on iOS; query the view. See APDM-2627.
+    if ((NSInteger)showType == RNAAdTypeMREC) {
+        return @([RNAppodealMrecView isActiveMrecReady]);
+    }
     BOOL isLoaded = [Appodeal isReadyForShowWithStyle:AppodealShowStyleFromRNAAdType(showType)];
     return @(isLoaded);
 }
 
 - (NSNumber *)canShow:(double)showType
             placement:(NSString *)placement {
+    // MREC is not represented in the central SDK manager on iOS; query the view. See APDM-2627.
+    if ((NSInteger)showType == RNAAdTypeMREC) {
+        return @([RNAppodealMrecView canShowActiveMrecForPlacement:placement]);
+    }
     BOOL canShow = [Appodeal canShow:AppodealAdTypeFromRNAAdType(showType)
                         forPlacement:placement];
     return @(canShow);

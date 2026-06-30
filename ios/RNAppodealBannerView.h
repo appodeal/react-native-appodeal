@@ -30,6 +30,18 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface RNAppodealMrecView : RNAppodealBannerView
 
+/**
+ * Readiness of the plugin's own MREC view instance.
+ *
+ * On iOS, MREC exists only as a standalone `APDMRECView` and is not represented in
+ * the central SDK manager, so `[Appodeal isReadyForShowWithStyle:]` / `[Appodeal canShow:]`
+ * always report `false` for MREC. These query the most recently created MREC view
+ * (the instance actually shown) instead, so `Appodeal.isLoaded(MREC)` /
+ * `Appodeal.canShow(MREC)` return correct values. See APDM-2627.
+ */
++ (BOOL)isActiveMrecReady;
++ (BOOL)canShowActiveMrecForPlacement:(nullable NSString *)placement;
+
 @end
 
 NS_ASSUME_NONNULL_END
