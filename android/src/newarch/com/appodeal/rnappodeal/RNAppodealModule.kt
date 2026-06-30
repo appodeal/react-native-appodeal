@@ -85,6 +85,14 @@ class RNAppodealModule(
         moduleImplementation.showConsentForm(promise)
     }
 
+    override fun privacyOptionsRequirementStatus(): Double {
+        return moduleImplementation.privacyOptionsRequirementStatus()
+    }
+
+    override fun showPrivacyOptionsForm(promise: Promise) {
+        moduleImplementation.showPrivacyOptionsForm(promise)
+    }
+
     override fun setChildDirectedTreatment(value: Boolean) {
         moduleImplementation.setChildDirectedTreatment(value)
     }

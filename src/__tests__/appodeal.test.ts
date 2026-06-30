@@ -23,6 +23,8 @@ jest.mock('../specs/NativeAppodealModule', () => ({
     ),
     showConsentFormIfNeeded: jest.fn(() => Promise.resolve({ status: 0 })),
     showConsentForm: jest.fn(() => Promise.resolve({ status: 0 })),
+    privacyOptionsRequirementStatus: jest.fn(() => 0),
+    showPrivacyOptionsForm: jest.fn(() => Promise.resolve()),
     setChildDirectedTreatment: jest.fn(),
     setTesting: jest.fn(),
     setLogLevel: jest.fn(),
@@ -122,6 +124,8 @@ describe('Appodeal SDK', () => {
         'requestConsentInfoUpdate',
         'showConsentFormIfNeeded',
         'showConsentForm',
+        'privacyOptionsRequirementStatus',
+        'showPrivacyOptionsForm',
         'setChildDirectedTreatment',
         'setTesting',
         'setLogLevel',
@@ -240,7 +244,7 @@ describe('Appodeal SDK', () => {
     });
 
     it('should return correct plugin version', () => {
-      expect(Appodeal.getVersion()).toBe('4.1.0');
+      expect(Appodeal.getVersion()).toBe('4.2.0');
     });
 
     it('should handle consent methods correctly', async () => {
@@ -257,6 +261,20 @@ describe('Appodeal SDK', () => {
 
       await Appodeal.showConsentForm();
       expect(mockNativeAppodeal.showConsentForm).toHaveBeenCalled();
+    });
+
+    it('should handle privacy options (Privacy Entry Point) methods correctly', async () => {
+      const mockNativeAppodeal =
+        require('../specs/NativeAppodealModule').default;
+
+      const status = Appodeal.privacyOptionsRequirementStatus();
+      expect(
+        mockNativeAppodeal.privacyOptionsRequirementStatus
+      ).toHaveBeenCalled();
+      expect(status).toBe(0);
+
+      await Appodeal.showPrivacyOptionsForm();
+      expect(mockNativeAppodeal.showPrivacyOptionsForm).toHaveBeenCalled();
     });
 
     it('should handle user data methods', () => {
@@ -626,7 +644,7 @@ describe('Appodeal SDK', () => {
       expect(mockNativeAppodeal.initialize).toHaveBeenCalledWith(
         'test-key',
         combinedTypes,
-        '4.1.0'
+        '4.2.0'
       );
       expect(mockNativeAppodeal.cache).toHaveBeenCalledWith(combinedTypes);
       expect(mockNativeAppodeal.setAutoCache).toHaveBeenCalledWith(

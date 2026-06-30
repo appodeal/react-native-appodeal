@@ -2,7 +2,7 @@
 
 Official Appodeal React Native Plugin for your React Native application.
 
-## Appodeal SDK 4.1.0
+## Appodeal SDK 4.2.0
 
 - **Google CMP and TCF v2 Support**
   - To enhance the relevance of ads for your users and comply with regulations like GDPR and CCPA,
@@ -101,10 +101,10 @@ source 'https://cdn.cocoapods.org'
 use_frameworks!
 
 def appodeal
-    pod 'Appodeal', '4.1.0'
+    pod 'Appodeal', '4.2.0'
     # AppLovin MAX
     pod 'AppLovinMediationAmazonAdMarketplaceAdapter', '5.3.2.0'
-    pod 'AppLovinMediationBidMachineAdapter', '3.6.1.0.0'
+    pod 'AppLovinMediationBidMachineAdapter', '3.7.1.0.0'
     pod 'AppLovinMediationBigoAdsAdapter', '5.0.0.0'
     pod 'AppLovinMediationByteDanceAdapter', '7.7.0.7.0'
     pod 'AppLovinMediationChartboostAdapter', '9.10.1.0'
@@ -128,7 +128,7 @@ def appodeal
     # Level Play
     pod 'IronSourceAdMobAdapter', '5.3.0.0'
     pod 'IronSourceAppLovinAdapter', '5.3.0.0'
-    pod 'IronSourceBidMachineAdapter', '5.5.0.0'
+    pod 'IronSourceBidMachineAdapter', '5.7.0.0'
     pod 'IronSourceBigoAdapter', '5.1.0.0'
     pod 'IronSourceFacebookAdapter', '5.0.0.0'
     pod 'IronSourceFyberAdapter', '5.2.0.0'
@@ -143,10 +143,34 @@ def appodeal
     pod 'IronSourceUnityAdsAdapter', '5.2.0.0'
     pod 'IronSourceVerveAdapter', '5.5.0.0'
     pod 'IronSourceVungleAdapter', '5.3.0.0'
+    # Appodeal
+    pod 'AppodealAdjustAdapter', '5.4.6.1'
+    pod 'AppodealAmazonAdapter', '5.3.2.0'
+    pod 'AppodealAppLovinAdapter', '13.5.1.0'
+    pod 'AppodealAppLovinMAXAdapter', '13.5.1.1'
+    pod 'AppodealAppsFlyerAdapter', '6.17.7.1'
+    pod 'AppodealBidMachineAdapter', '3.7.1.0'
+    pod 'AppodealBidonAdapter', '0.15.0.0'
+    pod 'AppodealBigoAdsAdapter', '5.0.0.0'
+    pod 'AppodealDTExchangeAdapter', '8.4.1.0'
+    pod 'AppodealFacebookAdapter', '18.0.1.0'
+    pod 'AppodealFirebaseAdapter', '12.4.0.1'
+    pod 'AppodealGoogleAdMobAdapter', '12.13.0.0'
+    pod 'AppodealIABAdapter', '3.5.0.0'
+    pod 'AppodealInMobiAdapter', '11.1.0.0'
+    pod 'AppodealIronSourceAdapter', '9.1.0.0.0'
+    pod 'AppodealLevelPlayAdapter', '9.1.0.0.0'
+    pod 'AppodealMetaAudienceNetworkAdapter', '6.20.1.0'
+    pod 'AppodealMintegralAdapter', '7.7.9.0'
+    pod 'AppodealMyTargetAdapter', '5.36.2.0'
+    pod 'AppodealSentryAdapter', '8.57.2.1'
+    pod 'AppodealUnityAdapter', '4.16.3.0'
+    pod 'AppodealVungleAdapter', '7.6.2.0'
+    pod 'AppodealYandexAdapter', '7.17.0.1'
     # Bidon
     pod 'BidonAdapterAmazon', '5.3.2.0'
     pod 'BidonAdapterAppLovin', '13.5.1.0'
-    pod 'BidonAdapterBidMachine', '3.6.1.1'
+    pod 'BidonAdapterBidMachine', '3.7.1.1'
     pod 'BidonAdapterBigoAds', '5.0.0.0'
     pod 'BidonAdapterChartboost', '9.10.1.0'
     pod 'BidonAdapterDTExchange', '8.4.1.0'
@@ -163,30 +187,6 @@ def appodeal
     pod 'BidonAdapterVungle', '7.6.2.0'
     pod 'BidonAdapterYandex', '7.17.0.0'
     pod 'BidonAdapterZmaticoo', '2.2.0.0'
-    # Appodeal
-    pod 'AppodealAdjustAdapter', '5.4.6.1'
-    pod 'AppodealAmazonAdapter', '5.3.2.0'
-    pod 'AppodealAppLovinAdapter', '13.5.1.0'
-    pod 'AppodealAppLovinMAXAdapter', '13.5.1.1'
-    pod 'AppodealAppsFlyerAdapter', '6.17.7.1'
-    pod 'AppodealBidMachineAdapter', '3.6.1.0'
-    pod 'AppodealBidonAdapter', '0.14.0.1'
-    pod 'AppodealBigoAdsAdapter', '5.0.0.0'
-    pod 'AppodealDTExchangeAdapter', '8.4.1.0'
-    pod 'AppodealFacebookAdapter', '18.0.1.0'
-    pod 'AppodealFirebaseAdapter', '12.4.0.1'
-    pod 'AppodealGoogleAdMobAdapter', '12.13.0.0'
-    pod 'AppodealIABAdapter', '3.4.7.0'
-    pod 'AppodealInMobiAdapter', '11.1.0.0'
-    pod 'AppodealIronSourceAdapter', '9.1.0.0.0'
-    pod 'AppodealLevelPlayAdapter', '9.1.0.0.0'
-    pod 'AppodealMetaAudienceNetworkAdapter', '6.20.1.0'
-    pod 'AppodealMintegralAdapter', '7.7.9.0'
-    pod 'AppodealMyTargetAdapter', '5.36.2.0'
-    pod 'AppodealSentryAdapter', '8.57.2.1'
-    pod 'AppodealUnityAdapter', '4.16.3.0'
-    pod 'AppodealVungleAdapter', '7.6.2.0'
-    pod 'AppodealYandexAdapter', '7.17.0.1'
 end
 
 target 'Sample' do
@@ -282,32 +282,12 @@ Add dependencies into `android/app/build.gradle`
 <!-- appodeal-deps:android:start -->
 ``` kotlin
 dependencies {
-    implementation("com.appodeal.ads.sdk:core:4.1.0")
-    // Bidon
-    implementation("org.bidon:amazon-adapter:11.3.0.0")
-    implementation("org.bidon:applovin-adapter:13.5.1.0")
-    implementation("org.bidon:bidmachine-adapter:3.7.1.0")
-    implementation("org.bidon:bigoads-adapter:5.6.2.0")
-    implementation("org.bidon:chartboost-adapter:9.10.2.0")
-    implementation("org.bidon:dtexchange-adapter:8.4.1.0")
-    implementation("org.bidon:inmobi-adapter:11.1.0.0")
-    implementation("org.bidon:ironsource-adapter:9.1.0.0")
-    implementation("org.bidon:meta-adapter:6.21.0.0")
-    implementation("org.bidon:mintegral-adapter:17.1.61.0")
-    implementation("org.bidon:mobilefuse-adapter:1.9.3.0")
-    implementation("org.bidon:moloco-adapter:4.3.1.0")
-    implementation("org.bidon:startio-adapter:5.2.4.1")
-    implementation("org.bidon:taurusx-adapter:1.12.2.0")
-    implementation("org.bidon:unityads-adapter:4.17.0.0")
-    implementation("org.bidon:vkads-adapter:5.47.1.0")
-    implementation("org.bidon:vungle-adapter:7.6.1.0")
-    implementation("org.bidon:yandex-adapter:7.17.0.0")
-    implementation("org.bidon:zmaticoo-adapter:2.0.6.0.0")
+    implementation("com.appodeal.ads.sdk:core:4.2.0")
     // AppLovin MAX
     implementation("com.applovin.mediation:amazon-tam-adapter:11.3.0.0")
     implementation("com.applovin.mediation:bidmachine-adapter:3.7.1.0")
     implementation("com.applovin.mediation:bigoads-adapter:5.6.2.0")
-    implementation("com.applovin.mediation:bytedance-adapter:7.7.0.2.0")
+    implementation("com.applovin.mediation:bytedance-adapter:8.1.0.3.0")
     implementation("com.applovin.mediation:chartboost-adapter:9.10.2.0")
     implementation("com.applovin.mediation:facebook-adapter:6.21.0.0")
     implementation("com.applovin.mediation:fyber-adapter:8.4.1.0")
@@ -339,20 +319,46 @@ dependencies {
     implementation("com.unity3d.ads-mediation:moloco-adapter:5.5.0")
     implementation("com.unity3d.ads-mediation:mytarget-adapter:5.5.0")
     implementation("com.unity3d.ads-mediation:ogury-adapter:5.2.0")
-    implementation("com.unity3d.ads-mediation:pangle-adapter:5.3.0")
+    implementation("com.unity3d.ads-mediation:pangle-adapter:5.18.0")
     implementation("com.unity3d.ads-mediation:smaato-adapter:5.0.0")
     implementation("com.unity3d.ads-mediation:unityads-adapter:5.6.0")
     implementation("com.unity3d.ads-mediation:verve-adapter:5.2.0")
     implementation("com.unity3d.ads-mediation:vungle-adapter:5.4.0")
+    // BidMachine
+    implementation("io.bidmachine:ads.networks.amazon:11.3.0.2")
+    implementation("io.bidmachine:ads.networks.meta_audience:6.21.0.1")
+    implementation("io.bidmachine:ads.networks.mintegral:17.1.61.1")
+    implementation("io.bidmachine:ads.networks.my_target:5.47.1.2")
+    implementation("io.bidmachine:ads.networks.vungle:7.6.1.2")
+    // Bidon
+    implementation("org.bidon:amazon-adapter:11.3.0.0")
+    implementation("org.bidon:applovin-adapter:13.5.1.0")
+    implementation("org.bidon:bidmachine-adapter:3.7.1.0")
+    implementation("org.bidon:bigoads-adapter:5.6.2.0")
+    implementation("org.bidon:chartboost-adapter:9.10.2.0")
+    implementation("org.bidon:dtexchange-adapter:8.4.1.0")
+    implementation("org.bidon:inmobi-adapter:11.1.0.0")
+    implementation("org.bidon:ironsource-adapter:9.1.0.0")
+    implementation("org.bidon:meta-adapter:6.21.0.0")
+    implementation("org.bidon:mintegral-adapter:17.1.61.0")
+    implementation("org.bidon:mobilefuse-adapter:1.9.3.0")
+    implementation("org.bidon:moloco-adapter:4.3.1.0")
+    implementation("org.bidon:startio-adapter:5.2.4.1")
+    implementation("org.bidon:taurusx-adapter:1.12.2.0")
+    implementation("org.bidon:unityads-adapter:4.17.0.0")
+    implementation("org.bidon:vkads-adapter:5.47.1.0")
+    implementation("org.bidon:vungle-adapter:7.6.1.0")
+    implementation("org.bidon:yandex-adapter:7.17.0.0")
+    implementation("org.bidon:zmaticoo-adapter:2.0.6.0.0")
     // Appodeal
     implementation("com.appodeal.ads.sdk.adapters:adjust:5.4.6.1")
     implementation("com.appodeal.ads.sdk.adapters:admob:24.7.0.0")
     implementation("com.appodeal.ads.sdk.adapters:amazon:11.3.0.0")
     implementation("com.appodeal.ads.sdk.adapters:applovin:13.5.1.0")
     implementation("com.appodeal.ads.sdk.adapters:applovin_max:13.5.1.1")
-    implementation("com.appodeal.ads.sdk.adapters:appsflyer:6.17.3.1")
+    implementation("com.appodeal.ads.sdk.adapters:appsflyer:6.18.0.1")
     implementation("com.appodeal.ads.sdk.adapters:bidmachine:3.7.1.0")
-    implementation("com.appodeal.ads.sdk.adapters:bidon:0.13.0.0")
+    implementation("com.appodeal.ads.sdk.adapters:bidon:0.14.0.0")
     implementation("com.appodeal.ads.sdk.adapters:bigo_ads:5.6.2.0")
     implementation("com.appodeal.ads.sdk.adapters:chartboost:9.10.2.0")
     implementation("com.appodeal.ads.sdk.adapters:dt_exchange:8.4.1.0")
@@ -368,7 +374,6 @@ dependencies {
     implementation("com.appodeal.ads.sdk.adapters:moloco:4.3.1.0")
     implementation("com.appodeal.ads.sdk.adapters:my_target:5.47.1.0")
     implementation("com.appodeal.ads.sdk.adapters:ogury:6.2.0.0")
-    implementation("com.appodeal.ads.sdk.adapters:pangle:7.7.0.2.0")
     implementation("com.appodeal.ads.sdk.adapters:pubmatic:4.10.0.0")
     implementation("com.appodeal.ads.sdk.adapters:sentry_analytics:8.26.0.0")
     implementation("com.appodeal.ads.sdk.adapters:smaato:22.7.2.0")
@@ -378,13 +383,6 @@ dependencies {
     implementation("com.appodeal.ads.sdk.adapters:verve:3.7.1.0")
     implementation("com.appodeal.ads.sdk.adapters:vungle:7.6.1.0")
     implementation("com.appodeal.ads.sdk.adapters:yandex:7.17.0.0")
-    // BidMachine
-    implementation("io.bidmachine:ads.networks.amazon:11.3.0.2")
-    implementation("io.bidmachine:ads.networks.meta_audience:6.21.0.1")
-    implementation("io.bidmachine:ads.networks.mintegral:17.1.61.1")
-    implementation("io.bidmachine:ads.networks.my_target:5.47.1.2")
-    implementation("io.bidmachine:ads.networks.pangle:7.7.0.2.2")
-    implementation("io.bidmachine:ads.networks.vungle:7.6.1.2")
 }
 ```
 <!-- appodeal-deps:android:end -->
@@ -881,6 +879,45 @@ Appodeal.revokeConsent();
 const status = Appodeal.consentStatus();
 console.log('Current consent status:', status);
 ```
+
+#### Privacy Entry Point (US State Regulations)
+
+Available since Appodeal SDK 4.2.0. US state privacy laws (CCPA, CPA, VCDPA, and
+others) follow an opt-out model: data processing is allowed by default, but users
+must be given a permanent way to opt out — typically a "Do Not Sell or Share My
+Personal Information" button (the Privacy Entry Point). In the US zone the consent
+form is not shown automatically on initialization; the opt-out form must be shown
+on demand, in response to a user tap.
+
+Both methods become meaningful only after `requestConsentInfoUpdate` completes.
+
+- Check whether a Privacy Entry Point button is required
+
+```javascript
+import { AppodealPrivacyOptionsStatus } from 'react-native-appodeal';
+
+const status = Appodeal.privacyOptionsRequirementStatus();
+if (status === AppodealPrivacyOptionsStatus.REQUIRED) {
+  // Show a "Do Not Sell or Share My Personal Information" / Privacy Settings button
+}
+```
+
+- Show the Privacy Options form (US opt-out form, or the GDPR re-consent form in the EEA)
+
+```javascript
+// Call this only from the handler of your Privacy Entry Point button —
+// it must be triggered by an explicit user interaction, not at initialization.
+Appodeal.showPrivacyOptionsForm()
+  .then(() => console.log('Privacy options form dismissed'))
+  .catch((error) => console.error('Privacy options form error:', error));
+```
+
+> **Note:** Once the user interacts with the US opt-out form, Stack Consent Manager
+> writes the corresponding `IABGPP_*` keys where ad networks read them. Before the
+> form has been shown at least once, these keys remain empty and ad networks may
+> treat the user as "no consent collected".
+
+See [GDPR and CCPA](https://docs.appodeal.com/android/data-protection/gdpr-and-ccpa) for details.
 
 ## App-ads.txt
 

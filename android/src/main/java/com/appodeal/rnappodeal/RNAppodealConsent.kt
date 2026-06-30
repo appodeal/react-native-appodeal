@@ -29,6 +29,7 @@ internal class RNAppodealConsent {
         private const val ERROR_CONSENT_INFO_UPDATE = "APD_REQUEST_CONSENT_INFO_UPDATE_ERROR"
         private const val ERROR_CONSENT_FORM_IF_NEEDED = "APD_SHOW_CONSENT_FORM_IF_NEEDED_ERROR"
         private const val ERROR_CONSENT_FORM = "APD_SHOW_CONSENT_FORM_ERROR"
+        private const val ERROR_PRIVACY_OPTIONS_FORM = "APD_SHOW_PRIVACY_OPTIONS_FORM_ERROR"
     }
 
     /**
@@ -152,5 +153,39 @@ internal class RNAppodealConsent {
      */
     fun getConsentStatusAsDouble(): Double {
         return ConsentManager.status.toRNDouble()
+    }
+
+    /**
+     * Gets the Privacy Entry Point requirement status (US State Regulations / EEA
+     * re-consent) as a double (for React Native compatibility).
+     * @return Double representation of the privacy options requirement status
+     */
+    fun getPrivacyOptionsRequirementStatusAsDouble(): Double {
+        return ConsentManager.getPrivacyOptionsRequirementStatus().toRNDouble()
+    }
+
+    /**
+     * Shows the Privacy Options form (US opt-out form, or GDPR re-consent form in
+     * the EEA). Must be triggered by an explicit user interaction.
+     * @param activity The current activity
+     * @param promise The React Native promise to resolve/reject
+     */
+    fun showPrivacyOptionsForm(activity: Activity, promise: Promise) {
+        Log.d(TAG, "Showing privacy options form")
+
+        ConsentManager.showPrivacyOptionsForm(
+            activity = activity,
+            listener = object : OnConsentFormDismissedListener {
+                override fun onConsentFormDismissed(error: ConsentManagerError?) {
+                    if (error != null) {
+                        Log.e(TAG, "Privacy options form dismissed with error: ${error.localizedMessage}")
+                        promise.reject(ERROR_PRIVACY_OPTIONS_FORM, error.localizedMessage)
+                    } else {
+                        Log.d(TAG, "Privacy options form dismissed successfully")
+                        promise.resolve(null)
+                    }
+                }
+            }
+        )
     }
 } 

@@ -1,5 +1,39 @@
 # Changelog
 
+## 4.2.0
+
+### Features
+
+- **Privacy Entry Point (US State Regulations & EEA re-consent)**: added
+  `Appodeal.privacyOptionsRequirementStatus()` to check whether a "Do Not Sell or
+  Share My Personal Information" / Privacy Settings button must be surfaced, and
+  `Appodeal.showPrivacyOptionsForm()` to present the US opt-out form (or the GDPR
+  re-consent form in the EEA). Both become meaningful only after
+  `requestConsentInfoUpdate` completes, and the form must be triggered by an
+  explicit user action. New `AppodealPrivacyOptionsStatus` enum
+  (`UNKNOWN` / `REQUIRED` / `NOT_REQUIRED`). See [GDPR and CCPA](https://docs.appodeal.com/android/data-protection/gdpr-and-ccpa).
+
+### Fixes
+
+- **iOS MREC `isLoaded` / `canShow`**: `Appodeal.isLoaded(MREC)` and
+  `Appodeal.canShow(MREC)` now return correct values on iOS. MREC exists only as a
+  standalone view and is not represented in the central SDK manager, so these
+  previously always returned `false`; they now query the plugin's own MREC view
+  instance. Other ad types and Android are unaffected.
+
+### Updated SDKs
+
+- Updated Appodeal iOS SDK to [4.2.0](https://docs.appodeal.com/ios/changelog)
+- Updated Appodeal Android SDK to [4.2.0](https://docs.appodeal.com/android/changelog)
+- Refreshed mediation adapter versions (AppLovin MAX, LevelPlay, BidMachine, Bidon, Appodeal) to match the 4.2.0 recommended set
+- Updated iOS `AppodealIABAdapter` to `3.5.0.0`
+
+### Platform notes
+
+- Android: minimum supported version is API 24 (Android 7.0); the CMP consent form
+  is now presented as a dialog overlay instead of a separate full-screen activity;
+  bundled Google UMP SDK updated to 4.0.0
+
 ## 4.1.0
 
 - **Android SDK now uses individual adapter dependencies instead of a single umbrella SDK**

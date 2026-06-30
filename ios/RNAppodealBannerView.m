@@ -175,6 +175,10 @@
 
 @implementation RNAppodealMrecView
 
+/// Weak reference to the most recently created MREC view. MREC is not tracked by the
+/// central SDK manager on iOS, so this is what `Appodeal.isLoaded/canShow(MREC)` query.
+static __weak RNAppodealMrecView *_activeMrecView = nil;
+
 - (instancetype)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]) {
         NSAssert([Appodeal isInitializedForAdType:AppodealAdTypeMREC],
@@ -200,6 +204,9 @@
         [self invalidateIntrinsicContentSize];
         
         [self.bannerView loadAd];
+
+        // Track this instance so the central isLoaded/canShow(MREC) calls can query it.
+        _activeMrecView = self;
     }
     return self;
 }
@@ -207,6 +214,20 @@
 - (void)setAdSize:(NSString *)adSize {
     // MREC views have fixed size, adSize property is not supported
     NSLog(@"Warning: setAdSize is not supported for MREC views - they have a fixed size of 300x250");
+}
+
++ (BOOL)isActiveMrecReady {
+    return _activeMrecView.bannerView.isReady;
+}
+
++ (BOOL)canShowActiveMrecForPlacement:(NSString *)placement {
+    APDBannerView *mrecView = _activeMrecView.bannerView;
+    if (mrecView == nil) {
+        return NO;
+    }
+    return placement.length > 0
+        ? [mrecView hasReadyAdForPlacement:placement]
+        : mrecView.isReady;
 }
 
 @end

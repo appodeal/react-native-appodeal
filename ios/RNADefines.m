@@ -278,3 +278,17 @@ NSString *NSStringFromAppodealBannerViewSize(CGSize size) {
 NSNumber *RNAppodealConsentStatusFrom(APDConsentStatus status) {
     return @(status);
 }
+
+NSNumber *RNAppodealPrivacyOptionsStatusFrom(APDPrivacyOptionsStatus status) {
+    // Remap native ordinals to the JS `AppodealPrivacyOptionsStatus` enum
+    // (UNKNOWN=0, REQUIRED=1, NOT_REQUIRED=2).
+    switch (status) {
+        case APDPrivacyOptionsStatusRequired:
+            return @1;
+        case APDPrivacyOptionsStatusNotRequired:
+            return @2;
+        case APDPrivacyOptionsStatusUnknown:
+        default:
+            return @0;
+    }
+}

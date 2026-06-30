@@ -205,6 +205,16 @@ internal class RNAppodealModuleImpl(
         }
     }
 
+    fun privacyOptionsRequirementStatus(): Double {
+        return consentHandler.getPrivacyOptionsRequirementStatusAsDouble()
+    }
+
+    fun showPrivacyOptionsForm(promise: Promise) {
+        withActivity("showPrivacyOptionsForm", promise) { activity ->
+            consentHandler.showPrivacyOptionsForm(activity, promise)
+        }
+    }
+
     fun setChildDirectedTreatment(value: Boolean) {
         Appodeal.setChildDirectedTreatment(value)
     }

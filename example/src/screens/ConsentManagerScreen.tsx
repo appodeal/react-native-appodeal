@@ -1,5 +1,8 @@
 import { ScrollView, Text, TouchableOpacity, View } from 'react-native';
-import Appodeal, { AppodealConsentStatus } from 'react-native-appodeal';
+import Appodeal, {
+  AppodealConsentStatus,
+  AppodealPrivacyOptionsStatus,
+} from 'react-native-appodeal';
 import type { NavigationProps } from '../App';
 import { commonStyles as styles } from '../styles/common';
 
@@ -63,6 +66,24 @@ export default function ConsentManagerScreen({
     console.log('Consent status:', AppodealConsentStatus[status]);
   };
 
+  const getPrivacyOptionsStatus = () => {
+    const status = Appodeal.privacyOptionsRequirementStatus();
+    console.log(
+      'Privacy options requirement status:',
+      AppodealPrivacyOptionsStatus[status]
+    );
+  };
+
+  const showPrivacyOptionsForm = () => {
+    Appodeal.showPrivacyOptionsForm()
+      .then(() => {
+        console.log('Privacy options form dismissed');
+      })
+      .catch((error: any) => {
+        console.error('Show privacy options form error:', error);
+      });
+  };
+
   return (
     <ScrollView style={styles.container}>
       <View style={styles.content}>
@@ -84,6 +105,20 @@ export default function ConsentManagerScreen({
 
         <TouchableOpacity style={styles.button} onPress={getConsentStatus}>
           <Text style={styles.buttonText}>Get Consent Status</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          style={styles.button}
+          onPress={getPrivacyOptionsStatus}
+        >
+          <Text style={styles.buttonText}>Get Privacy Options Status</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          style={styles.button}
+          onPress={showPrivacyOptionsForm}
+        >
+          <Text style={styles.buttonText}>Show Privacy Options Form</Text>
         </TouchableOpacity>
 
         <TouchableOpacity
