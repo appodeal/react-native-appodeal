@@ -314,7 +314,7 @@ dependencies {
     implementation("com.unity3d.ads-mediation:facebook-adapter:5.2.0")
     implementation("com.unity3d.ads-mediation:fyber-adapter:5.2.0")
     implementation("com.unity3d.ads-mediation:inmobi-adapter:5.3.0")
-    implementation("com.unity3d.ads-mediation:mintegral-adapter:5.16.0")
+    implementation("com.unity3d.ads-mediation:mintegral-adapter:5.17.0")
     implementation("com.unity3d.ads-mediation:mobilefuse-adapter:5.1.0")
     implementation("com.unity3d.ads-mediation:moloco-adapter:5.5.0")
     implementation("com.unity3d.ads-mediation:mytarget-adapter:5.5.0")
