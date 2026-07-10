@@ -311,7 +311,7 @@ dependencies {
     implementation("com.unity3d.ads-mediation:applovin-adapter:5.2.0")
     implementation("com.unity3d.ads-mediation:bidmachine-adapter:5.7.0")
     implementation("com.unity3d.ads-mediation:bigo-adapter:5.3.0")
-    implementation("com.unity3d.ads-mediation:facebook-adapter:5.2.0")
+    implementation("com.unity3d.ads-mediation:facebook-adapter:5.3.0")
     implementation("com.unity3d.ads-mediation:fyber-adapter:5.2.0")
     implementation("com.unity3d.ads-mediation:inmobi-adapter:5.3.0")
     implementation("com.unity3d.ads-mediation:mintegral-adapter:5.17.0")
