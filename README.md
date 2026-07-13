@@ -60,6 +60,7 @@ Official Appodeal React Native Plugin for your React Native application.
 - [Usage](#usage)
     - [Initialisation](#initialisation)
     - [Callbacks](#callbacks)
+    - [Ad Revenue Callbacks](#ad-revenue-callbacks)
     - [Presentation](#presentation)
     - [Ad Components](#ad-components)
 - [Privacy Policy and Consent](#privacy-policy-and-consent)
@@ -701,6 +702,43 @@ Appodeal.addEventListener(AppodealRewardedEvents.CLICKED, () => {
   console.log('Rewarded video clicked');
 });
 ```
+
+### Ad Revenue Callbacks
+
+The Appodeal SDK provides impression-level ad revenue data (network name, revenue, ad
+type, currency, etc.). This data can be forwarded to your mobile measurement partner of
+choice, such as Firebase. If you have integrated Firebase (included in the Appodeal SDK),
+ad revenue data is reported automatically — see the [Firebase guide](https://docs.appodeal.com/android/services/firebase).
+
+> **Minimum requirements:** Appodeal SDK 3.0.1+
+
+Subscribe with the `AppodealSdkEvents.AD_REVENUE` event. The handler receives an
+`AppodealAdRevenue` object:
+
+```javascript
+import Appodeal, {
+  AppodealSdkEvents,
+  type AppodealAdRevenue,
+} from 'react-native-appodeal';
+
+Appodeal.addEventListener(
+  AppodealSdkEvents.AD_REVENUE,
+  (revenue: AppodealAdRevenue) => {
+    console.log('Ad revenue received:', {
+      networkName: revenue.networkName,
+      adUnitName: revenue.adUnitName,
+      placement: revenue.placement,
+      revenue: revenue.revenue,
+      currency: revenue.currency,
+      revenuePrecision: revenue.revenuePrecision,
+      demandSource: revenue.demandSource,
+      adType: revenue.adType,
+    });
+  }
+);
+```
+
+Docs: [Android](https://docs.appodeal.com/android/advanced/ad-revenue-callback) · [iOS](https://docs.appodeal.com/ios/advanced/ad-revenue-callback).
 
 ### Presentation
 
