@@ -352,7 +352,7 @@ dependencies {
     implementation("org.bidon:yandex-adapter:7.17.0.0")
     implementation("org.bidon:zmaticoo-adapter:2.0.6.0.0")
     // Appodeal
-    implementation("com.appodeal.ads.sdk.adapters:adjust:5.4.6.1")
+    implementation("com.appodeal.ads.sdk.adapters:adjust:5.7.0.0")
     implementation("com.appodeal.ads.sdk.adapters:admob:24.7.0.0")
     implementation("com.appodeal.ads.sdk.adapters:amazon:11.3.0.0")
     implementation("com.appodeal.ads.sdk.adapters:applovin:13.5.1.0")
