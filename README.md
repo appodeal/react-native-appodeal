@@ -118,7 +118,6 @@ def appodeal
     pod 'AppLovinMediationMintegralAdapter', '7.7.9.0.0'
     pod 'AppLovinMediationMobileFuseAdapter', '1.9.3.0'
     pod 'AppLovinMediationMolocoAdapter', '4.1.0.0'
-    pod 'AppLovinMediationMyTargetAdapter', '5.36.2.0'
     pod 'AppLovinMediationOguryPresageAdapter', '5.1.1.0'
     pod 'AppLovinMediationPubMaticAdapter', '4.10.0.0'
     pod 'AppLovinMediationSmaatoAdapter', '23.1.0.0'
@@ -299,7 +298,6 @@ dependencies {
     implementation("com.applovin.mediation:mintegral-adapter:17.1.61.0")
     implementation("com.applovin.mediation:mobilefuse-adapter:1.9.3.0")
     implementation("com.applovin.mediation:moloco-adapter:4.3.1.0")
-    implementation("com.applovin.mediation:mytarget-adapter:5.47.1.0")
     implementation("com.applovin.mediation:ogury-presage-adapter:6.2.0.0")
     implementation("com.applovin.mediation:pubmatic-adapter:4.10.0.0")
     implementation("com.applovin.mediation:smaato-adapter:22.7.2.3")
