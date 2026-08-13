@@ -332,7 +332,7 @@ dependencies {
     // Bidon
     implementation("org.bidon:amazon-adapter:11.3.0.0")
     implementation("org.bidon:applovin-adapter:13.5.1.0")
-    implementation("org.bidon:bidmachine-adapter:3.7.1.0")
+    implementation("org.bidon:bidmachine-adapter:3.7.1.1")
     implementation("org.bidon:bigoads-adapter:5.6.2.0")
     implementation("org.bidon:chartboost-adapter:9.10.2.0")
     implementation("org.bidon:dtexchange-adapter:8.4.1.0")
