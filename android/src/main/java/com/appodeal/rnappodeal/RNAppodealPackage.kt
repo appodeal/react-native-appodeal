@@ -20,7 +20,10 @@ class RNAppodealPackage : BaseReactPackage() {
         reactContext: ReactApplicationContext
     ): List<ViewManager<*, *>> = listOf(
         RNAppodealBannerViewManager(),
-        RNAppodealMrecViewManager()
+        RNAppodealMrecViewManager(),
+        RNAppodealNativeViewManager(),
+        RNAppodealNativeAdViewManager(),
+        RNAppodealNativeAssetViewManager()
     )
 
     override fun getReactModuleInfoProvider(): ReactModuleInfoProvider {

@@ -24,6 +24,7 @@ internal object AdTypeExtensions {
         if (types.hasFlag(BANNER_TOP_FLAG)) result = result or Appodeal.BANNER_TOP
         if (types.hasFlag(REWARDED_VIDEO_FLAG)) result = result or Appodeal.REWARDED_VIDEO
         if (types.hasFlag(MREC_FLAG)) result = result or Appodeal.MREC
+        if (types.hasFlag(NATIVE_FLAG)) result = result or Appodeal.NATIVE
 
         return result
     }
@@ -42,6 +43,7 @@ internal object AdTypeExtensions {
         if (this.hasFlag(Appodeal.BANNER_TOP)) result = result or BANNER_TOP_FLAG
         if (this.hasFlag(Appodeal.REWARDED_VIDEO)) result = result or REWARDED_VIDEO_FLAG
         if (this.hasFlag(Appodeal.MREC)) result = result or MREC_FLAG
+        if (this.hasFlag(Appodeal.NATIVE)) result = result or NATIVE_FLAG
 
         return result
     }
@@ -61,4 +63,5 @@ internal object AdTypeExtensions {
     private const val BANNER_TOP_FLAG = 1 shl 4
     private const val REWARDED_VIDEO_FLAG = 1 shl 5
     private const val MREC_FLAG = 1 shl 8
+    private const val NATIVE_FLAG = 1 shl 7
 } 

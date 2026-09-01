@@ -3,7 +3,7 @@
  *
  * This module provides a complete interface to the Appodeal SDK for React Native applications.
  * It includes functionality for:
- * - Ad management (banner, interstitial, rewarded video, MREC)
+ * - Ad management (banner, interstitial, rewarded video, MREC, native)
  * - Analytics and revenue tracking
  * - In-app purchase validation
  * - Consent management (GDPR compliance)
@@ -19,6 +19,8 @@ import type {
   AppodealConsentStatus,
   AppodealPrivacyOptionsStatus,
   AppodealIOSPurchase,
+  AppodealNativeAdInfo,
+  AppodealNativeContentType,
   AppodealReward,
   Map,
 } from './types';
@@ -93,6 +95,31 @@ export interface Appodeal {
    * @param adTypes Ad types mask
    */
   cache(adTypes: AppodealAdType): void;
+  /**
+   * Pull cached native ads from the SDK (removes them from the SDK cache).
+   * Returns metadata + opaque ids for use with AppodealNative.
+   * @param count Number of ads to pull (Android max 5)
+   */
+  getNativeAds(count?: number): AppodealNativeAdInfo[];
+  /**
+   * Number of native ads currently available in the SDK cache / queue
+   */
+  getAvailableNativeAdsCount(): number;
+  /**
+   * Destroy a native ad previously returned by getNativeAds
+   * @param adId Opaque ad id
+   */
+  destroyNativeAd(adId: string): void;
+  /**
+   * Manually cache native ads
+   * @param count Number of ads to request (clamped 1–5 on Android)
+   */
+  cacheNativeAds(count?: number): void;
+  /**
+   * Preferred native media content type
+   * @param type auto | noVideo | video
+   */
+  setPreferredNativeContentType(type: AppodealNativeContentType): void;
   /**
    * Enables or disables autocache for specific ad type
    * @param adTypes Ad types mask
@@ -253,7 +280,7 @@ export interface Appodeal {
 /**
  * Plugin version constant
  */
-const PLUGIN_VERSION = '4.2.0';
+const PLUGIN_VERSION = '4.3.1';
 
 /**
  * Appodeal SDK implementation
@@ -304,6 +331,38 @@ const appodeal: Appodeal = {
 
   cache: (adTypes: AppodealAdType): void => {
     NativeAppodeal.cache(adTypes);
+  },
+
+  getNativeAds: (count: number = 1): AppodealNativeAdInfo[] => {
+    // Android TurboModule Spec uses UnsafeObject → { ads: [...] }
+    const result = NativeAppodeal.getNativeAds(count) as unknown;
+    if (Array.isArray(result)) {
+      return result as AppodealNativeAdInfo[];
+    }
+    if (
+      result &&
+      typeof result === 'object' &&
+      Array.isArray((result as { ads?: unknown }).ads)
+    ) {
+      return (result as { ads: AppodealNativeAdInfo[] }).ads;
+    }
+    return [];
+  },
+
+  getAvailableNativeAdsCount: (): number => {
+    return NativeAppodeal.getAvailableNativeAdsCount();
+  },
+
+  destroyNativeAd: (adId: string): void => {
+    NativeAppodeal.destroyNativeAd(adId);
+  },
+
+  cacheNativeAds: (count: number = 2): void => {
+    NativeAppodeal.cacheNativeAds(count);
+  },
+
+  setPreferredNativeContentType: (type: AppodealNativeContentType): void => {
+    NativeAppodeal.setPreferredNativeContentType(type);
   },
 
   setAutoCache: (adTypes: AppodealAdType, value: boolean): void => {

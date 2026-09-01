@@ -16,13 +16,39 @@ export enum AppodealAdType {
   BANNER_BOTTOM = 1 << 3, // 8
   BANNER_TOP = 1 << 4, // 16
   REWARDED_VIDEO = 1 << 5, // 32
+  NATIVE = 1 << 7, // 128
   MREC = 1 << 8, // 256
   ALL = INTERSTITIAL |
     BANNER |
     BANNER_BOTTOM |
     BANNER_TOP |
     REWARDED_VIDEO |
+    NATIVE |
     MREC,
+}
+
+/**
+ * Preferred media content type for native ads
+ */
+export type AppodealNativeContentType = 'auto' | 'noVideo' | 'video';
+
+/**
+ * Native ad template used by AppodealNative view (stock SDK templates).
+ * Custom layouts use AppodealNativeAdView + asset children instead.
+ */
+export type AppodealNativeTemplate = 'newsFeed' | 'appWall' | 'contentStream';
+
+/**
+ * Metadata for a cached native ad pulled from the SDK
+ */
+export interface AppodealNativeAdInfo {
+  id: string;
+  title: string;
+  description: string;
+  callToAction: string;
+  rating: number;
+  containsVideo: boolean;
+  predictedEcpm: number;
 }
 
 /**

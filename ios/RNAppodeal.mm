@@ -2,6 +2,7 @@
 #import "RNADefines.h"
 #import "RNAEventDispatcher.h"
 #import "RNAppodealBannerView.h"
+#import "RNAppodealNativeAdStore.h"
 #import <React/RCTUtils.h>
 #import <StackConsentManager/StackConsentManager-Swift.h>
 
@@ -58,6 +59,10 @@ RCT_EXPORT_MODULE();
     
     [Appodeal initializeWithApiKey:appKey
                              types:AppodealAdTypeFromRNAAdType(adTypes)];
+
+    if (((NSInteger)adTypes & RNAAdTypeNative) > 0) {
+        [[RNAppodealNativeAdStore shared] ensureQueue];
+    }
 }
 
 #ifndef RCT_NEW_ARCH_ENABLED
@@ -85,6 +90,9 @@ RCT_EXPORT_BLOCKING_SYNCHRONOUS_METHOD(isLoaded:(double)showType) {
     // MREC is not represented in the central SDK manager on iOS; query the view. See APDM-2627.
     if ((NSInteger)showType == RNAAdTypeMREC) {
         return @([RNAppodealMrecView isActiveMrecReady]);
+    }
+    if ((NSInteger)showType == RNAAdTypeNative) {
+        return @([[RNAppodealNativeAdStore shared] availableCount] > 0);
     }
     BOOL isLoaded = [Appodeal isReadyForShowWithStyle:AppodealShowStyleFromRNAAdType(showType)];
     return @(isLoaded);
@@ -117,6 +125,28 @@ RCT_EXPORT_BLOCKING_SYNCHRONOUS_METHOD(canShow:(double)showType
     BOOL canShow = [Appodeal canShow:AppodealAdTypeFromRNAAdType(showType)
                         forPlacement:placement];
     return @(canShow);
+}
+
+#pragma mark - Native Ads
+
+RCT_EXPORT_BLOCKING_SYNCHRONOUS_METHOD(getNativeAds:(double)count) {
+    return [[RNAppodealNativeAdStore shared] getNativeAds:(NSInteger)count];
+}
+
+RCT_EXPORT_BLOCKING_SYNCHRONOUS_METHOD(getAvailableNativeAdsCount) {
+    return @([[RNAppodealNativeAdStore shared] availableCount]);
+}
+
+RCT_EXPORT_METHOD(destroyNativeAd:(NSString *)adId) {
+    [[RNAppodealNativeAdStore shared] destroyAdId:adId];
+}
+
+RCT_EXPORT_METHOD(cacheNativeAds:(double)count) {
+    [[RNAppodealNativeAdStore shared] cacheNativeAds:(NSInteger)count];
+}
+
+RCT_EXPORT_METHOD(setPreferredNativeContentType:(NSString *)type) {
+    [[RNAppodealNativeAdStore shared] setPreferredType:type];
 }
 
 #pragma mark - Banner Settings
@@ -440,6 +470,9 @@ RCT_EXPORT_METHOD(setSharedAdsInstanceAcrossActivities:(BOOL)flag) {}
     if ((NSInteger)showType == RNAAdTypeMREC) {
         return @([RNAppodealMrecView isActiveMrecReady]);
     }
+    if ((NSInteger)showType == RNAAdTypeNative) {
+        return @([[RNAppodealNativeAdStore shared] availableCount] > 0);
+    }
     BOOL isLoaded = [Appodeal isReadyForShowWithStyle:AppodealShowStyleFromRNAAdType(showType)];
     return @(isLoaded);
 }
@@ -470,6 +503,28 @@ RCT_EXPORT_METHOD(setSharedAdsInstanceAcrossActivities:(BOOL)flag) {}
 
 - (NSNumber *)isPrecache:(double)adTypes {
     return @([Appodeal isPrecacheAd:AppodealAdTypeFromRNAAdType(adTypes)]);
+}
+
+#pragma mark - Native Ads
+
+- (NSArray *)getNativeAds:(double)count {
+    return [[RNAppodealNativeAdStore shared] getNativeAds:(NSInteger)count];
+}
+
+- (NSNumber *)getAvailableNativeAdsCount {
+    return @([[RNAppodealNativeAdStore shared] availableCount]);
+}
+
+- (void)destroyNativeAd:(NSString *)adId {
+    [[RNAppodealNativeAdStore shared] destroyAdId:adId];
+}
+
+- (void)cacheNativeAds:(double)count {
+    [[RNAppodealNativeAdStore shared] cacheNativeAds:(NSInteger)count];
+}
+
+- (void)setPreferredNativeContentType:(NSString *)type {
+    [[RNAppodealNativeAdStore shared] setPreferredType:type];
 }
 
 #pragma mark - Banner Settings

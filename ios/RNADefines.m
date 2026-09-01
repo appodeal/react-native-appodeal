@@ -27,6 +27,14 @@ NSString *const kEventInterstitialShown             = @"onInterstitialShown";
 NSString *const kEventInterstitialClosed            = @"onInterstitialClosed";
 NSString *const kEventInterstitialClicked           = @"onInterstitialClicked";
 
+// Native ad events
+NSString *const kEventNativeLoaded                  = @"onNativeLoaded";
+NSString *const kEventNativeFailedToLoad            = @"onNativeFailedToLoad";
+NSString *const kEventNativeShown                     = @"onNativeShown";
+NSString *const kEventNativeShowFailed                = @"onNativeShowFailed";
+NSString *const kEventNativeClicked                   = @"onNativeClicked";
+NSString *const kEventNativeExpired                   = @"onNativeExpired";
+
 // Rewarded video ad events
 NSString *const kEventRewardedVideoLoaded           = @"onRewardedVideoLoaded";
 NSString *const kEventRewardedVideoFailedToLoad     = @"onRewardedVideoFailedToLoad";
@@ -101,6 +109,14 @@ NSArray<NSString *> *RNASupportedMethods(void) {
         kEventInterstitialExpired,
         kEventInterstitialClosed,
         kEventInterstitialClicked,
+
+        // Native events
+        kEventNativeLoaded,
+        kEventNativeFailedToLoad,
+        kEventNativeShown,
+        kEventNativeShowFailed,
+        kEventNativeClicked,
+        kEventNativeExpired,
         
         // Rewarded video events
         kEventRewardedVideoLoaded,

@@ -239,6 +239,31 @@ public class RNAppodealModule extends ReactContextBaseJavaModule {
         moduleImplementation.trackEvent(name, parameters);
     }
 
+    @ReactMethod(isBlockingSynchronousMethod = true)
+    public WritableMap getNativeAds(double count) {
+        return moduleImplementation.getNativeAds(count);
+    }
+
+    @ReactMethod(isBlockingSynchronousMethod = true)
+    public double getAvailableNativeAdsCount() {
+        return moduleImplementation.getAvailableNativeAdsCount();
+    }
+
+    @ReactMethod
+    public void destroyNativeAd(String adId) {
+        moduleImplementation.destroyNativeAd(adId);
+    }
+
+    @ReactMethod
+    public void cacheNativeAds(double count) {
+        moduleImplementation.cacheNativeAds(count);
+    }
+
+    @ReactMethod
+    public void setPreferredNativeContentType(String type) {
+        moduleImplementation.setPreferredNativeContentType(type);
+    }
+
     @ReactMethod
     public void setBidonEndpoint(String endpoint) {
         moduleImplementation.setBidonEndpoint(endpoint);

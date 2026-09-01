@@ -74,6 +74,13 @@ export interface Spec extends TurboModule {
   ): Promise<AppodealPurchaseValidationResult>;
   trackEvent(name: string, parameters: UnsafeObject): void;
 
+  // Native ads
+  getNativeAds(count: number): UnsafeObject;
+  getAvailableNativeAdsCount(): number;
+  destroyNativeAd(adId: string): void;
+  cacheNativeAds(count: number): void;
+  setPreferredNativeContentType(type: string): void;
+
   // Bidon
   setBidonEndpoint(endpoint: string): void;
   getBidonEndpoint(): string | null;

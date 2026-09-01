@@ -546,7 +546,8 @@ Appodeal.initialize('YOUR_APPODEAL_APP_KEY',
   AppodealAdType.INTERSTITIAL | 
   AppodealAdType.REWARDED_VIDEO | 
   AppodealAdType.BANNER | 
-  AppodealAdType.MREC
+  AppodealAdType.MREC |
+  AppodealAdType.NATIVE
 );
 ```
 
@@ -558,6 +559,7 @@ Use the type codes below to set the preferred ad format:
 - `AppodealAdType.REWARDED_VIDEO` for rewarded videos.
 - `AppodealAdType.BANNER` for banners.
 - `AppodealAdType.MREC` for 300*250 banners.
+- `AppodealAdType.NATIVE` for native ads.
 
 2. Configure SDK
 
@@ -816,6 +818,45 @@ import { AppodealMrec } from 'react-native-appodeal';
   onAdExpired={() => console.log('MREC expired')}
   style={{ width: 300, height: 250 }}
 />
+```
+
+### Native ads
+
+Pull native ads from the SDK cache, then bind each ad id to `<AppodealNative />`:
+
+```javascript
+import Appodeal, {
+  AppodealAdType,
+  AppodealNative,
+  AppodealNativeEvents,
+} from 'react-native-appodeal';
+
+// Include NATIVE in initialize(), then:
+Appodeal.cacheNativeAds(3);
+
+Appodeal.addEventListener(AppodealNativeEvents.LOADED, () => {
+  const ads = Appodeal.getNativeAds(1);
+  // ads[0] => { id, title, description, callToAction, rating, containsVideo, predictedEcpm }
+});
+
+// Render a platform template for a pulled ad:
+<AppodealNative
+  adId={ads[0].id}
+  placement="default"
+  adTemplate="contentStream" // "newsFeed" | "appWall" | "contentStream"
+  onAdLoaded={() => console.log('Native shown')}
+  onAdFailedToLoad={() => console.log('Native failed')}
+  onAdClicked={() => console.log('Native clicked')}
+  style={{ width: '100%', height: 300 }}
+/>
+```
+
+Optional:
+
+```javascript
+Appodeal.setPreferredNativeContentType('auto'); // 'auto' | 'noVideo' | 'video'
+Appodeal.getAvailableNativeAdsCount();
+Appodeal.destroyNativeAd(adId);
 ```
 
 ## Privacy Policy and Consent

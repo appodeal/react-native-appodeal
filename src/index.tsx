@@ -9,6 +9,22 @@ import Appodeal from './RNAppodeal';
 // React Native components
 export { default as AppodealBanner } from './RNAppodealBanner';
 export { default as AppodealMrec } from './RNAppodealMrec';
+export { default as AppodealNative } from './RNAppodealNative';
+export {
+  AppodealNativeAdView,
+  AppodealNativeAsset,
+  AppodealNativeMediaView,
+  AppodealNativeIconView,
+  AppodealNativeTitleView,
+  AppodealNativeDescriptionView,
+  AppodealNativeCallToActionView,
+  AppodealNativeAttributionView,
+} from './RNAppodealNativeAdView';
+export type {
+  AppodealNativeAdViewProps,
+  AppodealNativeAssetProps,
+  AppodealNativeAssetType,
+} from './RNAppodealNativeAdView';
 
 // Export the main Appodeal interface
 export default Appodeal;
@@ -29,6 +45,9 @@ export type {
   AppodealIOSPurchase,
   AppodealAndroidPurchase,
   AppodealAdRevenue,
+  AppodealNativeAdInfo,
+  AppodealNativeContentType,
+  AppodealNativeTemplate,
   AppodealPurchaseValidationResult,
   Map,
 } from './types';
@@ -39,4 +58,5 @@ export {
   AppodealBannerEvents,
   AppodealInterstitialEvents,
   AppodealRewardedEvents,
+  AppodealNativeEvents,
 } from './RNAppodealEvents';

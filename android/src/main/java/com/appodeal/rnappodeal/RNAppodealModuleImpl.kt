@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Context
 import android.util.Log
 import com.appodeal.ads.Appodeal
+import com.appodeal.ads.NativeMediaViewContentType
 import com.appodeal.ads.inapp.InAppPurchase
 import com.appodeal.ads.inapp.InAppPurchaseValidateCallback
 import com.appodeal.ads.service.ServiceError
@@ -11,6 +12,7 @@ import com.appodeal.rnappodeal.callbacks.RNAppodealAdRevenueCallbacks
 import com.appodeal.rnappodeal.callbacks.RNAppodealBannerCallbacks
 import com.appodeal.rnappodeal.callbacks.RNAppodealInterstitialCallbacks
 import com.appodeal.rnappodeal.callbacks.RNAppodealMrecCallbacks
+import com.appodeal.rnappodeal.callbacks.RNAppodealNativeCallbacks
 import com.appodeal.rnappodeal.callbacks.RNAppodealRewardedVideoCallbacks
 import com.appodeal.rnappodeal.ext.AdTypeExtensions.toAppodealTypes
 import com.appodeal.rnappodeal.ext.LogLevelExtensions.toLogLevel
@@ -42,6 +44,7 @@ internal class RNAppodealModuleImpl(
     private val mrecCallbacks by lazy { RNAppodealMrecCallbacks(eventDispatcher) }
     private val rewardedVideoCallbacks by lazy { RNAppodealRewardedVideoCallbacks(eventDispatcher) }
     private val adRevenueCallbacks by lazy { RNAppodealAdRevenueCallbacks(eventDispatcher) }
+    private val nativeCallbacks by lazy { RNAppodealNativeCallbacks(eventDispatcher) }
 
     // Consent handler
     private val consentHandler by lazy { RNAppodealConsent() }
@@ -52,6 +55,7 @@ internal class RNAppodealModuleImpl(
 
     init {
         this.currentActivity = WeakReference(reactContext.currentActivity)
+        RNAppodealActivityHolder.set(reactContext.currentActivity)
         this.reactContext.addLifecycleEventListener(this)
     }
 
@@ -63,8 +67,9 @@ internal class RNAppodealModuleImpl(
     private fun getActivity(): Activity? {
         if (reactContext.hasCurrentActivity()) {
             currentActivity = WeakReference(reactContext.currentActivity)
+            RNAppodealActivityHolder.set(reactContext.currentActivity)
         }
-        return currentActivity?.get()
+        return currentActivity?.get() ?: RNAppodealActivityHolder.get()
     }
 
     /**
@@ -114,6 +119,7 @@ internal class RNAppodealModuleImpl(
         Appodeal.setBannerCallbacks(bannerCallbacks)
         Appodeal.setMrecCallbacks(mrecCallbacks)
         Appodeal.setRewardedVideoCallbacks(rewardedVideoCallbacks)
+        Appodeal.setNativeCallbacks(nativeCallbacks)
         Appodeal.setAdRevenueCallbacks(adRevenueCallbacks)
 
         // Set up Appodeal options
@@ -388,6 +394,46 @@ internal class RNAppodealModuleImpl(
         Appodeal.logEvent(name, parameters.toMap())
     }
 
+    /**
+     * TurboModule codegen maps Spec `UnsafeObject` → WritableMap.
+     * Shape: `{ ads: Array<NativeAdInfo> }`.
+     */
+    fun getNativeAds(count: Double): WritableMap {
+        val ads = Appodeal.getNativeAds(count.toInt())
+        val storedAds = RNAppodealNativeAdStore.putAds(ads)
+        val array = Arguments.createArray().apply {
+            storedAds.forEach { pushMap(it) }
+        }
+        return Arguments.createMap().apply {
+            putArray("ads", array)
+        }
+    }
+
+    fun getAvailableNativeAdsCount(): Double {
+        return Appodeal.getAvailableNativeAdsCount().toDouble()
+    }
+
+    fun destroyNativeAd(adId: String) {
+        RCTAppodealNativeView.unbindAdId(adId)
+        RCTAppodealNativeAdView.unbindAdId(adId)
+        RNAppodealNativeAdStore.remove(adId)
+    }
+
+    fun cacheNativeAds(count: Double) {
+        withActivity("cacheNativeAds") { activity ->
+            Appodeal.cache(activity, Appodeal.NATIVE, count.toInt().coerceIn(1, 5))
+        }
+    }
+
+    fun setPreferredNativeContentType(type: String) {
+        val contentType = when (type) {
+            "noVideo" -> NativeMediaViewContentType.NoVideo
+            "video" -> NativeMediaViewContentType.Video
+            else -> NativeMediaViewContentType.Auto
+        }
+        Appodeal.setPreferredNativeContentType(contentType)
+    }
+
     // MARK: - Event Management
 
     fun eventsNotifyReady(ready: Boolean) {
@@ -418,7 +464,13 @@ internal class RNAppodealModuleImpl(
     }
 
     override fun onHostResume() {
-        // Not implemented
+        val activity = reactContext.currentActivity
+        if (activity != null) {
+            currentActivity = WeakReference(activity)
+            RNAppodealActivityHolder.set(activity)
+        }
+        RCTAppodealNativeView.notifyActivityReady()
+        RCTAppodealNativeAdView.notifyActivityReady()
     }
 
     companion object Companion {

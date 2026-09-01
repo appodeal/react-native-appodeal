@@ -8,7 +8,12 @@
 // Ad-related types
 export { AppodealAdType } from './AppodealAdTypes';
 
-export type { AppodealAdRevenue } from './AppodealAdTypes';
+export type {
+  AppodealAdRevenue,
+  AppodealNativeAdInfo,
+  AppodealNativeContentType,
+  AppodealNativeTemplate,
+} from './AppodealAdTypes';
 
 // Consent-related types
 export {

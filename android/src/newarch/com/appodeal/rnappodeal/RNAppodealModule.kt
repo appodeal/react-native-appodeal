@@ -197,6 +197,26 @@ class RNAppodealModule(
         moduleImplementation.trackEvent(name, parameters)
     }
 
+    override fun getNativeAds(count: Double): WritableMap {
+        return moduleImplementation.getNativeAds(count)
+    }
+
+    override fun getAvailableNativeAdsCount(): Double {
+        return moduleImplementation.getAvailableNativeAdsCount()
+    }
+
+    override fun destroyNativeAd(adId: String) {
+        moduleImplementation.destroyNativeAd(adId)
+    }
+
+    override fun cacheNativeAds(count: Double) {
+        moduleImplementation.cacheNativeAds(count)
+    }
+
+    override fun setPreferredNativeContentType(type: String) {
+        moduleImplementation.setPreferredNativeContentType(type)
+    }
+
     override fun eventsNotifyReady(ready: Boolean) {
         moduleImplementation.eventsNotifyReady(ready)
     }

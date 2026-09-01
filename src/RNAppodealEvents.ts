@@ -52,6 +52,24 @@ export namespace AppodealInterstitialEvents {
 }
 
 /**
+ * Native ad events
+ */
+export namespace AppodealNativeEvents {
+  /** Fired when native ads are loaded into the queue */
+  export const LOADED = 'onNativeLoaded';
+  /** Fired when native ads fail to load */
+  export const FAILED_TO_LOAD = 'onNativeFailedToLoad';
+  /** Fired when a native ad is shown */
+  export const SHOWN = 'onNativeShown';
+  /** Fired when a native ad fails to show */
+  export const SHOW_FAILED = 'onNativeShowFailed';
+  /** Fired when a native ad is clicked */
+  export const CLICKED = 'onNativeClicked';
+  /** Fired when a native ad expires */
+  export const EXPIRED = 'onNativeExpired';
+}
+
+/**
  * Rewarded video ad events
  */
 export namespace AppodealRewardedEvents {

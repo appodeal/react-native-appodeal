@@ -21,7 +21,12 @@ describe('Appodeal Type Definitions', () => {
       expect(typeof AppodealAdType.INTERSTITIAL).toBe('number');
       expect(typeof AppodealAdType.BANNER).toBe('number');
       expect(typeof AppodealAdType.REWARDED_VIDEO).toBe('number');
+      expect(typeof AppodealAdType.NATIVE).toBe('number');
+      expect(AppodealAdType.NATIVE).toBe(1 << 7);
       expect(typeof AppodealAdType.MREC).toBe('number');
+      expect(AppodealAdType.ALL & AppodealAdType.NATIVE).toBe(
+        AppodealAdType.NATIVE
+      );
     });
 
     it('should have correct AppodealLogLevel values', () => {

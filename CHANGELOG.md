@@ -1,5 +1,35 @@
 # Changelog
 
+## 4.3.1
+
+### Features
+
+- **Composable native ads**: AdMob-style JSX layout via
+  `AppodealNativeAdView` + asset views (`media` / `icon` / `title` /
+  `description` / `callToAction` / `attribution`) on Android and iOS.
+  Matches Appodeal Android custom `NativeAdView` and iOS `APDNativeAdView`
+  asset binding — app owns styling in React Native.
+
+### Changes
+
+- Stock `<AppodealNative adTemplate="..." />` remains for
+  `newsFeed` / `appWall` / `contentStream` only (no app-specific templates).
+
+## 4.3.0
+
+### Features
+
+- **Native ads**: full React Native bridge for Appodeal Native (the previously
+  missing format). Adds `AppodealAdType.NATIVE`, module APIs
+  (`getNativeAds`, `getAvailableNativeAdsCount`, `destroyNativeAd`,
+  `cacheNativeAds`, `setPreferredNativeContentType`),
+  `AppodealNativeEvents`, and the `<AppodealNative />` view component
+  (templates: `newsFeed` / `appWall` / `contentStream`).
+- Android: `Appodeal.NATIVE` type mapping, `NativeCallbacks`, ad store,
+  template `NativeAdView` registration.
+- iOS: `APDNativeAdQueue` store, `getViewForPlacement` view binding,
+  native event constants.
+
 ## 4.2.0
 
 ### Features

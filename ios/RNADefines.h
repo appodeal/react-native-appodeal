@@ -38,6 +38,16 @@ FOUNDATION_EXPORT NSString *const kEventInterstitialClosed;
 FOUNDATION_EXPORT NSString *const kEventInterstitialClicked;
 
 /**
+ * Native ad events
+ */
+FOUNDATION_EXPORT NSString *const kEventNativeLoaded;
+FOUNDATION_EXPORT NSString *const kEventNativeFailedToLoad;
+FOUNDATION_EXPORT NSString *const kEventNativeShown;
+FOUNDATION_EXPORT NSString *const kEventNativeShowFailed;
+FOUNDATION_EXPORT NSString *const kEventNativeClicked;
+FOUNDATION_EXPORT NSString *const kEventNativeExpired;
+
+/**
  * Rewarded video ad events
  */
 FOUNDATION_EXPORT NSString *const kEventRewardedVideoLoaded;
