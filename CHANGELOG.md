@@ -1,5 +1,21 @@
 # Changelog
 
+## 4.3.0
+
+### Fixes
+
+- **iOS banner and MREC centering**: banner and MREC ads are now centered inside
+  their React Native container instead of being pinned to its left edge. The ad
+  view's frame is owned solely by `layoutSubviews`; the load callback no longer
+  rewrites it. Previously `bannerViewDidLoadAd:` reset the ad's origin to `(0, 0)`
+  once a creative arrived, which silently undid the centering — and, because that
+  callback also fires on every auto-refresh, the misalignment came back after each
+  refresh cycle even if a device rotation had temporarily corrected it. Affects any
+  layout where the container is wider than the ad's natural size, including the
+  default `<AppodealBanner />` with no explicit width. Fixed on both the old and
+  new architecture. Android was never affected.
+  ([#186](https://github.com/appodeal/react-native-appodeal/issues/186))
+
 ## 4.2.0
 
 ### Features
