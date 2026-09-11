@@ -215,6 +215,10 @@ internal class RNAppodealModuleImpl(
         }
     }
 
+    fun setNonPersonalized(value: Boolean) {
+        Appodeal.setNonPersonalized(value)
+    }
+
     fun setChildDirectedTreatment(value: Boolean) {
         Appodeal.setChildDirectedTreatment(value)
     }

@@ -25,6 +25,7 @@ jest.mock('../specs/NativeAppodealModule', () => ({
     showConsentForm: jest.fn(() => Promise.resolve({ status: 0 })),
     privacyOptionsRequirementStatus: jest.fn(() => 0),
     showPrivacyOptionsForm: jest.fn(() => Promise.resolve()),
+    setNonPersonalized: jest.fn(),
     setChildDirectedTreatment: jest.fn(),
     setTesting: jest.fn(),
     setLogLevel: jest.fn(),
@@ -126,6 +127,7 @@ describe('Appodeal SDK', () => {
         'showConsentForm',
         'privacyOptionsRequirementStatus',
         'showPrivacyOptionsForm',
+        'setNonPersonalized',
         'setChildDirectedTreatment',
         'setTesting',
         'setLogLevel',
@@ -244,7 +246,7 @@ describe('Appodeal SDK', () => {
     });
 
     it('should return correct plugin version', () => {
-      expect(Appodeal.getVersion()).toBe('4.2.0');
+      expect(Appodeal.getVersion()).toBe('4.3.0');
     });
 
     it('should handle consent methods correctly', async () => {
@@ -275,6 +277,14 @@ describe('Appodeal SDK', () => {
 
       await Appodeal.showPrivacyOptionsForm();
       expect(mockNativeAppodeal.showPrivacyOptionsForm).toHaveBeenCalled();
+    });
+
+    it('should handle non-personalized advertising', () => {
+      const mockNativeAppodeal =
+        require('../specs/NativeAppodealModule').default;
+
+      Appodeal.setNonPersonalized(true);
+      expect(mockNativeAppodeal.setNonPersonalized).toHaveBeenCalledWith(true);
     });
 
     it('should handle user data methods', () => {
@@ -644,7 +654,7 @@ describe('Appodeal SDK', () => {
       expect(mockNativeAppodeal.initialize).toHaveBeenCalledWith(
         'test-key',
         combinedTypes,
-        '4.2.0'
+        '4.3.0'
       );
       expect(mockNativeAppodeal.cache).toHaveBeenCalledWith(combinedTypes);
       expect(mockNativeAppodeal.setAutoCache).toHaveBeenCalledWith(

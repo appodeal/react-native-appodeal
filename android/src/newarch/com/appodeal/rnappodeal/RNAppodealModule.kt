@@ -93,6 +93,10 @@ class RNAppodealModule(
         moduleImplementation.showPrivacyOptionsForm(promise)
     }
 
+    override fun setNonPersonalized(value: Boolean) {
+        moduleImplementation.setNonPersonalized(value)
+    }
+
     override fun setChildDirectedTreatment(value: Boolean) {
         moduleImplementation.setChildDirectedTreatment(value)
     }

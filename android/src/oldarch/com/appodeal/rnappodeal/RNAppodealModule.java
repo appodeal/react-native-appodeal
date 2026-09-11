@@ -120,6 +120,11 @@ public class RNAppodealModule extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
+    public void setNonPersonalized(boolean flag) {
+        moduleImplementation.setNonPersonalized(flag);
+    }
+
+    @ReactMethod
     public void setChildDirectedTreatment(boolean flag) {
         moduleImplementation.setChildDirectedTreatment(flag);
     }
