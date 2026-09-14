@@ -46,17 +46,11 @@
     // Set placement (use default if not set)
     self.bannerView.placement = _placement ?: @"default";
     
-    // Set our frame to match the banner size initially
-    self.frame = CGRectMake(self.frame.origin.x, self.frame.origin.y, size.width, size.height);
-    
-    // Set banner frame to fill our bounds
+    // Pre-layout placeholder frame, corrected by -layoutSubviews on the first pass
     self.bannerView.frame = CGRectMake(0, 0, size.width, size.height);
     
     // Add banner to our view hierarchy immediately
     [self addSubview:self.bannerView];
-    
-    // Update our intrinsic content size
-    [self invalidateIntrinsicContentSize];
     
     [self.bannerView loadAd];
 }
@@ -85,66 +79,50 @@
     RCTLogError(@"RNAppodealBannerView cannot have subviews");
 }
 
+/// Sole owner of the ad view's frame. The creative is always laid out at its natural
+/// `adSize`: stretching it to our bounds distorts the creative, and our bounds can be
+/// zero before Yoga has measured us, which would collapse the ad entirely. The origin
+/// centers the ad in whatever space we were given and is clamped to zero so an
+/// oversized creative overflows to the right/bottom instead of off-screen to the left.
 - (void)layoutSubviews {
     [super layoutSubviews];
-    
-    if (self.bannerView) {
-        // Get the banner's natural size
-        CGSize bannerSize = self.bannerView.adSize;
-        
-        // Center the banner in our bounds if our container is larger
-        if (CGRectGetWidth(self.bounds) > bannerSize.width ||
-            CGRectGetHeight(self.bounds) > bannerSize.height) {
-            
-            CGRect bannerFrame = CGRectMake(
-                (self.bounds.size.width - bannerSize.width) / 2.0,
-                (self.bounds.size.height - bannerSize.height) / 2.0,
-                bannerSize.width,
-                bannerSize.height
-            );
-            self.bannerView.frame = bannerFrame;
-        } else {
-            // If container is smaller, fill it
-            self.bannerView.frame = self.bounds;
-        }
-        
-        // If banner view hasn't been added to hierarchy yet, add it
-        if (self.bannerView.superview != self) {
-            [self addSubview:self.bannerView];
-        }
-    }
-}
 
-- (CGSize)intrinsicContentSize {
-    if (self.bannerView) {
-        // For MREC views, return fixed size; for banner views, use adSize
-        if ([self isKindOfClass:[RNAppodealMrecView class]]) {
-            return CGSizeMake(300, 250); // Standard MREC size
-        } else {
-            return self.bannerView.adSize;
-        }
+    if (!self.bannerView) {
+        return;
     }
-    return CGSizeMake(UIViewNoIntrinsicMetric, UIViewNoIntrinsicMetric);
+
+    CGSize bannerSize = self.bannerView.adSize;
+    CGFloat x = MAX(0, (CGRectGetWidth(self.bounds) - bannerSize.width) / 2.0);
+    CGFloat y = MAX(0, (CGRectGetHeight(self.bounds) - bannerSize.height) / 2.0);
+
+    // Snap the origin to the pixel grid, otherwise the creative renders blurry and its
+    // tap target shifts by a fraction of a point
+    CGFloat scale = self.window.screen.scale ?: UIScreen.mainScreen.scale;
+    if (scale <= 0) {
+        scale = 1.0;
+    }
+
+    self.bannerView.frame = CGRectMake(round(x * scale) / scale,
+                                       round(y * scale) / scale,
+                                       bannerSize.width,
+                                       bannerSize.height);
 }
 
 #pragma mark - APDBannerViewDelegate
 
 - (void)bannerViewDidLoadAd:(APDBannerView *)bannerView isPrecache:(BOOL)precache {
-    // Ensure banner is added to view hierarchy
-    if (self.bannerView.superview != self) {
-        [self addSubview:self.bannerView];
+    // A banner replaced by -setAdSize: keeps us as its delegate, ignore its callbacks
+    if (bannerView != self.bannerView) {
+        return;
     }
-    
-    // Use the banner's intrinsic size (don't force it to our potentially zero bounds)
-    CGSize bannerSize = self.bannerView.adSize;
-    self.bannerView.frame = CGRectMake(0, 0, bannerSize.width, bannerSize.height);
-    
-    // Update our intrinsic content size to match the banner
-    [self invalidateIntrinsicContentSize];
-    
+
+    // Fires more than once per load cycle and on every refresh, so re-run layout to
+    // re-apply the centered frame
+    [self setNeedsLayout];
+
     if (self.onAdLoaded) {
         // Calculate height from the banner's actual size
-        CGFloat height = bannerSize.height;
+        CGFloat height = self.bannerView.adSize.height;
         self.onAdLoaded(@{
             @"height": [NSString stringWithFormat:@"%.0f", height],
             @"isPrecache": @(precache)
@@ -184,9 +162,6 @@ static __weak RNAppodealMrecView *_activeMrecView = nil;
         NSAssert([Appodeal isInitializedForAdType:AppodealAdTypeMREC],
                  @"Appodeal should be initialised with AppodealAdTypeMREC before trying to add AppodealMrec in hierarchy");
         
-        // Set our frame to MREC standard size (300x250)
-        self.frame = CGRectMake(frame.origin.x, frame.origin.y, 300, 250);
-        
         // Create MREC view
         self.bannerView = [[APDMRECView alloc] init];
         self.bannerView.delegate = self;
@@ -194,14 +169,11 @@ static __weak RNAppodealMrecView *_activeMrecView = nil;
         // Set default placement
         self.bannerView.placement = self.placement ?: @"default";
         
-        // Set banner frame to fill our bounds
+        // Pre-layout placeholder frame, corrected by -layoutSubviews on the first pass
         self.bannerView.frame = CGRectMake(0, 0, 300, 250);
         
         // Add banner to our view hierarchy immediately
         [self addSubview:self.bannerView];
-        
-        // Update our intrinsic content size
-        [self invalidateIntrinsicContentSize];
         
         [self.bannerView loadAd];
 

@@ -158,6 +158,13 @@ export interface Appodeal {
    */
   showPrivacyOptionsForm(): Promise<void>;
   /**
+   * Requests non-personalized advertising and disables the collection of data
+   * used for ad personalization. A publisher-set value takes precedence over
+   * the consent resolved from the CMP. Available since Appodeal SDK 4.3.0.
+   * @param value Boolean flag indicating non-personalized advertising
+   */
+  setNonPersonalized(value: boolean): void;
+  /**
    * Enables or disables test mode
    * @param value Boolean flag indicating test mode
    */
@@ -253,7 +260,7 @@ export interface Appodeal {
 /**
  * Plugin version constant
  */
-const PLUGIN_VERSION = '4.2.0';
+const PLUGIN_VERSION = '4.3.0';
 
 /**
  * Appodeal SDK implementation
@@ -360,6 +367,10 @@ const appodeal: Appodeal = {
 
   showPrivacyOptionsForm: (): Promise<void> => {
     return NativeAppodeal.showPrivacyOptionsForm();
+  },
+
+  setNonPersonalized: (value: boolean): void => {
+    NativeAppodeal.setNonPersonalized(value);
   },
 
   setChildDirectedTreatment: (value: boolean): void => {

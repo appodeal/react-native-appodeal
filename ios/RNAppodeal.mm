@@ -369,6 +369,10 @@ RCT_EXPORT_METHOD(showPrivacyOptionsForm:(RCTPromiseResolveBlock)resolve
     }];
 }
 
+RCT_EXPORT_METHOD(setNonPersonalized:(BOOL)value) {
+    [Appodeal setNonPersonalized:value];
+}
+
 #pragma mark - Self-Hosted Bidon Configuration
 
 RCT_EXPORT_METHOD(setBidonEndpoint:(NSString *)endpoint) {
@@ -720,6 +724,10 @@ RCT_EXPORT_METHOD(setSharedAdsInstanceAcrossActivities:(BOOL)flag) {}
             resolve(nil);
         }
     }];
+}
+
+- (void)setNonPersonalized:(BOOL)value {
+    [Appodeal setNonPersonalized:value];
 }
 
 #pragma mark - Self-Hosted Bidon Configuration

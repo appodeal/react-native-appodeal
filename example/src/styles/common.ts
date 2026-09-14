@@ -74,13 +74,13 @@ export const commonStyles = StyleSheet.create({
   banner: {
     marginTop: 40,
     height: 50,
-    width: 320,
+    width: '100%',
     alignSelf: 'center',
   },
   mrec: {
     height: 250,
     marginTop: 40,
-    width: 300,
+    width: '100%',
     alignSelf: 'center',
   },
 });
