@@ -123,6 +123,7 @@ def appodeal
     pod 'IronSourceYandexAdapter', '5.7.0.0'
     # Bidon
     pod 'BidonAdapterAmazon', '5.5.0.0'
+    pod 'BidonAdapterAppLovin', '13.6.4.0'
     pod 'BidonAdapterBidMachine', '3.7.1.1'
     pod 'BidonAdapterBigoAds', '5.2.1.0'
     pod 'BidonAdapterChartboost', '9.10.1.0'
