@@ -330,7 +330,7 @@ dependencies {
     implementation("org.bidon:vkads-adapter:5.47.1.0")
     implementation("org.bidon:vungle-adapter:7.7.4.0")
     implementation("org.bidon:yandex-adapter:7.17.0.0")
-    implementation("org.bidon:zmaticoo-adapter:2.0.7.0.0")
+    implementation("org.bidon:zmaticoo-adapter:2.0.7.1.0")
     // Level Play
     implementation("com.unity3d.ads-mediation:admob-adapter:5.7.0")
     implementation("com.unity3d.ads-mediation:applovin-adapter:5.8.0")
