@@ -187,7 +187,6 @@ def appodeal
     pod 'AppLovinMediationVerveAdapter', '3.7.0.0'
     pod 'AppLovinMediationVungleAdapter', '7.7.3.0'
     pod 'AppLovinMediationYandexAdapter', '7.18.4.0'
-    pod 'TaurusxAdsSDK', '1.9.2'
     pod 'TaurusxAdsSDK/AppLovinAdapter', '1.9.2'
     pod 'zMaticooMAXAdapter', '2.2.0'
 end
