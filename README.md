@@ -154,7 +154,7 @@ def appodeal
     pod 'AppodealFacebookAdapter', '18.0.3.0'
     pod 'AppodealFirebaseAdapter', '12.15.0.1'
     pod 'AppodealGoogleAdMobAdapter', '13.5.0.0'
-    pod 'AppodealIABAdapter', '3.5.2.0'
+    pod 'AppodealIABAdapter', '4.4.0.0'
     pod 'AppodealInMobiAdapter', '11.3.0.0'
     pod 'AppodealIronSourceAdapter', '9.4.0.0.0'
     pod 'AppodealLevelPlayAdapter', '9.4.0.0.0'
