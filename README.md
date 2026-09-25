@@ -364,7 +364,7 @@ dependencies {
     implementation("com.appodeal.ads.sdk.adapters:dt_exchange:8.4.6.0")
     implementation("com.appodeal.ads.sdk.adapters:facebook_analytics:18.3.0.0")
     implementation("com.appodeal.ads.sdk.adapters:firebase:23.2.0.0")
-    implementation("com.appodeal.ads.sdk.adapters:iab:1.8.1.0")
+    implementation("com.appodeal.ads.sdk.adapters:iab:1.8.1.1")
     implementation("com.appodeal.ads.sdk.adapters:inmobi:11.3.0.0")
     implementation("com.appodeal.ads.sdk.adapters:ironsource:9.4.4.0")
     implementation("com.appodeal.ads.sdk.adapters:level_play:9.4.4.0")
