@@ -153,7 +153,7 @@ def appodeal
     pod 'AppodealDTExchangeAdapter', '8.4.7.1'
     pod 'AppodealFacebookAdapter', '18.0.3.1'
     pod 'AppodealFirebaseAdapter', '12.15.0.2'
-    pod 'AppodealGoogleAdMobAdapter', '13.5.0.4'
+    pod 'AppodealGoogleAdMobAdapter', '13.5.0.5'
     pod 'AppodealIABAdapter', '4.4.1.1'
     pod 'AppodealInMobiAdapter', '11.3.0.1'
     pod 'AppodealIronSourceAdapter', '9.4.0.0.0'
