@@ -356,7 +356,7 @@ dependencies {
     implementation("com.appodeal.ads.sdk.adapters:amazon:12.0.0.0")
     implementation("com.appodeal.ads.sdk.adapters:applovin:13.6.3.0")
     implementation("com.appodeal.ads.sdk.adapters:applovin_max:13.6.3.1")
-    implementation("com.appodeal.ads.sdk.adapters:appsflyer:6.18.0.1")
+    implementation("com.appodeal.ads.sdk.adapters:appsflyer:6.18.1.1")
     implementation("com.appodeal.ads.sdk.adapters:bidmachine:3.7.1.0")
     implementation("com.appodeal.ads.sdk.adapters:bidon:0.14.0.0")
     implementation("com.appodeal.ads.sdk.adapters:bigo_ads:5.9.0.0")
